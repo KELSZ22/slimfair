@@ -1,0 +1,1175 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "current": {
+    "color_text": "#3d4246",
+    "color_body_text": "#69727b",
+    "color_sale_text": "#ff0000",
+    "color_button": "#6f9755",
+    "color_button_text": "#fff",
+    "color_small_button_text_border": "#3d4246",
+    "color_text_field_text": "#000",
+    "color_text_field_border": "#949494",
+    "color_text_field": "#fff",
+    "color_image_overlay_text": "#fff",
+    "color_image_overlay": "#3d4246",
+    "image_overlay_opacity": 40,
+    "color_borders": "#e8e9eb",
+    "color_body_bg": "#ffffff",
+    "type_header_font": "work_sans_n6",
+    "type_header_base_size": 26,
+    "type_base_font": "work_sans_n4",
+    "type_base_size": 16,
+    "type_bold_product_titles": false,
+    "share_image": "shopify://shop_images/667BA34E-7260-4303-B5DE-38DC925260F8.jpeg",
+    "share_facebook": true,
+    "share_twitter": false,
+    "share_pinterest": false,
+    "social_twitter_link": "",
+    "social_facebook_link": "https://facebook.com/theslimfairshop",
+    "social_pinterest_link": "",
+    "social_instagram_link": "http://instagram.com/theslimfairshop",
+    "social_tumblr_link": "",
+    "social_snapchat_link": "",
+    "social_youtube_link": "",
+    "social_vimeo_link": "",
+    "favicon": "shopify://shop_images/Untitled_design_18.png",
+    "enable_ajax": true,
+    "checkout_logo_image": "shopify://shop_images/Untitled_design_11.png",
+    "checkout_logo_position": "left",
+    "checkout_logo_size": "medium",
+    "checkout_body_background_image": "",
+    "checkout_body_background_color": "#fff",
+    "checkout_input_background_color_mode": "white",
+    "checkout_sidebar_background_image": "",
+    "checkout_sidebar_background_color": "#fafafa",
+    "checkout_heading_font": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
+    "checkout_body_font": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
+    "checkout_accent_color": "#197bbd",
+    "checkout_button_color": "#197bbd",
+    "checkout_error_color": "#e32c2b",
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {
+          "align_logo": "center",
+          "logo": "shopify://shop_images/Untitled_design_11.png",
+          "logo_max_width": 250,
+          "main_linklist": "main-menu",
+          "message": true,
+          "home_page_only": true,
+          "message_text": "FREE SHIPPING FOR ORDERS PHP 499 AND UP!",
+          "message_link": "",
+          "color_bg": "#000000",
+          "color_text": "#ffffff"
+        }
+      },
+      "hero": {
+        "type": "hero",
+        "disabled": true,
+        "settings": {
+          "image": "shopify://shop_images/SLIMFAIR_CAFE_LATTE_9_x_12_in.jpg",
+          "alignment": "center",
+          "hero_layout": "full_width",
+          "hero_size": "adapt",
+          "text_size": "large",
+          "title": "",
+          "text": "",
+          "button_label": "",
+          "button_link": "shopify://products/new-slimfair-cafe-latte-beauty-mix-10-sachets"
+        }
+      },
+      "slideshow": {
+        "type": "slideshow",
+        "blocks": {
+          "slideshow-0": {
+            "type": "image",
+            "disabled": true,
+            "settings": {
+              "image": "shopify://shop_images/coffee_salma.png",
+              "alignment": "center center",
+              "slide_title": "The first and the best",
+              "subheading": "",
+              "button_label": "",
+              "button_link": "shopify://products/slimfair-coffee"
+            }
+          },
+          "slideshow-1": {
+            "type": "image",
+            "disabled": true,
+            "settings": {
+              "image": "shopify://shop_images/dchoco_salma.png",
+              "alignment": "center center",
+              "slide_title": "THE BITTER THE BETTER",
+              "subheading": "",
+              "button_label": "",
+              "button_link": "shopify://products/slimfair-dark-chocolatenew-korean-formula"
+            }
+          },
+          "1576063333620": {
+            "type": "image",
+            "disabled": true,
+            "settings": {
+              "image": "shopify://shop_images/12_f1faf720-d6d1-44ef-a54f-54e45b201c06.png",
+              "alignment": "center center",
+              "slide_title": "Matcha made in Heaven!",
+              "subheading": "",
+              "button_label": "",
+              "button_link": "shopify://products/slimfair-matcha-latte-ceremonial-grade-japan-formula"
+            }
+          },
+          "1576063341864": {
+            "type": "image",
+            "disabled": true,
+            "settings": {
+              "image": "shopify://shop_images/13_813e2109-c245-42ae-8ad9-3f8b8a3788a7.png",
+              "alignment": "center center",
+              "slide_title": "Beauty plus Immunity",
+              "subheading": "",
+              "button_label": "",
+              "button_link": "shopify://products/glowzinc-plus-quercetin-whitening-vitamin-c"
+            }
+          },
+          "1576063353576": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/17.png",
+              "alignment": "center center",
+              "slide_title": "wash away impurities",
+              "subheading": "",
+              "button_label": "",
+              "button_link": ""
+            }
+          },
+          "1576063377661": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/19_155d17c8-40d7-4352-a522-32842cebe584.png",
+              "alignment": "center center",
+              "slide_title": "",
+              "subheading": "Reveal a fairer skin",
+              "button_label": "",
+              "button_link": ""
+            }
+          }
+        },
+        "block_order": [
+          "slideshow-0",
+          "slideshow-1",
+          "1576063333620",
+          "1576063341864",
+          "1576063353576",
+          "1576063377661"
+        ],
+        "settings": {
+          "slideshow_height": "adapt",
+          "text_size": "medium",
+          "text_alignment": "center bottom",
+          "show_overlay": false,
+          "autorotate": true,
+          "autorotate_speed": 5
+        }
+      },
+      "feature-row": {
+        "type": "feature-row",
+        "disabled": true,
+        "settings": {
+          "image": "shopify://shop_images/AA61698A-B15D-4B35-AACF-3A8B23F69278.jpeg",
+          "layout": "right",
+          "title": "It’s time for you to try the best tasting weight loss coffee in the world!",
+          "text": "",
+          "button_label": "Ingredients and Benefits",
+          "button_link": "shopify://pages/health-benefits-of-drinking-slimfair-coffee"
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "blocks": {
+          "link_list": {
+            "type": "link_list",
+            "settings": {
+              "title": "Quick links",
+              "menu": "footer"
+            }
+          },
+          "newsletter": {
+            "type": "newsletter",
+            "settings": {
+              "title": "Newsletter"
+            }
+          }
+        },
+        "block_order": [
+          "link_list",
+          "newsletter"
+        ],
+        "settings": {
+          "show_payment_icons": true,
+          "color_footer_bg": "#ffeeb4",
+          "color_footer_text": "#000000"
+        }
+      },
+      "1576507939591": {
+        "type": "video",
+        "disabled": true,
+        "settings": {
+          "image": "shopify://shop_images/1_fb4867e2-db30-4c11-bd64-9839c7d22c5a.png",
+          "image_position": "center center",
+          "video_link": "https://youtu.be/tD4TbhvX4lM",
+          "show_overlay": true,
+          "style": "image_with_play",
+          "height": "medium",
+          "video_title": "",
+          "text_size": "medium"
+        }
+      },
+      "1576508268561": {
+        "type": "map",
+        "disabled": true,
+        "settings": {
+          "heading": "Our store",
+          "address": "<p>Level 3 Robinsons Place Angeles, Balibago, Angeles City, Pampanga, Philippines 2009</p><p></p><p>Monday 10:00AM - 6:00PM</p><p>Tuesday 10:00AM - 6:00PM</p><p>Wednesday 10:00AM - 6:00PM</p><p>Thursday 10:00AM - 6:00PM</p><p>Friday 10:00AM - 6:00PM</p><p>Saturday 10:00AM - 6:00PM</p><p>Sunday CLOSED</p>",
+          "map_address": "Robinsons Angeles",
+          "button_text": "Get directions",
+          "show_pin": true,
+          "api_key": "",
+          "background_image": "shopify://shop_images/This_formula_contains_sodium_ascorbate_zinc_curcumin_quercetin_and_rosehip._48_x_48_in_Facebook_Cover_Presentation_169.png",
+          "background_image_position": "center center"
+        }
+      },
+      "product-template": {
+        "type": "product-template",
+        "settings": {
+          "image_size": "medium",
+          "show_quantity_selector": false,
+          "show_variant_labels": true,
+          "show_vendor": false,
+          "enable_zoom": true,
+          "enable_payment_button": true,
+          "show_share_buttons": true
+        }
+      },
+      "product-recommendations": {
+        "type": "product-recommendations",
+        "settings": {
+          "show_product_recommendations": false,
+          "heading": "You may also like",
+          "show_vendor": false
+        }
+      },
+      "1594613023391": {
+        "type": "feature-row",
+        "disabled": true,
+        "settings": {
+          "image": "shopify://shop_images/262B2624-B0AD-497D-B9D1-C37AC4F68746.jpeg",
+          "layout": "left",
+          "title": "Cash on Delivery via J&T Express",
+          "text": "<p>Terms and Conditions:</p>\n<p>✅ For sure buyers only<br>🚫 incomplete address will not be accepted.<br>🚫 NO RUSH orders<br>🙏🏻Please be Responsible when placing order.<br>🚫 Bogus buyers will be banned from placing another order.<br>🛒 ADD TO CART MO NA YAN! 😃👍</p>",
+          "button_label": "Order now!",
+          "button_link": "shopify://products/slimfair-coffee"
+        }
+      },
+      "209c1a2a-e24a-4883-bf3a-93c426687e50": {
+        "type": "image-bar",
+        "blocks": {
+          "209c1a2a-e24a-4883-bf3a-93c426687e50-1688988111ac7d32d4-0": {
+            "type": "image",
+            "disabled": true,
+            "settings": {
+              "image": "shopify://shop_images/EF7C9CFF-5E56-43F7-856A-7472F34AF0A8.png",
+              "alignment": "center",
+              "link": "",
+              "cta_label": ""
+            }
+          },
+          "image_E84fp6": {
+            "type": "image",
+            "disabled": true,
+            "settings": {
+              "image": "shopify://shop_images/Copy_of_Consistency_24_x_36_in.png",
+              "alignment": "center",
+              "link": "",
+              "cta_label": ""
+            }
+          }
+        },
+        "block_order": [
+          "209c1a2a-e24a-4883-bf3a-93c426687e50-1688988111ac7d32d4-0",
+          "image_E84fp6"
+        ],
+        "disabled": true,
+        "settings": {
+          "section_height": "small"
+        }
+      },
+      "94cb5824-701d-4646-8386-e6165f9f2756": {
+        "type": "rich-text",
+        "disabled": true,
+        "settings": {
+          "full_width": true,
+          "section_title": "﻿ASIA'S BEST HEALTH AND BEAUTY PRODUCTS PROVIDER",
+          "text": "<h2>﻿2022 Asia's Golden Icons Award</h2>",
+          "text_size": "large"
+        }
+      },
+      "19494a9c-8ffb-4150-9dac-f35a70654d9d": {
+        "type": "collection",
+        "settings": {
+          "title": "slimming beauty mix",
+          "collection": "slimfair-coffee",
+          "grid": 3,
+          "rows": 2,
+          "show_vendor": false,
+          "show_view_all": false
+        }
+      },
+      "734fe57f-0903-4d8f-8a58-8445b60a39b7": {
+        "type": "collection",
+        "settings": {
+          "title": "Beauty Soaps",
+          "collection": "beauty",
+          "grid": 3,
+          "rows": 2,
+          "show_vendor": false,
+          "show_view_all": false
+        }
+      },
+      "221ab568-1b56-46de-902b-2426ca377994": {
+        "type": "collection",
+        "disabled": true,
+        "settings": {
+          "title": "Skin Care",
+          "collection": "beauty",
+          "grid": 3,
+          "rows": 2,
+          "show_vendor": false,
+          "show_view_all": false
+        }
+      },
+      "90fe7948-15ec-4483-b0b6-d922629cb291": {
+        "type": "slideshow",
+        "blocks": {
+          "e0d56bca-380a-4586-afb7-94c20e990371": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/2cmprsd_f7248315-ef8b-4f65-95e4-559233355197.jpg",
+              "alignment": "center center",
+              "slide_title": "",
+              "subheading": "",
+              "button_label": "",
+              "button_link": ""
+            }
+          },
+          "c44745e0-7219-4611-be1a-2d4cbc5c2a43": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/Wash_away_skin_impurities_1_058c7e37-e5db-4ccb-b2a0-6361ebf0ebce.png",
+              "alignment": "center center",
+              "slide_title": "Image slide",
+              "subheading": "",
+              "button_label": "",
+              "button_link": ""
+            }
+          },
+          "90fe7948-15ec-4483-b0b6-d922629cb291-image-2": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/4cmprsd_8b3a6ead-24b2-445b-bc16-de884d38b6d4.jpg",
+              "alignment": "center center",
+              "slide_title": "",
+              "subheading": "",
+              "button_label": "",
+              "button_link": ""
+            }
+          },
+          "90fe7948-15ec-4483-b0b6-d922629cb291-image-1": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/5cmprsd_3e51deb6-d586-4c8d-bfcb-cdac7c2f347e.jpg",
+              "alignment": "center center",
+              "slide_title": "",
+              "subheading": "",
+              "button_label": "",
+              "button_link": ""
+            }
+          },
+          "38ec88fd-5611-489c-ac8f-dc4a0a9470e8": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/3cmprsd_78e6bdcd-6ac8-460b-b6a0-91a8c7f5dc7d.jpg",
+              "alignment": "center center",
+              "slide_title": "",
+              "subheading": "",
+              "button_label": "",
+              "button_link": ""
+            }
+          },
+          "a2119665-3219-4463-9d49-015a2469ce7f": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/1cmprsd_6459a2df-d358-4221-a338-912945cca4cb.jpg",
+              "alignment": "center center",
+              "slide_title": "",
+              "subheading": "",
+              "button_label": "",
+              "button_link": ""
+            }
+          }
+        },
+        "block_order": [
+          "e0d56bca-380a-4586-afb7-94c20e990371",
+          "c44745e0-7219-4611-be1a-2d4cbc5c2a43",
+          "90fe7948-15ec-4483-b0b6-d922629cb291-image-2",
+          "90fe7948-15ec-4483-b0b6-d922629cb291-image-1",
+          "38ec88fd-5611-489c-ac8f-dc4a0a9470e8",
+          "a2119665-3219-4463-9d49-015a2469ce7f"
+        ],
+        "settings": {
+          "slideshow_height": "adapt",
+          "text_size": "medium",
+          "text_alignment": "center center",
+          "show_overlay": false,
+          "autorotate": false,
+          "autorotate_speed": 9
+        }
+      },
+      "03ffee24-a65a-4bd2-be7e-2af6aa7a9b9e": {
+        "type": "slideshow",
+        "blocks": {
+          "5fcba149-0b09-4feb-9848-ad2fcb3380ae": {
+            "type": "image",
+            "disabled": true,
+            "settings": {
+              "image": "shopify://shop_images/romney_coffee_pic_2compressed_b9dbfb9a-c536-448a-b209-6fdf8c03997d.jpg",
+              "alignment": "center center",
+              "slide_title": "Men loves Slimfair too",
+              "subheading": "",
+              "button_label": "",
+              "button_link": ""
+            }
+          },
+          "03ffee24-a65a-4bd2-be7e-2af6aa7a9b9e-image-1": {
+            "type": "image",
+            "disabled": true,
+            "settings": {
+              "image": "shopify://shop_images/m5.jpg",
+              "alignment": "center center",
+              "slide_title": "Men loves Slimfair too",
+              "subheading": "",
+              "button_label": "",
+              "button_link": ""
+            }
+          },
+          "03ffee24-a65a-4bd2-be7e-2af6aa7a9b9e-image-2": {
+            "type": "image",
+            "disabled": true,
+            "settings": {
+              "image": "shopify://shop_images/m4.webp",
+              "alignment": "center center",
+              "slide_title": "Men loves Slimfair too",
+              "subheading": "",
+              "button_label": "",
+              "button_link": ""
+            }
+          },
+          "0266c5db-02f0-4398-8984-acd4690fe9fc": {
+            "type": "image",
+            "disabled": true,
+            "settings": {
+              "image": "shopify://shop_images/Copy_of_Copy_of_Copy_of_Cream_and_Black_Natural_Makeup_Beauty_Logo.png",
+              "alignment": "center center",
+              "slide_title": "Men loves Slimfair too",
+              "subheading": "",
+              "button_label": "",
+              "button_link": ""
+            }
+          },
+          "image_JYBp39": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/Copy_of_preorder_promo_640_x_360_px_2.png",
+              "alignment": "center center",
+              "slide_title": "",
+              "subheading": "",
+              "button_label": "",
+              "button_link": ""
+            }
+          }
+        },
+        "block_order": [
+          "5fcba149-0b09-4feb-9848-ad2fcb3380ae",
+          "03ffee24-a65a-4bd2-be7e-2af6aa7a9b9e-image-1",
+          "03ffee24-a65a-4bd2-be7e-2af6aa7a9b9e-image-2",
+          "0266c5db-02f0-4398-8984-acd4690fe9fc",
+          "image_JYBp39"
+        ],
+        "settings": {
+          "slideshow_height": "adapt",
+          "text_size": "large",
+          "text_alignment": "center center",
+          "show_overlay": false,
+          "autorotate": false,
+          "autorotate_speed": 5
+        }
+      },
+      "slideshow_CEQYa9": {
+        "type": "slideshow",
+        "blocks": {
+          "image_bLJVxB": {
+            "type": "image",
+            "disabled": true,
+            "settings": {
+              "image": "shopify://shop_images/PREORDER_PROMO_2.png",
+              "alignment": "center center",
+              "slide_title": "",
+              "subheading": "",
+              "button_label": "",
+              "button_link": "shopify://products/skin-quench-matcha-latte-beauty-drink-w-gluta-blend-collagen-oral-sunbloc-l-carnitine-fiber"
+            }
+          }
+        },
+        "block_order": [
+          "image_bLJVxB"
+        ],
+        "disabled": true,
+        "settings": {
+          "slideshow_height": "adapt",
+          "text_size": "large",
+          "text_alignment": "center center",
+          "show_overlay": true,
+          "autorotate": false,
+          "autorotate_speed": 5
+        }
+      },
+      "slideshow_in7UQe": {
+        "type": "slideshow",
+        "blocks": {
+          "image_ttRxcQ": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/Take_Your_Time_3_x_4_cm_3.png",
+              "alignment": "center center",
+              "slide_title": "",
+              "subheading": "",
+              "button_label": "",
+              "button_link": "shopify://products/skin-quench-matcha-latte-beauty-drink-w-gluta-blend-collagen-oral-sunbloc-l-carnitine-fiber"
+            }
+          }
+        },
+        "block_order": [
+          "image_ttRxcQ"
+        ],
+        "disabled": true,
+        "settings": {
+          "slideshow_height": "adapt",
+          "text_size": "large",
+          "text_alignment": "left center",
+          "show_overlay": false,
+          "autorotate": false,
+          "autorotate_speed": 5
+        }
+      },
+      "image_bar_mXk7QD": {
+        "type": "image-bar",
+        "blocks": {
+          "image_aCcRqP": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/SLIMFAIR_CAFE_LATTE_9_x_12_in.jpg",
+              "alignment": "center",
+              "link": "",
+              "cta_label": ""
+            }
+          },
+          "image_jWfk7U": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/Glow_up_Instagram_Post_1.png",
+              "alignment": "center",
+              "link": "",
+              "cta_label": ""
+            }
+          },
+          "image_XFWkPD": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/Glow_up_Instagram_Post_6.png",
+              "alignment": "center",
+              "link": "",
+              "cta_label": ""
+            }
+          }
+        },
+        "block_order": [
+          "image_aCcRqP",
+          "image_jWfk7U",
+          "image_XFWkPD"
+        ],
+        "disabled": true,
+        "settings": {
+          "section_height": "medium"
+        }
+      },
+      "featured-collections": {
+        "type": "collection",
+        "disabled": true,
+        "settings": {
+          "title": "Vitamins",
+          "collection": "vitamins",
+          "grid": 2,
+          "rows": 1,
+          "show_vendor": false,
+          "show_view_all": false
+        }
+      },
+      "custom_content_yJVVEp": {
+        "type": "custom-content",
+        "blocks": {
+          "text_mi8jM7": {
+            "type": "text",
+            "settings": {
+              "title": "About Us",
+              "text": "<p>Slimfair is a local brand in the Philippines established in the year 2014. Engaged in providing innovative and premium quality beauty and wellness products, we are the first brand to introduce organic slimming powder mix drink with whitening, anti-aging and health benefits in the year 2016.</p><p>Our product line includes skincare and dietary supplement which are chemical-free, effectual, made withorganic active ingredients. This is to ensure to give consumers the satisfaction, true to its purpose, only the best experience, and cater to the demand of the people inclined to health and well-being.</p>",
+              "width": "100%",
+              "alignment": "center",
+              "align_text": "center"
+            }
+          },
+          "image_hKpMHP": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/Glow_up_Instagram_Post_2.png",
+              "width": "100%",
+              "alignment": "center"
+            }
+          }
+        },
+        "block_order": [
+          "text_mi8jM7",
+          "image_hKpMHP"
+        ],
+        "settings": {
+          "title": "We're the first and the best!"
+        }
+      },
+      "feature_row_NEzGVn": {
+        "type": "feature-row",
+        "disabled": true,
+        "settings": {
+          "image": "shopify://shop_images/Glow_up_Your_Story_3.png",
+          "layout": "left",
+          "title": "The Best Made Even Better!",
+          "text": "<p>Fuel your day, elevate your mind. Unlock Better Taste and Results with Our New improved SLIMFAIR CAFE LATTE. </p>",
+          "button_label": "Learn More",
+          "button_link": "shopify://products/slimfair-coffee-🏆"
+        }
+      },
+      "feature_row_rnhT6F": {
+        "type": "feature-row",
+        "settings": {
+          "image": "shopify://shop_images/New_Obsession_Coming_soon_Instagram_Post_45_Instagram_Post_3.png",
+          "layout": "right",
+          "title": "Indulge and burn with Slimfair",
+          "text": "<p><br/>At Slimfair, we believe beauty starts from within. Each drink is crafted to support your metabolism, boost focus, and promote a healthy glow — whether you’re working, hustling, or taking that self-care moment.<br/><br/></p>",
+          "button_label": "Learn More",
+          "button_link": "shopify://collections/slimfair-coffee"
+        }
+      },
+      "image_bar_a7rqqA": {
+        "type": "image-bar",
+        "blocks": {
+          "image_CzkfHR": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/matcha_girly.png",
+              "alignment": "center",
+              "link": "shopify://products/slimfair-matcha-barley-beauty-mix",
+              "cta_label": "DETOX + SLIMMING"
+            }
+          },
+          "image_MfeDVb": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/Gemini_Generated_Image_aaytciaaytciaayt.png",
+              "alignment": "center",
+              "link": "shopify://products/new-slimfair-cafe-latte-beauty-mix-10-sachets",
+              "cta_label": "ENERGY + APPETITE CONTROL"
+            }
+          },
+          "image_3hxB67": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/unnamed_1.png",
+              "alignment": "center",
+              "link": "shopify://products/sf-beauty-mix-graviola-guyabano-with-chia-seeds",
+              "cta_label": "IMMUNE SUPPORT + APPETITE CONTROL"
+            }
+          }
+        },
+        "block_order": [
+          "image_CzkfHR",
+          "image_MfeDVb",
+          "image_3hxB67"
+        ],
+        "name": "Gallery",
+        "settings": {
+          "section_height": "large"
+        }
+      },
+      "cart-template": {
+        "type": "cart-template",
+        "settings": {
+          "cart_ajax_enable": true,
+          "cart_notes_enable": false
+        }
+      },
+      "image_bar_BRnM7Q": {
+        "type": "image-bar",
+        "blocks": {
+          "image_Y3iARj": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/Best_for_you.jpg",
+              "alignment": "center",
+              "link": "",
+              "cta_label": ""
+            }
+          },
+          "image_Q9xL9n": {
+            "type": "image",
+            "disabled": true,
+            "settings": {
+              "alignment": "center",
+              "link": "",
+              "cta_label": ""
+            }
+          },
+          "image_ijfGnm": {
+            "type": "image",
+            "disabled": true,
+            "settings": {
+              "alignment": "center",
+              "link": "",
+              "cta_label": ""
+            }
+          }
+        },
+        "block_order": [
+          "image_Y3iARj",
+          "image_Q9xL9n",
+          "image_ijfGnm"
+        ],
+        "name": "Gallery",
+        "settings": {
+          "section_height": "large"
+        }
+      }
+    },
+    "content_for_index": [
+      "feature_row_rnhT6F",
+      "image_bar_BRnM7Q",
+      "feature_row_NEzGVn",
+      "image_bar_mXk7QD",
+      "209c1a2a-e24a-4883-bf3a-93c426687e50",
+      "94cb5824-701d-4646-8386-e6165f9f2756",
+      "slideshow_CEQYa9",
+      "19494a9c-8ffb-4150-9dac-f35a70654d9d",
+      "hero",
+      "image_bar_a7rqqA",
+      "734fe57f-0903-4d8f-8a58-8445b60a39b7",
+      "featured-collections",
+      "slideshow_in7UQe",
+      "1576507939591",
+      "221ab568-1b56-46de-902b-2426ca377994",
+      "90fe7948-15ec-4483-b0b6-d922629cb291",
+      "slideshow",
+      "1594613023391",
+      "03ffee24-a65a-4bd2-be7e-2af6aa7a9b9e",
+      "1576508268561",
+      "custom_content_yJVVEp"
+    ],
+    "blocks": {
+      "17754088914158789468": {
+        "type": "shopify://apps/easysell-cod-form/blocks/app-embed/7bfd0a95-6839-4f02-b2ee-896832dbe67e",
+        "disabled": false,
+        "settings": {}
+      },
+      "15683396631634586217": {
+        "type": "shopify://apps/inbox/blocks/chat/841fc607-4181-4ad1-842d-e24d7f8bad6b",
+        "disabled": false,
+        "settings": {
+          "button_color": "#ffa000",
+          "secondary_color": "#FFFFFF",
+          "ternary_color": "#6A6A6A",
+          "button_icon": "chat_bubble",
+          "button_text": "chat_with_us",
+          "button_horizontal_position": "bottom_right",
+          "button_vertical_position": "lowest",
+          "greeting_message": ""
+        }
+      },
+      "4935202709820522637": {
+        "type": "shopify://apps/trustshop-reviews/blocks/review-embed/18b0c4cc-5411-4b6e-922d-34fdc2f30ab9",
+        "disabled": false,
+        "settings": {}
+      },
+      "12439146293631897289": {
+        "type": "shopify://apps/blockify-fraud-filter/blocks/app_embed/2e3e0ba5-0e70-447a-9ec5-3bf76b5ef12e",
+        "disabled": false,
+        "settings": {}
+      },
+      "1626193551103621034": {
+        "type": "shopify://apps/cod-king/blocks/app-embed/99553eb5-bf07-4ce0-9263-7e5f10cab22c",
+        "disabled": false,
+        "settings": {}
+      }
+    }
+  },
+  "presets": {
+    "Default": {
+      "color_text": "#3d4246",
+      "color_body_text": "#69727b",
+      "color_sale_text": "#557B97",
+      "color_borders": "#e8e9eb",
+      "color_button": "#557B97",
+      "color_button_text": "#fff",
+      "color_small_button_text_border": "#3d4246",
+      "color_text_field": "#fff",
+      "color_text_field_text": "#000",
+      "color_text_field_border": "#949494",
+      "color_image_overlay_text": "#fff",
+      "color_image_overlay": "#3d4246",
+      "image_overlay_opacity": 40,
+      "color_body_bg": "#fff",
+      "type_header_font": "work_sans_n6",
+      "type_header_base_size": 26,
+      "type_base_font": "work_sans_n4",
+      "type_base_size": 16,
+      "type_bold_product_titles": false,
+      "share_facebook": true,
+      "share_twitter": true,
+      "share_pinterest": true,
+      "sections": {
+        "header": {
+          "type": "header",
+          "settings": {}
+        },
+        "hero": {
+          "type": "hero",
+          "settings": {
+            "text_size": "large"
+          }
+        },
+        "slideshow": {
+          "type": "slideshow",
+          "blocks": {
+            "slideshow-0": {
+              "type": "image",
+              "settings": {}
+            },
+            "slideshow-1": {
+              "type": "image",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "slideshow-0",
+            "slideshow-1"
+          ],
+          "settings": {}
+        },
+        "featured-collections": {
+          "type": "collection",
+          "settings": {
+            "collection": "frontpage"
+          }
+        },
+        "feature-row": {
+          "type": "feature-row",
+          "settings": {}
+        },
+        "footer": {
+          "type": "footer",
+          "blocks": {
+            "link_list": {
+              "type": "link_list",
+              "settings": {}
+            },
+            "text": {
+              "type": "text",
+              "settings": {}
+            },
+            "newsletter": {
+              "type": "newsletter",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "link_list",
+            "text",
+            "newsletter"
+          ],
+          "settings": {}
+        }
+      },
+      "content_for_index": [
+        "hero",
+        "featured-collections",
+        "feature-row",
+        "slideshow"
+      ]
+    },
+    "Light": {
+      "color_text": "#162950",
+      "color_body_text": "#6d6d6d",
+      "color_sale_text": "#DA2F0C",
+      "color_borders": "#e4e4e4",
+      "color_button": "#DA2F0C",
+      "color_button_text": "#ffffff",
+      "color_small_button_text_border": "#162950",
+      "color_text_field": "#ffffff",
+      "color_text_field_text": "#162950",
+      "color_text_field_border": "#909090",
+      "color_image_overlay_text": "#ffffff",
+      "color_image_overlay": "#3d3d3d",
+      "image_overlay_opacity": 40,
+      "color_body_bg": "#f8f8f8",
+      "type_header_font": "muli_n6",
+      "type_header_base_size": 26,
+      "type_base_font": "muli_n4",
+      "type_base_size": 18,
+      "type_bold_product_titles": true,
+      "share_facebook": true,
+      "share_twitter": true,
+      "share_pinterest": true,
+      "social_twitter_link": "",
+      "social_facebook_link": "",
+      "social_pinterest_link": "",
+      "social_instagram_link": "",
+      "social_tumblr_link": "",
+      "social_snapchat_link": "",
+      "social_youtube_link": "",
+      "social_vimeo_link": "",
+      "favicon": "",
+      "checkout_header_image": "",
+      "checkout_logo_image": "",
+      "checkout_logo_position": "left",
+      "checkout_logo_size": "small",
+      "checkout_body_background_image": "",
+      "checkout_body_background_color": "#ffffff",
+      "checkout_input_background_color_mode": "white",
+      "checkout_sidebar_background_image": "",
+      "checkout_sidebar_background_color": "#e8f3f6",
+      "checkout_heading_font": "Roboto",
+      "checkout_body_font": "Source Sans Pro",
+      "checkout_accent_color": "#1990c6",
+      "checkout_button_color": "#23314e",
+      "checkout_error_color": "#ff6d6d",
+      "sections": {
+        "header": {
+          "type": "header",
+          "settings": {
+            "align_logo": "left",
+            "logo": "",
+            "logo_max_width": 135,
+            "main_linklist": "main-menu",
+            "message": true,
+            "color_bg": "#162950",
+            "color_text": "#ffffff"
+          }
+        },
+        "hero": {
+          "type": "hero",
+          "settings": {
+            "alignment": "center",
+            "hero_size": "x-large",
+            "text_size": "large"
+          }
+        },
+        "slideshow": {
+          "type": "slideshow",
+          "blocks": {
+            "slideshow-0": {
+              "type": "image",
+              "settings": {
+                "image": "",
+                "alignment": "center center"
+              }
+            },
+            "1492095993817": {
+              "type": "image",
+              "settings": {
+                "image": "",
+                "alignment": "center"
+              }
+            }
+          },
+          "block_order": [
+            "slideshow-0",
+            "1492095993817"
+          ],
+          "settings": {
+            "slideshow_height": "medium",
+            "text_size": "medium",
+            "autorotate": false,
+            "autorotate_speed": 5
+          }
+        },
+        "featured-collections": {
+          "type": "collection",
+          "settings": {
+            "grid": 3,
+            "rows": 1,
+            "show_vendor": true,
+            "show_view_all": true
+          }
+        },
+        "product-template": {
+          "type": "product-template",
+          "settings": {
+            "image_size": "medium",
+            "show_quantity_selector": false,
+            "show_variant_labels": true,
+            "show_vendor": false,
+            "enable_zoom": true,
+            "show_share_buttons": true
+          }
+        },
+        "collection-template": {
+          "type": "collection-template",
+          "settings": {
+            "layout": "grid",
+            "grid": 2,
+            "rows": 2,
+            "show_collection_image": true,
+            "show_vendor": false,
+            "sort_enable": true,
+            "tags_enable": true
+          }
+        },
+        "1492033809691": {
+          "type": "map",
+          "settings": {}
+        },
+        "1492033877875": {
+          "type": "quotes",
+          "blocks": {
+            "1492033877875-0": {
+              "type": "quote",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "1492033877875-0"
+          ],
+          "settings": {}
+        },
+        "1492033924902": {
+          "type": "custom-content",
+          "blocks": {
+            "1492033924902-0": {
+              "type": "text",
+              "settings": {
+                "width": "100%",
+                "alignment": "center",
+                "align_text": "center"
+              }
+            }
+          },
+          "block_order": [
+            "1492033924902-0"
+          ],
+          "settings": {
+            "title": ""
+          }
+        },
+        "1492096252560": {
+          "type": "collection-list",
+          "blocks": {
+            "1492096252560-0": {
+              "type": "featured_collection",
+              "settings": {}
+            },
+            "1492096252560-1": {
+              "type": "featured_collection",
+              "settings": {}
+            },
+            "1492096252560-2": {
+              "type": "featured_collection",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "1492096252560-0",
+            "1492096252560-1",
+            "1492096252560-2"
+          ],
+          "settings": {
+            "grid": 3
+          }
+        },
+        "blog-template": {
+          "type": "blog-template",
+          "settings": {
+            "layout": "grid",
+            "blog_show_author": true,
+            "blog_show_date": false
+          }
+        },
+        "article-template": {
+          "type": "article-template",
+          "settings": {
+            "blog_show_author": true,
+            "blog_show_date": true,
+            "show_share_buttons": true
+          }
+        },
+        "cart-template": {
+          "type": "cart-template",
+          "settings": {
+            "cart_notes_enable": false
+          }
+        },
+        "footer": {
+          "type": "footer",
+          "blocks": {
+            "link_list": {
+              "type": "link_list",
+              "settings": {}
+            },
+            "text": {
+              "type": "text",
+              "settings": {}
+            },
+            "newsletter": {
+              "type": "newsletter",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "link_list",
+            "text",
+            "newsletter"
+          ],
+          "settings": {}
+        }
+      },
+      "content_for_index": [
+        "hero",
+        "featured-collections",
+        "slideshow",
+        "1492033924902",
+        "1492096252560",
+        "1492033877875",
+        "1492033809691"
+      ]
+    }
+  }
+}
