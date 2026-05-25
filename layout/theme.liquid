@@ -37,6 +37,9 @@
   {% include 'social-meta-tags' %}
 
   {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
+  {%- if request.page_type == 'product' -%}
+    {{ 'product-gallery.css' | asset_url | stylesheet_tag }}
+  {%- endif -%}
 
   <script>
     var theme = {

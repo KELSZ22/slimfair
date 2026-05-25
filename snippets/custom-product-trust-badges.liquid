@@ -1,0 +1,87 @@
+{% if section.settings.show_product_trust_badges %}
+  <div class="custom-product-trust-badges">
+    {% if section.settings.trust_badge_1_title != blank or section.settings.trust_badge_1_content != blank %}
+      <div class="custom-product-trust-badges__item">
+        <span class="custom-product-trust-badges__icon">
+          {% if section.settings.trust_badge_1_icon != blank %}
+            <img src="{{ section.settings.trust_badge_1_icon | img_url: '64x64' }}" alt="" aria-hidden="true" loading="lazy">
+          {% else %}
+            <svg aria-hidden="true" focusable="false" role="presentation" viewBox="0 0 24 24">
+              <path d="M12 3 5.5 5.4v5.1c0 4.1 2.6 7.8 6.5 9.5 3.9-1.7 6.5-5.4 6.5-9.5V5.4L12 3Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+              <path d="m8.8 11.6 2 2 4.4-4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          {% endif %}
+        </span>
+        <span class="custom-product-trust-badges__copy">
+          {% if section.settings.trust_badge_1_title != blank %}
+            <span class="custom-product-trust-badges__title">{{ section.settings.trust_badge_1_title }}</span>
+          {% endif %}
+          {% if section.settings.trust_badge_1_content != blank %}
+            <span class="custom-product-trust-badges__content">{{ section.settings.trust_badge_1_content }}</span>
+          {% endif %}
+        </span>
+      </div>
+    {% endif %}
+
+    {% if section.settings.trust_badge_1_title != blank or section.settings.trust_badge_1_content != blank %}
+      {% if section.settings.trust_badge_2_title != blank or section.settings.trust_badge_2_content != blank or section.settings.trust_badge_3_title != blank or section.settings.trust_badge_3_content != blank %}
+        <span class="custom-product-trust-badges__separator" aria-hidden="true"></span>
+      {% endif %}
+    {% endif %}
+
+    {% if section.settings.trust_badge_2_title != blank or section.settings.trust_badge_2_content != blank %}
+      <div class="custom-product-trust-badges__item">
+        <span class="custom-product-trust-badges__icon">
+          {% if section.settings.trust_badge_2_icon != blank %}
+            <img src="{{ section.settings.trust_badge_2_icon | img_url: '64x64' }}" alt="" aria-hidden="true" loading="lazy">
+          {% else %}
+            <svg aria-hidden="true" focusable="false" role="presentation" viewBox="0 0 24 24">
+              <path d="M3.5 7.5h10v8h-10v-8Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+              <path d="M13.5 10h3.1l2.9 2.9v2.6h-6v-5.5Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+              <path d="M6.5 18a1.7 1.7 0 1 0 0-3.4 1.7 1.7 0 0 0 0 3.4ZM16.8 18a1.7 1.7 0 1 0 0-3.4 1.7 1.7 0 0 0 0 3.4Z" fill="currentColor"/>
+            </svg>
+          {% endif %}
+        </span>
+        <span class="custom-product-trust-badges__copy">
+          {% if section.settings.trust_badge_2_title != blank %}
+            <span class="custom-product-trust-badges__title">{{ section.settings.trust_badge_2_title }}</span>
+          {% endif %}
+          {% if section.settings.trust_badge_2_content != blank %}
+            <span class="custom-product-trust-badges__content">{{ section.settings.trust_badge_2_content }}</span>
+          {% endif %}
+        </span>
+      </div>
+    {% endif %}
+
+    {% if section.settings.trust_badge_2_title != blank or section.settings.trust_badge_2_content != blank %}
+      {% if section.settings.trust_badge_3_title != blank or section.settings.trust_badge_3_content != blank %}
+        <span class="custom-product-trust-badges__separator" aria-hidden="true"></span>
+      {% endif %}
+    {% endif %}
+
+    {% if section.settings.trust_badge_3_title != blank or section.settings.trust_badge_3_content != blank %}
+      <div class="custom-product-trust-badges__item">
+        <span class="custom-product-trust-badges__icon">
+          {% if section.settings.trust_badge_3_icon != blank %}
+            <img src="{{ section.settings.trust_badge_3_icon | img_url: '64x64' }}" alt="" aria-hidden="true" loading="lazy">
+          {% else %}
+            <svg aria-hidden="true" focusable="false" role="presentation" viewBox="0 0 24 24">
+              <path d="M12 4.2 5.5 7.8l6.5 3.6 6.5-3.6L12 4.2Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+              <path d="M5.5 7.8v7.1l6.5 3.7 6.5-3.7V7.8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+              <path d="M12 11.4v7.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+              <path d="M9.4 13.9h5.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+          {% endif %}
+        </span>
+        <span class="custom-product-trust-badges__copy">
+          {% if section.settings.trust_badge_3_title != blank %}
+            <span class="custom-product-trust-badges__title">{{ section.settings.trust_badge_3_title }}</span>
+          {% endif %}
+          {% if section.settings.trust_badge_3_content != blank %}
+            <span class="custom-product-trust-badges__content">{{ section.settings.trust_badge_3_content }}</span>
+          {% endif %}
+        </span>
+      </div>
+    {% endif %}
+  </div>
+{% endif %}

@@ -4000,6 +4000,9 @@ theme.Product = (function() {
       productThumbImages: '.product-single__thumbnail--' + sectionId,
       productThumbs: '.product-single__thumbnails-' + sectionId,
       productThumbListItem: '.product-single__thumbnails-item',
+      productThumbRailScroll: '[data-thumbnail-rail-scroll]',
+      bundleOptionCard: '[data-bundle-option-card]',
+      bundleOptionInput: '[data-bundle-option-input]',
       productFeaturedImage: '.product-featured-img',
       productThumbsWrapper: '.thumbnails-wrapper',
       saleLabel: '.product-price__sale-label-' + sectionId,
@@ -4063,6 +4066,8 @@ theme.Product = (function() {
     this._stringOverrides();
     this._initVariants();
     this._initImageSwitch();
+    this._initThumbnailRailScroll();
+    this._initBundleOptions();
     this._initAddToCart();
     this._setActiveThumbnail();
   }
@@ -4160,6 +4165,96 @@ theme.Product = (function() {
           self._setActiveThumbnail(imageId);
         })
         .on('keyup', self._handleImageFocus.bind(self));
+    },
+
+    _initThumbnailRailScroll: function() {
+      var self = this;
+
+      $(this.selectors.productThumbRailScroll, this.$container).on(
+        'click',
+        function() {
+          var $thumbnails = $(self.selectors.productThumbs, self.$container);
+
+          if (!$thumbnails.length || $thumbnails.hasClass('slick-initialized')) {
+            return;
+          }
+
+          var itemHeight =
+            $thumbnails.find(self.selectors.productThumbListItem).outerHeight(true) ||
+            66;
+
+          $thumbnails.animate(
+            {
+              scrollTop: $thumbnails.scrollTop() + itemHeight * 3
+            },
+            200
+          );
+        }
+      );
+    },
+
+    _initBundleOptions: function() {
+      var self = this;
+
+      $(this.selectors.bundleOptionInput, this.$container).on('change', function() {
+        var variantId = Number($(this).val());
+        var quantity = Number($(this).data('bundle-quantity')) || 1;
+        var bundlePrice = Number($(this).data('bundle-price')) || 0;
+        var bundleComparePrice = Number($(this).data('bundle-compare-price')) || 0;
+        var variant = _.find(self.productSingleObject.variants, function(item) {
+          return item.id === variantId;
+        });
+
+        $(self.selectors.bundleOptionCard, self.$container).removeClass('is-selected');
+        $(this).closest(self.selectors.bundleOptionCard).addClass('is-selected');
+        $(self.selectors.originalSelectorId, self.$container).val(variantId);
+        self.$quantityInput.val(quantity);
+
+        if (!variant) {
+          return;
+        }
+
+        self.$container.trigger({
+          type: 'variantChange',
+          variant: variant
+        });
+
+        if (variant.featured_image) {
+          self.$container.trigger({
+            type: 'variantImageChange',
+            variant: variant
+          });
+        }
+
+        self._updateBundleButton(variant, bundlePrice, bundleComparePrice);
+      });
+    },
+
+    _updateBundleButton: function(variant, bundlePrice, bundleComparePrice) {
+      var buttonText = theme.strings.addToCart + ' — ';
+
+      if (!variant.available) {
+        $(this.selectors.addToCartText, this.$container).text(theme.strings.soldOut);
+        return;
+      }
+
+      if (!bundlePrice) {
+        bundlePrice = variant.price;
+      }
+
+      if (bundleComparePrice > bundlePrice) {
+        buttonText +=
+          '<s>' +
+          theme.Currency.formatMoney(bundleComparePrice, theme.moneyFormat) +
+          '</s>';
+      }
+
+      buttonText +=
+        '<strong>' +
+        theme.Currency.formatMoney(bundlePrice, theme.moneyFormat) +
+        '</strong>';
+
+      $(this.selectors.addToCartText, this.$container).html(buttonText);
     },
 
     _initAddToCart: function() {

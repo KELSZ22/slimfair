@@ -14,6 +14,12 @@
   {%- assign enable_zoom = section.settings.enable_zoom -%}
   {%- assign compare_at_price = current_variant.compare_at_price -%}
   {%- assign price = current_variant.price -%}
+  {%- assign use_custom_product_design = section.settings.apply_custom_design_to_all -%}
+  {%- assign custom_design_product_handle = section.settings.custom_design_product.handle | default: section.settings.custom_design_product -%}
+
+  {%- if section.settings.apply_custom_design_to_all == false and custom_design_product_handle != blank and custom_design_product_handle == product.handle -%}
+    {%- assign use_custom_product_design = true -%}
+  {%- endif -%}
 
   {% case section.settings.image_size %}
     {% when 'small' %}
@@ -25,7 +31,7 @@
       {%- assign product_image_width = 'medium-up--one-half' -%}
       {%- assign product_description_width = 'medium-up--one-half' -%}
       {%- assign product_thumbnail_width = 'medium-up--one-quarter' -%}
-      {%- assign height = 530 -%}
+      {%- assign height = 533 -%}
     {% when 'large' %}
       {%- assign product_image_width = 'medium-up--two-thirds' -%}
       {%- assign product_description_width = 'medium-up--one-third' -%}
@@ -40,41 +46,43 @@
   {% endcase %}
 
   <div class="grid product-single{% if section.settings.enable_payment_button %} product-single--{{ section.settings.image_size }}-image{% endif %}">
-    <div class="grid__item product-single__photos {{ product_image_width }}{% if section.settings.image_size == 'full' %} product-single__photos--full{% endif %}">
+    <div class="grid__item product-single__photos {{ product_image_width }}{% if product.images.size > 1 %} product-single__photos--thumbnail-rail{% endif %}{% if section.settings.image_size == 'full' %} product-single__photos--full{% endif %}" style="--product-gallery-width: {{ section.settings.product_gallery_width }}px;">
       {%- assign featured_image = product.selected_or_first_available_variant.featured_image | default: product.featured_image -%}
-      {% for image in product.images %}
-        {% capture img_id %}FeaturedImage-{{ section.id }}-{{ image.id }}{% endcapture %}
-        {% capture img_class %}product-featured-img{% endcapture %}
-        {% capture zoom_img_id %}FeaturedImageZoom-{{ section.id }}-{{ image.id }}{% endcapture %}
-        {% capture img_wrapper_id %}{{ zoom_img_id }}-wrapper{% endcapture %}
-        {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+      <div class="product-single__media-stage">
+        {% for image in product.images %}
+          {% capture img_id %}FeaturedImage-{{ section.id }}-{{ image.id }}{% endcapture %}
+          {% capture img_class %}product-featured-img{% endcapture %}
+          {% capture zoom_img_id %}FeaturedImageZoom-{{ section.id }}-{{ image.id }}{% endcapture %}
+          {% capture img_wrapper_id %}{{ zoom_img_id }}-wrapper{% endcapture %}
+          {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
 
-        {% include 'image-style', image: image, height: height, wrapper_id: img_wrapper_id, img_id: img_id %}
+          {% include 'image-style', image: image, height: height, wrapper_id: img_wrapper_id, img_id: img_id %}
 
-        <div id="{{ img_wrapper_id }}" class="product-single__photo-wrapper js">
-          <div
-          id="{{ zoom_img_id }}"
-          style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%;"
-          class="product-single__photo{% if enable_zoom %} js-zoom-enabled{% endif %}{% if product.images.size > 1 %} product-single__photo--has-thumbnails{% endif %}{% unless featured_image == image %} hide{% endunless %}"
-          data-image-id="{{ image.id }}"
-          {% if enable_zoom %} data-zoom="{{ image | img_url: product_image_zoom_size, scale: product_image_scale }}"{% endif %}>
-            <img id="{{ img_id }}"
-                 class="feature-row__image {{ img_class }} lazyload{% unless featured_image == image %} lazypreload{% endunless %}"
-                 src="{{ image | img_url: '300x300' }}"
-                 data-src="{{ img_url }}"
-                 data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
-                 data-aspectratio="{{ image.aspect_ratio }}"
-                 data-sizes="auto"
-                 tabindex="-1"
-                 alt="{{ image.alt | escape }}">
+          <div id="{{ img_wrapper_id }}" class="product-single__photo-wrapper js">
+            <div
+            id="{{ zoom_img_id }}"
+            style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%;"
+            class="product-single__photo{% if enable_zoom %} js-zoom-enabled{% endif %}{% if product.images.size > 1 %} product-single__photo--has-thumbnails{% endif %}{% unless featured_image == image %} hide{% endunless %}"
+            data-image-id="{{ image.id }}"
+            {% if enable_zoom %} data-zoom="{{ image | img_url: product_image_zoom_size, scale: product_image_scale }}"{% endif %}>
+              <img id="{{ img_id }}"
+                   class="feature-row__image {{ img_class }} lazyload{% unless featured_image == image %} lazypreload{% endunless %}"
+                   src="{{ image | img_url: '300x300' }}"
+                   data-src="{{ img_url }}"
+                   data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                   data-aspectratio="{{ image.aspect_ratio }}"
+                   data-sizes="auto"
+                   tabindex="-1"
+                   alt="{{ image.alt | escape }}">
+            </div>
           </div>
-        </div>
-      {% endfor %}
+        {% endfor %}
 
-      <noscript>
-        {% capture product_image_size %}{{ height }}x{% endcapture %}
-        <img src="{{ featured_image | img_url: product_image_size, scale: product_image_scale }}" alt="{{ featured_image.alt }}" id="FeaturedImage-{{ section.id }}" class="product-featured-img" style="max-width: {{ height }}px;">
-      </noscript>
+        <noscript>
+          {% capture product_image_size %}{{ height }}x{% endcapture %}
+          <img src="{{ featured_image | img_url: product_image_size, scale: product_image_scale }}" alt="{{ featured_image.alt }}" id="FeaturedImage-{{ section.id }}" class="product-featured-img" style="max-width: {{ height }}px;">
+        </noscript>
+      </div>
 
       {% if product.images.size > 1 %}
         {% if product.images.size > 3 %}
@@ -100,6 +108,10 @@
               </li>
             {% endfor %}
           </ul>
+          <button type="button" class="btn btn--link thumbnail-rail__scroll-button" data-thumbnail-rail-scroll>
+            {% include 'icon-chevron-down' %}
+            <span class="icon__fallback-text">Scroll thumbnails</span>
+          </button>
           {% if enable_thumbnail_slides == true %}
             <button type="button" class="btn btn--link medium-up--hide thumbnails-slider__btn thumbnails-slider__next thumbnails-slider__next--{{ section.id }}">
               {% include 'icon-chevron-right' %}
@@ -110,10 +122,196 @@
       {% endif %}
     </div>
 
-    <div class="grid__item {{ product_description_width }}">
+    <div class="grid__item product-single__details {{ product_description_width }}">
       <div class="product-single__meta">
 
-        <h1 class="product-single__title">{{ product.title }}</h1>
+        {% if use_custom_product_design %}
+          <div class="product-info-header">
+            <div class="product-info-header__social-proof">
+              <span class="product-info-header__badge">Best Seller</span>
+              <span class="product-info-header__rating" aria-label="Rated 5 out of 5">
+                <span class="product-info-header__stars" aria-hidden="true">★★★★★</span>
+                <span>5.0/5.0</span>
+              </span>
+              <span class="product-info-header__divider" aria-hidden="true">|</span>
+              <span class="product-info-header__sold">250k+ sold</span>
+            </div>
+
+            <h1 class="product-single__title">{{ product.title }}</h1>
+
+            <div class="product-info-header__purchase-summary">
+              <div class="product-info-header__pack">
+                <svg aria-hidden="true" focusable="false" role="presentation" class="product-info-header__pack-icon" viewBox="0 0 32 32">
+                  <path d="M8 11h14v7a7 7 0 0 1-14 0v-7z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                  <path d="M22 13h2.5a3.5 3.5 0 0 1 0 7H22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M7 25h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M10 4v4M16 3v5M21 4v4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                <span>10 Sachets Per Pack</span>
+              </div>
+
+              <span class="product-info-header__divider" aria-hidden="true">|</span>
+
+              <div class="product__price product-info-header__price">
+                {% include 'product-price', variant: current_variant, show_vendor: section.settings.show_vendor %}
+              </div>
+
+              {% if compare_at_price > price %}
+                <span class="product-info-header__save">
+                  Save {{ compare_at_price | minus: price | money_without_trailing_zeros }}
+                </span>
+              {% endif %}
+            </div>
+
+            {% if product.description != blank %}
+              <div class="product-info-header__description">
+                {{ product.description | strip_html | truncate: 210 }}
+              </div>
+            {% endif %}
+          </div>
+
+          {% include 'custom-health-benefits' %}
+
+          {% capture "form_classes" -%}
+            product-form product-form-{{ section.id }}
+            {%- unless section.settings.show_variant_labels %} product-form--hide-variant-labels {% endunless %}
+            {%- if current_variant.available == false %} product-form--variant-sold-out {%- endif -%}
+          {%- endcapture %}
+
+          {% form 'product', product, class:form_classes, novalidate: 'novalidate', data-product-form: '' %}
+            <div class="bundle-options">
+              <h2 class="bundle-options__title">Bundle &amp; Save More!</h2>
+
+              <div class="bundle-options__grid">
+                {% assign single_image = product.images[0] | default: product.featured_image %}
+                {% assign double_image = product.images[1] | default: single_image %}
+                {% assign six_image = product.images[2] | default: double_image %}
+                {% assign compare_price = current_variant.compare_at_price | default: current_variant.price %}
+
+                <label class="bundle-option-card is-selected" data-bundle-option-card>
+                  <input type="radio" name="bundle_option" value="{{ current_variant.id }}" data-bundle-option-input data-bundle-quantity="1" data-bundle-price="{{ current_variant.price }}" data-bundle-compare-price="{{ compare_price }}" checked {% unless current_variant.available %}disabled{% endunless %}>
+                  <div class="bundle-option-card__image-wrap">
+                    {% if single_image != blank %}
+                      <img class="bundle-option-card__image" src="{{ single_image | img_url: '420x420', crop: 'center' }}" alt="Buy single pack" loading="lazy">
+                    {% endif %}
+                  </div>
+                  <div class="bundle-option-card__content">
+                    <span class="bundle-option-card__radio" aria-hidden="true"></span>
+                    <div>
+                      <div class="bundle-option-card__title">Buy Single Pack</div>
+                      <div class="bundle-option-card__price">
+                        {% if compare_price > current_variant.price %}
+                          <s>{{ compare_price | money }}</s>
+                        {% endif %}
+                        <strong>{{ current_variant.price | money }}</strong>
+                      </div>
+                      <div class="bundle-option-card__subtitle">10 Sachet | 1-2 Week Supply</div>
+                    </div>
+                  </div>
+                </label>
+
+                {% assign double_price = current_variant.price | times: 2 %}
+                {% assign double_compare_price = compare_price | times: 2 %}
+                <label class="bundle-option-card" data-bundle-option-card>
+                  <input type="radio" name="bundle_option" value="{{ current_variant.id }}" data-bundle-option-input data-bundle-quantity="2" data-bundle-price="{{ double_price }}" data-bundle-compare-price="{{ double_compare_price }}" {% unless current_variant.available %}disabled{% endunless %}>
+                  <span class="bundle-option-card__badge">Most Popular</span>
+                  <div class="bundle-option-card__image-wrap">
+                    {% if double_image != blank %}
+                      <img class="bundle-option-card__image" src="{{ double_image | img_url: '420x420', crop: 'center' }}" alt="Buy 2 packs" loading="lazy">
+                    {% endif %}
+                  </div>
+                  <div class="bundle-option-card__content">
+                    <span class="bundle-option-card__radio" aria-hidden="true"></span>
+                    <div>
+                      <div class="bundle-option-card__title">Buy 2 Packs</div>
+                      <div class="bundle-option-card__price">
+                        {% if double_compare_price > double_price %}
+                          <s>{{ double_compare_price | money }}</s>
+                        {% endif %}
+                        <strong>{{ double_price | money }}</strong>
+                      </div>
+                      <div class="bundle-option-card__subtitle">20 Sachet | 1 Month Supply</div>
+                    </div>
+                  </div>
+                </label>
+
+                {% assign six_price = current_variant.price | times: 6 %}
+                {% assign six_compare_price = compare_price | times: 6 %}
+                <label class="bundle-option-card" data-bundle-option-card>
+                  <input type="radio" name="bundle_option" value="{{ current_variant.id }}" data-bundle-option-input data-bundle-quantity="6" data-bundle-price="{{ six_price }}" data-bundle-compare-price="{{ six_compare_price }}" {% unless current_variant.available %}disabled{% endunless %}>
+                  <span class="bundle-option-card__badge bundle-option-card__badge--red">Best Value</span>
+                  <div class="bundle-option-card__image-wrap">
+                    {% if six_image != blank %}
+                      <img class="bundle-option-card__image" src="{{ six_image | img_url: '420x420', crop: 'center' }}" alt="Buy 6 packs" loading="lazy">
+                    {% endif %}
+                  </div>
+                  <div class="bundle-option-card__content">
+                    <span class="bundle-option-card__radio" aria-hidden="true"></span>
+                    <div>
+                      <div class="bundle-option-card__title">Buy 6 Packs</div>
+                      <div class="bundle-option-card__price">
+                        {% if six_compare_price > six_price %}
+                          <s>{{ six_compare_price | money }}</s>
+                        {% endif %}
+                        <strong>{{ six_price | money }}</strong>
+                      </div>
+                      <div class="bundle-option-card__subtitle">6 Sachets | 3 Months Supply | Free Vacuum Flask Insulated 750ml</div>
+                    </div>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <select name="id" id="ProductSelect-{{ section.id }}" class="product-form__variants no-js">
+              {% for variant in product.variants %}
+                <option value="{{ variant.id }}"
+                  {%- if variant == current_variant %} selected="selected" {%- endif -%}
+                >
+                  {{ variant.title }}  {%- if variant.available == false %} - {{ 'products.product.sold_out' | t }}{% endif %}
+                </option>
+              {% endfor %}
+            </select>
+
+            <input type="hidden" name="quantity" value="1" data-quantity-input>
+
+            <div class="product-form__error-message-wrapper product-form__error-message-wrapper--hidden"
+              data-error-message-wrapper
+              role="alert"
+            >
+              <span class="visually-hidden">{{ 'general.accessibility.error' | t }} </span>
+              {% include 'icon-error' %}
+              <span class="product-form__error-message" data-error-message>{{ 'products.product.quantity_minimum_message' | t }}</span>
+            </div>
+
+            <div class="bundle-options__actions">
+              <button type="submit" name="add"
+                {% unless current_variant.available %} aria-disabled="true"{% endunless %}
+                aria-label="{% unless current_variant.available %}{{ 'products.product.sold_out' | t }}{% else %}{{ 'products.product.add_to_cart' | t }}{% endunless %}"
+                class="btn bundle-options__add-button"
+                data-add-to-cart>
+                <span data-add-to-cart-text>
+                  {% unless current_variant.available %}
+                    {{ 'products.product.sold_out' | t }}
+                  {% else %}
+                    {{ 'products.product.add_to_cart' | t }} —
+                    {% if current_variant.compare_at_price > current_variant.price %}
+                      <s>{{ current_variant.compare_at_price | money }}</s>
+                    {% endif %}
+                    <strong>{{ current_variant.price | money }}</strong>
+                  {% endunless %}
+                </span>
+                <span class="hide" data-loader>
+                  {% include 'icon-spinner' %}
+                </span>
+              </button>
+
+              <a class="bundle-options__payment-link" href="#payment-options">View Payment Options</a>
+            </div>
+
+            {% include 'custom-product-trust-badges' %}
+          {% endform %}
+        {% else %}
+          <h1 class="product-single__title">{{ product.title }}</h1>
 
           <div class="product__price">
             {% include 'product-price', variant: current_variant, show_vendor: section.settings.show_vendor %}
@@ -137,18 +335,17 @@
             {%- if current_variant.available == false %} product-form--variant-sold-out {%- endif -%}
           {%- endcapture %}
 
-          {% form 'product', product, class:form_classes, novalidate: 'novalidate', data-product-form: '' %}
+          {% form 'product', product, class: form_classes, novalidate: 'novalidate', data-product-form: '' %}
             {% unless product.has_only_default_variant %}
               <div class="product-form__controls-group">
                 {% for option in product.options_with_values %}
                   <div class="selector-wrapper js product-form__item">
-                    <label {% if option.name == 'default' %}class="label--hidden" {% endif %}for="SingleOptionSelector-{{ forloop.index0 }}">
+                    <label {% unless section.settings.show_variant_labels %}class="label--hidden" {% endunless %}for="SingleOptionSelector-{{ section.id }}-{{ forloop.index0 }}">
                       {{ option.name }}
                     </label>
                     <select class="single-option-selector single-option-selector-{{ section.id }} product-form__input"
-                      id="SingleOptionSelector-{{ forloop.index0 }}"
-                      data-index="option{{ forloop.index }}"
-                    >
+                      id="SingleOptionSelector-{{ section.id }}-{{ forloop.index0 }}"
+                      data-index="option{{ forloop.index }}">
                       {% for value in option.values %}
                         <option value="{{ value | escape }}"{% if option.selected_value == value %} selected="selected"{% endif %}>{{ value }}</option>
                       {% endfor %}
@@ -174,13 +371,15 @@
                   <label for="Quantity-{{ section.id }}">{{ 'products.product.quantity' | t }}</label>
                   <input type="number" id="Quantity-{{ section.id }}"
                     name="quantity" value="1" min="1" pattern="[0-9]*"
-                    class="product-form__input product-form__input--quantity" data-quantity-input
-                  >
+                    class="product-form__input product-form__input--quantity"
+                    data-quantity-input>
                 </div>
               </div>
+            {% else %}
+              <input type="hidden" name="quantity" value="1" data-quantity-input>
             {% endif %}
 
-            <div class="product-form__error-message-wrapper product-form__error-message-wrapper--hidden{% if section.settings.enable_payment_button %} product-form__error-message-wrapper--has-payment-button{% endif %}"
+            <div class="product-form__error-message-wrapper product-form__error-message-wrapper--hidden"
               data-error-message-wrapper
               role="alert"
             >
@@ -210,12 +409,15 @@
                     {% include 'icon-spinner' %}
                   </span>
                 </button>
+
                 {% if section.settings.enable_payment_button %}
                   {{ form | payment_button }}
                 {% endif %}
               </div>
             </div>
           {% endform %}
+        {% endif %}
+
         </div>
 
         {%- comment -%}
@@ -404,6 +606,32 @@
       "default": "medium"
     },
     {
+      "type": "range",
+      "id": "product_gallery_width",
+      "label": "Product gallery width",
+      "min": 560,
+      "max": 760,
+      "step": 5,
+      "unit": "px",
+      "default": 605
+    },
+    {
+      "type": "header",
+      "content": "Custom product design"
+    },
+    {
+      "type": "checkbox",
+      "id": "apply_custom_design_to_all",
+      "label": "Apply custom design to all products",
+      "default": true
+    },
+    {
+      "type": "product",
+      "id": "custom_design_product",
+      "label": "Product for custom design",
+      "info": "Used when custom design is not applied to all products."
+    },
+    {
       "type": "checkbox",
       "id": "show_quantity_selector",
       "label": {
@@ -579,6 +807,101 @@
         "zh-TW": "顯示社群分享按鈕"
       },
       "default": true
+    },
+    {
+      "type": "header",
+      "content": "Health benefits"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_health_benefits",
+      "label": "Show health benefits",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "health_benefits_title",
+      "label": "Title",
+      "default": "Health Benefits:"
+    },
+    {
+      "type": "text",
+      "id": "health_benefits_link_text",
+      "label": "Link text",
+      "default": "Nutrition Info"
+    },
+    {
+      "type": "url",
+      "id": "health_benefits_link_url",
+      "label": "Link URL"
+    },
+    {
+      "type": "textarea",
+      "id": "health_benefits_items",
+      "label": "Benefits",
+      "info": "Add one benefit per line.",
+      "default": "Appetite Suppressant\nHelps lighten and tighten skin\nAnti-aging\nMetabolism Booster\nBurns Unwanted Fats\nHelps lower bad cholesterol\nHelps maintain blood sugar level\nPrevents fatty liver\nNormalize bowel movement\nReduce wrinkles and cellulite"
+    },
+    {
+      "type": "header",
+      "content": "Trust badges"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_product_trust_badges",
+      "label": "Show trust badges",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "trust_badge_1_icon",
+      "label": "Badge 1 icon"
+    },
+    {
+      "type": "text",
+      "id": "trust_badge_1_title",
+      "label": "Badge 1 title",
+      "default": "FDA LTO NO."
+    },
+    {
+      "type": "text",
+      "id": "trust_badge_1_content",
+      "label": "Badge 1 content",
+      "default": "3000002733024"
+    },
+    {
+      "type": "image_picker",
+      "id": "trust_badge_2_icon",
+      "label": "Badge 2 icon"
+    },
+    {
+      "type": "text",
+      "id": "trust_badge_2_title",
+      "label": "Badge 2 title",
+      "default": "FREE SHIPPING"
+    },
+    {
+      "type": "text",
+      "id": "trust_badge_2_content",
+      "label": "Badge 2 content",
+      "default": "2 packs and up"
+    },
+    {
+      "type": "image_picker",
+      "id": "trust_badge_3_icon",
+      "label": "Badge 3 icon"
+    },
+    {
+      "type": "text",
+      "id": "trust_badge_3_title",
+      "label": "Badge 3 title",
+      "default": "ESTIMATED DELIVERY"
+    },
+    {
+      "type": "text",
+      "id": "trust_badge_3_content",
+      "label": "Badge 3 content",
+      "default": "Luzon 1-3days VisMin 4-7d"
     }
   ]
 }

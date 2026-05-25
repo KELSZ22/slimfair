@@ -1,0 +1,33 @@
+{% assign health_benefits = section.settings.health_benefits_items | newline_to_br | split: '<br />' %}
+
+{% if section.settings.show_health_benefits and section.settings.health_benefits_items != blank %}
+  <div class="custom-health-benefits">
+    <div class="custom-health-benefits__header">
+      {% if section.settings.health_benefits_title != blank %}
+        <h2 class="custom-health-benefits__title">{{ section.settings.health_benefits_title }}</h2>
+      {% endif %}
+
+      {% if section.settings.health_benefits_link_text != blank %}
+        <a class="custom-health-benefits__link" href="{{ section.settings.health_benefits_link_url | default: '#nutrition-info' }}">
+          {{ section.settings.health_benefits_link_text }}
+        </a>
+      {% endif %}
+    </div>
+
+    <div class="custom-health-benefits__panel">
+      <ul class="custom-health-benefits__list">
+        {% for benefit in health_benefits %}
+          {% assign benefit_text = benefit | strip %}
+          {% if benefit_text != blank %}
+            <li>
+              <span class="custom-health-benefits__icon">
+                <img src="{{ 'icon-health-checkmark.svg' | asset_url }}" alt="" aria-hidden="true" loading="lazy">
+              </span>
+              <span>{{ benefit_text }}</span>
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+{% endif %}
