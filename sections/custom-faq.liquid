@@ -1,0 +1,43 @@
+<section class="custom-faq">
+    <div class="custom-faq__heading">
+        <h1>
+            {{ settings.section.faq_heading }}
+        </h1>
+    </div>
+
+    <div class="custom-faq__accordions">
+
+    </div>
+    
+    <div class="custom-faq__footer">
+        <p class="custom-faq__footer-heading">
+
+        </p>
+        <a href="" class="button custom-faq__footer-button">
+
+        </a>
+    </div>
+</section>
+
+{% schema %}
+  {
+  "name": "Custom FAQ",
+  "settings": [
+    {
+        "type": "text", 
+        "id": "faq_heading",
+        "label": "Heading",
+        "default": "Hello"
+    }
+  ],
+  
+  
+  
+  
+  "presets": [
+    {
+      "name": "Custom FAQ"
+    }
+  ]
+}  
+{% endschema %}

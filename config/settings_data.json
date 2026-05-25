@@ -248,12 +248,30 @@
         "type": "product-template",
         "settings": {
           "image_size": "medium",
+          "product_gallery_width": 650,
+          "apply_custom_design_to_all": false,
+          "custom_design_product": "slimfair-coffee-🏆",
           "show_quantity_selector": false,
           "show_variant_labels": true,
           "show_vendor": false,
           "enable_zoom": true,
           "enable_payment_button": true,
-          "show_share_buttons": true
+          "show_share_buttons": true,
+          "show_health_benefits": true,
+          "health_benefits_title": "Health Benefits:",
+          "health_benefits_link_text": "Nutrition Info",
+          "health_benefits_link_url": "",
+          "health_benefits_items": "Appetite Suppressant\nHelps lighten and tighten skin\nAnti-aging\nMetabolism Booster\nBurns Unwanted Fats\nHelps lower bad cholesterol\nHelps maintain blood sugar level\nPrevents fatty liver\nNormalize bowel movement\nReduce wrinkles and cellulite",
+          "show_product_trust_badges": true,
+          "trust_badge_1_icon": "shopify://shop_images/Protect_1.svg",
+          "trust_badge_1_title": "FDA LTO NO.",
+          "trust_badge_1_content": "3000002733024",
+          "trust_badge_2_icon": "shopify://shop_images/Truck.svg",
+          "trust_badge_2_title": "FREE SHIPPING",
+          "trust_badge_2_content": "2 packs and up",
+          "trust_badge_3_icon": "shopify://shop_images/Successful_Delivery.svg",
+          "trust_badge_3_title": "ESTIMATED DELIVERY",
+          "trust_badge_3_content": "Luzon 1-3days VisMin 4-7d"
         }
       },
       "product-recommendations": {
@@ -817,16 +835,6 @@
       },
       "4935202709820522637": {
         "type": "shopify://apps/trustshop-reviews/blocks/review-embed/18b0c4cc-5411-4b6e-922d-34fdc2f30ab9",
-        "disabled": false,
-        "settings": {}
-      },
-      "12439146293631897289": {
-        "type": "shopify://apps/blockify-fraud-filter/blocks/app_embed/2e3e0ba5-0e70-447a-9ec5-3bf76b5ef12e",
-        "disabled": false,
-        "settings": {}
-      },
-      "1626193551103621034": {
-        "type": "shopify://apps/cod-king/blocks/app-embed/99553eb5-bf07-4ce0-9263-7e5f10cab22c",
         "disabled": false,
         "settings": {}
       }
