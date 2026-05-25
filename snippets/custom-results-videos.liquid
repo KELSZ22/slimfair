@@ -1,0 +1,72 @@
+{% assign results_video_blocks = section.blocks | where: 'type', 'results_video' %}
+
+{% if section.settings.show_results_videos and results_video_blocks.size > 0 %}
+  <section class="custom-results-videos" aria-labelledby="custom-results-videos-title-{{ section.id }}">
+    <div class="custom-results-videos__header">
+      {% if section.settings.results_videos_title != blank %}
+        <h2 id="custom-results-videos-title-{{ section.id }}" class="custom-results-videos__title">
+          {{ section.settings.results_videos_title }}
+        </h2>
+      {% endif %}
+
+      {% if section.settings.results_videos_cta_url != blank %}
+        <a class="custom-results-videos__next" href="{{ section.settings.results_videos_cta_url }}" aria-label="{{ section.settings.results_videos_cta_label | default: 'View more results' | escape }}">
+          <span>{{ section.settings.results_videos_cta_label | default: 'More' }}</span>
+          <svg aria-hidden="true" focusable="false" role="presentation" viewBox="0 0 24 24">
+            <path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      {% endif %}
+    </div>
+
+    <div class="custom-results-videos__track">
+      {% for block in results_video_blocks %}
+        {% assign video_title = block.settings.title | default: section.settings.results_videos_title %}
+        {% assign video_label = block.settings.label | default: video_title %}
+
+        {% capture results_video_card_content %}
+          {% if block.settings.image != blank %}
+            <img
+              class="custom-results-videos__image"
+              src="{{ block.settings.image | img_url: '360x640', crop: 'center' }}"
+              alt="{{ block.settings.image.alt | default: video_title | escape }}"
+              width="360"
+              height="640"
+              loading="lazy"
+            >
+          {% else %}
+            <div class="custom-results-videos__placeholder">
+              {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+            </div>
+          {% endif %}
+
+          <span class="custom-results-videos__shade" aria-hidden="true"></span>
+
+          {% if block.settings.quote != blank %}
+            <span class="custom-results-videos__quote">{{ block.settings.quote }}</span>
+          {% endif %}
+
+          <span class="custom-results-videos__play" aria-hidden="true">
+            <svg focusable="false" role="presentation" viewBox="0 0 24 24">
+              <path d="M9 7.5v9l7-4.5-7-4.5Z" fill="currentColor"/>
+            </svg>
+          </span>
+
+          {% if video_label != blank %}
+            <span class="custom-results-videos__label">{{ video_label }}</span>
+          {% endif %}
+        {% endcapture %}
+
+        {% if block.settings.video_url != blank %}
+          <a class="custom-results-videos__card" href="{{ block.settings.video_url }}" aria-label="{{ video_title | escape }}" {{ block.shopify_attributes }}>
+            {{ results_video_card_content }}
+          </a>
+        {% else %}
+          <div class="custom-results-videos__card" {{ block.shopify_attributes }}>
+            {{ results_video_card_content }}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </section>
+{% endif %}

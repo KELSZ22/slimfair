@@ -447,6 +447,10 @@
         {% endif %}
     </div>
   </div>
+
+  {% if use_custom_product_design %}
+    {% include 'custom-results-videos' %}
+  {% endif %}
 </div>
 
 {% unless product == empty %}
@@ -902,7 +906,69 @@
       "id": "trust_badge_3_content",
       "label": "Badge 3 content",
       "default": "Luzon 1-3days VisMin 4-7d"
+    },
+    {
+      "type": "header",
+      "content": "Results videos"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_results_videos",
+      "label": "Show results videos",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "results_videos_title",
+      "label": "Title",
+      "default": "Results You Don't Have to Guess"
+    },
+    {
+      "type": "text",
+      "id": "results_videos_cta_label",
+      "label": "Arrow label",
+      "default": "View more"
+    },
+    {
+      "type": "url",
+      "id": "results_videos_cta_url",
+      "label": "Arrow link"
     }
-  ]
+  ],
+  "blocks": [
+    {
+      "type": "results_video",
+      "name": "Results video",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Thumbnail image"
+        },
+        {
+          "type": "url",
+          "id": "video_url",
+          "label": "Video link"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Video title",
+          "default": "Customer result"
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Overlay quote"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Bottom label"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8
 }
 {% endschema %}
