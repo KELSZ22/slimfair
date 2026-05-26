@@ -1,0 +1,504 @@
+{% assign section_image = section.settings.image %}
+
+<section class="custom-simple-steps" style="
+    --simple-steps-bg: {{ section.settings.background_color }};
+    --simple-steps-heading: {{ section.settings.heading_color }};
+    --simple-steps-text: {{ section.settings.text_color }};
+    --simple-steps-accent: {{ section.settings.accent_color }};
+    --simple-steps-number-bg: {{ section.settings.number_background_color }};
+    --simple-steps-number-text: {{ section.settings.number_text_color }};
+    --simple-steps-padding-top: {{ section.settings.padding_top }}px;
+    --simple-steps-padding-bottom: {{ section.settings.padding_bottom }}px;
+    --simple-steps-image-radius: {{ section.settings.image_radius }}px;
+  ">
+  <div class="custom-simple-steps__inner page-width custom-simple-steps__inner--{{ section.settings.image_position }}">
+    <div class="custom-simple-steps__content">
+      {% if section.settings.heading != blank %}
+        <h2 class="custom-simple-steps__heading">{{ section.settings.heading | escape }}</h2>
+      {% endif %}
+
+      {% if section.settings.text != blank %}
+        <div class="custom-simple-steps__text rte-setting">{{ section.settings.text }}</div>
+      {% endif %}
+
+      {% if section.blocks.size > 0 %}
+        <div class="custom-simple-steps__list">
+          {% for block in section.blocks %}
+            <article class="custom-simple-steps__step" {{ block.shopify_attributes }}>
+              <div class="custom-simple-steps__icon custom-simple-steps__icon--{{ block.settings.icon }}" aria-hidden="true">
+                {% if block.settings.icon == 'water' %}
+                  <span class="custom-simple-steps__icon-shape custom-simple-steps__icon-shape--drop"></span>
+                  <span class="custom-simple-steps__icon-shape custom-simple-steps__icon-shape--cup"></span>
+                {% elsif block.settings.icon == 'sachet' %}
+                  <span class="custom-simple-steps__icon-shape custom-simple-steps__icon-shape--pack"></span>
+                {% else %}
+                  <span class="custom-simple-steps__icon-shape custom-simple-steps__icon-shape--person"></span>
+                  <span class="custom-simple-steps__icon-shape custom-simple-steps__icon-shape--cup-small"></span>
+                {% endif %}
+              </div>
+
+              <div class="custom-simple-steps__copy">
+                <div class="custom-simple-steps__title-row">
+                  <span class="custom-simple-steps__number">{{ forloop.index }}</span>
+
+                  {% if block.settings.title != blank %}
+                    <h3 class="custom-simple-steps__step-title">{{ block.settings.title | escape }}</h3>
+                  {% endif %}
+                </div>
+
+                {% if block.settings.description != blank %}
+                  <div class="custom-simple-steps__description rte-setting">{{ block.settings.description }}</div>
+                {% endif %}
+              </div>
+            </article>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="custom-simple-steps__media">
+      {% if section_image != blank %}
+        <img
+          src="{{ section_image | img_url: '760x' }}"
+          srcset="
+            {{ section_image | img_url: '480x' }} 480w,
+            {{ section_image | img_url: '640x' }} 640w,
+            {{ section_image | img_url: '760x' }} 760w,
+            {{ section_image | img_url: '960x' }} 960w
+          "
+          sizes="(min-width: 990px) 48vw, 92vw"
+          alt="{{ section_image.alt | escape }}"
+          loading="lazy">
+      {% else %}
+        {{ 'image' | placeholder_svg_tag: 'placeholder-svg custom-simple-steps__placeholder' }}
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<style>
+  .custom-simple-steps {
+    background: var(--simple-steps-bg);
+    color: var(--simple-steps-text);
+    padding: var(--simple-steps-padding-top) 0 var(--simple-steps-padding-bottom);
+  }
+
+  .custom-simple-steps__inner.page-width {
+    max-width: 1160px;
+  }
+
+  .custom-simple-steps__inner {
+    align-items: center;
+    display: grid;
+    gap: 72px;
+    grid-template-columns: minmax(320px, .95fr) minmax(320px, 1.05fr);
+  }
+
+  .custom-simple-steps__inner--left .custom-simple-steps__media {
+    order: -1;
+  }
+
+  .custom-simple-steps__heading {
+    color: var(--simple-steps-heading);
+    font-family: Lora, serif;
+    font-size: 31px;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1.2;
+    margin: 0 0 12px;
+  }
+
+  .custom-simple-steps__text,
+  .custom-simple-steps__text.rte-setting {
+    color: var(--simple-steps-text);
+    font-size: 15px;
+    line-height: 1.55;
+    margin: 0 0 38px;
+    max-width: 560px;
+  }
+
+  .custom-simple-steps__text p,
+  .custom-simple-steps__description p {
+    color: inherit;
+    margin: 0;
+  }
+
+  .custom-simple-steps__list {
+    display: grid;
+    gap: 26px;
+  }
+
+  .custom-simple-steps__step {
+    align-items: center;
+    display: grid;
+    gap: 20px;
+    grid-template-columns: 68px minmax(0, 1fr);
+  }
+
+  .custom-simple-steps__icon {
+    align-items: center;
+    background: var(--simple-steps-accent);
+    border-radius: 50%;
+    display: flex;
+    height: 64px;
+    justify-content: center;
+    position: relative;
+    width: 64px;
+  }
+
+  .custom-simple-steps__icon-shape {
+    display: block;
+    position: absolute;
+  }
+
+  .custom-simple-steps__icon-shape--drop {
+    border-radius: 50% 50% 50% 0;
+    border: 3px solid #fff;
+    height: 18px;
+    left: 21px;
+    top: 18px;
+    transform: rotate(-45deg);
+    width: 18px;
+  }
+
+  .custom-simple-steps__icon-shape--cup {
+    border: 3px solid #fff;
+    border-radius: 0 0 8px 8px;
+    border-top: 0;
+    bottom: 17px;
+    height: 16px;
+    right: 18px;
+    width: 16px;
+  }
+
+  .custom-simple-steps__icon-shape--pack {
+    border: 3px solid #fff;
+    border-radius: 3px;
+    height: 26px;
+    width: 28px;
+  }
+
+  .custom-simple-steps__icon-shape--pack:before {
+    border-bottom: 2px solid #fff;
+    border-left: 2px solid #fff;
+    content: "";
+    height: 6px;
+    left: 7px;
+    position: absolute;
+    top: 7px;
+    transform: rotate(-45deg);
+    width: 10px;
+  }
+
+  .custom-simple-steps__icon-shape--pack:after {
+    border: 2px solid #fff;
+    border-radius: 50%;
+    content: "";
+    height: 5px;
+    position: absolute;
+    right: 5px;
+    top: 8px;
+    width: 5px;
+  }
+
+  .custom-simple-steps__icon-shape--person {
+    background: #fff;
+    border-radius: 50% 50% 44% 44%;
+    height: 18px;
+    left: 17px;
+    top: 29px;
+    width: 18px;
+  }
+
+  .custom-simple-steps__icon-shape--person:before {
+    background: #fff;
+    border-radius: 50%;
+    content: "";
+    height: 12px;
+    left: 3px;
+    position: absolute;
+    top: -13px;
+    width: 12px;
+  }
+
+  .custom-simple-steps__icon-shape--cup-small {
+    border: 3px solid #fff;
+    border-radius: 0 0 8px 8px;
+    border-top: 0;
+    height: 17px;
+    right: 18px;
+    top: 27px;
+    transform: rotate(-30deg);
+    width: 13px;
+  }
+
+  .custom-simple-steps__title-row {
+    align-items: center;
+    display: flex;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+
+  .custom-simple-steps__number {
+    align-items: center;
+    background: var(--simple-steps-number-bg);
+    border-radius: 50%;
+    color: var(--simple-steps-number-text);
+    display: inline-flex;
+    flex: 0 0 23px;
+    font-size: 12px;
+    font-weight: 700;
+    height: 23px;
+    justify-content: center;
+    line-height: 1;
+    width: 23px;
+  }
+
+  .custom-simple-steps__step-title {
+    color: var(--simple-steps-heading);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1.3;
+    margin: 0;
+  }
+
+  .custom-simple-steps__description,
+  .custom-simple-steps__description.rte-setting {
+    color: var(--simple-steps-text);
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
+  .custom-simple-steps__media {
+    border-radius: var(--simple-steps-image-radius);
+    overflow: hidden;
+  }
+
+  .custom-simple-steps__media img,
+  .custom-simple-steps__placeholder {
+    aspect-ratio: 540 / 408;
+    display: block;
+    height: auto;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  .custom-simple-steps__placeholder {
+    background: #eadfc6;
+  }
+
+  @media screen and (max-width: 899px) {
+    .custom-simple-steps__inner {
+      gap: 36px;
+      grid-template-columns: 1fr;
+    }
+
+    .custom-simple-steps__inner--left .custom-simple-steps__media {
+      order: 0;
+    }
+  }
+
+  @media screen and (max-width: 549px) {
+    .custom-simple-steps__heading {
+      font-size: 26px;
+    }
+
+    .custom-simple-steps__step {
+      grid-template-columns: 56px minmax(0, 1fr);
+    }
+
+    .custom-simple-steps__icon {
+      height: 54px;
+      width: 54px;
+    }
+  }
+</style>
+
+{% schema %}
+  {
+    "name": "Simple steps",
+    "class": "custom-product-stack-section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading",
+        "default": "Ready in 3 Simple Steps"
+      },
+      {
+        "type": "richtext",
+        "id": "text",
+        "label": "Text",
+        "default": "<p>Enjoy a smooth, slimming coffee designed to support your metabolism and keep you feeling in control-anytime, anywhere.</p>"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "select",
+        "id": "image_position",
+        "label": "Image position",
+        "default": "right",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          }
+        ]
+      },
+      {
+        "type": "range",
+        "id": "image_radius",
+        "label": "Image corner radius",
+        "min": 0,
+        "max": 44,
+        "step": 2,
+        "unit": "px",
+        "default": 34
+      },
+      {
+        "type": "header",
+        "content": "Colors"
+      },
+      {
+        "type": "color",
+        "id": "background_color",
+        "label": "Background color",
+        "default": "#FFFBD8"
+      },
+      {
+        "type": "color",
+        "id": "heading_color",
+        "label": "Heading color",
+        "default": "#5C3F2D"
+      },
+      {
+        "type": "color",
+        "id": "text_color",
+        "label": "Text color",
+        "default": "#6D563D"
+      },
+      {
+        "type": "color",
+        "id": "accent_color",
+        "label": "Icon background",
+        "default": "#68422E"
+      },
+      {
+        "type": "color",
+        "id": "number_background_color",
+        "label": "Step number background",
+        "default": "#F3E59B"
+      },
+      {
+        "type": "color",
+        "id": "number_text_color",
+        "label": "Step number text",
+        "default": "#6D563D"
+      },
+      {
+        "type": "header",
+        "content": "Spacing"
+      },
+      {
+        "type": "range",
+        "id": "padding_top",
+        "label": "Top padding",
+        "min": 24,
+        "max": 120,
+        "step": 4,
+        "unit": "px",
+        "default": 52
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom",
+        "label": "Bottom padding",
+        "min": 24,
+        "max": 120,
+        "step": 4,
+        "unit": "px",
+        "default": 52
+      }
+    ],
+    "blocks": [
+      {
+        "type": "simple_step",
+        "name": "Step",
+        "settings": [
+          {
+            "type": "select",
+            "id": "icon",
+            "label": "Icon",
+            "default": "water",
+            "options": [
+              {
+                "value": "water",
+                "label": "Water"
+              },
+              {
+                "value": "sachet",
+                "label": "Sachet"
+              },
+              {
+                "value": "sip",
+                "label": "Sip"
+              }
+            ]
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "Add Hot or Cold Water"
+          },
+          {
+            "type": "richtext",
+            "id": "description",
+            "label": "Description",
+            "default": "<p>Pour 150-200ml of hot or cold water into your cup.</p>"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Simple steps",
+        "category": "Custom",
+        "blocks": [
+          {
+            "type": "simple_step",
+            "settings": {
+              "icon": "water",
+              "title": "Add Hot or Cold Water",
+              "description": "<p>Pour 150-200ml of hot or cold water into your cup.</p>"
+            }
+          },
+          {
+            "type": "simple_step",
+            "settings": {
+              "icon": "sachet",
+              "title": "Mix 1 Sachet of SlimFair",
+              "description": "<p>Stir well until fully dissolved for a smooth, creamy blend.</p>"
+            }
+          },
+          {
+            "type": "simple_step",
+            "settings": {
+              "icon": "sip",
+              "title": "Sip & Stay Consistent",
+              "description": "<p>Enjoy daily-best before meals-to support better results over time.</p>"
+            }
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

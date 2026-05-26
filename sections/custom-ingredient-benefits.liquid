@@ -5,9 +5,7 @@
   {% assign has_background_image = true %}
 {% endif %}
 
-<section
-  class="custom-ingredient-benefits custom-ingredient-benefits--{{ section_id }}{% if has_background_image %} custom-ingredient-benefits--has-bg-image{% endif %}"
-  style="
+<section class="custom-ingredient-benefits custom-ingredient-benefits--{{ section_id }}{% if has_background_image %} custom-ingredient-benefits--has-bg-image{% endif %}" style="
     --ingredient-benefits-bg: {{ section.settings.background_color }};
     --ingredient-benefits-text: {{ section.settings.text_color }};
     --ingredient-benefits-heading: {{ section.settings.heading_color }};
@@ -17,8 +15,7 @@
     --ingredient-benefits-featured-bg: {{ section.settings.featured_card_background_color }};
     --ingredient-benefits-featured-text: {{ section.settings.featured_card_text_color }};
     --ingredient-benefits-overlay-opacity: {{ section.settings.background_overlay_opacity | divided_by: 100.0 }};
-  "
->
+  ">
   {% if has_background_image %}
     <div
       class="custom-ingredient-benefits__background"
@@ -27,14 +24,13 @@
         background-image: url('{{ background_image | img_url: '2400x' }}');
         background-position: {{ section.settings.background_image_position }};
         background-size: {{ section.settings.background_image_size }};
-      "
-    ></div>
+      ">
+</div>
     {% if section.settings.background_overlay_opacity > 0 %}
       <div
         class="custom-ingredient-benefits__overlay"
         aria-hidden="true"
-        style="background-color: {{ section.settings.background_overlay_color }};"
-      ></div>
+        style="background-color: {{ section.settings.background_overlay_color }};"></div>
     {% endif %}
   {% endif %}
 
@@ -63,10 +59,7 @@
     {% if section.blocks.size > 0 %}
       <div class="custom-ingredient-benefits__grid">
         {% for block in section.blocks %}
-          <article
-            class="custom-ingredient-benefits__card{% if block.settings.featured_card %} custom-ingredient-benefits__card--featured{% endif %}{% if block.settings.image == blank %} custom-ingredient-benefits__card--no-image{% endif %}"
-            {{ block.shopify_attributes }}
-          >
+          <article class="custom-ingredient-benefits__card{% if block.settings.featured_card %} custom-ingredient-benefits__card--featured{% endif %}{% if block.settings.image == blank %} custom-ingredient-benefits__card--no-image{% endif %}" {{ block.shopify_attributes }}>
             <div class="custom-ingredient-benefits__card-copy">
               {% if block.settings.eyebrow != blank %}
                 <p class="custom-ingredient-benefits__eyebrow">{{ block.settings.eyebrow | escape }}</p>
@@ -92,8 +85,7 @@
                   "
                   sizes="(min-width: 990px) 120px, 96px"
                   alt="{{ block.settings.image.alt | escape }}"
-                  loading="lazy"
-                >
+                  loading="lazy">
               </div>
             {% endif %}
           </article>
@@ -129,8 +121,12 @@
     z-index: 1;
   }
 
+  .custom-ingredient-benefits__inner.page-width {
+    max-width: 1360px;
+    width: 100%;
+  }
+
   .custom-ingredient-benefits__inner {
-    max-width: 1220px;
     position: relative;
     z-index: 2;
   }
@@ -143,9 +139,9 @@
 
   .custom-ingredient-benefits__rating {
     align-items: center;
-    color: var(--ingredient-benefits-text);
+    color: #0A0A0A;
     display: flex;
-    font-size: 12px;
+    font-size: 16px;
     gap: 7px;
     justify-content: center;
     line-height: 1.2;
@@ -153,25 +149,26 @@
   }
 
   .custom-ingredient-benefits__stars {
-    color: var(--ingredient-benefits-accent);
+    color: #B68353;
     display: inline-flex;
-    font-size: 18px;
+    font-size: 24px;
     gap: 2px;
     letter-spacing: 0;
     line-height: 1;
   }
 
   .custom-ingredient-benefits__heading {
-    color: var(--ingredient-benefits-heading);
-    font-family: Georgia, 'Times New Roman', serif;
-    font-size: 34px;
+    font-family: Lora;
+    font-size: 25px;
+    font-style: normal;
     font-weight: 700;
-    letter-spacing: 0;
-    line-height: 1.08;
+    line-height: normal;
+    color: #5C3F2D;
     margin: 0;
   }
 
-  .custom-ingredient-benefits__subheading {
+  .custom-ingredient-benefits__subheading,
+  .custom-ingredient-benefits__subheading.rte-setting {
     color: var(--ingredient-benefits-text);
     font-size: 13px;
     line-height: 1.55;
@@ -180,25 +177,36 @@
   }
 
   .custom-ingredient-benefits__subheading p,
+  .custom-ingredient-benefits__subheading.rte-setting p {
+    color: var(--ingredient-benefits-text);
+    margin: 0;
+  }
+
   .custom-ingredient-benefits__description p {
     margin: 0;
   }
 
   .custom-ingredient-benefits__grid {
+    --ingredient-card-width: 328px;
+    --ingredient-grid-gap: 12px;
     display: grid;
-    gap: 12px;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--ingredient-grid-gap);
+    grid-template-columns: repeat(4, var(--ingredient-card-width));
+    justify-content: center;
   }
 
   .custom-ingredient-benefits__card {
     background: var(--ingredient-benefits-card-bg);
     border: 1px solid var(--ingredient-benefits-card-border);
     border-radius: 8px;
+    box-sizing: border-box;
     display: flex;
     min-height: 148px;
     overflow: hidden;
-    padding: 17px 12px 15px 18px;
+    padding: 25px;
     position: relative;
+    width: 328px;
+    max-width: 100%;
   }
 
   .custom-ingredient-benefits__card--featured {
@@ -210,7 +218,7 @@
     display: flex;
     flex: 1 1 auto;
     flex-direction: column;
-    max-width: 68%;
+    max-width: 65%;
     min-width: 0;
     position: relative;
     z-index: 1;
@@ -222,7 +230,7 @@
 
   .custom-ingredient-benefits__eyebrow {
     color: inherit;
-    font-size: 10px;
+    font-size: 14px;
     line-height: 1.25;
     margin: 0 0 7px;
     opacity: .9;
@@ -232,17 +240,23 @@
     color: inherit;
     font-size: 14px;
     font-weight: 700;
-    letter-spacing: .04em;
+    letter-spacing: 0.04em;
     line-height: 1.18;
     margin: 0 0 10px;
     text-transform: uppercase;
   }
 
-  .custom-ingredient-benefits__description {
+  .custom-ingredient-benefits__description,
+  .custom-ingredient-benefits__description.rte-setting {
     color: inherit;
-    font-size: 11px;
+    font-size: 14px;
     line-height: 1.45;
     opacity: .9;
+  }
+
+  .custom-ingredient-benefits__description p {
+    color: inherit;
+    font-size: inherit;
   }
 
   .custom-ingredient-benefits__image {
@@ -276,7 +290,7 @@
     }
 
     .custom-ingredient-benefits__grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(2, var(--ingredient-card-width));
     }
   }
 
@@ -303,298 +317,272 @@
 
     .custom-ingredient-benefits__card {
       min-height: 132px;
+      width: 100%;
     }
   }
 </style>
 
 {% schema %}
-{
-  "name": "Ingredient benefits",
-  "class": "index-section",
-  "settings": [
-    {
-      "type": "text",
-      "id": "rating_text",
-      "label": "Rating text",
-      "default": "Rated by 20,000+ Coffee Lovers"
-    },
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "See Exactly What You're Putting In Your Body"
-    },
-    {
-      "type": "richtext",
-      "id": "subheading",
-      "label": "Subheading",
-      "default": "<p>Every ingredient is carefully selected to support fat loss, boost metabolism, and keep you feeling in control, nothing unnecessary, nothing hidden.</p>"
-    },
-    {
-      "type": "header",
-      "content": "Background"
-    },
-    {
-      "type": "image_picker",
-      "id": "background_image",
-      "label": "Background image"
-    },
-    {
-      "type": "select",
-      "id": "background_image_position",
-      "label": "Image position",
-      "default": "center center",
-      "options": [
-        {
-          "value": "top left",
-          "label": "Top left"
-        },
-        {
-          "value": "top center",
-          "label": "Top center"
-        },
-        {
-          "value": "top right",
-          "label": "Top right"
-        },
-        {
-          "value": "center left",
-          "label": "Center left"
-        },
-        {
-          "value": "center center",
-          "label": "Center"
-        },
-        {
-          "value": "center right",
-          "label": "Center right"
-        },
-        {
-          "value": "bottom left",
-          "label": "Bottom left"
-        },
-        {
-          "value": "bottom center",
-          "label": "Bottom center"
-        },
-        {
-          "value": "bottom right",
-          "label": "Bottom right"
-        }
-      ]
-    },
-    {
-      "type": "select",
-      "id": "background_image_size",
-      "label": "Image size",
-      "default": "cover",
-      "options": [
-        {
-          "value": "cover",
-          "label": "Cover"
-        },
-        {
-          "value": "contain",
-          "label": "Contain"
-        },
-        {
-          "value": "auto",
-          "label": "Original"
-        }
-      ]
-    },
-    {
-      "type": "color",
-      "id": "background_color",
-      "label": "Background color",
-      "info": "Fallback when no image is set. Shows behind the image while it loads.",
-      "default": "#FCF9D8"
-    },
-    {
-      "type": "color",
-      "id": "background_overlay_color",
-      "label": "Overlay color",
-      "info": "Optional tint over the background image for readability.",
-      "default": "#FCF9D8"
-    },
-    {
-      "type": "range",
-      "id": "background_overlay_opacity",
-      "label": "Overlay opacity",
-      "min": 0,
-      "max": 100,
-      "step": 5,
-      "unit": "%",
-      "default": 0
-    },
-    {
-      "type": "color",
-      "id": "heading_color",
-      "label": "Heading color",
-      "default": "#6F3F25"
-    },
-    {
-      "type": "color",
-      "id": "text_color",
-      "label": "Text color",
-      "default": "#5E543F"
-    },
-    {
-      "type": "color",
-      "id": "accent_color",
-      "label": "Star color",
-      "default": "#C98830"
-    },
-    {
-      "type": "color",
-      "id": "card_background_color",
-      "label": "Card background color",
-      "default": "#FEFCE8"
-    },
-    {
-      "type": "color",
-      "id": "card_border_color",
-      "label": "Card border color",
-      "default": "#9A8A52"
-    },
-    {
-      "type": "color",
-      "id": "featured_card_background_color",
-      "label": "Featured card background color",
-      "default": "#6B422E"
-    },
-    {
-      "type": "color",
-      "id": "featured_card_text_color",
-      "label": "Featured card text color",
-      "default": "#FFFFFF"
-    }
-  ],
-  "blocks": [
-    {
-      "type": "ingredient",
-      "name": "Ingredient card",
-      "settings": [
-        {
-          "type": "checkbox",
-          "id": "featured_card",
-          "label": "Use featured card colors",
-          "default": false
-        },
-        {
-          "type": "text",
-          "id": "eyebrow",
-          "label": "Eyebrow",
-          "default": "Enhanced Fat Burning"
-        },
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Ingredient name",
-          "default": "GREEN COFFEE BEANS"
-        },
-        {
-          "type": "richtext",
-          "id": "description",
-          "label": "Description",
-          "default": "<p>Higher chlorogenic acid content to improved metabolism vs roasted coffee.</p>"
-        },
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Image"
-        },
-        {
-          "type": "select",
-          "id": "image_position",
-          "label": "Image fit",
-          "default": "cover",
-          "options": [
-            {
-              "value": "cover",
-              "label": "Cover"
-            },
-            {
-              "value": "contain",
-              "label": "Contain"
+  {
+    "name": "Ingredient benefits",
+    "class": "index-section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "rating_text",
+        "label": "Rating text",
+        "default": "Rated by 20,000+ Coffee Lovers"
+      },
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading",
+        "default": "See Exactly What You're Putting In Your Body"
+      },
+      {
+        "type": "richtext",
+        "id": "subheading",
+        "label": "Subheading",
+        "default": "<p>Every ingredient is carefully selected to support fat loss, boost metabolism, and keep you feeling in control, nothing unnecessary, nothing hidden.</p>"
+      },
+      {
+        "type": "header",
+        "content": "Background"
+      }, {
+        "type": "image_picker",
+        "id": "background_image",
+        "label": "Background image"
+      }, {
+        "type": "select",
+        "id": "background_image_position",
+        "label": "Image position",
+        "default": "center center",
+        "options": [
+          {
+            "value": "top left",
+            "label": "Top left"
+          },
+          {
+            "value": "top center",
+            "label": "Top center"
+          },
+          {
+            "value": "top right",
+            "label": "Top right"
+          },
+          {
+            "value": "center left",
+            "label": "Center left"
+          }, {
+            "value": "center center",
+            "label": "Center"
+          }, {
+            "value": "center right",
+            "label": "Center right"
+          }, {
+            "value": "bottom left",
+            "label": "Bottom left"
+          }, {
+            "value": "bottom center",
+            "label": "Bottom center"
+          }, {
+            "value": "bottom right",
+            "label": "Bottom right"
+          }
+        ]
+      }, {
+        "type": "select",
+        "id": "background_image_size",
+        "label": "Image size",
+        "default": "cover",
+        "options": [
+          {
+            "value": "cover",
+            "label": "Cover"
+          }, {
+            "value": "contain",
+            "label": "Contain"
+          }, {
+            "value": "auto",
+            "label": "Original"
+          }
+        ]
+      }, {
+        "type": "color",
+        "id": "background_color",
+        "label": "Background color",
+        "info": "Fallback when no image is set. Shows behind the image while it loads.",
+        "default": "#FCF9D8"
+      }, {
+        "type": "color",
+        "id": "background_overlay_color",
+        "label": "Overlay color",
+        "info": "Optional tint over the background image for readability.",
+        "default": "#FCF9D8"
+      }, {
+        "type": "range",
+        "id": "background_overlay_opacity",
+        "label": "Overlay opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "default": 0
+      }, {
+        "type": "color",
+        "id": "heading_color",
+        "label": "Heading color",
+        "default": "#6F3F25"
+      }, {
+        "type": "color",
+        "id": "text_color",
+        "label": "Text color",
+        "default": "#5E543F"
+      }, {
+        "type": "color",
+        "id": "accent_color",
+        "label": "Star color",
+        "default": "#C98830"
+      }, {
+        "type": "color",
+        "id": "card_background_color",
+        "label": "Card background color",
+        "default": "#FEFCE8"
+      }, {
+        "type": "color",
+        "id": "card_border_color",
+        "label": "Card border color",
+        "default": "#9A8A52"
+      }, {
+        "type": "color",
+        "id": "featured_card_background_color",
+        "label": "Featured card background color",
+        "default": "#6B422E"
+      }, {
+        "type": "color",
+        "id": "featured_card_text_color",
+        "label": "Featured card text color",
+        "default": "#FFFFFF"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "ingredient",
+        "name": "Ingredient card",
+        "settings": [
+          {
+            "type": "checkbox",
+            "id": "featured_card",
+            "label": "Use featured card colors",
+            "default": false
+          },
+          {
+            "type": "text",
+            "id": "eyebrow",
+            "label": "Eyebrow",
+            "default": "Enhanced Fat Burning"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Ingredient name",
+            "default": "GREEN COFFEE BEANS"
+          },
+          {
+            "type": "richtext",
+            "id": "description",
+            "label": "Description",
+            "default": "<p>Higher chlorogenic acid content to improved metabolism vs roasted coffee.</p>"
+          }, {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          }, {
+            "type": "select",
+            "id": "image_position",
+            "label": "Image fit",
+            "default": "cover",
+            "options": [
+              {
+                "value": "cover",
+                "label": "Cover"
+              }, {
+                "value": "contain",
+                "label": "Contain"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Ingredient benefits",
+        "category": "Custom",
+        "blocks": [
+          {
+            "type": "ingredient",
+            "settings": {
+              "featured_card": true,
+              "eyebrow": "Enhanced Fat Burning",
+              "title": "GREEN COFFEE BEANS",
+              "description": "<p>Higher chlorogenic acid content to improved metabolism vs roasted coffee.</p>"
             }
-          ]
-        }
-      ]
-    }
-  ],
-  "presets": [
-    {
-      "name": "Ingredient benefits",
-      "category": "Custom",
-      "blocks": [
-        {
-          "type": "ingredient",
-          "settings": {
-            "featured_card": true,
-            "eyebrow": "Enhanced Fat Burning",
-            "title": "GREEN COFFEE BEANS",
-            "description": "<p>Higher chlorogenic acid content to improved metabolism vs roasted coffee.</p>"
+          },
+          {
+            "type": "ingredient",
+            "settings": {
+              "eyebrow": "Appetite Suppressant",
+              "title": "L-CARNITINE",
+              "description": "<p>Breaks down fat and turn fat into energy.</p>"
+            }
+          },
+          {
+            "type": "ingredient",
+            "settings": {
+              "eyebrow": "Natural Sweetener",
+              "title": "STEVIA",
+              "description": "<p>Against oxidative damage; whitening effect on skin.</p>"
+            }
+          },
+          {
+            "type": "ingredient",
+            "settings": {
+              "eyebrow": "Lower Cholesterol",
+              "title": "ROSEHIP EXTRACT",
+              "description": "<p>Blood fat levels, brighten skin, prevent blackheads, and reduce inflammation.</p>"
+            }
+          }, {
+            "type": "ingredient",
+            "settings": {
+              "eyebrow": "Normalize Blood Sugar",
+              "title": "MORINGA OLEIFERA",
+              "description": "<p>Rich in vitamins, minerals, and nutrients; helps normalize blood sugar.</p>"
+            }
+          }, {
+            "type": "ingredient",
+            "settings": {
+              "eyebrow": "Boost Metabolism",
+              "title": "GINKGO BILOBA",
+              "description": "<p>Increases blood flow and improves memory.</p>"
+            }
+          }, {
+            "type": "ingredient",
+            "settings": {
+              "eyebrow": "Reduce wrinkles",
+              "title": "MARINE COLLAGEN",
+              "description": "<p>Improve skin elasticity, and enhance the overall structure and appearance of skin.</p>"
+            }
+          }, {
+            "type": "ingredient",
+            "settings": {
+              "eyebrow": "Burning Fat",
+              "title": "MANGOSTEEN",
+              "description": "<p>Helps in the prevention of weight gain, by burning down fat.</p>"
+            }
           }
-        },
-        {
-          "type": "ingredient",
-          "settings": {
-            "eyebrow": "Appetite Suppressant",
-            "title": "L-CARNITINE",
-            "description": "<p>Breaks down fat and turn fat into energy.</p>"
-          }
-        },
-        {
-          "type": "ingredient",
-          "settings": {
-            "eyebrow": "Natural Sweetener",
-            "title": "STEVIA",
-            "description": "<p>Against oxidative damage; whitening effect on skin.</p>"
-          }
-        },
-        {
-          "type": "ingredient",
-          "settings": {
-            "eyebrow": "Lower Cholesterol",
-            "title": "ROSEHIP EXTRACT",
-            "description": "<p>Blood fat levels, brighten skin, prevent blackheads, and reduce inflammation.</p>"
-          }
-        },
-        {
-          "type": "ingredient",
-          "settings": {
-            "eyebrow": "Normalize Blood Sugar",
-            "title": "MORINGA OLEIFERA",
-            "description": "<p>Rich in vitamins, minerals, and nutrients; helps normalize blood sugar.</p>"
-          }
-        },
-        {
-          "type": "ingredient",
-          "settings": {
-            "eyebrow": "Boost Metabolism",
-            "title": "GINKGO BILOBA",
-            "description": "<p>Increases blood flow and improves memory.</p>"
-          }
-        },
-        {
-          "type": "ingredient",
-          "settings": {
-            "eyebrow": "Reduce wrinkles",
-            "title": "MARINE COLLAGEN",
-            "description": "<p>Improve skin elasticity, and enhance the overall structure and appearance of skin.</p>"
-          }
-        },
-        {
-          "type": "ingredient",
-          "settings": {
-            "eyebrow": "Burning Fat",
-            "title": "MANGOSTEEN",
-            "description": "<p>Helps in the prevention of weight gain, by burning down fat.</p>"
-          }
-        }
-      ]
-    }
-  ]
-}
+        ]
+      }
+    ]
+  }
 {% endschema %}

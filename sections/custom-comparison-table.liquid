@@ -1,0 +1,491 @@
+{% assign slimfair_image = section.settings.slimfair_image %}
+{% assign competitor_image = section.settings.competitor_image %}
+
+<section class="custom-comparison-table" style="
+    --comparison-bg: {{ section.settings.background_color }};
+    --comparison-heading: {{ section.settings.heading_color }};
+    --comparison-text: {{ section.settings.text_color }};
+    --comparison-accent: {{ section.settings.accent_color }};
+    --comparison-negative: {{ section.settings.negative_color }};
+    --comparison-pill-bg: {{ section.settings.pill_background_color }};
+    --comparison-pill-text: {{ section.settings.pill_text_color }};
+    --comparison-divider: {{ section.settings.divider_color }};
+    --comparison-padding-top: {{ section.settings.padding_top }}px;
+    --comparison-padding-bottom: {{ section.settings.padding_bottom }}px;
+  ">
+  <div class="custom-comparison-table__inner page-width">
+    <div class="custom-comparison-table__header">
+      {% if section.settings.heading != blank %}
+        <h2 class="custom-comparison-table__heading">{{ section.settings.heading | escape }}</h2>
+      {% endif %}
+
+      {% if section.settings.text != blank %}
+        <div class="custom-comparison-table__text rte-setting">{{ section.settings.text }}</div>
+      {% endif %}
+    </div>
+
+    <div class="custom-comparison-table__products">
+      <div class="custom-comparison-table__product custom-comparison-table__product--slimfair">
+        {% if slimfair_image != blank %}
+          <img
+            src="{{ slimfair_image | img_url: '460x' }}"
+            srcset="
+              {{ slimfair_image | img_url: '280x' }} 280w,
+              {{ slimfair_image | img_url: '360x' }} 360w,
+              {{ slimfair_image | img_url: '460x' }} 460w
+            "
+            sizes="(min-width: 990px) 260px, 40vw"
+            alt="{{ slimfair_image.alt | escape }}"
+            loading="lazy">
+        {% endif %}
+
+        {% if section.settings.slimfair_label != blank %}
+          <span class="custom-comparison-table__product-label custom-comparison-table__product-label--slimfair">
+            {{ section.settings.slimfair_label | escape }}
+          </span>
+        {% endif %}
+      </div>
+
+      <div class="custom-comparison-table__product custom-comparison-table__product--competitor">
+        {% if competitor_image != blank %}
+          <img
+            src="{{ competitor_image | img_url: '460x' }}"
+            srcset="
+              {{ competitor_image | img_url: '280x' }} 280w,
+              {{ competitor_image | img_url: '360x' }} 360w,
+              {{ competitor_image | img_url: '460x' }} 460w
+            "
+            sizes="(min-width: 990px) 260px, 40vw"
+            alt="{{ competitor_image.alt | escape }}"
+            loading="lazy">
+        {% endif %}
+
+        {% if section.settings.competitor_label != blank %}
+          <span class="custom-comparison-table__product-label custom-comparison-table__product-label--competitor">
+            {{ section.settings.competitor_label | escape }}
+          </span>
+        {% endif %}
+      </div>
+    </div>
+
+    {% if section.blocks.size > 0 %}
+      <div class="custom-comparison-table__rows">
+        {% for block in section.blocks %}
+          <div class="custom-comparison-table__row" {{ block.shopify_attributes }}>
+            <div class="custom-comparison-table__cell custom-comparison-table__cell--positive">
+              <span class="custom-comparison-table__icon custom-comparison-table__icon--positive" aria-hidden="true"></span>
+              {% if block.settings.slimfair_text != blank %}
+                <span>{{ block.settings.slimfair_text | escape }}</span>
+              {% endif %}
+            </div>
+
+            <div class="custom-comparison-table__criterion">
+              {{ block.settings.criterion | escape }}
+            </div>
+
+            <div class="custom-comparison-table__cell custom-comparison-table__cell--negative">
+              <span class="custom-comparison-table__icon custom-comparison-table__icon--negative" aria-hidden="true"></span>
+              {% if block.settings.competitor_text != blank %}
+                <span>{{ block.settings.competitor_text | escape }}</span>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<style>
+  .custom-comparison-table {
+    background: var(--comparison-bg);
+    color: var(--comparison-text);
+    padding: var(--comparison-padding-top) 0 var(--comparison-padding-bottom);
+  }
+
+  .custom-comparison-table__inner.page-width {
+    max-width: 1120px;
+  }
+
+  .custom-comparison-table__header {
+    margin: 0 auto 22px;
+    max-width: 760px;
+    text-align: center;
+  }
+
+  .custom-comparison-table__heading {
+    color: var(--comparison-heading);
+    font-family: Lora, serif;
+    font-size: 25px;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1.22;
+    margin: 0 0 9px;
+  }
+
+  .custom-comparison-table__text,
+  .custom-comparison-table__text.rte-setting {
+    color: var(--comparison-text);
+    font-size: 13px;
+    line-height: 1.55;
+    margin: 0 auto;
+    max-width: 640px;
+  }
+
+  .custom-comparison-table__text p {
+    color: inherit;
+    margin: 0;
+  }
+
+  .custom-comparison-table__products {
+    align-items: end;
+    display: grid;
+    gap: 120px;
+    grid-template-columns: minmax(180px, 1fr) minmax(180px, 1fr);
+    margin: 0 auto 24px;
+    max-width: 720px;
+    position: relative;
+  }
+
+  .custom-comparison-table__products:after {
+    background: var(--comparison-divider);
+    bottom: -246px;
+    content: "";
+    height: 300px;
+    left: 50%;
+    opacity: .72;
+    position: absolute;
+    transform: translateX(-50%);
+    width: 1px;
+  }
+
+  .custom-comparison-table__product {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 130px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .custom-comparison-table__product img {
+    display: block;
+    height: auto;
+    max-height: 150px;
+    max-width: 100%;
+    object-fit: contain;
+  }
+
+  .custom-comparison-table__product-label {
+    border-radius: 3px;
+    display: inline-flex;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-top: -10px;
+    padding: 10px 18px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .custom-comparison-table__product-label--slimfair {
+    background: var(--comparison-pill-bg);
+    color: var(--comparison-accent);
+  }
+
+  .custom-comparison-table__product-label--competitor {
+    background: #000;
+    color: var(--comparison-negative);
+  }
+
+  .custom-comparison-table__rows {
+    display: grid;
+    gap: 16px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .custom-comparison-table__row {
+    align-items: center;
+    display: grid;
+    gap: 30px;
+    grid-template-columns: minmax(0, 1fr) 140px minmax(0, 1fr);
+  }
+
+  .custom-comparison-table__cell {
+    align-items: center;
+    display: grid;
+    font-size: 13px;
+    gap: 18px;
+    grid-template-columns: 18px minmax(0, 1fr);
+    line-height: 1.45;
+  }
+
+  .custom-comparison-table__cell--negative {
+    grid-template-columns: 18px minmax(0, 1fr);
+  }
+
+  .custom-comparison-table__criterion {
+    align-items: center;
+    background: var(--comparison-pill-bg);
+    border-radius: 999px;
+    color: var(--comparison-pill-text);
+    display: flex;
+    font-size: 12px;
+    font-weight: 700;
+    justify-content: center;
+    line-height: 1.25;
+    min-height: 34px;
+    padding: 7px 18px;
+    text-align: center;
+  }
+
+  .custom-comparison-table__icon {
+    border-radius: 50%;
+    display: inline-block;
+    height: 18px;
+    position: relative;
+    width: 18px;
+  }
+
+  .custom-comparison-table__icon--positive {
+    background: var(--comparison-accent);
+  }
+
+  .custom-comparison-table__icon--positive:after {
+    border-bottom: 3px solid #fff;
+    border-right: 3px solid #fff;
+    content: "";
+    height: 8px;
+    left: 6px;
+    position: absolute;
+    top: 3px;
+    transform: rotate(45deg);
+    width: 4px;
+  }
+
+  .custom-comparison-table__icon--negative {
+    background: var(--comparison-negative);
+  }
+
+  .custom-comparison-table__icon--negative:before,
+  .custom-comparison-table__icon--negative:after {
+    background: #fff;
+    content: "";
+    height: 2px;
+    left: 5px;
+    position: absolute;
+    top: 8px;
+    width: 8px;
+  }
+
+  .custom-comparison-table__icon--negative:before {
+    transform: rotate(45deg);
+  }
+
+  .custom-comparison-table__icon--negative:after {
+    transform: rotate(-45deg);
+  }
+
+  @media screen and (max-width: 749px) {
+    .custom-comparison-table__products {
+      gap: 34px;
+      margin-bottom: 28px;
+    }
+
+    .custom-comparison-table__products:after {
+      display: none;
+    }
+
+    .custom-comparison-table__row {
+      gap: 10px;
+      grid-template-columns: 1fr;
+    }
+
+    .custom-comparison-table__criterion {
+      order: -1;
+    }
+
+    .custom-comparison-table__cell {
+      gap: 12px;
+    }
+  }
+</style>
+
+{% schema %}
+  {
+    "name": "Comparison table",
+    "class": "custom-product-stack-section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading",
+        "default": "See Why SlimFair Stands Above the Rest"
+      },
+      {
+        "type": "richtext",
+        "id": "text",
+        "label": "Text",
+        "default": "<p>While others rely on hype and hidden formulas, SlimFair focuses on transparency, balance, and real results over time.</p>"
+      },
+      {
+        "type": "image_picker",
+        "id": "slimfair_image",
+        "label": "SlimFair image"
+      },
+      {
+        "type": "text",
+        "id": "slimfair_label",
+        "label": "SlimFair label",
+        "default": "SlimFair Products"
+      },
+      {
+        "type": "image_picker",
+        "id": "competitor_image",
+        "label": "Competitor image"
+      },
+      {
+        "type": "text",
+        "id": "competitor_label",
+        "label": "Competitor label",
+        "default": "Brand X"
+      },
+      {
+        "type": "header",
+        "content": "Colors"
+      },
+      {
+        "type": "color",
+        "id": "background_color",
+        "label": "Background color",
+        "default": "#65402C"
+      },
+      {
+        "type": "color",
+        "id": "heading_color",
+        "label": "Heading color",
+        "default": "#FBF7D4"
+      },
+      {
+        "type": "color",
+        "id": "text_color",
+        "label": "Text color",
+        "default": "#FBF7D4"
+      },
+      {
+        "type": "color",
+        "id": "accent_color",
+        "label": "Positive color",
+        "default": "#A8DD62"
+      },
+      {
+        "type": "color",
+        "id": "negative_color",
+        "label": "Negative color",
+        "default": "#FF3131"
+      },
+      {
+        "type": "color",
+        "id": "pill_background_color",
+        "label": "Middle label background",
+        "default": "#FFF9D2"
+      },
+      {
+        "type": "color",
+        "id": "pill_text_color",
+        "label": "Middle label text",
+        "default": "#5C3F2D"
+      },
+      {
+        "type": "color",
+        "id": "divider_color",
+        "label": "Center divider",
+        "default": "#E8D8B9"
+      },
+      {
+        "type": "header",
+        "content": "Spacing"
+      },
+      {
+        "type": "range",
+        "id": "padding_top",
+        "label": "Top padding",
+        "min": 24,
+        "max": 120,
+        "step": 4,
+        "unit": "px",
+        "default": 36
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom",
+        "label": "Bottom padding",
+        "min": 24,
+        "max": 120,
+        "step": 4,
+        "unit": "px",
+        "default": 44
+      }
+    ],
+    "blocks": [
+      {
+        "type": "comparison_row",
+        "name": "Comparison row",
+        "settings": [
+          {
+            "type": "text",
+            "id": "slimfair_text",
+            "label": "SlimFair text",
+            "default": "Lorem ipsum dolor sit amet, consectetur."
+          },
+          {
+            "type": "text",
+            "id": "criterion",
+            "label": "Middle label",
+            "default": "Taste"
+          },
+          {
+            "type": "text",
+            "id": "competitor_text",
+            "label": "Competitor text",
+            "default": "Lorem ipsum dolor sit amet, consectetur."
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Comparison table",
+        "category": "Custom",
+        "blocks": [
+          {
+            "type": "comparison_row",
+            "settings": {
+              "criterion": "Taste"
+            }
+          },
+          {
+            "type": "comparison_row",
+            "settings": {
+              "criterion": "Ingredients"
+            }
+          },
+          {
+            "type": "comparison_row",
+            "settings": {
+              "criterion": "Texture"
+            }
+          },
+          {
+            "type": "comparison_row",
+            "settings": {
+              "criterion": "Effect"
+            }
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

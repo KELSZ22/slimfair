@@ -1,0 +1,638 @@
+<section class="custom-real-results" data-real-results-id="{{ section.id }}" style="
+    --real-results-bg: {{ section.settings.background_color }};
+    --real-results-heading: {{ section.settings.heading_color }};
+    --real-results-text: {{ section.settings.text_color }};
+    --real-results-accent: {{ section.settings.accent_color }};
+    --real-results-line: {{ section.settings.line_color }};
+    --real-results-padding-top: {{ section.settings.padding_top }}px;
+    --real-results-padding-bottom: {{ section.settings.padding_bottom }}px;
+  ">
+  <div class="custom-real-results__inner page-width">
+    <div class="custom-real-results__header">
+      {% if section.settings.rating_text != blank %}
+        <div class="custom-real-results__rating" aria-label="{{ section.settings.rating_text | escape }}">
+          <span class="custom-real-results__stars" aria-hidden="true">
+            {% for i in (1..5) %}
+              <span>★</span>
+            {% endfor %}
+          </span>
+          <span>{{ section.settings.rating_text | escape }}</span>
+        </div>
+      {% endif %}
+
+      {% if section.settings.heading != blank %}
+        <h2 class="custom-real-results__heading">{{ section.settings.heading | escape }}</h2>
+      {% endif %}
+
+      {% if section.settings.text != blank %}
+        <div class="custom-real-results__text rte-setting">{{ section.settings.text }}</div>
+      {% endif %}
+    </div>
+
+    {% if section.blocks.size > 0 %}
+      <div class="custom-real-results__viewport">
+        <div class="custom-real-results__track" data-real-results-track>
+          {% for block in section.blocks %}
+            {% assign hosted_video_url = blank %}
+
+            {% if block.settings.hosted_video != blank %}
+              {% for source in block.settings.hosted_video.sources %}
+                {% if hosted_video_url == blank and source.format == 'mp4' %}
+                  {% assign hosted_video_url = source.url %}
+                {% endif %}
+              {% endfor %}
+
+              {% if hosted_video_url == blank and block.settings.hosted_video.sources.size > 0 %}
+                {% assign hosted_video_url = block.settings.hosted_video.sources[0].url %}
+              {% endif %}
+            {% endif %}
+
+            {% assign video_url = hosted_video_url | default: block.settings.video_url %}
+
+            <article class="custom-real-results__card" {{ block.shopify_attributes }}>
+              {% capture card_media %}
+                {% if block.settings.image != blank %}
+                  <img
+                    class="custom-real-results__image"
+                    src="{{ block.settings.image | img_url: '420x640', crop: 'center' }}"
+                    alt="{{ block.settings.image.alt | default: block.settings.title | escape }}"
+                    loading="lazy">
+                {% else %}
+                  {{ 'image' | placeholder_svg_tag: 'placeholder-svg custom-real-results__placeholder' }}
+                {% endif %}
+
+                <span class="custom-real-results__shade" aria-hidden="true"></span>
+
+                {% if block.settings.overlay_quote != blank %}
+                  <span class="custom-real-results__overlay-quote">{{ block.settings.overlay_quote | escape }}</span>
+                {% endif %}
+
+                {% if video_url != blank %}
+                  <span class="custom-real-results__play" aria-hidden="true"></span>
+                {% endif %}
+              {% endcapture %}
+
+              {% if video_url != blank %}
+                <button
+                  type="button"
+                  class="custom-real-results__media"
+                  data-real-results-video-trigger
+                  data-video-url="{{ video_url | escape }}"
+                  aria-label="Play {{ block.settings.title | default: section.settings.heading | escape }}">
+                  {{ card_media }}
+                </button>
+              {% else %}
+                <div class="custom-real-results__media">
+                  {{ card_media }}
+                </div>
+              {% endif %}
+
+              {% if block.settings.title != blank %}
+                <h3 class="custom-real-results__card-title">{{ block.settings.title | escape }}</h3>
+              {% endif %}
+
+              {% if block.settings.quote != blank %}
+                <div class="custom-real-results__quote rte-setting">{{ block.settings.quote }}</div>
+              {% endif %}
+
+              {% if block.settings.name != blank %}
+                <p class="custom-real-results__name">{{ block.settings.name | escape }}</p>
+              {% endif %}
+            </article>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="custom-real-results__controls">
+        <button type="button" class="custom-real-results__arrow" data-real-results-prev aria-label="Scroll results left">
+          <span aria-hidden="true">←</span>
+        </button>
+        <button type="button" class="custom-real-results__arrow" data-real-results-next aria-label="Scroll results right">
+          <span aria-hidden="true">→</span>
+        </button>
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="custom-real-results__modal" data-real-results-modal hidden aria-hidden="true">
+    <button type="button" class="custom-real-results__backdrop" data-real-results-close aria-label="Close video"></button>
+    <div class="custom-real-results__dialog" role="dialog" aria-modal="true" aria-label="{{ section.settings.heading | default: 'Results video' | escape }}">
+      <button type="button" class="custom-real-results__close" data-real-results-close aria-label="Close video">
+        {% include 'icon-close' %}
+      </button>
+      <div class="custom-real-results__player" data-real-results-player></div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .custom-real-results {
+    background: var(--real-results-bg);
+    color: var(--real-results-text);
+    overflow: hidden;
+    padding: var(--real-results-padding-top) 0 var(--real-results-padding-bottom);
+  }
+
+  .custom-real-results__inner.page-width {
+    max-width: 1160px;
+  }
+
+  .custom-real-results__header {
+    margin: 0 auto 34px;
+    max-width: 720px;
+    text-align: center;
+  }
+
+  .custom-real-results__rating {
+    align-items: center;
+    color: var(--real-results-text);
+    display: inline-flex;
+    font-size: 12px;
+    gap: 8px;
+    line-height: 1.1;
+    margin-bottom: 4px;
+  }
+
+  .custom-real-results__stars {
+    color: var(--real-results-accent);
+    display: inline-flex;
+    font-size: 18px;
+    gap: 1px;
+    letter-spacing: 0;
+  }
+
+  .custom-real-results__heading {
+    color: var(--real-results-heading);
+    font-family: Lora, serif;
+    font-size: 25px;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1.18;
+    margin: 0 0 8px;
+  }
+
+  .custom-real-results__text,
+  .custom-real-results__text.rte-setting {
+    color: var(--real-results-text);
+    font-size: 13px;
+    line-height: 1.5;
+    margin: 0 auto;
+    max-width: 670px;
+  }
+
+  .custom-real-results__text p,
+  .custom-real-results__quote p {
+    color: inherit;
+    margin: 0;
+  }
+
+  .custom-real-results__viewport {
+    overflow: visible;
+  }
+
+  .custom-real-results__track {
+    display: flex;
+    gap: 24px;
+    overflow-x: auto;
+    padding: 0 0 18px;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+  }
+
+  .custom-real-results__track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .custom-real-results__card {
+    flex: 0 0 230px;
+    text-align: center;
+  }
+
+  .custom-real-results__media {
+    background: transparent;
+    border: 0;
+    border-radius: 8px;
+    display: block;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    position: relative;
+    width: 100%;
+  }
+
+  .custom-real-results__image,
+  .custom-real-results__placeholder {
+    aspect-ratio: 230 / 352;
+    display: block;
+    height: auto;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  .custom-real-results__placeholder {
+    background: #eadfc6;
+  }
+
+  .custom-real-results__shade {
+    background: linear-gradient(180deg, rgba(0, 0, 0, .3), rgba(0, 0, 0, .1) 45%, rgba(0, 0, 0, .22));
+    inset: 0;
+    position: absolute;
+  }
+
+  .custom-real-results__overlay-quote {
+    color: #fff;
+    font-size: 11px;
+    font-style: italic;
+    left: 18px;
+    line-height: 1.25;
+    position: absolute;
+    right: 18px;
+    text-align: center;
+    top: 38px;
+  }
+
+  .custom-real-results__play {
+    border: 3px solid #fff;
+    border-radius: 50%;
+    height: 45px;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 45px;
+  }
+
+  .custom-real-results__play:after {
+    border-bottom: 10px solid transparent;
+    border-left: 15px solid #fff;
+    border-top: 10px solid transparent;
+    content: "";
+    left: 17px;
+    position: absolute;
+    top: 10px;
+  }
+
+  .custom-real-results__card-title {
+    color: var(--real-results-heading);
+    font-family: Lora, serif;
+    font-size: 14px;
+    font-style: italic;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1.25;
+    margin: 14px 0 4px;
+  }
+
+  .custom-real-results__quote,
+  .custom-real-results__quote.rte-setting {
+    color: var(--real-results-text);
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
+  .custom-real-results__name {
+    color: var(--real-results-heading);
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.25;
+    margin: 8px 0 0;
+  }
+
+  .custom-real-results__controls {
+    align-items: center;
+    border-top: 4px solid var(--real-results-line);
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    margin: 24px auto 0;
+    max-width: 760px;
+    padding-top: 0;
+  }
+
+  .custom-real-results__arrow {
+    align-items: center;
+    background: #f8e9a7;
+    border: 1px solid #a77a33;
+    border-radius: 999px;
+    color: #5c3f2d;
+    display: inline-flex;
+    font-size: 16px;
+    height: 22px;
+    justify-content: center;
+    line-height: 1;
+    margin-top: -13px;
+    padding: 0;
+    width: 34px;
+  }
+
+  .custom-real-results__modal[hidden] {
+    display: none;
+  }
+
+  .custom-real-results__modal {
+    inset: 0;
+    position: fixed;
+    z-index: 9999;
+  }
+
+  .custom-real-results__backdrop {
+    background: rgba(0, 0, 0, .72);
+    border: 0;
+    inset: 0;
+    position: absolute;
+  }
+
+  .custom-real-results__dialog {
+    background: #000;
+    border-radius: 8px;
+    left: 50%;
+    max-width: min(90vw, 420px);
+    overflow: hidden;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+  }
+
+  .custom-real-results__close {
+    align-items: center;
+    background: #fff;
+    border: 0;
+    border-radius: 50%;
+    color: #111;
+    display: flex;
+    height: 34px;
+    justify-content: center;
+    padding: 9px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 34px;
+    z-index: 2;
+  }
+
+  .custom-real-results__player {
+    aspect-ratio: 9 / 16;
+    width: 100%;
+  }
+
+  .custom-real-results__player iframe,
+  .custom-real-results__player video {
+    border: 0;
+    display: block;
+    height: 100%;
+    width: 100%;
+  }
+
+  @media screen and (max-width: 749px) {
+    .custom-real-results__card {
+      flex-basis: 190px;
+    }
+
+    .custom-real-results__heading {
+      font-size: 23px;
+    }
+
+    .custom-real-results__controls {
+      max-width: 100%;
+    }
+  }
+</style>
+
+<script>
+  (function() {
+    var section = document.querySelector('[data-real-results-id="{{ section.id }}"]');
+    if (!section) return;
+
+    var track = section.querySelector('[data-real-results-track]');
+    var prev = section.querySelector('[data-real-results-prev]');
+    var next = section.querySelector('[data-real-results-next]');
+    var modal = section.querySelector('[data-real-results-modal]');
+    var player = section.querySelector('[data-real-results-player]');
+    var activeTrigger = null;
+
+    function scrollByCard(direction) {
+      if (!track) return;
+      var card = track.querySelector('.custom-real-results__card');
+      var gap = parseFloat(getComputedStyle(track).gap) || 24;
+      var amount = card ? card.offsetWidth + gap : track.clientWidth * 0.85;
+      track.scrollBy({ left: amount * direction, behavior: 'smooth' });
+    }
+
+    function getEmbedUrl(url) {
+      url = url.replace(/&amp;/g, '&');
+      var youtubeMatch = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/shorts\/)([^&?/#]+)/);
+      var vimeoMatch = url.match(/vimeo\.com\/(?:video\/)?([0-9]+)/);
+
+      if (youtubeMatch && youtubeMatch[1]) return 'https://www.youtube.com/embed/' + youtubeMatch[1] + '?autoplay=1&rel=0';
+      if (vimeoMatch && vimeoMatch[1]) return 'https://player.vimeo.com/video/' + vimeoMatch[1] + '?autoplay=1';
+      return url;
+    }
+
+    function isVideoFile(url) {
+      return /\.(mp4|webm|ogg|mov)(\?.*)?$/i.test(url);
+    }
+
+    function openVideo(url, trigger) {
+      if (!modal || !player) return;
+      activeTrigger = trigger;
+      player.innerHTML = '';
+
+      if (isVideoFile(url)) {
+        var video = document.createElement('video');
+        video.controls = true;
+        video.autoplay = true;
+        video.playsInline = true;
+        video.src = url;
+        player.appendChild(video);
+      } else {
+        var iframe = document.createElement('iframe');
+        iframe.src = getEmbedUrl(url);
+        iframe.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+        iframe.allowFullscreen = true;
+        iframe.title = trigger.getAttribute('aria-label') || 'Results video';
+        player.appendChild(iframe);
+      }
+
+      modal.hidden = false;
+      modal.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeVideo() {
+      if (!modal || !player) return;
+      modal.hidden = true;
+      modal.setAttribute('aria-hidden', 'true');
+      player.innerHTML = '';
+      if (activeTrigger) activeTrigger.focus();
+      activeTrigger = null;
+    }
+
+    if (prev) prev.addEventListener('click', function() { scrollByCard(-1); });
+    if (next) next.addEventListener('click', function() { scrollByCard(1); });
+
+    section.addEventListener('click', function(event) {
+      var trigger = event.target.closest('[data-real-results-video-trigger]');
+      if (trigger) openVideo(trigger.getAttribute('data-video-url'), trigger);
+
+      if (event.target.closest('[data-real-results-close]')) closeVideo();
+    });
+
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape' && modal && !modal.hidden) closeVideo();
+    });
+  })();
+</script>
+
+{% schema %}
+  {
+    "name": "Real results videos",
+    "class": "custom-product-stack-section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "rating_text",
+        "label": "Rating text",
+        "default": "5.0/5.0"
+      },
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading",
+        "default": "Real Routines. Real Results."
+      },
+      {
+        "type": "richtext",
+        "id": "text",
+        "label": "Text",
+        "default": "<p>See how Slimfair Coffee fits into busy mornings, self-care moments and healthy lifestyles supporting weight, digestion, energy and glow.</p>"
+      },
+      {
+        "type": "header",
+        "content": "Colors"
+      },
+      {
+        "type": "color",
+        "id": "background_color",
+        "label": "Background color",
+        "default": "#F5FCE9"
+      },
+      {
+        "type": "color",
+        "id": "heading_color",
+        "label": "Heading color",
+        "default": "#5C3F2D"
+      },
+      {
+        "type": "color",
+        "id": "text_color",
+        "label": "Text color",
+        "default": "#6D563D"
+      },
+      {
+        "type": "color",
+        "id": "accent_color",
+        "label": "Star color",
+        "default": "#C48645"
+      },
+      {
+        "type": "color",
+        "id": "line_color",
+        "label": "Control line color",
+        "default": "#8F5F2E"
+      },
+      {
+        "type": "header",
+        "content": "Spacing"
+      },
+      {
+        "type": "range",
+        "id": "padding_top",
+        "label": "Top padding",
+        "min": 24,
+        "max": 120,
+        "step": 4,
+        "unit": "px",
+        "default": 24
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom",
+        "label": "Bottom padding",
+        "min": 24,
+        "max": 120,
+        "step": 4,
+        "unit": "px",
+        "default": 44
+      }
+    ],
+    "blocks": [
+      {
+        "type": "video_card",
+        "name": "Video card",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Thumbnail image"
+          },
+          {
+            "type": "video",
+            "id": "hosted_video",
+            "label": "Hosted video"
+          },
+          {
+            "type": "url",
+            "id": "video_url",
+            "label": "Video link"
+          },
+          {
+            "type": "textarea",
+            "id": "overlay_quote",
+            "label": "Overlay quote"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "Lorem ipsum dolor sit amet!"
+          },
+          {
+            "type": "richtext",
+            "id": "quote",
+            "label": "Quote",
+            "default": "<p>\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor\"</p>"
+          },
+          {
+            "type": "text",
+            "id": "name",
+            "label": "Name",
+            "default": "Jane Doe"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Real results videos",
+        "category": "Custom",
+        "blocks": [
+          {
+            "type": "video_card"
+          },
+          {
+            "type": "video_card"
+          },
+          {
+            "type": "video_card"
+          },
+          {
+            "type": "video_card"
+          },
+          {
+            "type": "video_card"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

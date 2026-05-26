@@ -1,0 +1,421 @@
+<section class="custom-switch-reviews" data-switch-reviews-id="{{ section.id }}" style="
+    --switch-reviews-bg: {{ section.settings.background_color }};
+    --switch-reviews-heading: {{ section.settings.heading_color }};
+    --switch-reviews-text: {{ section.settings.text_color }};
+    --switch-reviews-accent: {{ section.settings.accent_color }};
+    --switch-reviews-card-bg: {{ section.settings.card_background_color }};
+    --switch-reviews-line: {{ section.settings.line_color }};
+    --switch-reviews-padding-top: {{ section.settings.padding_top }}px;
+    --switch-reviews-padding-bottom: {{ section.settings.padding_bottom }}px;
+  ">
+  <div class="custom-switch-reviews__inner page-width">
+    <div class="custom-switch-reviews__header">
+      {% if section.settings.rating_text != blank %}
+        <div class="custom-switch-reviews__rating" aria-label="{{ section.settings.rating_text | escape }}">
+          <span class="custom-switch-reviews__stars" aria-hidden="true">
+            {% for i in (1..5) %}
+              <span>★</span>
+            {% endfor %}
+          </span>
+          <span>{{ section.settings.rating_text | escape }}</span>
+        </div>
+      {% endif %}
+
+      {% if section.settings.heading != blank %}
+        <h2 class="custom-switch-reviews__heading">{{ section.settings.heading | escape }}</h2>
+      {% endif %}
+    </div>
+
+    {% if section.blocks.size > 0 %}
+      <div class="custom-switch-reviews__viewport">
+        <button type="button" class="custom-switch-reviews__arrow custom-switch-reviews__arrow--prev" data-switch-reviews-prev aria-label="Scroll reviews left">
+          <span aria-hidden="true">←</span>
+        </button>
+
+        <div class="custom-switch-reviews__track" data-switch-reviews-track>
+          {% for block in section.blocks %}
+            <article class="custom-switch-reviews__card" {{ block.shopify_attributes }}>
+              <div class="custom-switch-reviews__card-stars" aria-hidden="true">
+                {% for i in (1..5) %}
+                  <span>★</span>
+                {% endfor %}
+              </div>
+
+              {% if block.settings.title != blank %}
+                <h3 class="custom-switch-reviews__card-title">{{ block.settings.title | escape }}</h3>
+              {% endif %}
+
+              {% if block.settings.text != blank %}
+                <div class="custom-switch-reviews__quote rte-setting">{{ block.settings.text }}</div>
+              {% endif %}
+
+              {% if block.settings.name != blank %}
+                <p class="custom-switch-reviews__name">{{ block.settings.name | escape }}</p>
+              {% endif %}
+
+              {% if block.settings.badge != blank %}
+                <p class="custom-switch-reviews__badge">{{ block.settings.badge | escape }}</p>
+              {% endif %}
+            </article>
+          {% endfor %}
+        </div>
+
+        <button type="button" class="custom-switch-reviews__arrow custom-switch-reviews__arrow--next" data-switch-reviews-next aria-label="Scroll reviews right">
+          <span aria-hidden="true">→</span>
+        </button>
+      </div>
+
+      <div class="custom-switch-reviews__progress" aria-hidden="true">
+        <span></span>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<style>
+  .custom-switch-reviews {
+    background: var(--switch-reviews-bg);
+    color: var(--switch-reviews-text);
+    overflow: hidden;
+    padding: var(--switch-reviews-padding-top) 0 var(--switch-reviews-padding-bottom);
+  }
+
+  .custom-switch-reviews__inner.page-width {
+    max-width: 1020px;
+  }
+
+  .custom-switch-reviews__header {
+    margin: 0 auto 36px;
+    max-width: 620px;
+    text-align: center;
+  }
+
+  .custom-switch-reviews__rating {
+    align-items: center;
+    color: var(--switch-reviews-text);
+    display: inline-flex;
+    font-size: 12px;
+    gap: 7px;
+    line-height: 1.1;
+    margin-bottom: 6px;
+  }
+
+  .custom-switch-reviews__stars,
+  .custom-switch-reviews__card-stars {
+    color: var(--switch-reviews-accent);
+    display: inline-flex;
+    gap: 1px;
+    letter-spacing: 0;
+    line-height: 1;
+  }
+
+  .custom-switch-reviews__stars {
+    font-size: 18px;
+  }
+
+  .custom-switch-reviews__heading {
+    color: var(--switch-reviews-heading);
+    font-family: Lora, serif;
+    font-size: 27px;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1.22;
+    margin: 0;
+  }
+
+  .custom-switch-reviews__viewport {
+    align-items: center;
+    display: grid;
+    gap: 18px;
+    grid-template-columns: 34px minmax(0, 1fr) 34px;
+  }
+
+  .custom-switch-reviews__track {
+    display: flex;
+    gap: 18px;
+    overflow-x: auto;
+    padding: 0 0 2px;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+  }
+
+  .custom-switch-reviews__track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .custom-switch-reviews__card {
+    background: var(--switch-reviews-card-bg);
+    border-radius: 8px;
+    box-sizing: border-box;
+    flex: 0 0 220px;
+    min-height: 210px;
+    padding: 22px 24px 20px;
+    text-align: center;
+  }
+
+  .custom-switch-reviews__card-stars {
+    font-size: 19px;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+
+  .custom-switch-reviews__card-title {
+    color: var(--switch-reviews-heading);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1.25;
+    margin: 0 0 14px;
+  }
+
+  .custom-switch-reviews__quote,
+  .custom-switch-reviews__quote.rte-setting {
+    color: #111;
+    font-size: 13px;
+    line-height: 1.45;
+    margin: 0;
+  }
+
+  .custom-switch-reviews__quote p {
+    margin: 0;
+  }
+
+  .custom-switch-reviews__name {
+    color: #111;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.25;
+    margin: 18px 0 4px;
+  }
+
+  .custom-switch-reviews__badge {
+    color: #C48645;
+    font-size: 11px;
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .custom-switch-reviews__badge:before {
+    content: "◎";
+    margin-right: 4px;
+  }
+
+  .custom-switch-reviews__arrow {
+    align-items: center;
+    background: #9bd36e;
+    border: 1px solid #4a8c45;
+    border-radius: 999px;
+    color: #3e6f39;
+    display: inline-flex;
+    font-size: 16px;
+    height: 22px;
+    justify-content: center;
+    line-height: 1;
+    padding: 0;
+    width: 34px;
+  }
+
+  .custom-switch-reviews__progress {
+    background: rgba(255, 255, 255, .75);
+    height: 4px;
+    margin: 40px auto 0;
+    max-width: 940px;
+    position: relative;
+  }
+
+  .custom-switch-reviews__progress span {
+    background: var(--switch-reviews-line);
+    display: block;
+    height: 100%;
+    width: 80%;
+  }
+
+  @media screen and (max-width: 749px) {
+    .custom-switch-reviews__viewport {
+      gap: 10px;
+      grid-template-columns: 30px minmax(0, 1fr) 30px;
+    }
+
+    .custom-switch-reviews__heading {
+      font-size: 24px;
+    }
+
+    .custom-switch-reviews__card {
+      flex-basis: 205px;
+    }
+  }
+</style>
+
+<script>
+  (function() {
+    var section = document.querySelector('[data-switch-reviews-id="{{ section.id }}"]');
+    if (!section) return;
+
+    var track = section.querySelector('[data-switch-reviews-track]');
+    var prev = section.querySelector('[data-switch-reviews-prev]');
+    var next = section.querySelector('[data-switch-reviews-next]');
+
+    function scrollByCard(direction) {
+      if (!track) return;
+      var card = track.querySelector('.custom-switch-reviews__card');
+      var gap = parseFloat(getComputedStyle(track).gap) || 18;
+      var amount = card ? card.offsetWidth + gap : track.clientWidth * 0.85;
+      track.scrollBy({ left: amount * direction, behavior: 'smooth' });
+    }
+
+    if (prev) prev.addEventListener('click', function() { scrollByCard(-1); });
+    if (next) next.addEventListener('click', function() { scrollByCard(1); });
+  })();
+</script>
+
+{% schema %}
+  {
+    "name": "Switch reviews",
+    "class": "custom-product-stack-section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "rating_text",
+        "label": "Rating text",
+        "default": "5.0/5.0"
+      },
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading",
+        "default": "More than 200,000 Filipinos Have Made The Switch to Slim Fair"
+      },
+      {
+        "type": "header",
+        "content": "Colors"
+      },
+      {
+        "type": "color",
+        "id": "background_color",
+        "label": "Background color",
+        "default": "#D4F4B7"
+      },
+      {
+        "type": "color",
+        "id": "heading_color",
+        "label": "Heading color",
+        "default": "#347D45"
+      },
+      {
+        "type": "color",
+        "id": "text_color",
+        "label": "Text color",
+        "default": "#5C3F2D"
+      },
+      {
+        "type": "color",
+        "id": "accent_color",
+        "label": "Star color",
+        "default": "#5C3F2D"
+      },
+      {
+        "type": "color",
+        "id": "card_background_color",
+        "label": "Card background",
+        "default": "#FBFEE8"
+      },
+      {
+        "type": "color",
+        "id": "line_color",
+        "label": "Progress line color",
+        "default": "#347D45"
+      },
+      {
+        "type": "header",
+        "content": "Spacing"
+      },
+      {
+        "type": "range",
+        "id": "padding_top",
+        "label": "Top padding",
+        "min": 24,
+        "max": 120,
+        "step": 4,
+        "unit": "px",
+        "default": 64
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom",
+        "label": "Bottom padding",
+        "min": 24,
+        "max": 120,
+        "step": 4,
+        "unit": "px",
+        "default": 64
+      }
+    ],
+    "blocks": [
+      {
+        "type": "review",
+        "name": "Review",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "Amazing results!"
+          },
+          {
+            "type": "richtext",
+            "id": "text",
+            "label": "Review text",
+            "default": "<p>After 2 weeks I noticed less bloating and more energy. Will definitely repurchase!</p>"
+          },
+          {
+            "type": "text",
+            "id": "name",
+            "label": "Name",
+            "default": "Mike dela Cruz"
+          },
+          {
+            "type": "text",
+            "id": "badge",
+            "label": "Badge",
+            "default": "Verified Buyer"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Switch reviews",
+        "category": "Custom",
+        "blocks": [
+          {
+            "type": "review"
+          },
+          {
+            "type": "review",
+            "settings": {
+              "title": "Taste like cafe latte",
+              "text": "<p>Didn't expect a health mix to taste like my favorite cafe drink. Super creamy!</p>",
+              "name": "Sophia Abad"
+            }
+          },
+          {
+            "type": "review",
+            "settings": {
+              "title": "My daily ritual",
+              "text": "<p>I start my mornings with this and I've lost 2kg in a month without changing much else.</p>",
+              "name": "Noel Sanchez"
+            }
+          },
+          {
+            "type": "review",
+            "settings": {
+              "title": "My daily ritual",
+              "text": "<p>I start my mornings with this and I've lost 2kg in a month without changing much else.</p>",
+              "name": "Noel Sanchez"
+            }
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

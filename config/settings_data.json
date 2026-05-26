@@ -988,6 +988,309 @@
         "settings": {
           "section_height": "large"
         }
+      },
+      "custom-routine-tips": {
+        "type": "custom-routine-tips",
+        "blocks": {
+          "routine_tip_consistent": {
+            "type": "tip",
+            "settings": {
+              "title": "Stay consistent for best results",
+              "description": "<p>Visible changes come with routine-make it part of your daily habit and let it work over time.</p>"
+            }
+          },
+          "routine_tip_lifestyle": {
+            "type": "tip",
+            "settings": {
+              "title": "Pair with a balanced lifestyle",
+              "description": "<p>For optimal results, combine with proper nutrition, hydration, and light physical activity.</p>"
+            }
+          },
+          "routine_tip_daily": {
+            "type": "tip",
+            "settings": {
+              "title": "Drink 1-2 cups daily",
+              "description": "<p>Enjoy a cup in the morning to kickstart your metabolism, and another later in the day if needed.</p>"
+            }
+          },
+          "routine_tip_body": {
+            "type": "tip",
+            "settings": {
+              "title": "Listen to your body",
+              "description": "<p>Start with one cup if you're new, then adjust based on your comfort and routine.</p>"
+            }
+          },
+          "routine_tip_meals": {
+            "type": "tip",
+            "settings": {
+              "title": "Best taken before meals",
+              "description": "<p>Helps support appetite control and prepares your body to better manage calorie intake.</p>"
+            }
+          }
+        },
+        "block_order": [
+          "routine_tip_consistent",
+          "routine_tip_lifestyle",
+          "routine_tip_daily",
+          "routine_tip_body",
+          "routine_tip_meals"
+        ],
+        "settings": {
+          "image": "shopify://shop_images/SLIMFAIR_CAFE_LATTE_9_x_12_in.jpg",
+          "image_position": "left",
+          "image_radius": 22,
+          "heading": "Simple. Consistent. Effective.",
+          "text": "<p>No complicated routines-just a daily habit that fits seamlessly into your lifestyle.</p>",
+          "columns": "two",
+          "background_color": "#f5fce9",
+          "heading_color": "#5c3f2d",
+          "text_color": "#6d563d",
+          "accent_color": "#c48645",
+          "pill_background_color": "#f8e9a7",
+          "pill_text_color": "#5c3f2d",
+          "pill_border_color": "#a77a33",
+          "padding_top": 64,
+          "padding_bottom": 64
+        }
+      },
+      "custom-comparison-table": {
+        "type": "custom-comparison-table",
+        "blocks": {
+          "comparison_taste": {
+            "type": "comparison_row",
+            "settings": {
+              "slimfair_text": "Lorem ipsum dolor sit amet, consectetur.",
+              "criterion": "Taste",
+              "competitor_text": "Lorem ipsum dolor sit amet, consectetur."
+            }
+          },
+          "comparison_ingredients": {
+            "type": "comparison_row",
+            "settings": {
+              "slimfair_text": "Lorem ipsum dolor sit amet, consectetur.",
+              "criterion": "Ingredients",
+              "competitor_text": "Lorem ipsum dolor sit amet, consectetur."
+            }
+          },
+          "comparison_texture": {
+            "type": "comparison_row",
+            "settings": {
+              "slimfair_text": "Lorem ipsum dolor sit amet, consectetur.",
+              "criterion": "Texture",
+              "competitor_text": "Lorem ipsum dolor sit amet, consectetur."
+            }
+          },
+          "comparison_effect": {
+            "type": "comparison_row",
+            "settings": {
+              "slimfair_text": "Lorem ipsum dolor sit amet, consectetur.",
+              "criterion": "Effect",
+              "competitor_text": "Lorem ipsum dolor sit amet, consectetur."
+            }
+          }
+        },
+        "block_order": [
+          "comparison_taste",
+          "comparison_ingredients",
+          "comparison_texture",
+          "comparison_effect"
+        ],
+        "settings": {
+          "heading": "See Why SlimFair Stands Above the Rest",
+          "text": "<p>While others rely on hype and hidden formulas, SlimFair focuses on transparency, balance, and real results over time.</p>",
+          "slimfair_image": "shopify://shop_images/SLIMFAIR_CAFE_LATTE_9_x_12_in.jpg",
+          "slimfair_label": "SlimFair Products",
+          "competitor_label": "Brand X",
+          "background_color": "#65402c",
+          "heading_color": "#fbf7d4",
+          "text_color": "#fbf7d4",
+          "accent_color": "#a8dd62",
+          "negative_color": "#ff3131",
+          "pill_background_color": "#fff9d2",
+          "pill_text_color": "#5c3f2d",
+          "divider_color": "#e8d8b9",
+          "padding_top": 36,
+          "padding_bottom": 44
+        }
+      },
+      "custom-real-results": {
+        "type": "custom-real-results",
+        "blocks": {
+          "real_result_1": {
+            "type": "video_card",
+            "settings": {
+              "image": "shopify://shop_images/Screenshot_2026-04-15_at_4.30.11_PM_1.png",
+              "video_url": "https://www.youtube.com/watch?v=lq2jHhp_xRQ",
+              "overlay_quote": "\"Wellness hits different when your habits feel like a lifestyle, not a to-do list.\"",
+              "title": "Lorem ipsum dolor sit amet!",
+              "quote": "<p>\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor\"</p>",
+              "name": "Jane Doe"
+            }
+          },
+          "real_result_2": {
+            "type": "video_card",
+            "settings": {
+              "image": "shopify://shop_images/Screenshot_2026-04-15_at_4.30.49_PM_1.png",
+              "title": "Lorem ipsum dolor sit amet!",
+              "quote": "<p>\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor\"</p>",
+              "name": "Jane Doe"
+            }
+          },
+          "real_result_3": {
+            "type": "video_card",
+            "settings": {
+              "image": "shopify://shop_images/Frame_1000009418.png",
+              "title": "Lorem ipsum dolor sit amet!",
+              "quote": "<p>\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor\"</p>",
+              "name": "Jane Doe"
+            }
+          },
+          "real_result_4": {
+            "type": "video_card",
+            "settings": {
+              "image": "shopify://shop_images/Frame_1000009420.png",
+              "title": "Lorem ipsum dolor sit amet!",
+              "quote": "<p>\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor\"</p>",
+              "name": "Jane Doe"
+            }
+          },
+          "real_result_5": {
+            "type": "video_card",
+            "settings": {
+              "image": "shopify://shop_images/Frame_1000009419.png",
+              "title": "Lorem ipsum dolor sit amet!",
+              "quote": "<p>\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor\"</p>",
+              "name": "Jane Doe"
+            }
+          }
+        },
+        "block_order": [
+          "real_result_1",
+          "real_result_2",
+          "real_result_3",
+          "real_result_4",
+          "real_result_5"
+        ],
+        "settings": {
+          "rating_text": "5.0/5.0",
+          "heading": "Real Routines. Real Results.",
+          "text": "<p>See how Slimfair Coffee fits into busy mornings, self-care moments and healthy lifestyles supporting weight, digestion, energy and glow.</p>",
+          "background_color": "#f5fce9",
+          "heading_color": "#5c3f2d",
+          "text_color": "#6d563d",
+          "accent_color": "#c48645",
+          "line_color": "#8f5f2e",
+          "padding_top": 24,
+          "padding_bottom": 44
+        }
+      },
+      "custom-simple-steps": {
+        "type": "custom-simple-steps",
+        "blocks": {
+          "simple_step_water": {
+            "type": "simple_step",
+            "settings": {
+              "icon": "water",
+              "title": "Add Hot or Cold Water",
+              "description": "<p>Pour 150-200ml of hot or cold water into your cup.</p>"
+            }
+          },
+          "simple_step_mix": {
+            "type": "simple_step",
+            "settings": {
+              "icon": "sachet",
+              "title": "Mix 1 Sachet of SlimFair",
+              "description": "<p>Stir well until fully dissolved for a smooth, creamy blend.</p>"
+            }
+          },
+          "simple_step_sip": {
+            "type": "simple_step",
+            "settings": {
+              "icon": "sip",
+              "title": "Sip & Stay Consistent",
+              "description": "<p>Enjoy daily-best before meals-to support better results over time.</p>"
+            }
+          }
+        },
+        "block_order": [
+          "simple_step_water",
+          "simple_step_mix",
+          "simple_step_sip"
+        ],
+        "settings": {
+          "heading": "Ready in 3 Simple Steps",
+          "text": "<p>Enjoy a smooth, slimming coffee designed to support your metabolism and keep you feeling in control-anytime, anywhere.</p>",
+          "image": "shopify://shop_images/SLIMFAIR_CAFE_LATTE_9_x_12_in.jpg",
+          "image_position": "right",
+          "image_radius": 34,
+          "background_color": "#fffbd8",
+          "heading_color": "#5c3f2d",
+          "text_color": "#6d563d",
+          "accent_color": "#68422e",
+          "number_background_color": "#f3e59b",
+          "number_text_color": "#6d563d",
+          "padding_top": 52,
+          "padding_bottom": 52
+        }
+      },
+      "custom-switch-reviews": {
+        "type": "custom-switch-reviews",
+        "blocks": {
+          "switch_review_1": {
+            "type": "review",
+            "settings": {
+              "title": "Amazing results!",
+              "text": "<p>After 2 weeks I noticed less bloating and more energy. Will definitely repurchase!</p>",
+              "name": "Mike dela Cruz",
+              "badge": "Verified Buyer"
+            }
+          },
+          "switch_review_2": {
+            "type": "review",
+            "settings": {
+              "title": "Taste like cafe latte",
+              "text": "<p>Didn't expect a health mix to taste like my favorite cafe drink. Super creamy!</p>",
+              "name": "Sophia Abad",
+              "badge": "Verified Buyer"
+            }
+          },
+          "switch_review_3": {
+            "type": "review",
+            "settings": {
+              "title": "My daily ritual",
+              "text": "<p>I start my mornings with this and I've lost 2kg in a month without changing much else.</p>",
+              "name": "Noel Sanchez",
+              "badge": "Verified Buyer"
+            }
+          },
+          "switch_review_4": {
+            "type": "review",
+            "settings": {
+              "title": "My daily ritual",
+              "text": "<p>I start my mornings with this and I've lost 2kg in a month without changing much else.</p>",
+              "name": "Noel Sanchez",
+              "badge": "Verified Buyer"
+            }
+          }
+        },
+        "block_order": [
+          "switch_review_1",
+          "switch_review_2",
+          "switch_review_3",
+          "switch_review_4"
+        ],
+        "settings": {
+          "rating_text": "5.0/5.0",
+          "heading": "More than 200,000 Filipinos Have Made The Switch to Slim Fair",
+          "background_color": "#d4f4b7",
+          "heading_color": "#347d45",
+          "text_color": "#5c3f2d",
+          "accent_color": "#5c3f2d",
+          "card_background_color": "#fbfee8",
+          "line_color": "#347d45",
+          "padding_top": 64,
+          "padding_bottom": 64
+        }
       }
     },
     "content_for_index": [
