@@ -334,7 +334,24 @@
           "show_results_videos": true,
           "results_videos_title": "Results You Don't Have to Guess",
           "results_videos_cta_label": "View more",
-          "results_videos_cta_url": ""
+          "results_videos_cta_url": "",
+          "show_section": true,
+          "faq_heading": "",
+          "enable_faq_schema": true,
+          "faq_border_radius": 24,
+          "faq_padding_top": 32,
+          "faq_padding_bottom": 32,
+          "faq_background_color": "#fffbd8",
+          "faq_active_background_color": "#68422e",
+          "faq_text_color": "#68422e",
+          "faq_accent_color": "#68422e",
+          "faq_divider_color": "#e8ddb2",
+          "show_product_upsell": true,
+          "product_upsell_heading": "Frequently Bought Together:",
+          "upsell_product_1": "new-slimfair-cafe-latte-beauty-mix-10-sachets",
+          "upsell_product_1_title": "",
+          "upsell_product_2": "love-at-first-sip",
+          "upsell_product_2_title": ""
         }
       },
       "product-recommendations": {
