@@ -354,6 +354,114 @@
           "upsell_product_2_title": ""
         }
       },
+      "custom-ingredient-benefits": {
+        "type": "custom-ingredient-benefits",
+        "blocks": {
+          "ingredient_green_coffee": {
+            "type": "ingredient",
+            "settings": {
+              "featured_card": true,
+              "eyebrow": "Enhanced Fat Burning",
+              "title": "GREEN COFFEE BEANS",
+              "description": "<p>Higher chlorogenic acid content to improved metabolism vs roasted coffee.</p>",
+              "image_position": "cover"
+            }
+          },
+          "ingredient_l_carnitine": {
+            "type": "ingredient",
+            "settings": {
+              "featured_card": false,
+              "eyebrow": "Appetite Suppressant",
+              "title": "L-CARNITINE",
+              "description": "<p>Breaks down fat and turn fat into energy.</p>",
+              "image_position": "cover"
+            }
+          },
+          "ingredient_stevia": {
+            "type": "ingredient",
+            "settings": {
+              "featured_card": false,
+              "eyebrow": "Natural Sweetener",
+              "title": "STEVIA",
+              "description": "<p>Against oxidative damage; whitening effect on skin.</p>",
+              "image_position": "cover"
+            }
+          },
+          "ingredient_rosehip": {
+            "type": "ingredient",
+            "settings": {
+              "featured_card": false,
+              "eyebrow": "Lower Cholesterol",
+              "title": "ROSEHIP EXTRACT",
+              "description": "<p>Blood fat levels, brighten skin, prevent blackheads, and reduce inflammation.</p>",
+              "image_position": "cover"
+            }
+          },
+          "ingredient_moringa": {
+            "type": "ingredient",
+            "settings": {
+              "featured_card": false,
+              "eyebrow": "Normalize Blood Sugar",
+              "title": "MORINGA OLEIFERA",
+              "description": "<p>Rich in vitamins, minerals, and nutrients; helps normalize blood sugar.</p>",
+              "image_position": "cover"
+            }
+          },
+          "ingredient_ginkgo": {
+            "type": "ingredient",
+            "settings": {
+              "featured_card": false,
+              "eyebrow": "Boost Metabolism",
+              "title": "GINKGO BILOBA",
+              "description": "<p>Increases blood flow and improves memory.</p>",
+              "image_position": "cover"
+            }
+          },
+          "ingredient_collagen": {
+            "type": "ingredient",
+            "settings": {
+              "featured_card": false,
+              "eyebrow": "Reduce wrinkles",
+              "title": "MARINE COLLAGEN",
+              "description": "<p>Improve skin elasticity, and enhance the overall structure and appearance of skin.</p>",
+              "image_position": "cover"
+            }
+          },
+          "ingredient_mangosteen": {
+            "type": "ingredient",
+            "settings": {
+              "featured_card": false,
+              "eyebrow": "Burning Fat",
+              "title": "MANGOSTEEN",
+              "description": "<p>Helps in the prevention of weight gain, by burning down fat.</p>",
+              "image_position": "cover"
+            }
+          }
+        },
+        "block_order": [
+          "ingredient_green_coffee",
+          "ingredient_l_carnitine",
+          "ingredient_stevia",
+          "ingredient_rosehip",
+          "ingredient_moringa",
+          "ingredient_ginkgo",
+          "ingredient_collagen",
+          "ingredient_mangosteen"
+        ],
+        "settings": {
+          "rating_text": "Rated by 20,000+ Coffee Lovers",
+          "heading": "See Exactly What You're Putting In Your Body",
+          "subheading": "<p>Every ingredient is carefully selected to support fat loss, boost metabolism, and keep you feeling in control, nothing unnecessary, nothing hidden.</p>",
+          "background_color": "#FCF9D8",
+          "heading_color": "#6F3F25",
+          "text_color": "#5E543F",
+          "accent_color": "#C98830",
+          "card_background_color": "#FEFCE8",
+          "card_border_color": "#9A8A52",
+          "featured_card_background_color": "#6B422E",
+          "featured_card_text_color": "#FFFFFF"
+        }
+      },
       "product-recommendations": {
         "type": "product-recommendations",
         "settings": {

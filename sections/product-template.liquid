@@ -443,13 +443,15 @@
           aria-hidden="true"
         >{{ 'products.product.loader_label' | t }}</p>
 
-        <div class="product-single__description rte">
-          {{ product.description }}
-        </div>
+        {% unless use_custom_product_design %}
+          <div class="product-single__description rte">
+            {{ product.description }}
+          </div>
 
-        {% if section.settings.show_share_buttons %}
-          {% include 'social-sharing', share_title: product.title, share_permalink: product.url, share_image: product %}
-        {% endif %}
+          {% if section.settings.show_share_buttons %}
+            {% include 'social-sharing', share_title: product.title, share_permalink: product.url, share_image: product %}
+          {% endif %}
+        {% endunless %}
     </div>
   </div>
 </div>
