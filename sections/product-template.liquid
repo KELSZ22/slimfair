@@ -309,6 +309,7 @@
             </div>
 
             {% include 'custom-product-trust-badges' %}
+            {% include 'custom-results-videos' %}
           {% endform %}
         {% else %}
           <h1 class="product-single__title">{{ product.title }}</h1>
@@ -447,10 +448,6 @@
         {% endif %}
     </div>
   </div>
-
-  {% if use_custom_product_design %}
-    {% include 'custom-results-videos' %}
-  {% endif %}
 </div>
 
 {% unless product == empty %}
@@ -946,9 +943,15 @@
           "label": "Thumbnail image"
         },
         {
+          "type": "video",
+          "id": "hosted_video",
+          "label": "Hosted video"
+        },
+        {
           "type": "url",
           "id": "video_url",
-          "label": "Video link"
+          "label": "Video link",
+          "info": "Used if no hosted video is selected. YouTube, Vimeo, or direct MP4 links work best."
         },
         {
           "type": "text",

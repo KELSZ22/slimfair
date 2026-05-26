@@ -1,7 +1,7 @@
 {% assign results_video_blocks = section.blocks | where: 'type', 'results_video' %}
 
 {% if section.settings.show_results_videos and results_video_blocks.size > 0 %}
-  <section class="custom-results-videos" aria-labelledby="custom-results-videos-title-{{ section.id }}">
+  <section class="custom-results-videos" data-results-videos-id="{{ section.id }}" aria-labelledby="custom-results-videos-title-{{ section.id }}">
     <div class="custom-results-videos__header">
       {% if section.settings.results_videos_title != blank %}
         <h2 id="custom-results-videos-title-{{ section.id }}" class="custom-results-videos__title">
@@ -19,19 +19,36 @@
       {% endif %}
     </div>
 
-    <div class="custom-results-videos__track">
+    <div class="custom-results-videos__slider">
+      <div class="custom-results-videos__frame">
+      <div class="custom-results-videos__track" data-results-videos-track>
       {% for block in results_video_blocks %}
         {% assign video_title = block.settings.title | default: section.settings.results_videos_title %}
         {% assign video_label = block.settings.label | default: video_title %}
+        {% assign hosted_video_url = blank %}
+
+        {% if block.settings.hosted_video != blank %}
+          {% for source in block.settings.hosted_video.sources %}
+            {% if hosted_video_url == blank and source.format == 'mp4' %}
+              {% assign hosted_video_url = source.url %}
+            {% endif %}
+          {% endfor %}
+
+          {% if hosted_video_url == blank and block.settings.hosted_video.sources.size > 0 %}
+            {% assign hosted_video_url = block.settings.hosted_video.sources[0].url %}
+          {% endif %}
+        {% endif %}
+
+        {% assign video_play_url = hosted_video_url | default: block.settings.video_url %}
 
         {% capture results_video_card_content %}
           {% if block.settings.image != blank %}
             <img
               class="custom-results-videos__image"
-              src="{{ block.settings.image | img_url: '360x640', crop: 'center' }}"
+              src="{{ block.settings.image | img_url: '248x442', crop: 'center' }}"
               alt="{{ block.settings.image.alt | default: video_title | escape }}"
-              width="360"
-              height="640"
+              width="124"
+              height="221"
               loading="lazy"
             >
           {% else %}
@@ -57,16 +74,286 @@
           {% endif %}
         {% endcapture %}
 
-        {% if block.settings.video_url != blank %}
-          <a class="custom-results-videos__card" href="{{ block.settings.video_url }}" aria-label="{{ video_title | escape }}" {{ block.shopify_attributes }}>
+        {% if video_play_url != blank %}
+          <button
+            type="button"
+            class="custom-results-videos__card"
+            data-results-video-trigger
+            data-video-url="{{ video_play_url | escape }}"
+            aria-label="Play {{ video_title | escape }}"
+            {{ block.shopify_attributes }}
+          >
             {{ results_video_card_content }}
-          </a>
+          </button>
         {% else %}
           <div class="custom-results-videos__card" {{ block.shopify_attributes }}>
             {{ results_video_card_content }}
           </div>
         {% endif %}
       {% endfor %}
+      </div>
+
+        <button
+          type="button"
+          class="custom-results-videos__scroll-next"
+          data-results-videos-scroll-next
+          aria-label="Scroll videos right"
+        >
+          <img
+            class="custom-results-videos__scroll-next-icon"
+            src="{{ 'arrow-right.svg' | asset_url }}"
+            alt=""
+            width="39"
+            height="25"
+            loading="lazy"
+            decoding="async"
+          >
+        </button>
+      </div>
+    </div>
+
+    <div
+      class="custom-results-videos__modal"
+      data-results-video-modal
+      data-results-videos-section-id="{{ section.id }}"
+      hidden
+      aria-hidden="true"
+    >
+      <button type="button" class="custom-results-videos__backdrop" data-results-video-close aria-label="Close video"></button>
+      <div class="custom-results-videos__dialog" role="dialog" aria-modal="true" aria-label="{{ section.settings.results_videos_title | default: 'Results video' | escape }}">
+        <button type="button" class="custom-results-videos__close" data-results-video-close aria-label="Close video">
+          {% include 'icon-close' %}
+        </button>
+        <div class="custom-results-videos__player" data-results-video-player></div>
+      </div>
     </div>
   </section>
+
+  <script>
+    (function() {
+      if (window.customResultsVideosReady) return;
+      window.customResultsVideosReady = true;
+
+      var activeTrigger = null;
+
+      function getEmbedUrl(url) {
+        url = url.replace(/&amp;/g, '&');
+        var youtubeMatch = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/shorts\/)([^&?/#]+)/);
+        var vimeoMatch = url.match(/vimeo\.com\/(?:video\/)?([0-9]+)/);
+
+        if (youtubeMatch && youtubeMatch[1]) {
+          return 'https://www.youtube.com/embed/' + youtubeMatch[1] + '?autoplay=1&rel=0';
+        }
+
+        if (vimeoMatch && vimeoMatch[1]) {
+          return 'https://player.vimeo.com/video/' + vimeoMatch[1] + '?autoplay=1';
+        }
+
+        return url;
+      }
+
+      function isVideoFile(url) {
+        return /\.(mp4|webm|ogg|mov)(\?.*)?$/i.test(url);
+      }
+
+      function getSectionModal(section) {
+        var sectionId = section.getAttribute('data-results-videos-id');
+        if (sectionId) {
+          var modal = document.querySelector(
+            '[data-results-video-modal][data-results-videos-section-id="' + sectionId + '"]'
+          );
+          if (modal) return modal;
+        }
+
+        return section.querySelector('[data-results-video-modal]');
+      }
+
+      function ensureModalInBody(modal) {
+        if (modal && modal.parentElement !== document.body) {
+          document.body.appendChild(modal);
+        }
+      }
+
+      function openVideo(url, trigger) {
+        var section = trigger.closest('.custom-results-videos');
+        if (!section) return;
+
+        var modal = getSectionModal(section);
+        if (!modal) return;
+
+        ensureModalInBody(modal);
+
+        var player = modal.querySelector('[data-results-video-player]');
+        if (!player) return;
+
+        activeTrigger = trigger;
+        player.innerHTML = '';
+
+        if (isVideoFile(url)) {
+          var video = document.createElement('video');
+          video.controls = true;
+          video.autoplay = true;
+          video.playsInline = true;
+          video.src = url;
+          player.appendChild(video);
+        } else {
+          var iframe = document.createElement('iframe');
+          iframe.src = getEmbedUrl(url);
+          iframe.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+          iframe.allowFullscreen = true;
+          iframe.title = trigger.getAttribute('aria-label') || 'Results video';
+          player.appendChild(iframe);
+        }
+
+        modal.hidden = false;
+        modal.setAttribute('aria-hidden', 'false');
+        document.documentElement.classList.add('custom-results-videos-open');
+        var closeButton = modal.querySelector('.custom-results-videos__close');
+        if (closeButton) closeButton.focus();
+      }
+
+      function closeVideo() {
+        var modal = document.querySelector('.custom-results-videos__modal:not([hidden])');
+        if (!modal) return;
+
+        var player = modal.querySelector('[data-results-video-player]');
+        modal.hidden = true;
+        modal.setAttribute('aria-hidden', 'true');
+        if (player) player.innerHTML = '';
+        document.documentElement.classList.remove('custom-results-videos-open');
+
+        if (activeTrigger) {
+          activeTrigger.focus();
+          activeTrigger = null;
+        }
+      }
+
+      function initTrackSlider(section) {
+        var track = section.querySelector('[data-results-videos-track]');
+        var nextButton = section.querySelector('[data-results-videos-scroll-next]');
+        if (!track || !nextButton) return;
+
+        function updateNextButton() {
+          var maxScroll = track.scrollWidth - track.clientWidth;
+          var atEnd = maxScroll <= 1 || track.scrollLeft >= maxScroll - 1;
+          nextButton.disabled = atEnd;
+          nextButton.hidden = maxScroll <= 1;
+        }
+
+        function scrollNext() {
+          var card = track.querySelector('.custom-results-videos__card');
+          var gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap) || 10;
+          var scrollAmount = card ? card.offsetWidth + gap : track.clientWidth * 0.85;
+          track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        }
+
+        nextButton.addEventListener('click', function(event) {
+          event.preventDefault();
+          event.stopPropagation();
+          if (!nextButton.disabled) scrollNext();
+        });
+
+        function initTrackDrag() {
+          var isActive = false;
+          var didDrag = false;
+          var isMouseDrag = false;
+          var startX = 0;
+          var startScrollLeft = 0;
+          var activePointerId = null;
+          var dragThreshold = 10;
+
+          function endPointer(event) {
+            if (!isActive) return;
+
+            isActive = false;
+            isMouseDrag = false;
+            activePointerId = null;
+            track.classList.remove('is-dragging');
+
+            if (event && event.pointerId != null) {
+              try {
+                track.releasePointerCapture(event.pointerId);
+              } catch (error) {}
+            }
+          }
+
+          track.addEventListener('click', function(event) {
+            var trigger = event.target.closest('[data-results-video-trigger]');
+            if (!trigger) return;
+
+            if (didDrag) {
+              event.preventDefault();
+              event.stopPropagation();
+              didDrag = false;
+              return;
+            }
+
+            event.preventDefault();
+            openVideo(trigger.getAttribute('data-video-url'), trigger);
+          });
+
+          track.addEventListener('pointerdown', function(event) {
+            if (event.pointerType === 'mouse' && event.button !== 0) return;
+
+            isActive = true;
+            didDrag = false;
+            isMouseDrag = event.pointerType === 'mouse';
+            startX = event.clientX;
+            startScrollLeft = track.scrollLeft;
+            activePointerId = event.pointerId;
+          });
+
+          track.addEventListener(
+            'pointermove',
+            function(event) {
+              if (!isActive || event.pointerId !== activePointerId) return;
+
+              var deltaX = event.clientX - startX;
+              if (Math.abs(deltaX) <= dragThreshold) return;
+
+              didDrag = true;
+
+              if (!isMouseDrag) return;
+
+              if (!track.classList.contains('is-dragging')) {
+                track.classList.add('is-dragging');
+                track.setPointerCapture(event.pointerId);
+              }
+
+              event.preventDefault();
+              track.scrollLeft = startScrollLeft - deltaX;
+            },
+            { passive: false }
+          );
+
+          track.addEventListener('pointerup', endPointer);
+          track.addEventListener('pointercancel', endPointer);
+        }
+
+        initTrackDrag();
+
+        track.addEventListener('scroll', updateNextButton, { passive: true });
+        window.addEventListener('resize', updateNextButton);
+        updateNextButton();
+      }
+
+      document.querySelectorAll('[data-results-video-modal]').forEach(ensureModalInBody);
+      document.querySelectorAll('.custom-results-videos').forEach(initTrackSlider);
+
+      document.addEventListener('click', function(event) {
+        var closeButton = event.target.closest('[data-results-video-close]');
+
+        if (closeButton) {
+          event.preventDefault();
+          closeVideo();
+        }
+      });
+
+      document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+          closeVideo();
+        }
+      });
+    })();
+  </script>
 {% endif %}

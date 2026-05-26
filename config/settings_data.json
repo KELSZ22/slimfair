@@ -246,6 +246,61 @@
       },
       "product-template": {
         "type": "product-template",
+        "blocks": {
+          "results_video_XRKFwB": {
+            "type": "results_video",
+            "settings": {
+              "image": "shopify://shop_images/Screenshot_2026-04-15_at_4.30.11_PM_1.png",
+              "video_url": "https://www.youtube.com/watch?v=lq2jHhp_xRQ",
+              "title": "Customer result",
+              "quote": "",
+              "label": ""
+            }
+          },
+          "results_video_xP6L6m": {
+            "type": "results_video",
+            "settings": {
+              "video_url": "",
+              "title": "Customer result",
+              "quote": "",
+              "label": ""
+            }
+          },
+          "results_video_hr9Jix": {
+            "type": "results_video",
+            "settings": {
+              "video_url": "",
+              "title": "Customer result",
+              "quote": "",
+              "label": ""
+            }
+          },
+          "results_video_B3L9J6": {
+            "type": "results_video",
+            "settings": {
+              "video_url": "",
+              "title": "Customer result",
+              "quote": "",
+              "label": ""
+            }
+          },
+          "results_video_J9Mr7D": {
+            "type": "results_video",
+            "settings": {
+              "video_url": "",
+              "title": "Customer result",
+              "quote": "",
+              "label": ""
+            }
+          }
+        },
+        "block_order": [
+          "results_video_XRKFwB",
+          "results_video_xP6L6m",
+          "results_video_hr9Jix",
+          "results_video_B3L9J6",
+          "results_video_J9Mr7D"
+        ],
         "settings": {
           "image_size": "medium",
           "product_gallery_width": 650,
@@ -271,7 +326,11 @@
           "trust_badge_2_content": "2 packs and up",
           "trust_badge_3_icon": "shopify://shop_images/Successful_Delivery.svg",
           "trust_badge_3_title": "ESTIMATED DELIVERY",
-          "trust_badge_3_content": "Luzon 1-3days VisMin 4-7d"
+          "trust_badge_3_content": "Luzon 1-3days VisMin 4-7d",
+          "show_results_videos": true,
+          "results_videos_title": "Results You Don't Have to Guess",
+          "results_videos_cta_label": "View more",
+          "results_videos_cta_url": ""
         }
       },
       "product-recommendations": {
