@@ -1,0 +1,302 @@
+{% assign faq_blocks = faq_section.blocks | where: 'type', 'faq_item' %}
+
+{% assign cpf_heading = faq_section.settings.faq_heading | default: faq_section.settings.heading %}
+{% assign cpf_bg = faq_section.settings.faq_background_color | default: faq_section.settings.background_color | default: '#fffbd8' %}
+{% assign cpf_text = faq_section.settings.faq_text_color | default: faq_section.settings.text_color | default: '#68422e' %}
+{% assign cpf_accent = faq_section.settings.faq_accent_color | default: faq_section.settings.accent_color | default: '#68422e' %}
+{% assign cpf_active_bg = faq_section.settings.faq_active_background_color | default: faq_section.settings.active_background_color | default: '#68422e' %}
+{% assign cpf_divider = faq_section.settings.faq_divider_color | default: faq_section.settings.divider_color | default: '#e8ddb2' %}
+{% assign cpf_radius = faq_section.settings.faq_border_radius | default: faq_section.settings.border_radius | default: 24 %}
+{% assign cpf_padding_top = faq_section.settings.faq_padding_top | default: faq_section.settings.padding_top | default: 32 %}
+{% assign cpf_padding_bottom = faq_section.settings.faq_padding_bottom | default: faq_section.settings.padding_bottom | default: 32 %}
+
+{% capture cpf_icon_markup %}
+  <span class="custom-product-faq__icon" aria-hidden="true">
+    <img
+      class="custom-product-faq__icon-svg custom-product-faq__icon-svg--plus"
+      src="{{ 'custom-faq-icon-plus.svg' | asset_url }}"
+      width="22"
+      height="22"
+      alt=""
+      loading="lazy"
+    >
+    <img
+      class="custom-product-faq__icon-svg custom-product-faq__icon-svg--minus"
+      src="{{ 'custom-faq-icon-minus.svg' | asset_url }}"
+      width="19"
+      height="19"
+      alt=""
+      loading="lazy"
+    >
+  </span>
+{% endcapture %}
+
+{% if faq_section.settings.show_section %}
+  <section
+    id="custom-product-faq-{{ faq_section.id }}"
+    class="custom-product-faq"
+    style="
+      --cpf-bg: {{ cpf_bg }};
+      --cpf-text: {{ cpf_text }};
+      --cpf-accent: {{ cpf_accent }};
+      --cpf-active-bg: {{ cpf_active_bg }};
+      --cpf-divider: {{ cpf_divider }};
+      --cpf-radius: {{ cpf_radius }}px;
+      --cpf-padding-top: {{ cpf_padding_top }}px;
+      --cpf-padding-bottom: {{ cpf_padding_bottom }}px;
+    "
+  >
+    <div class="custom-product-faq__inner">
+      {% if cpf_heading != blank %}
+        <h2 class="custom-product-faq__heading">{{ cpf_heading }}</h2>
+      {% endif %}
+
+      <div class="custom-product-faq__panel">
+        {% for block in faq_blocks %}
+          <details
+            class="custom-product-faq__item"
+            {{ block.shopify_attributes }}
+          >
+            <summary class="custom-product-faq__summary">
+              <span class="custom-product-faq__title">{{ block.settings.title }}</span>
+              {{ cpf_icon_markup }}
+            </summary>
+
+            {% if block.settings.content != blank %}
+              <div class="custom-product-faq__content">
+                {{ block.settings.content }}
+              </div>
+            {% endif %}
+          </details>
+        {% else %}
+          <details class="custom-product-faq__item">
+            <summary class="custom-product-faq__summary">
+              <span class="custom-product-faq__title">Product Details</span>
+              {{ cpf_icon_markup }}
+            </summary>
+            <div class="custom-product-faq__content">
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea.</p>
+            </div>
+          </details>
+
+          <details class="custom-product-faq__item">
+            <summary class="custom-product-faq__summary">
+              <span class="custom-product-faq__title">Slimfair Difference</span>
+              {{ cpf_icon_markup }}
+            </summary>
+            <div class="custom-product-faq__content">
+              <p>Add details about what makes Slimfair different.</p>
+            </div>
+          </details>
+
+          <details class="custom-product-faq__item">
+            <summary class="custom-product-faq__summary">
+              <span class="custom-product-faq__title">Ingredients</span>
+              {{ cpf_icon_markup }}
+            </summary>
+            <div class="custom-product-faq__content">
+              <p>Add your ingredient details here.</p>
+            </div>
+          </details>
+
+          <details class="custom-product-faq__item">
+            <summary class="custom-product-faq__summary">
+              <span class="custom-product-faq__title">Benefits</span>
+              {{ cpf_icon_markup }}
+            </summary>
+            <div class="custom-product-faq__content">
+              <p>Add your benefit details here.</p>
+            </div>
+          </details>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  {% if faq_section.settings.enable_faq_schema and faq_blocks.size > 0 %}
+    {% assign faq_schema_count = 0 %}
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {% for block in faq_blocks %}
+            {% if block.settings.title != blank and block.settings.content != blank %}
+              {% assign faq_schema_count = faq_schema_count | plus: 1 %}
+              {% if faq_schema_count > 1 %},{% endif %}
+              {
+                "@type": "Question",
+                "name": {{ block.settings.title | strip_html | json }},
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": {{ block.settings.content | strip_html | json }}
+                }
+              }
+            {% endif %}
+          {% endfor %}
+        ]
+      }
+    </script>
+  {% endif %}
+
+  <style>
+    #custom-product-faq-{{ faq_section.id }}.custom-product-faq {
+      padding:0;
+      color: var(--cpf-text);
+      width: 100%;
+    }
+
+    #custom-product-faq-{{ faq_section.id }} .custom-product-faq__inner {
+      width: 100%;
+      max-width: none;
+      margin: 0;
+    }
+
+    #custom-product-faq-{{ faq_section.id }} .custom-product-faq__heading {
+      margin: 0 0 18px;
+      color: var(--cpf-text);
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1.2;
+      text-align: center;
+    }
+
+    #custom-product-faq-{{ faq_section.id }} .custom-product-faq__panel {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 22px 23px;
+      border: 1.5px solid var(--cpf-accent);
+      border-radius: 18px;
+      background: var(--cpf-bg);
+    }
+
+    #custom-product-faq-{{ faq_section.id }} .custom-product-faq__item {
+      border-bottom: 1px solid var(--cpf-divider);
+    }
+
+    #custom-product-faq-{{ faq_section.id }} .custom-product-faq__item[open] {
+      margin-bottom: 22px;
+      border-bottom: 0;
+      border-radius: 8px;
+      background: var(--cpf-active-bg);
+    }
+
+    #custom-product-faq-{{ faq_section.id }} .custom-product-faq__item:last-child {
+      border-bottom: 0;
+    }
+
+    #custom-product-faq-{{ faq_section.id }} .custom-product-faq__summary {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      align-self: stretch;
+      justify-content: space-between;
+      padding: 16px;
+    }
+
+    #custom-product-faq-{{ faq_section.id }} .custom-product-faq__item[open] .custom-product-faq__summary {
+      min-height: 60px;
+      color: #FFF8DC;
+    }
+
+    #custom-product-faq-{{ faq_section.id }} .custom-product-faq__summary::-webkit-details-marker {
+      display: none;
+    }
+
+    #custom-product-faq-{{ faq_section.id }} .custom-product-faq__title {
+      color: inherit;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 800;
+      line-height: normal;
+    }
+
+    #custom-product-faq-{{ faq_section.id }} .custom-product-faq__icon {
+      display: inline-flex;
+      flex: 0 0 22px;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+    }
+
+    #custom-product-faq-{{ faq_section.id }} .custom-product-faq__icon-svg {
+      display: block;
+      flex-shrink: 0;
+    }
+
+    #custom-product-faq-{{ faq_section.id }} .custom-product-faq__icon-svg--plus {
+      width: 22px;
+      height: 22px;
+    }
+
+    #custom-product-faq-{{ faq_section.id }} .custom-product-faq__icon-svg--minus {
+      display: none;
+      width: 19px;
+      height: 19px;
+    }
+
+    #custom-product-faq-{{ faq_section.id }} .custom-product-faq__item[open] .custom-product-faq__icon-svg--plus {
+      display: none;
+    }
+
+    #custom-product-faq-{{ faq_section.id }} .custom-product-faq__item[open] .custom-product-faq__icon-svg--minus {
+      display: block;
+    }
+
+    #custom-product-faq-{{ faq_section.id }} .custom-product-faq__content {
+      font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    }
+
+    #custom-product-faq-{{ faq_section.id }} .custom-product-faq__content p {
+      margin: 0 0 10px;
+    }
+
+    #custom-product-faq-{{ faq_section.id }} .custom-product-faq__content p:last-child {
+      margin-bottom: 0;
+    }
+
+    #custom-product-faq-{{ faq_section.id }} .custom-product-faq__empty {
+      padding: 22px;
+      color: var(--cpf-text);
+      text-align: center;
+    }
+    #custom-product-faq-{{ faq_section.id }} .custom-product-faq__content {
+      padding: 0 23px 22px;
+    }
+    #custom-product-faq-product-template .custom-product-faq__content p:last-child{
+      color: #FFF8DC;
+    }
+    #custom-product-faq-product-template .custom-product-faq__content{
+      padding: 0 16px 16px;
+    }
+
+    @media screen and (max-width: 749px) {
+      #custom-product-faq-{{ faq_section.id }} .custom-product-faq__panel {
+        padding: 16px;
+      }
+
+      #custom-product-faq-{{ faq_section.id }} .custom-product-faq__summary {
+        min-height: 78px;
+        padding: 0 6px;
+      }
+
+      #custom-product-faq-{{ faq_section.id }} .custom-product-faq__item[open] .custom-product-faq__summary {
+        padding: 16px 16px 8px;
+      }
+
+      #custom-product-faq-{{ faq_section.id }} .custom-product-faq__title,
+      #custom-product-faq-{{ faq_section.id }} .custom-product-faq__content {
+        font-size: 18px;
+      }
+
+      #custom-product-faq-{{ faq_section.id }} .custom-product-faq__content {
+        padding: 0 16px 18px;
+      }
+    }
+  </style>
+{% endif %}

@@ -252,7 +252,7 @@
             "settings": {
               "image": "shopify://shop_images/Screenshot_2026-04-15_at_4.30.11_PM_1.png",
               "video_url": "https://www.youtube.com/watch?v=lq2jHhp_xRQ",
-              "title": "Customer result",
+              "title": "",
               "quote": "",
               "label": ""
             }
@@ -260,8 +260,9 @@
           "results_video_xP6L6m": {
             "type": "results_video",
             "settings": {
+              "image": "shopify://shop_images/Screenshot_2026-04-15_at_4.30.49_PM_1.png",
               "video_url": "",
-              "title": "Customer result",
+              "title": "",
               "quote": "",
               "label": ""
             }
@@ -269,8 +270,9 @@
           "results_video_hr9Jix": {
             "type": "results_video",
             "settings": {
+              "image": "shopify://shop_images/Frame_1000009418.png",
               "video_url": "",
-              "title": "Customer result",
+              "title": "",
               "quote": "",
               "label": ""
             }
@@ -278,8 +280,9 @@
           "results_video_B3L9J6": {
             "type": "results_video",
             "settings": {
+              "image": "shopify://shop_images/Frame_1000009420.png",
               "video_url": "",
-              "title": "Customer result",
+              "title": "",
               "quote": "",
               "label": ""
             }
@@ -287,8 +290,9 @@
           "results_video_J9Mr7D": {
             "type": "results_video",
             "settings": {
+              "image": "shopify://shop_images/Frame_1000009419.png",
               "video_url": "",
-              "title": "Customer result",
+              "title": "",
               "quote": "",
               "label": ""
             }

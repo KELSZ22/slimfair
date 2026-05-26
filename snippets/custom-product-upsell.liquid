@@ -1,0 +1,292 @@
+{% assign upsell_product_1_handle = section.settings.upsell_product_1.handle | default: section.settings.upsell_product_1 | default: 'new-slimfair-cafe-latte-beauty-mix-10-sachets' %}
+{% assign upsell_product_2_handle = section.settings.upsell_product_2.handle | default: section.settings.upsell_product_2 | default: 'hoarder-package' %}
+{% assign upsell_product_1 = all_products[upsell_product_1_handle] %}
+{% assign upsell_product_2 = all_products[upsell_product_2_handle] %}
+{% assign show_upsell_1 = false %}
+{% assign show_upsell_2 = false %}
+{% assign show_product_upsell_items = false %}
+
+{% if upsell_product_1 != blank and upsell_product_1.title != blank %}
+  {% assign show_upsell_1 = true %}
+{% endif %}
+
+{% if upsell_product_2 != blank and upsell_product_2.title != blank %}
+  {% assign show_upsell_2 = true %}
+{% endif %}
+
+{% if show_upsell_1 or show_upsell_2 %}
+  {% assign show_product_upsell_items = true %}
+{% endif %}
+
+{% if section.settings.show_product_upsell and show_product_upsell_items %}
+  <section class="custom-product-upsell" aria-label="{{ section.settings.product_upsell_heading | default: 'Frequently Bought Together' | escape }}">
+    {% if section.settings.product_upsell_heading != blank %}
+      <h2 class="custom-product-upsell__heading">{{ section.settings.product_upsell_heading }}</h2>
+    {% endif %}
+
+    <div class="custom-product-upsell__panel">
+      {% if show_upsell_1 %}
+        {% assign upsell_variant_1 = upsell_product_1.selected_or_first_available_variant %}
+        {% assign upsell_image_1 = section.settings.upsell_product_1_image | default: upsell_product_1.featured_image %}
+
+        <div class="custom-product-upsell__item">
+          <a class="custom-product-upsell__image-link" href="{{ upsell_product_1.url }}" aria-label="{{ upsell_product_1.title | escape }}">
+            {% if upsell_image_1 != blank %}
+              <img
+                class="custom-product-upsell__image"
+                src="{{ upsell_image_1 | img_url: '180x180', crop: 'center' }}"
+                alt="{{ upsell_image_1.alt | default: upsell_product_1.title | escape }}"
+                loading="lazy"
+              >
+            {% endif %}
+          </a>
+
+          <div class="custom-product-upsell__copy">
+            <a class="custom-product-upsell__title" href="{{ upsell_product_1.url }}">
+              {{ section.settings.upsell_product_1_title | default: upsell_product_1.title }}
+            </a>
+          </div>
+
+          <div class="custom-product-upsell__purchase">
+            <div class="custom-product-upsell__price">
+              {% if upsell_variant_1.compare_at_price > upsell_variant_1.price %}
+                <s>{{ upsell_variant_1.compare_at_price | money }}</s>
+              {% endif %}
+              <strong>{{ upsell_variant_1.price | money }}</strong>
+            </div>
+
+            {% form 'product', upsell_product_1, class: 'custom-product-upsell__form' %}
+              <input type="hidden" name="id" value="{{ upsell_variant_1.id }}">
+              <input type="hidden" name="quantity" value="1">
+              <button
+                type="submit"
+                name="add"
+                class="custom-product-upsell__button"
+                {% unless upsell_variant_1.available %}disabled aria-disabled="true"{% endunless %}
+              >
+                {% if upsell_variant_1.available %}
+                  Add to Cart
+                {% else %}
+                  Sold Out
+                {% endif %}
+              </button>
+            {% endform %}
+          </div>
+        </div>
+      {% endif %}
+
+      {% if show_upsell_1 and show_upsell_2 %}
+        <span class="custom-product-upsell__divider" aria-hidden="true"></span>
+      {% endif %}
+
+      {% if show_upsell_2 %}
+        {% assign upsell_variant_2 = upsell_product_2.selected_or_first_available_variant %}
+        {% assign upsell_image_2 = section.settings.upsell_product_2_image | default: upsell_product_2.featured_image %}
+
+        <div class="custom-product-upsell__item">
+          <a class="custom-product-upsell__image-link" href="{{ upsell_product_2.url }}" aria-label="{{ upsell_product_2.title | escape }}">
+            {% if upsell_image_2 != blank %}
+              <img
+                class="custom-product-upsell__image"
+                src="{{ upsell_image_2 | img_url: '180x180', crop: 'center' }}"
+                alt="{{ upsell_image_2.alt | default: upsell_product_2.title | escape }}"
+                loading="lazy"
+              >
+            {% endif %}
+          </a>
+
+          <div class="custom-product-upsell__copy">
+            <a class="custom-product-upsell__title" href="{{ upsell_product_2.url }}">
+              {{ section.settings.upsell_product_2_title | default: upsell_product_2.title }}
+            </a>
+          </div>
+
+          <div class="custom-product-upsell__purchase">
+            <div class="custom-product-upsell__price">
+              {% if upsell_variant_2.compare_at_price > upsell_variant_2.price %}
+                <s>{{ upsell_variant_2.compare_at_price | money }}</s>
+              {% endif %}
+              <strong>{{ upsell_variant_2.price | money }}</strong>
+            </div>
+
+            {% form 'product', upsell_product_2, class: 'custom-product-upsell__form' %}
+              <input type="hidden" name="id" value="{{ upsell_variant_2.id }}">
+              <input type="hidden" name="quantity" value="1">
+              <button
+                type="submit"
+                name="add"
+                class="custom-product-upsell__button"
+                {% unless upsell_variant_2.available %}disabled aria-disabled="true"{% endunless %}
+              >
+                {% if upsell_variant_2.available %}
+                  Add to Cart
+                {% else %}
+                  Sold Out
+                {% endif %}
+              </button>
+            {% endform %}
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </section>
+
+  <style>
+    .custom-product-upsell {
+      margin: 20px 0 0;
+      color: #654230;
+    }
+
+    .custom-product-upsell__heading {
+      margin: 0 0 18px;
+      color: #654230;
+      font-size: 18px;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .custom-product-upsell__panel {
+      overflow: hidden;
+      border: 1.5px solid #654230;
+      border-radius: 14px;
+      background: #fff;
+      padding: 18px 44px 18px 16px;
+    }
+
+    .custom-product-upsell__item {
+      display: grid;
+      grid-template-columns: 90px minmax(0, 1fr) 182px;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .custom-product-upsell__image-link {
+      display: block;
+      width: 90px;
+      height: 90px;
+      overflow: hidden;
+      border-radius: 4px;
+      background: #f4ece4;
+    }
+
+    .custom-product-upsell__image {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .custom-product-upsell__title {
+      display: inline-block;
+      color: #654230;
+      font-size: 16px;
+      font-weight: 800;
+      line-height: 1.55;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    .custom-product-upsell__title:hover,
+    .custom-product-upsell__title:focus {
+      color: #654230;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .custom-product-upsell__purchase {
+      display: grid;
+      gap: 18px;
+      justify-items: stretch;
+    }
+
+    .custom-product-upsell__price {
+      display: flex;
+      align-items: baseline;
+      justify-content: flex-end;
+      gap: 18px;
+      font-size: 17px;
+      line-height: 1.2;
+      white-space: nowrap;
+    }
+
+    .custom-product-upsell__price s {
+      color: rgba(101, 66, 48, 0.45);
+      font-weight: 700;
+    }
+
+    .custom-product-upsell__price strong {
+      color: #3f302a;
+      font-weight: 900;
+    }
+
+    .custom-product-upsell__button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      min-height: 40px;
+      border: 0;
+      border-radius: 7px;
+      background: #347b4f;
+      color: #fff;
+      cursor: pointer;
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: 0;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .custom-product-upsell__button:hover,
+    .custom-product-upsell__button:focus {
+      background: #2d6d45;
+      color: #fff;
+    }
+
+    .custom-product-upsell__button:disabled {
+      cursor: not-allowed;
+      opacity: 0.55;
+    }
+
+    .custom-product-upsell__divider {
+      display: block;
+      height: 1px;
+      margin: 22px 0;
+      background: rgba(101, 66, 48, 0.35);
+    }
+
+    @media screen and (max-width: 749px) {
+      .custom-product-upsell__panel {
+        padding: 14px;
+      }
+
+      .custom-product-upsell__item {
+        grid-template-columns: 74px minmax(0, 1fr);
+        gap: 12px;
+      }
+
+      .custom-product-upsell__image-link {
+        width: 74px;
+        height: 74px;
+      }
+
+      .custom-product-upsell__purchase {
+        grid-column: 1 / -1;
+        grid-template-columns: minmax(0, 1fr) 150px;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .custom-product-upsell__price {
+        justify-content: flex-start;
+        gap: 10px;
+        font-size: 15px;
+      }
+
+      .custom-product-upsell__title,
+      .custom-product-upsell__button {
+        font-size: 14px;
+      }
+    }
+  </style>
+{% endif %}
