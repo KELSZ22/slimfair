@@ -3997,6 +3997,7 @@ theme.Product = (function() {
       errorMessage: '[data-error-message]',
       errorMessageWrapper: '[data-error-message-wrapper]',
       productImageWraps: '.product-single__photo',
+      productMediaStage: '.product-single__media-stage',
       productThumbImages: '.product-single__thumbnail--' + sectionId,
       productThumbs: '.product-single__thumbnails-' + sectionId,
       productThumbListItem: '.product-single__thumbnails-item',
@@ -4066,6 +4067,7 @@ theme.Product = (function() {
     this._stringOverrides();
     this._initVariants();
     this._initImageSwitch();
+    this._initMobileMediaSlider();
     this._initThumbnailRailScroll();
     this._initBundleOptions();
     this._initAddToCart();
@@ -4084,7 +4086,12 @@ theme.Product = (function() {
       enquire.register(this.settings.mediaQuerySmall, {
         match: function() {
           // initialize thumbnail slider on mobile if more than three thumbnails
-          if ($(self.selectors.productThumbImages).length > 3) {
+          if (
+            $(self.selectors.productThumbImages).length > 3 &&
+            !$(self.selectors.productMediaStage, self.$container)
+              .closest('.product-single__photos--thumbnail-rail')
+              .length
+          ) {
             self._initThumbnailSlider();
           }
 
@@ -4165,6 +4172,48 @@ theme.Product = (function() {
           self._setActiveThumbnail(imageId);
         })
         .on('keyup', self._handleImageFocus.bind(self));
+    },
+
+    _initMobileMediaSlider: function() {
+      var $stage = $(this.selectors.productMediaStage, this.$container);
+
+      if (!$stage.length) {
+        return;
+      }
+
+      var self = this;
+
+      $stage.on('scroll' + this.settings.namespace, function() {
+        window.clearTimeout(self.settings.mediaSliderTimer);
+
+        self.settings.mediaSliderTimer = window.setTimeout(function() {
+          if (!self.settings.bpSmall) {
+            return;
+          }
+
+          var stage = $stage.get(0);
+          var stageCenter = stage.scrollLeft + stage.clientWidth / 2;
+          var activeImageId;
+          var closestDistance = Infinity;
+
+          $stage.children('.product-single__photo-wrapper').each(function() {
+            var slideCenter = this.offsetLeft + this.offsetWidth / 2;
+            var distance = Math.abs(stageCenter - slideCenter);
+
+            if (distance < closestDistance) {
+              closestDistance = distance;
+              activeImageId = $(this)
+                .find(self.selectors.productImageWraps)
+                .first()
+                .data('image-id');
+            }
+          });
+
+          if (activeImageId) {
+            self._setActiveThumbnail(activeImageId);
+          }
+        }, 80);
+      });
     },
 
     _initAddToCart: function() {
@@ -4534,6 +4583,7 @@ theme.Product = (function() {
 
       $activeThumbnail.addClass(this.classes.activeClass);
       $activeThumbnail.attr('aria-current', true);
+      this._scrollThumbnailIntoView($activeThumbnail);
 
       if (!$thumbnailWrappers.hasClass('slick-slide')) {
         return;
@@ -4542,6 +4592,23 @@ theme.Product = (function() {
       var slideIndex = $activeThumbnail.parent().data('slick-index');
 
       $(this.selectors.productThumbs).slick('slickGoTo', slideIndex, true);
+    },
+
+    _scrollThumbnailIntoView: function($thumbnail) {
+      if (!this.settings.bpSmall || !$thumbnail.length) {
+        return;
+      }
+
+      var $thumbs = $thumbnail.closest(this.selectors.productThumbs);
+      var thumb = $thumbnail.get(0);
+      var thumbs = $thumbs.get(0);
+
+      if (!thumbs || !thumb) {
+        return;
+      }
+
+      thumbs.scrollLeft =
+        thumb.offsetLeft - thumbs.clientWidth / 2 + thumb.offsetWidth / 2;
     },
 
     _switchImage: function(imageId) {
@@ -4559,6 +4626,27 @@ theme.Product = (function() {
 
       $newImage.removeClass(this.classes.hidden);
       $otherImages.addClass(this.classes.hidden);
+      this._scrollMobileMediaToImage($newImage);
+    },
+
+    _scrollMobileMediaToImage: function($image) {
+      if (!this.settings.bpSmall) {
+        return;
+      }
+
+      var $stage = $(this.selectors.productMediaStage, this.$container);
+      var $slide = $image.closest('.product-single__photo-wrapper');
+
+      if (!$stage.length || !$slide.length) {
+        return;
+      }
+
+      $stage.stop().animate(
+        {
+          scrollLeft: $slide.get(0).offsetLeft
+        },
+        220
+      );
     },
 
     _handleImageFocus: function(evt) {
