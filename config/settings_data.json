@@ -1036,16 +1036,15 @@
           "routine_tip_meals"
         ],
         "settings": {
-          "image": "shopify://shop_images/SLIMFAIR_CAFE_LATTE_9_x_12_in.jpg",
+          "image": "shopify://shop_images/image_54.png",
           "image_position": "left",
-          "image_radius": 22,
+          "image_radius": 12,
           "heading": "Simple. Consistent. Effective.",
           "text": "<p>No complicated routines-just a daily habit that fits seamlessly into your lifestyle.</p>",
           "columns": "two",
           "background_color": "#f5fce9",
           "heading_color": "#5c3f2d",
-          "text_color": "#6d563d",
-          "accent_color": "#c48645",
+          "text_color": "#5c3f2d",
           "pill_background_color": "#f8e9a7",
           "pill_text_color": "#5c3f2d",
           "pill_border_color": "#a77a33",
@@ -1131,6 +1130,8 @@
             "type": "video_card",
             "settings": {
               "image": "shopify://shop_images/Screenshot_2026-04-15_at_4.30.49_PM_1.png",
+              "video_url": "",
+              "overlay_quote": "",
               "title": "Lorem ipsum dolor sit amet!",
               "quote": "<p>\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor\"</p>",
               "name": "Jane Doe"
@@ -1140,6 +1141,8 @@
             "type": "video_card",
             "settings": {
               "image": "shopify://shop_images/Frame_1000009418.png",
+              "video_url": "",
+              "overlay_quote": "",
               "title": "Lorem ipsum dolor sit amet!",
               "quote": "<p>\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor\"</p>",
               "name": "Jane Doe"
@@ -1149,6 +1152,8 @@
             "type": "video_card",
             "settings": {
               "image": "shopify://shop_images/Frame_1000009420.png",
+              "video_url": "",
+              "overlay_quote": "",
               "title": "Lorem ipsum dolor sit amet!",
               "quote": "<p>\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor\"</p>",
               "name": "Jane Doe"
@@ -1158,6 +1163,8 @@
             "type": "video_card",
             "settings": {
               "image": "shopify://shop_images/Frame_1000009419.png",
+              "video_url": "",
+              "overlay_quote": "",
               "title": "Lorem ipsum dolor sit amet!",
               "quote": "<p>\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor\"</p>",
               "name": "Jane Doe"
