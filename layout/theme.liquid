@@ -36,6 +36,11 @@
 
   {% include 'social-meta-tags' %}
 
+  {%- comment -%} Lora: referenced by custom sections (e.g. routine tips, simple steps). {%- endcomment -%}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
+
   {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
   
   {%- if request.page_type == 'product' -%}

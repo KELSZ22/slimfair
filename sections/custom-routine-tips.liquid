@@ -5,7 +5,6 @@
     --routine-tips-bg: {{ section.settings.background_color }};
     --routine-tips-heading: {{ section.settings.heading_color }};
     --routine-tips-text: {{ section.settings.text_color }};
-    --routine-tips-accent: {{ section.settings.accent_color }};
     --routine-tips-pill-bg: {{ section.settings.pill_background_color }};
     --routine-tips-pill-text: {{ section.settings.pill_text_color }};
     --routine-tips-pill-border: {{ section.settings.pill_border_color }};
@@ -46,7 +45,12 @@
           {% for block in section.blocks %}
             <article class="custom-routine-tips__item" {{ block.shopify_attributes }}>
               <div class="custom-routine-tips__icon" aria-hidden="true">
-                <span></span>
+                <img
+                  src="{{ 'brown-check.svg' | asset_url }}"
+                  alt=""
+                  width="22"
+                  height="22"
+                  loading="lazy">
               </div>
 
               <div class="custom-routine-tips__item-copy">
@@ -74,7 +78,8 @@
   }
 
   .custom-routine-tips__inner.page-width {
-    max-width: 1160px;
+    max-width: 1360px;
+    padding: 0;
   }
 
   .custom-routine-tips__inner {
@@ -109,27 +114,29 @@
 
   .custom-routine-tips__heading {
     color: var(--routine-tips-heading);
-    font-family: Lora, serif;
-    font-size: 30px;
+    font-family: Lora
+    , serif;
+    font-size: 33px;
+    font-style: normal;
     font-weight: 700;
-    letter-spacing: 0;
-    line-height: 1.2;
-    margin: 0 0 12px;
+    line-height: normal;
   }
 
   .custom-routine-tips__text,
-  .custom-routine-tips__text.rte-setting {
+  .custom-routine-tips__text.rte-setting p {
     color: var(--routine-tips-text);
-    font-size: 16px;
-    line-height: 1.55;
-    margin: 0 0 32px;
-    max-width: 560px;
+    font-size: 18px;
+    font-weight: 400;
+
   }
 
-  .custom-routine-tips__text p,
   .custom-routine-tips__description p {
     color: inherit;
     margin: 0;
+    font-size: 14px;
+  }
+  .custom-routine-tips__description {
+    font-size: 18px;
   }
 
   .custom-routine-tips__list {
@@ -144,34 +151,27 @@
 
   .custom-routine-tips__list--two {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 32px;
   }
 
   .custom-routine-tips__item {
     align-items: flex-start;
     display: grid;
-    gap: 12px;
+    gap: 20px;
     grid-template-columns: 14px minmax(0, 1fr);
   }
 
   .custom-routine-tips__icon {
-    background: var(--routine-tips-accent);
-    border-radius: 50%;
-    height: 12px;
-    margin-top: 8px;
-    position: relative;
-    width: 12px;
+    flex-shrink: 0;
+    line-height: 0;
+    margin-top: 4px;
   }
 
-  .custom-routine-tips__icon span {
-    border-bottom: 2px solid #fff;
-    border-right: 2px solid #fff;
+  .custom-routine-tips__icon img {
     display: block;
-    height: 6px;
-    left: 4px;
-    position: absolute;
-    top: 2px;
-    transform: rotate(45deg);
-    width: 3px;
+    height: auto;
+    width: 22px;
+    max-width: none;
   }
 
   .custom-routine-tips__pill {
@@ -181,13 +181,13 @@
     border-radius: 999px;
     color: var(--routine-tips-pill-text);
     display: flex;
-    font-size: 13px;
+    font-size: 16px;
     font-weight: 700;
     justify-content: center;
     line-height: 1.25;
     margin: 0 0 11px;
     min-height: 32px;
-    padding: 6px 18px;
+    padding: 12px 18px;
     text-align: center;
   }
 
@@ -200,28 +200,38 @@
 
   @media screen and (max-width: 989px) {
     .custom-routine-tips__inner {
-      gap: 36px;
+      gap: 16px;
       grid-template-columns: 1fr;
     }
 
     .custom-routine-tips__inner--right .custom-routine-tips__media {
       order: 0;
     }
+    .custom-routine-tips__pill {
+      font-size: 14px;
+      width: 80%;
+    }
   }
 
   @media screen and (max-width: 649px) {
     .custom-routine-tips {
-      padding: calc(var(--routine-tips-padding-top) * .7) 0 calc(var(--routine-tips-padding-bottom) * .7);
+      padding: 16px;
     }
 
     .custom-routine-tips__heading {
-      font-size: 26px;
+      font-size: 18px;
+      margin-bottom: 14px;
     }
 
     .custom-routine-tips__text,
     .custom-routine-tips__text.rte-setting {
       font-size: 14px;
       margin-bottom: 24px;
+    }
+
+    .custom-routine-tips__text,
+    .custom-routine-tips__text.rte-setting p {
+      font-size: 16px;
     }
 
     .custom-routine-tips__list--two {
@@ -254,8 +264,7 @@
           {
             "value": "left",
             "label": "Left"
-          },
-          {
+          }, {
             "value": "right",
             "label": "Right"
           }
@@ -276,14 +285,12 @@
         "id": "heading",
         "label": "Heading",
         "default": "Simple. Consistent. Effective."
-      },
-      {
+      }, {
         "type": "richtext",
         "id": "text",
         "label": "Text",
         "default": "<p>No complicated routines-just a daily habit that fits seamlessly into your lifestyle.</p>"
-      },
-      {
+      }, {
         "type": "select",
         "id": "columns",
         "label": "Tip columns",
@@ -292,64 +299,48 @@
           {
             "value": "one",
             "label": "One"
-          },
-          {
+          }, {
             "value": "two",
             "label": "Two"
           }
         ]
-      },
-      {
+      }, {
         "type": "header",
         "content": "Colors"
-      },
-      {
+      }, {
         "type": "color",
         "id": "background_color",
         "label": "Background color",
         "default": "#F5FCE9"
-      },
-      {
+      }, {
         "type": "color",
         "id": "heading_color",
         "label": "Heading color",
         "default": "#5C3F2D"
-      },
-      {
+      }, {
         "type": "color",
         "id": "text_color",
         "label": "Text color",
         "default": "#6D563D"
-      },
-      {
-        "type": "color",
-        "id": "accent_color",
-        "label": "Check icon color",
-        "default": "#C48645"
-      },
-      {
+      }, {
         "type": "color",
         "id": "pill_background_color",
         "label": "Tip title background",
         "default": "#F8E9A7"
-      },
-      {
+      }, {
         "type": "color",
         "id": "pill_text_color",
         "label": "Tip title text",
         "default": "#5C3F2D"
-      },
-      {
+      }, {
         "type": "color",
         "id": "pill_border_color",
         "label": "Tip title border",
         "default": "#A77A33"
-      },
-      {
+      }, {
         "type": "header",
         "content": "Spacing"
-      },
-      {
+      }, {
         "type": "range",
         "id": "padding_top",
         "label": "Top padding",
@@ -358,8 +349,7 @@
         "step": 4,
         "unit": "px",
         "default": 64
-      },
-      {
+      }, {
         "type": "range",
         "id": "padding_bottom",
         "label": "Bottom padding",
@@ -380,8 +370,7 @@
             "id": "title",
             "label": "Title",
             "default": "Stay consistent for best results"
-          },
-          {
+          }, {
             "type": "richtext",
             "id": "description",
             "label": "Description",
@@ -422,8 +411,7 @@
               "title": "Listen to your body",
               "description": "<p>Start with one cup if you're new, then adjust based on your comfort and routine.</p>"
             }
-          },
-          {
+          }, {
             "type": "tip",
             "settings": {
               "title": "Best taken before meals",
