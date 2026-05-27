@@ -44,23 +44,25 @@
         <div class="custom-routine-tips__list custom-routine-tips__list--{{ section.settings.columns }}">
           {% for block in section.blocks %}
             <article class="custom-routine-tips__item" {{ block.shopify_attributes }}>
-              <div class="custom-routine-tips__icon" aria-hidden="true">
-                <img
-                  src="{{ 'brown-check.svg' | asset_url }}"
-                  alt=""
-                  width="22"
-                  height="22"
-                  loading="lazy">
-              </div>
-
               <div class="custom-routine-tips__item-copy">
-                {% if block.settings.title != blank %}
-                  <h3 class="custom-routine-tips__pill">{{ block.settings.title | escape }}</h3>
-                {% endif %}
+                <div class="custom-routine-tips__item-heading">
+                  <div class="custom-routine-tips__icon" aria-hidden="true">
+                    <img
+                      src="{{ 'brown-check.svg' | asset_url }}"
+                      alt=""
+                      width="22"
+                      height="22"
+                      loading="lazy">
+                  </div>
 
-                {% if block.settings.description != blank %}
-                  <div class="custom-routine-tips__description rte-setting">{{ block.settings.description }}</div>
-                {% endif %}
+                  {% if block.settings.title != blank %}
+                    <h3 class="custom-routine-tips__pill">{{ block.settings.title | escape }}</h3>
+                  {% endif %}
+
+                  {% if block.settings.description != blank %}
+                    <div class="custom-routine-tips__description rte-setting">{{ block.settings.description }}</div>
+                  {% endif %}
+                </div>
               </div>
             </article>
           {% endfor %}
@@ -155,16 +157,19 @@
   }
 
   .custom-routine-tips__item {
-    align-items: flex-start;
+    display: block;
+  }
+
+  .custom-routine-tips__item-heading {
+    align-items: center;
     display: grid;
-    gap: 20px;
-    grid-template-columns: 14px minmax(0, 1fr);
+    gap: 10px;
+    grid-template-columns: 22px minmax(0, 1fr);
   }
 
   .custom-routine-tips__icon {
     flex-shrink: 0;
     line-height: 0;
-    margin-top: 4px;
   }
 
   .custom-routine-tips__icon img {
@@ -185,7 +190,7 @@
     font-weight: 700;
     justify-content: center;
     line-height: 1.25;
-    margin: 0 0 11px;
+    margin: 0;
     min-height: 32px;
     padding: 12px 18px;
     text-align: center;
@@ -195,6 +200,7 @@
   .custom-routine-tips__description.rte-setting {
     color: var(--routine-tips-text);
     font-size: 13px;
+    grid-column: 2;
     line-height: 1.48;
   }
 
@@ -241,6 +247,12 @@
     .custom-routine-tips__pill {
       justify-content: center;
       min-height: 30px;
+    }
+    .custom-routine-tips__icon img {
+      display: block;
+      height: auto;
+      width: 29px;
+      max-width: none;
     }
   }
 </style>
