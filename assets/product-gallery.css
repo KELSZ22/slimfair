@@ -453,7 +453,7 @@
     border-radius: 6px;
     background: #347b4f;
     color: #fff;
-    font-size: 17px;
+    font-size: 18px;
     font-weight: 800;
     letter-spacing: 0;
   }
@@ -467,6 +467,7 @@
   .bundle-options__add-button s {
     margin-left: 8px;
     color: rgba(255, 255, 255, 0.45);
+    font-weight: normal;
   }
 
   .bundle-options__add-button strong {
@@ -565,6 +566,21 @@
     border: 1px solid rgba(92, 63, 45, 0.15);
     border-radius: 10px;
     margin-top: 20px;
+  }
+
+  .custom-product-trust-badges__viewport {
+    display: flex;
+    flex: 1 1 auto;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .custom-product-trust-badges__track {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
   }
 
   .custom-product-trust-badges__item {
@@ -741,7 +757,7 @@
 }
 
 .custom-results-videos__title {
-  font-size: 18px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 800;
   line-height: normal;
@@ -1049,29 +1065,41 @@
 /* Mobile — results videos */
 @media only screen and (max-width: 749px) {
   .custom-results-videos {
+    --results-videos-card-width: 171.353px;
+    --results-videos-card-height: 304.318px;
     margin: 28px 0 6px;
+  }
+
+  .product-single__details .custom-results-videos {
+    width: calc(100% + 16px);
+    margin-left: 0;
   }
 
   .custom-results-videos__header {
     align-items: flex-start;
-    padding-left: var(--results-videos-inset);
-    padding-right: var(--results-videos-inset);
+    padding-left: 0;
+    padding-right: 0;
   }
 
   .custom-results-videos__title {
-    font-size: 20px;
+    font-size: 16px;
   }
 
   .custom-results-videos__frame {
-    width: 100vw;
-    max-width: 100vw;
-    margin-left: calc(50% - 50vw);
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0;
   }
 
   .custom-results-videos__track {
     gap: var(--results-videos-gap);
-    padding: 0 18px 8px var(--results-videos-inset);
+    padding: 0 0 8px;
     scroll-snap-type: x proximity;
+  }
+
+  .custom-results-videos__card {
+    height: var(--results-videos-card-height);
+    aspect-ratio: 58 / 103;
   }
 
   .custom-results-videos__label {
@@ -1083,8 +1111,7 @@
   }
 
   .custom-results-videos__scroll-next {
-    right: 0;
-    transform: translate(50%, -50%);
+    display: none !important;
   }
 
   .custom-results-videos__dialog {
@@ -1366,16 +1393,15 @@
 
   .bundle-options__grid {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 14px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
     padding-top: 10px;
   }
 
   .bundle-option-card {
     position: relative;
-    display: grid;
-    grid-template-columns: 104px minmax(0, 1fr);
-    gap: 12px;
+    display: block;
+    cursor: pointer;
     color: #5c3f2d;
   }
 
@@ -1387,7 +1413,7 @@
 
   .bundle-option-card__image-wrap {
     position: relative;
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 1.08 / 1;
     overflow: hidden;
     border: 2px solid transparent;
     border-radius: 7px;
@@ -1407,17 +1433,19 @@
 
   .bundle-option-card__badge {
     position: absolute;
-    top: -10px;
-    left: 52px;
+    top: -8px;
+    left: 50%;
     z-index: 2;
-    min-width: 76px;
+    min-width: 0;
+    max-width: calc(100% - 4px);
+    padding: 4px 6px;
     transform: translateX(-50%);
-    border-radius: 16px;
+    border-radius: 12px;
     background: #5c3f2d;
     color: #fff8dc;
-    padding: 3.551px 7.103px;
-    font-size: 8.523px;
+    font-size: 8px;
     font-weight: 800;
+    line-height: 1.1;
     text-align: center;
     text-transform: uppercase;
   }
@@ -1428,9 +1456,10 @@
 
   .bundle-option-card__content {
     display: grid;
-    grid-template-columns: 18px minmax(0, 1fr);
-    gap: 9px;
-    align-self: center;
+    grid-template-columns: 16px minmax(0, 1fr);
+    gap: 6px;
+    margin-top: 8px;
+    align-items: start;
   }
 
   .bundle-option-card__radio {
@@ -1459,7 +1488,7 @@
     flex-wrap: wrap;
     gap: 7px;
     margin-top: 7px;
-    font-size: 13px;
+    font-size: 12px;
   }
 
   .bundle-option-card__price s {
@@ -1473,7 +1502,7 @@
   .bundle-option-card__subtitle {
     margin-top: 7px;
     color: #5c3f2d;
-    font-size: 11px;
+    font-size: 10px;
     line-height: 1.35;
     text-transform: uppercase;
   }
@@ -1597,7 +1626,10 @@
     font-weight: 800;
   }
 
-  .bundle-options__add-button s,
+  .bundle-options__add-button s {
+    color: rgba(255, 255, 255, 0.45);
+    font-weight: normal;
+  }
   .bundle-options__add-button strong {
     margin-left: 6px;
   }
@@ -1681,9 +1713,10 @@
 
   .custom-product-trust-badges {
     display: flex;
-    flex-direction: column;
-    align-items: stretch;
+    align-items: center;
+    justify-content: center;
     margin: 16px 0 20px;
+    padding: 12px 14px;
     border: 1px solid #eadc88;
     border-radius: 8px;
     background: #fff8d9;
@@ -1691,18 +1724,42 @@
     overflow: hidden;
   }
 
+  .custom-product-trust-badges__viewport {
+    overflow: hidden;
+    width: 100%;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .custom-product-trust-badges__track {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0;
+    width: 100%;
+    transform: translate3d(0, 0, 0);
+    transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .custom-product-trust-badges__track {
+      transition: none;
+    }
+  }
+
   .custom-product-trust-badges__item {
+    box-sizing: border-box;
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 13px 14px;
+    justify-content: center;
+    padding: 0;
   }
 
   .custom-product-trust-badges__separator {
-    display: block;
-    flex: 0 0 1px;
-    height: 1px;
-    background: #eadc88;
+    display: none;
   }
 
   .custom-product-trust-badges__icon {
@@ -1727,9 +1784,17 @@
   }
 
   .custom-product-trust-badges__copy {
-    display: grid;
-    gap: 3px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35em;
     min-width: 0;
+    flex: 0 1 auto;
+    max-width: 100%;
+    overflow: hidden;
+    text-align: center;
   }
 
   .custom-product-trust-badges__title,
@@ -1738,6 +1803,10 @@
     font-size: 14px;
     line-height: normal;
     white-space: nowrap;
+    min-width: 0;
+    flex-shrink: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .custom-product-trust-badges__title {

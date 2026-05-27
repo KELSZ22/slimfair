@@ -149,7 +149,7 @@
       --upsell-purchase-width: 200px;
       --upsell-mobile-price-width: 132px;
       overflow: hidden;
-      border: 1.5px solid #5E3B2175;
+      border: 1.5px solid #5E3B21;
       border-radius: 14px;
       background: #fff;
       padding: 18px 17px;
@@ -281,21 +281,28 @@
       }
 
       .custom-product-upsell__item {
-        grid-template-columns: 74px minmax(0, 1fr);
-        gap: 12px;
+        grid-template-columns: 92px minmax(0, 1fr);
+        grid-template-rows: auto auto;
+        align-items: start;
+        column-gap: 14px;
+        row-gap: 10px;
+      }
+    
+      .custom-product-upsell__image-link {
+        grid-row: 1 / 3;
+        width: 92px;
+        height: 92px;
       }
 
-      .custom-product-upsell__image-link {
-        width: 74px;
-        height: 74px;
+      .custom-product-upsell__copy,
+      .custom-product-upsell__purchase {
+        grid-column: 2;
       }
 
       .custom-product-upsell__purchase {
-        grid-column: 1 / -1;
         width: 100%;
-        grid-template-columns: var(--upsell-mobile-price-width) minmax(0, 1fr);
-        align-items: center;
-        gap: 12px;
+        grid-template-columns: 1fr;
+        gap: 10px;
       }
 
       .custom-product-upsell__price {
@@ -310,6 +317,17 @@
       .custom-product-upsell__button {
         font-size: 14px;
       }
+
+      .custom-product-upsell__button {
+        height: 42px;
+        padding: 0 14px;
+      }
+
+      .custom-product-upsell__price s {
+        font-size: 14px;
+      }
+   
     }
+    
   </style>
 {% endif %}

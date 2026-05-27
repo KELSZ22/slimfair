@@ -1,5 +1,7 @@
 {% if section.settings.show_product_trust_badges %}
-  <div class="custom-product-trust-badges">
+  <div class="custom-product-trust-badges" data-custom-trust-badges-slider>
+    <div class="custom-product-trust-badges__viewport">
+      <div class="custom-product-trust-badges__track">
     {% if section.settings.trust_badge_1_title != blank or section.settings.trust_badge_1_content != blank %}
       <div class="custom-product-trust-badges__item">
         <span class="custom-product-trust-badges__icon">
@@ -83,5 +85,171 @@
         </span>
       </div>
     {% endif %}
+      </div>
+    </div>
   </div>
+
+  <script>
+    (function() {
+      if (window.customTrustBadgesSliderInitialized) return;
+      window.customTrustBadgesSliderInitialized = true;
+
+      function initTrustBadgeSlider(container) {
+        if (!container || container.dataset.sliderReady === 'true') return;
+
+        var viewport = container.querySelector('.custom-product-trust-badges__viewport');
+        var track = container.querySelector('.custom-product-trust-badges__track');
+
+        if (!viewport || !track) return;
+
+        var items = Array.prototype.slice.call(
+          container.querySelectorAll('.custom-product-trust-badges__item')
+        );
+
+        if (items.length === 0) return;
+
+        var currentIndex = 0;
+        var intervalId = null;
+        var mobileQuery = window.matchMedia('(max-width: 749px)');
+        var reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+        function setAriaHidden(index) {
+          items.forEach(function(item, itemIndex) {
+            item.setAttribute('aria-hidden', itemIndex === index ? 'false' : 'true');
+          });
+        }
+
+        function clearAriaHidden() {
+          items.forEach(function(item) {
+            item.removeAttribute('aria-hidden');
+          });
+        }
+
+        function updateSlidePosition() {
+          if (!mobileQuery.matches) return;
+          var w = viewport.offsetWidth;
+          if (w <= 0) return;
+          track.style.transform =
+            'translate3d(' + String(-currentIndex * w) + 'px, 0, 0)';
+        }
+
+        function layoutMobileTrack() {
+          if (!mobileQuery.matches) return;
+          var w = viewport.offsetWidth;
+          if (w <= 0) return;
+          track.style.width = w * items.length + 'px';
+          items.forEach(function(item) {
+            item.style.flex = '0 0 ' + w + 'px';
+            item.style.width = w + 'px';
+            item.style.maxWidth = w + 'px';
+          });
+        }
+
+        function clearMobileTrackSizing() {
+          track.style.width = '';
+          track.style.transform = '';
+          items.forEach(function(item) {
+            item.style.flex = '';
+            item.style.width = '';
+            item.style.maxWidth = '';
+          });
+        }
+
+        function goToDesktopLayout() {
+          if (intervalId) {
+            window.clearInterval(intervalId);
+            intervalId = null;
+          }
+          clearMobileTrackSizing();
+          clearAriaHidden();
+        }
+
+        function goToMobileLayout() {
+          setAriaHidden(currentIndex);
+          layoutMobileTrack();
+          window.requestAnimationFrame(function() {
+            window.requestAnimationFrame(updateSlidePosition);
+          });
+        }
+
+        function startSlider() {
+          if (
+            intervalId ||
+            items.length < 2 ||
+            !mobileQuery.matches ||
+            reducedMotionQuery.matches
+          ) {
+            return;
+          }
+          intervalId = window.setInterval(function() {
+            currentIndex = (currentIndex + 1) % items.length;
+            setAriaHidden(currentIndex);
+            updateSlidePosition();
+          }, 3000);
+        }
+
+        function stopSlider() {
+          if (!intervalId) return;
+          window.clearInterval(intervalId);
+          intervalId = null;
+        }
+
+        function applyState() {
+          stopSlider();
+
+          if (mobileQuery.matches) {
+            if (currentIndex >= items.length) currentIndex = 0;
+            goToMobileLayout();
+            startSlider();
+            return;
+          }
+
+          goToDesktopLayout();
+        }
+
+        var resizeTimer;
+        function onResize() {
+          window.clearTimeout(resizeTimer);
+          resizeTimer = window.setTimeout(function() {
+            if (mobileQuery.matches) {
+              layoutMobileTrack();
+              updateSlidePosition();
+            }
+          }, 120);
+        }
+
+        applyState();
+
+        window.addEventListener('resize', onResize);
+
+        if (typeof mobileQuery.addEventListener === 'function') {
+          mobileQuery.addEventListener('change', applyState);
+          reducedMotionQuery.addEventListener('change', applyState);
+        } else if (typeof mobileQuery.addListener === 'function') {
+          mobileQuery.addListener(applyState);
+          reducedMotionQuery.addListener(applyState);
+        }
+
+        container.dataset.sliderReady = 'true';
+      }
+
+      function initAllTrustBadgeSliders(root) {
+        var scope = root && root.querySelectorAll ? root : document;
+        var sliders = scope.querySelectorAll('[data-custom-trust-badges-slider]');
+        sliders.forEach(initTrustBadgeSlider);
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() {
+          initAllTrustBadgeSliders(document);
+        });
+      } else {
+        initAllTrustBadgeSliders(document);
+      }
+
+      document.addEventListener('shopify:section:load', function(event) {
+        initAllTrustBadgeSliders(event.target);
+      });
+    })();
+  </script>
 {% endif %}
