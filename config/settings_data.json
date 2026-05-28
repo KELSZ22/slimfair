@@ -934,7 +934,7 @@
             "settings": {
               "image": "shopify://shop_images/Screenshot_2026-04-15_at_4.30.11_PM_1.png",
               "video_url": "https://www.youtube.com/watch?v=lq2jHhp_xRQ",
-              "overlay_quote": "\"Wellness hits different when your habits feel like a lifestyle, not a to-do list.\"",
+              "overlay_quote": "",
               "title": "Lorem ipsum dolor sit amet!",
               "quote": "<p>\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor\"</p>",
               "name": "Jane Doe"
