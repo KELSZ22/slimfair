@@ -1,10 +1,14 @@
-<section class="custom-switch-reviews" data-switch-reviews-id="{{ section.id }}" style="
+<section
+  class="custom-switch-reviews"
+  data-switch-reviews-id="{{ section.id }}"
+  style="
     --switch-reviews-bg: {{ section.settings.background_color }};
     --switch-reviews-heading: {{ section.settings.heading_color }};
     --switch-reviews-text: {{ section.settings.text_color }};
     --switch-reviews-accent: {{ section.settings.accent_color }};
     --switch-reviews-card-bg: {{ section.settings.card_background_color }};
     --switch-reviews-line: {{ section.settings.line_color }};
+    --switch-reviews-max-width: {{ section.settings.max_width | default: 1160 }}px;
     --switch-reviews-padding-top: {{ section.settings.padding_top }}px;
     --switch-reviews-padding-bottom: {{ section.settings.padding_bottom }}px;
   ">
@@ -28,8 +32,18 @@
 
     {% if section.blocks.size > 0 %}
       <div class="custom-switch-reviews__viewport">
-        <button type="button" class="custom-switch-reviews__arrow custom-switch-reviews__arrow--prev" data-switch-reviews-prev aria-label="Scroll reviews left">
-          <span aria-hidden="true">←</span>
+        <button
+          type="button"
+          class="custom-switch-reviews__arrow custom-switch-reviews__arrow--prev"
+          data-switch-reviews-prev
+          aria-label="Scroll reviews left">
+          <img
+            src="{{ 'arrow-left-green.png' | asset_url }}"
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            width="39"
+            height="25">
         </button>
 
         <div class="custom-switch-reviews__track" data-switch-reviews-track>
@@ -54,14 +68,38 @@
               {% endif %}
 
               {% if block.settings.badge != blank %}
-                <p class="custom-switch-reviews__badge">{{ block.settings.badge | escape }}</p>
+                <p class="custom-switch-reviews__badge">
+                  {% if block.settings.badge_icon != blank %}
+                    <img
+                      class="custom-switch-reviews__badge-icon"
+                      src="{{ block.settings.badge_icon | image_url: width: 32 }}"
+                      alt=""
+                      aria-hidden="true"
+                      loading="lazy"
+                      width="12"
+                      height="12">
+                  {% else %}
+                    <span class="custom-switch-reviews__badge-fallback" aria-hidden="true">◎</span>
+                  {% endif %}
+                  <span>{{ block.settings.badge | escape }}</span>
+                </p>
               {% endif %}
             </article>
           {% endfor %}
         </div>
 
-        <button type="button" class="custom-switch-reviews__arrow custom-switch-reviews__arrow--next" data-switch-reviews-next aria-label="Scroll reviews right">
-          <span aria-hidden="true">→</span>
+        <button
+          type="button"
+          class="custom-switch-reviews__arrow custom-switch-reviews__arrow--next"
+          data-switch-reviews-next
+          aria-label="Scroll reviews right">
+          <img
+            src="{{ 'arrow-right-green.png' | asset_url }}"
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            width="39"
+            height="25">
         </button>
       </div>
 
@@ -81,7 +119,9 @@
   }
 
   .custom-switch-reviews__inner.page-width {
-    max-width: 1020px;
+    max-width: var(--switch-reviews-max-width);
+    padding-left: 0;
+    padding-right: 0;
   }
 
   .custom-switch-reviews__header {
@@ -94,7 +134,7 @@
     align-items: center;
     color: var(--switch-reviews-text);
     display: inline-flex;
-    font-size: 12px;
+    font-size: 16px;
     gap: 7px;
     line-height: 1.1;
     margin-bottom: 6px;
@@ -110,13 +150,14 @@
   }
 
   .custom-switch-reviews__stars {
-    font-size: 18px;
+    font-size: 24px;
   }
 
   .custom-switch-reviews__heading {
     color: var(--switch-reviews-heading);
-    font-family: Lora, serif;
-    font-size: 27px;
+    font-family: Lora
+    , serif;
+    font-size: 32px;
     font-weight: 700;
     letter-spacing: 0;
     line-height: 1.22;
@@ -138,6 +179,7 @@
     scroll-behavior: smooth;
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
+    justify-content: center;
   }
 
   .custom-switch-reviews__track::-webkit-scrollbar {
@@ -148,22 +190,25 @@
     background: var(--switch-reviews-card-bg);
     border-radius: 8px;
     box-sizing: border-box;
-    flex: 0 0 220px;
-    min-height: 210px;
+    display: grid;
+    flex: 0 0 236px;
+    grid-template-rows: auto auto minmax(0, 1fr) auto auto;
+    height: 209px;
     padding: 22px 24px 20px;
     scroll-snap-align: start;
     text-align: center;
   }
 
   .custom-switch-reviews__card-stars {
-    font-size: 19px;
+    font-size: 24px;
     justify-content: center;
     margin-bottom: 10px;
+    color: #49704B;
   }
 
   .custom-switch-reviews__card-title {
     color: var(--switch-reviews-heading);
-    font-size: 15px;
+    font-size: 18px;
     font-weight: 700;
     letter-spacing: 0;
     line-height: 1.25;
@@ -176,10 +221,34 @@
     font-size: 13px;
     line-height: 1.45;
     margin: 0;
+    min-height: 0;
+    overflow-y: auto;
+    padding-right: 4px;
+    scrollbar-color: rgba(52, 125, 69, 0.45) rgba(52, 125, 69, 0.12);
+    scrollbar-width: thin;
+  }
+
+  .custom-switch-reviews__quote::-webkit-scrollbar,
+  .custom-switch-reviews__quote.rte-setting::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .custom-switch-reviews__quote::-webkit-scrollbar-track,
+  .custom-switch-reviews__quote.rte-setting::-webkit-scrollbar-track {
+    background: rgba(52, 125, 69, 0.12);
+    border-radius: 999px;
+  }
+
+  .custom-switch-reviews__quote::-webkit-scrollbar-thumb,
+  .custom-switch-reviews__quote.rte-setting::-webkit-scrollbar-thumb {
+    background: rgba(52, 125, 69, 0.45);
+    border-radius: 999px;
   }
 
   .custom-switch-reviews__quote p {
     margin: 0;
+    font-size: 16px;
+    color: #000;
   }
 
   .custom-switch-reviews__name {
@@ -191,34 +260,48 @@
   }
 
   .custom-switch-reviews__badge {
+    align-items: center;
     color: #C48645;
-    font-size: 11px;
+    display: inline-flex;
+    font-size: 14px;
+    gap: 4px;
     line-height: 1.2;
     margin: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
   }
 
-  .custom-switch-reviews__badge:before {
-    content: "◎";
-    margin-right: 4px;
+  .custom-switch-reviews__badge-icon {
+    display: block;
+    height: 12px;
+    object-fit: contain;
+    width: 12px;
+  }
+
+  .custom-switch-reviews__badge-fallback {
+    line-height: 1;
   }
 
   .custom-switch-reviews__arrow {
     align-items: center;
-    background: #9bd36e;
-    border: 1px solid #4a8c45;
-    border-radius: 999px;
-    color: #3e6f39;
+    background: transparent;
+    border: 0;
     display: inline-flex;
-    font-size: 16px;
-    height: 22px;
+    height: 25px;
     justify-content: center;
-    line-height: 1;
     padding: 0;
-    width: 34px;
+    width: 39px;
+  }
+
+  .custom-switch-reviews__arrow img {
+    display: block;
+    height: 100%;
+    width: 100%;
   }
 
   .custom-switch-reviews__progress {
-    background: rgba(255, 255, 255, .75);
+    background: rgba(255, 255, 255, 0.75);
     height: 4px;
     margin: 40px auto 0;
     max-width: 940px;
@@ -229,7 +312,10 @@
     background: var(--switch-reviews-line);
     display: block;
     height: 100%;
-    width: 80%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 0;
   }
 
   @media screen and (max-width: 749px) {
@@ -238,7 +324,7 @@
     }
 
     .custom-switch-reviews__inner.page-width {
-      padding-left: 21px;
+      padding-left: 16px;
       padding-right: 0;
     }
 
@@ -248,17 +334,17 @@
     }
 
     .custom-switch-reviews__rating {
-      font-size: 12px;
+      font-size: 16px;
       gap: 7px;
       margin-bottom: 8px;
     }
 
     .custom-switch-reviews__stars {
-      font-size: 18px;
+      font-size: 22px;
     }
 
     .custom-switch-reviews__heading {
-      font-size: 25px;
+      font-size: 24px;
       line-height: 1.12;
       text-transform: uppercase;
     }
@@ -272,64 +358,64 @@
 
     .custom-switch-reviews__track {
       gap: 18px;
-      padding: 0 76px 0 0;
-      scroll-padding-left: 0;
+      justify-content: flex-start;
+      padding: 0 calc(50vw - 8px);
+      scroll-padding-left: 2px;
     }
 
     .custom-switch-reviews__card {
       border-radius: 8px;
-      flex: 0 0 min(205px, calc(100vw - 116px));
-      min-height: 225px;
+      flex: 0 0 clamp(216px, 60vw, 236px);
+      height: 209px;
       padding: 24px 22px 20px;
     }
 
     .custom-switch-reviews__card-stars {
-      font-size: 18px;
+      font-size: 22px;
       margin-bottom: 11px;
     }
 
     .custom-switch-reviews__card-title {
-      font-size: 15px;
+      font-size: 16px;
       margin-bottom: 16px;
     }
 
     .custom-switch-reviews__quote,
     .custom-switch-reviews__quote.rte-setting {
-      color: #5f6f7d;
-      font-size: 13px;
+      color: #000;
+      font-size: 14px;
       line-height: 1.45;
     }
 
     .custom-switch-reviews__name {
-      font-size: 12px;
+      font-size: 14px;
       margin-top: 20px;
     }
 
     .custom-switch-reviews__badge {
-      font-size: 11px;
+      font-size: 12px;
     }
 
     .custom-switch-reviews__arrow {
-      font-size: 13px;
-      height: 22px;
+      height: 25px;
       position: absolute;
       top: calc(100% + 44px);
       transform: translateY(-50%);
-      width: 34px;
+      width: 39px;
       z-index: 2;
     }
 
     .custom-switch-reviews__arrow--prev {
-      right: 43px;
+      right: 64px;
     }
 
     .custom-switch-reviews__arrow--next {
-      right: 1px;
+      right: 16px;
     }
 
     .custom-switch-reviews__progress {
       height: 4px;
-      margin: 42px 88px 0 0;
+      margin: 42px 112px 0 0;
       max-width: none;
     }
 
@@ -347,6 +433,7 @@
     var track = section.querySelector('[data-switch-reviews-track]');
     var prev = section.querySelector('[data-switch-reviews-prev]');
     var next = section.querySelector('[data-switch-reviews-next]');
+    var progress = section.querySelector('.custom-switch-reviews__progress span');
 
     function getCardPositions() {
       if (!track) return [];
@@ -385,8 +472,39 @@
       track.scrollTo({ left: target, behavior: 'smooth' });
     }
 
+    function updateProgress() {
+      if (!track || !progress) return;
+
+      var maxScroll = track.scrollWidth - track.clientWidth;
+      if (maxScroll <= 0) {
+        progress.style.width = '100%';
+        progress.style.left = '0';
+        return;
+      }
+
+      var visiblePercent = (track.clientWidth / track.scrollWidth) * 100;
+      var clampedVisiblePercent = Math.max(10, Math.min(100, visiblePercent));
+      var ratio = track.scrollLeft / maxScroll;
+      var leftPercent = ratio * (100 - clampedVisiblePercent);
+
+      progress.style.width = clampedVisiblePercent + '%';
+      progress.style.left = leftPercent + '%';
+    }
+
+    function resetToFirstCardOnMobile() {
+      if (!track || !window.matchMedia('(max-width: 749px)').matches) return;
+      track.scrollTo({ left: 0, behavior: 'auto' });
+    }
+
     if (prev) prev.addEventListener('click', function() { scrollByCard(-1); });
     if (next) next.addEventListener('click', function() { scrollByCard(1); });
+    if (track) track.addEventListener('scroll', updateProgress);
+    window.addEventListener('resize', function() {
+      resetToFirstCardOnMobile();
+      updateProgress();
+    });
+    resetToFirstCardOnMobile();
+    updateProgress();
   })();
 </script>
 
@@ -416,42 +534,47 @@
         "id": "background_color",
         "label": "Background color",
         "default": "#D4F4B7"
-      },
-      {
+      }, {
         "type": "color",
         "id": "heading_color",
         "label": "Heading color",
         "default": "#347D45"
-      },
-      {
+      }, {
         "type": "color",
         "id": "text_color",
         "label": "Text color",
         "default": "#5C3F2D"
-      },
-      {
+      }, {
         "type": "color",
         "id": "accent_color",
         "label": "Star color",
         "default": "#5C3F2D"
-      },
-      {
+      }, {
         "type": "color",
         "id": "card_background_color",
         "label": "Card background",
         "default": "#FBFEE8"
-      },
-      {
+      }, {
         "type": "color",
         "id": "line_color",
         "label": "Progress line color",
         "default": "#347D45"
-      },
-      {
+      }, {
+        "type": "header",
+        "content": "Layout"
+      }, {
+        "type": "range",
+        "id": "max_width",
+        "label": "Main container width",
+        "min": 960,
+        "max": 1440,
+        "step": 20,
+        "unit": "px",
+        "default": 1160
+      }, {
         "type": "header",
         "content": "Spacing"
-      },
-      {
+      }, {
         "type": "range",
         "id": "padding_top",
         "label": "Top padding",
@@ -460,8 +583,7 @@
         "step": 4,
         "unit": "px",
         "default": 64
-      },
-      {
+      }, {
         "type": "range",
         "id": "padding_bottom",
         "label": "Bottom padding",
@@ -500,6 +622,10 @@
             "id": "badge",
             "label": "Badge",
             "default": "Verified Buyer"
+          }, {
+            "type": "image_picker",
+            "id": "badge_icon",
+            "label": "Badge icon"
           }
         ]
       }
@@ -511,24 +637,21 @@
         "blocks": [
           {
             "type": "review"
-          },
-          {
+          }, {
             "type": "review",
             "settings": {
               "title": "Taste like cafe latte",
               "text": "<p>Didn't expect a health mix to taste like my favorite cafe drink. Super creamy!</p>",
               "name": "Sophia Abad"
             }
-          },
-          {
+          }, {
             "type": "review",
             "settings": {
               "title": "My daily ritual",
               "text": "<p>I start my mornings with this and I've lost 2kg in a month without changing much else.</p>",
               "name": "Noel Sanchez"
             }
-          },
-          {
+          }, {
             "type": "review",
             "settings": {
               "title": "My daily ritual",

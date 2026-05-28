@@ -427,13 +427,24 @@
       gap: var(--simple-steps-mobile-layout-gap);
     }
 
+    .custom-simple-steps__content {
+      width: 100%;
+    }
+
     .custom-simple-steps__media {
       border-radius: var(--simple-steps-mobile-image-radius);
+      justify-self: center;
+      margin-left: 0;
+      margin-right: 0;
+      max-width: none;
+      width: 100%;
     }
 
     .custom-simple-steps__media img,
     .custom-simple-steps__placeholder {
-      aspect-ratio: var(--simple-steps-mobile-image-aspect);
+      aspect-ratio: auto;
+      height: auto;
+      object-fit: contain;
     }
 
     .custom-simple-steps__heading {

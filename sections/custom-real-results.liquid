@@ -1,4 +1,7 @@
-<section class="custom-real-results" data-real-results-id="{{ section.id }}" style="
+<section
+  class="custom-real-results"
+  data-real-results-id="{{ section.id }}"
+  style="
     --real-results-bg: {{ section.settings.background_color }};
     --real-results-heading: {{ section.settings.heading_color }};
     --real-results-text: {{ section.settings.text_color }};
@@ -56,7 +59,9 @@
                     class="custom-real-results__image"
                     src="{{ block.settings.image | img_url: '420x640', crop: 'center' }}"
                     alt="{{ block.settings.image.alt | default: block.settings.title | escape }}"
-                    loading="lazy">
+                    loading="lazy"
+                    width="420"
+                    height="640">
                 {% else %}
                   {{ 'image' | placeholder_svg_tag: 'placeholder-svg custom-real-results__placeholder' }}
                 {% endif %}
@@ -71,7 +76,6 @@
                   <span class="custom-real-results__play" aria-hidden="true"></span>
                 {% endif %}
               {% endcapture %}
-
               {% if video_url != blank %}
                 <button
                   type="button"
@@ -104,20 +108,66 @@
       </div>
 
       <div class="custom-real-results__controls">
-        <button type="button" class="custom-real-results__arrow" data-real-results-prev aria-label="Scroll results left">
-          <span aria-hidden="true">←</span>
+        <button
+          type="button"
+          class="custom-real-results__controls-line"
+          data-real-results-scrollbar
+          aria-label="Scroll results">
+          <span class="custom-real-results__controls-progress" data-real-results-scrollbar-progress></span>
+          <span class="custom-real-results__controls-thumb" data-real-results-scrollbar-thumb></span>
         </button>
-        <button type="button" class="custom-real-results__arrow" data-real-results-next aria-label="Scroll results right">
-          <span aria-hidden="true">→</span>
-        </button>
+        <div class="custom-real-results__controls-arrows">
+          <button
+            type="button"
+            class="custom-real-results__arrow"
+            data-real-results-prev
+            aria-label="Scroll results left">
+            <img
+              src="{{ 'arrow-left-yellow.png' | asset_url }}"
+              alt=""
+              aria-hidden="true"
+              loading="lazy"
+              width="39"
+              height="25">
+          </button>
+          <button
+            type="button"
+            class="custom-real-results__arrow"
+            data-real-results-next
+            aria-label="Scroll results right">
+            <img
+              src="{{ 'arrow-right.svg' | asset_url }}"
+              alt=""
+              aria-hidden="true"
+              loading="lazy"
+              width="39"
+              height="25">
+          </button>
+        </div>
       </div>
     {% endif %}
   </div>
 
-  <div class="custom-real-results__modal" data-real-results-modal hidden aria-hidden="true">
-    <button type="button" class="custom-real-results__backdrop" data-real-results-close aria-label="Close video"></button>
-    <div class="custom-real-results__dialog" role="dialog" aria-modal="true" aria-label="{{ section.settings.heading | default: 'Results video' | escape }}">
-      <button type="button" class="custom-real-results__close" data-real-results-close aria-label="Close video">
+  <div
+    class="custom-real-results__modal"
+    data-real-results-modal
+    hidden
+    aria-hidden="true">
+    <button
+      type="button"
+      class="custom-real-results__backdrop"
+      data-real-results-close
+      aria-label="Close video"></button>
+    <div
+      class="custom-real-results__dialog"
+      role="dialog"
+      aria-modal="true"
+      aria-label="{{ section.settings.heading | default: 'Results video' | escape }}">
+      <button
+        type="button"
+        class="custom-real-results__close"
+        data-real-results-close
+        aria-label="Close video">
         {% include 'icon-close' %}
       </button>
       <div class="custom-real-results__player" data-real-results-player></div>
@@ -147,7 +197,7 @@
     align-items: center;
     color: var(--real-results-text);
     display: inline-flex;
-    font-size: 12px;
+    font-size: 16px;
     gap: 8px;
     line-height: 1.1;
     margin-bottom: 4px;
@@ -156,15 +206,16 @@
   .custom-real-results__stars {
     color: var(--real-results-accent);
     display: inline-flex;
-    font-size: 18px;
+    font-size: 24px;
     gap: 1px;
     letter-spacing: 0;
   }
 
   .custom-real-results__heading {
     color: var(--real-results-heading);
-    font-family: Lora, serif;
-    font-size: 25px;
+    font-family: Lora
+    , serif;
+    font-size: 32px;
     font-weight: 700;
     letter-spacing: 0;
     line-height: 1.18;
@@ -174,7 +225,7 @@
   .custom-real-results__text,
   .custom-real-results__text.rte-setting {
     color: var(--real-results-text);
-    font-size: 13px;
+    font-size: 18px;
     line-height: 1.5;
     margin: 0 auto;
     max-width: 670px;
@@ -188,6 +239,7 @@
 
   .custom-real-results__viewport {
     overflow: visible;
+    width: calc(100% + max(0px, (100vw - min(100vw, 1160px)) / 2));
   }
 
   .custom-real-results__track {
@@ -236,7 +288,7 @@
   }
 
   .custom-real-results__shade {
-    background: linear-gradient(180deg, rgba(0, 0, 0, .3), rgba(0, 0, 0, .1) 45%, rgba(0, 0, 0, .22));
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1) 45%, rgba(0, 0, 0, 0.22));
     inset: 0;
     position: absolute;
   }
@@ -276,8 +328,9 @@
 
   .custom-real-results__card-title {
     color: var(--real-results-heading);
-    font-family: Lora, serif;
-    font-size: 14px;
+    font-family: Lora
+    , serif;
+    font-size: 18px;
     font-style: italic;
     font-weight: 700;
     letter-spacing: 0;
@@ -288,13 +341,13 @@
   .custom-real-results__quote,
   .custom-real-results__quote.rte-setting {
     color: var(--real-results-text);
-    font-size: 12px;
+    font-size: 14px;
     line-height: 1.45;
   }
 
   .custom-real-results__name {
     color: var(--real-results-heading);
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 700;
     line-height: 1.25;
     margin: 8px 0 0;
@@ -302,29 +355,76 @@
 
   .custom-real-results__controls {
     align-items: center;
-    border-top: 4px solid var(--real-results-line);
     display: flex;
-    gap: 12px;
-    justify-content: flex-end;
+    gap: 16px;
     margin: 24px auto 0;
-    max-width: 760px;
-    padding-top: 0;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .custom-real-results__controls-line {
+    background: #d6cc76;
+    border: 0;
+    border-radius: 999px;
+    cursor: pointer;
+    flex: 1 1 auto;
+    height: 4px;
+    min-width: 0;
+    padding: 0;
+    position: relative;
+  }
+
+  .custom-real-results__controls-line:focus-visible {
+    outline: 2px solid var(--real-results-line);
+    outline-offset: 2px;
+  }
+
+  .custom-real-results__controls-progress {
+    background: var(--real-results-line);
+    border-radius: 999px;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 0;
+  }
+
+  .custom-real-results__controls-thumb {
+    background: #eadba0;
+    border: 1px solid #a77a33;
+    border-radius: 999px;
+    display: none;
+    height: 14px;
+    left: 0;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 14px;
+  }
+
+  .custom-real-results__controls-arrows {
+    display: inline-flex;
+    gap: 8px;
   }
 
   .custom-real-results__arrow {
     align-items: center;
-    background: #f8e9a7;
-    border: 1px solid #a77a33;
-    border-radius: 999px;
-    color: #5c3f2d;
+    background: transparent;
+    border: 0;
     display: inline-flex;
-    font-size: 16px;
-    height: 22px;
+    height: 25px;
     justify-content: center;
-    line-height: 1;
-    margin-top: -13px;
+    margin-top: 0;
     padding: 0;
-    width: 34px;
+    position: relative;
+    width: 39px;
+    z-index: 1;
+  }
+
+  .custom-real-results__arrow img {
+    display: block;
+    height: 100%;
+    width: 100%;
   }
 
   .custom-real-results__modal[hidden] {
@@ -338,7 +438,7 @@
   }
 
   .custom-real-results__backdrop {
-    background: rgba(0, 0, 0, .72);
+    background: rgba(0, 0, 0, 0.72);
     border: 0;
     inset: 0;
     position: absolute;
@@ -392,7 +492,7 @@
     }
 
     .custom-real-results__inner.page-width {
-      padding-left: 11px;
+      padding-left: 16px;
       padding-right: 0;
     }
 
@@ -402,7 +502,7 @@
     }
 
     .custom-real-results__rating {
-      font-size: 12px;
+      font-size: 16px;
       gap: 6px;
       margin-bottom: 3px;
     }
@@ -413,25 +513,27 @@
     }
 
     .custom-real-results__heading {
-      font-size: 20px;
+      font-size: 24px;
       line-height: 1.15;
       margin-bottom: 8px;
     }
 
     .custom-real-results__text,
     .custom-real-results__text.rte-setting {
-      font-size: 13px;
+      font-size: 16px;
       line-height: 1.5;
-      max-width: 280px;
+      max-width: none;
+      width: 100%;
     }
 
     .custom-real-results__viewport {
       overflow: visible;
+      width: 100%;
     }
 
     .custom-real-results__track {
       gap: 12px;
-      padding: 0 28px 12px 0;
+      padding: 0 0 12px;
       scroll-padding-left: 0;
     }
 
@@ -469,36 +571,48 @@
     }
 
     .custom-real-results__card-title {
-      font-size: 15px;
+      font-size: 18px;
       line-height: 1.2;
       margin: 14px 6px 6px;
     }
 
     .custom-real-results__quote,
     .custom-real-results__quote.rte-setting {
-      font-size: 11px;
+      font-size: 14px;
       line-height: 1.45;
       margin: 0 6px;
+      width: 100%;
     }
 
     .custom-real-results__name {
-      font-size: 11px;
+      font-size: 14px;
       margin-top: 8px;
     }
 
     .custom-real-results__controls {
-      border-top-width: 3px;
-      gap: 8px;
-      margin: 10px 11px 0 auto;
-      max-width: 214px;
-      padding-right: 0;
+      gap: 12px;
+      margin: 10px auto 0;
+      padding-right: 16px;
+      width: 100%;
+    }
+
+    .custom-real-results__controls-line {
+      height: 3px;
+    }
+
+    .custom-real-results__controls-thumb {
+      height: 12px;
+      width: 12px;
+    }
+
+    .custom-real-results__controls-arrows {
+      gap: 6px;
     }
 
     .custom-real-results__arrow {
-      font-size: 13px;
-      height: 18px;
-      margin-top: -11px;
-      width: 24px;
+      height: 20px;
+      margin-top: 0;
+      width: 31px;
     }
   }
 </style>
@@ -511,9 +625,13 @@
     var track = section.querySelector('[data-real-results-track]');
     var prev = section.querySelector('[data-real-results-prev]');
     var next = section.querySelector('[data-real-results-next]');
+    var scrollbar = section.querySelector('[data-real-results-scrollbar]');
+    var scrollbarProgress = section.querySelector('[data-real-results-scrollbar-progress]');
+    var scrollbarThumb = section.querySelector('[data-real-results-scrollbar-thumb]');
     var modal = section.querySelector('[data-real-results-modal]');
     var player = section.querySelector('[data-real-results-player]');
     var activeTrigger = null;
+    var isDraggingScrollbar = false;
 
     function getCardPositions() {
       if (!track) return [];
@@ -550,6 +668,53 @@
       }
 
       track.scrollTo({ left: target, behavior: 'smooth' });
+    }
+
+    function updateScrollbar() {
+      if (!track || !scrollbar || !scrollbarProgress || !scrollbarThumb) return;
+
+      var maxScroll = track.scrollWidth - track.clientWidth;
+      var ratio = maxScroll > 0 ? Math.min(1, Math.max(0, track.scrollLeft / maxScroll)) : 0;
+
+      scrollbarProgress.style.width = ratio * 100 + '%';
+      scrollbarThumb.style.left = ratio * 100 + '%';
+      scrollbar.disabled = maxScroll <= 0;
+    }
+
+    function scrollToRatio(ratio) {
+      if (!track) return;
+      var maxScroll = track.scrollWidth - track.clientWidth;
+      var clampedRatio = Math.min(1, Math.max(0, ratio));
+      track.scrollTo({ left: maxScroll * clampedRatio, behavior: 'auto' });
+    }
+
+    function getPointerRatio(event) {
+      if (!scrollbar) return 0;
+      var rect = scrollbar.getBoundingClientRect();
+      if (!rect.width) return 0;
+      return (event.clientX - rect.left) / rect.width;
+    }
+
+    function onScrollbarPointerDown(event) {
+      if (!scrollbar || scrollbar.disabled) return;
+      isDraggingScrollbar = true;
+      scrollbar.setPointerCapture(event.pointerId);
+      scrollToRatio(getPointerRatio(event));
+      event.preventDefault();
+    }
+
+    function onScrollbarPointerMove(event) {
+      if (!isDraggingScrollbar) return;
+      scrollToRatio(getPointerRatio(event));
+      event.preventDefault();
+    }
+
+    function onScrollbarPointerUp(event) {
+      if (!scrollbar) return;
+      isDraggingScrollbar = false;
+      if (scrollbar.hasPointerCapture(event.pointerId)) {
+        scrollbar.releasePointerCapture(event.pointerId);
+      }
     }
 
     function getEmbedUrl(url) {
@@ -602,6 +767,18 @@
 
     if (prev) prev.addEventListener('click', function() { scrollByCard(-1); });
     if (next) next.addEventListener('click', function() { scrollByCard(1); });
+    if (scrollbar) {
+      scrollbar.addEventListener('pointerdown', onScrollbarPointerDown);
+      scrollbar.addEventListener('pointermove', onScrollbarPointerMove);
+      scrollbar.addEventListener('pointerup', onScrollbarPointerUp);
+      scrollbar.addEventListener('pointercancel', onScrollbarPointerUp);
+      scrollbar.addEventListener('lostpointercapture', function() {
+        isDraggingScrollbar = false;
+      });
+    }
+    if (track) track.addEventListener('scroll', updateScrollbar);
+    window.addEventListener('resize', updateScrollbar);
+    updateScrollbar();
 
     section.addEventListener('click', function(event) {
       var trigger = event.target.closest('[data-real-results-video-trigger]');
@@ -642,42 +819,35 @@
       {
         "type": "header",
         "content": "Colors"
-      },
-      {
+      }, {
         "type": "color",
         "id": "background_color",
         "label": "Background color",
         "default": "#F5FCE9"
-      },
-      {
+      }, {
         "type": "color",
         "id": "heading_color",
         "label": "Heading color",
         "default": "#5C3F2D"
-      },
-      {
+      }, {
         "type": "color",
         "id": "text_color",
         "label": "Text color",
         "default": "#6D563D"
-      },
-      {
+      }, {
         "type": "color",
         "id": "accent_color",
         "label": "Star color",
         "default": "#C48645"
-      },
-      {
+      }, {
         "type": "color",
         "id": "line_color",
         "label": "Control line color",
         "default": "#8F5F2E"
-      },
-      {
+      }, {
         "type": "header",
         "content": "Spacing"
-      },
-      {
+      }, {
         "type": "range",
         "id": "padding_top",
         "label": "Top padding",
@@ -686,8 +856,7 @@
         "step": 4,
         "unit": "px",
         "default": 24
-      },
-      {
+      }, {
         "type": "range",
         "id": "padding_bottom",
         "label": "Bottom padding",
@@ -722,20 +891,17 @@
             "type": "textarea",
             "id": "overlay_quote",
             "label": "Overlay quote"
-          },
-          {
+          }, {
             "type": "text",
             "id": "title",
             "label": "Title",
             "default": "Lorem ipsum dolor sit amet!"
-          },
-          {
+          }, {
             "type": "richtext",
             "id": "quote",
             "label": "Quote",
             "default": "<p>\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor\"</p>"
-          },
-          {
+          }, {
             "type": "text",
             "id": "name",
             "label": "Name",
@@ -760,8 +926,7 @@
           },
           {
             "type": "video_card"
-          },
-          {
+          }, {
             "type": "video_card"
           }
         ]
