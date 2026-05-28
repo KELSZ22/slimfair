@@ -196,6 +196,7 @@
     overflow-x: auto;
     padding: 0 0 18px;
     scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
     scrollbar-width: none;
   }
 
@@ -205,6 +206,7 @@
 
   .custom-real-results__card {
     flex: 0 0 230px;
+    scroll-snap-align: start;
     text-align: center;
   }
 
@@ -385,16 +387,118 @@
   }
 
   @media screen and (max-width: 749px) {
-    .custom-real-results__card {
-      flex-basis: 190px;
+    .custom-real-results {
+      padding: 24px 0 28px;
+    }
+
+    .custom-real-results__inner.page-width {
+      padding-left: 11px;
+      padding-right: 0;
+    }
+
+    .custom-real-results__header {
+      margin: 0 11px 16px 0;
+      max-width: none;
+    }
+
+    .custom-real-results__rating {
+      font-size: 12px;
+      gap: 6px;
+      margin-bottom: 3px;
+    }
+
+    .custom-real-results__stars {
+      font-size: 20px;
+      gap: 0;
     }
 
     .custom-real-results__heading {
-      font-size: 23px;
+      font-size: 20px;
+      line-height: 1.15;
+      margin-bottom: 8px;
+    }
+
+    .custom-real-results__text,
+    .custom-real-results__text.rte-setting {
+      font-size: 13px;
+      line-height: 1.5;
+      max-width: 280px;
+    }
+
+    .custom-real-results__viewport {
+      overflow: visible;
+    }
+
+    .custom-real-results__track {
+      gap: 12px;
+      padding: 0 28px 12px 0;
+      scroll-padding-left: 0;
+    }
+
+    .custom-real-results__card {
+      flex: 0 0 min(230px, calc(100vw - 79px));
+    }
+
+    .custom-real-results__media {
+      border-radius: 8px;
+    }
+
+    .custom-real-results__image,
+    .custom-real-results__placeholder {
+      aspect-ratio: 230 / 352;
+    }
+
+    .custom-real-results__overlay-quote {
+      font-size: 10px;
+      left: 14px;
+      right: 14px;
+      top: 12px;
+    }
+
+    .custom-real-results__play {
+      height: 56px;
+      width: 56px;
+    }
+
+    .custom-real-results__play:after {
+      border-bottom-width: 12px;
+      border-left-width: 18px;
+      border-top-width: 12px;
+      left: 21px;
+      top: 13px;
+    }
+
+    .custom-real-results__card-title {
+      font-size: 15px;
+      line-height: 1.2;
+      margin: 14px 6px 6px;
+    }
+
+    .custom-real-results__quote,
+    .custom-real-results__quote.rte-setting {
+      font-size: 11px;
+      line-height: 1.45;
+      margin: 0 6px;
+    }
+
+    .custom-real-results__name {
+      font-size: 11px;
+      margin-top: 8px;
     }
 
     .custom-real-results__controls {
-      max-width: 100%;
+      border-top-width: 3px;
+      gap: 8px;
+      margin: 10px 11px 0 auto;
+      max-width: 214px;
+      padding-right: 0;
+    }
+
+    .custom-real-results__arrow {
+      font-size: 13px;
+      height: 18px;
+      margin-top: -11px;
+      width: 24px;
     }
   }
 </style>
@@ -411,12 +515,41 @@
     var player = section.querySelector('[data-real-results-player]');
     var activeTrigger = null;
 
+    function getCardPositions() {
+      if (!track) return [];
+      var cards = track.querySelectorAll('.custom-real-results__card');
+      return Array.prototype.map.call(cards, function(card) {
+        return card.offsetLeft - track.offsetLeft;
+      });
+    }
+
     function scrollByCard(direction) {
       if (!track) return;
-      var card = track.querySelector('.custom-real-results__card');
-      var gap = parseFloat(getComputedStyle(track).gap) || 24;
-      var amount = card ? card.offsetWidth + gap : track.clientWidth * 0.85;
-      track.scrollBy({ left: amount * direction, behavior: 'smooth' });
+      var positions = getCardPositions();
+      if (!positions.length) return;
+
+      var current = track.scrollLeft;
+      var target = positions[0];
+      var tolerance = 4;
+
+      if (direction > 0) {
+        target = positions[positions.length - 1];
+        for (var i = 0; i < positions.length; i++) {
+          if (positions[i] > current + tolerance) {
+            target = positions[i];
+            break;
+          }
+        }
+      } else {
+        for (var j = positions.length - 1; j >= 0; j--) {
+          if (positions[j] < current - tolerance) {
+            target = positions[j];
+            break;
+          }
+        }
+      }
+
+      track.scrollTo({ left: target, behavior: 'smooth' });
     }
 
     function getEmbedUrl(url) {

@@ -136,6 +136,7 @@
     overflow-x: auto;
     padding: 0 0 2px;
     scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
     scrollbar-width: none;
   }
 
@@ -150,6 +151,7 @@
     flex: 0 0 220px;
     min-height: 210px;
     padding: 22px 24px 20px;
+    scroll-snap-align: start;
     text-align: center;
   }
 
@@ -231,17 +233,108 @@
   }
 
   @media screen and (max-width: 749px) {
-    .custom-switch-reviews__viewport {
-      gap: 10px;
-      grid-template-columns: 30px minmax(0, 1fr) 30px;
+    .custom-switch-reviews {
+      padding: 68px 0 64px;
+    }
+
+    .custom-switch-reviews__inner.page-width {
+      padding-left: 21px;
+      padding-right: 0;
+    }
+
+    .custom-switch-reviews__header {
+      margin: 0 21px 38px 0;
+      max-width: none;
+    }
+
+    .custom-switch-reviews__rating {
+      font-size: 12px;
+      gap: 7px;
+      margin-bottom: 8px;
+    }
+
+    .custom-switch-reviews__stars {
+      font-size: 18px;
     }
 
     .custom-switch-reviews__heading {
-      font-size: 24px;
+      font-size: 25px;
+      line-height: 1.12;
+      text-transform: uppercase;
+    }
+
+    .custom-switch-reviews__viewport {
+      align-items: center;
+      display: block;
+      margin-right: 0;
+      position: relative;
+    }
+
+    .custom-switch-reviews__track {
+      gap: 18px;
+      padding: 0 76px 0 0;
+      scroll-padding-left: 0;
     }
 
     .custom-switch-reviews__card {
-      flex-basis: 205px;
+      border-radius: 8px;
+      flex: 0 0 min(205px, calc(100vw - 116px));
+      min-height: 225px;
+      padding: 24px 22px 20px;
+    }
+
+    .custom-switch-reviews__card-stars {
+      font-size: 18px;
+      margin-bottom: 11px;
+    }
+
+    .custom-switch-reviews__card-title {
+      font-size: 15px;
+      margin-bottom: 16px;
+    }
+
+    .custom-switch-reviews__quote,
+    .custom-switch-reviews__quote.rte-setting {
+      color: #5f6f7d;
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .custom-switch-reviews__name {
+      font-size: 12px;
+      margin-top: 20px;
+    }
+
+    .custom-switch-reviews__badge {
+      font-size: 11px;
+    }
+
+    .custom-switch-reviews__arrow {
+      font-size: 13px;
+      height: 22px;
+      position: absolute;
+      top: calc(100% + 44px);
+      transform: translateY(-50%);
+      width: 34px;
+      z-index: 2;
+    }
+
+    .custom-switch-reviews__arrow--prev {
+      right: 43px;
+    }
+
+    .custom-switch-reviews__arrow--next {
+      right: 1px;
+    }
+
+    .custom-switch-reviews__progress {
+      height: 4px;
+      margin: 42px 88px 0 0;
+      max-width: none;
+    }
+
+    .custom-switch-reviews__progress span {
+      width: 100%;
     }
   }
 </style>
@@ -255,12 +348,41 @@
     var prev = section.querySelector('[data-switch-reviews-prev]');
     var next = section.querySelector('[data-switch-reviews-next]');
 
+    function getCardPositions() {
+      if (!track) return [];
+      var cards = track.querySelectorAll('.custom-switch-reviews__card');
+      return Array.prototype.map.call(cards, function(card) {
+        return card.offsetLeft - track.offsetLeft;
+      });
+    }
+
     function scrollByCard(direction) {
       if (!track) return;
-      var card = track.querySelector('.custom-switch-reviews__card');
-      var gap = parseFloat(getComputedStyle(track).gap) || 18;
-      var amount = card ? card.offsetWidth + gap : track.clientWidth * 0.85;
-      track.scrollBy({ left: amount * direction, behavior: 'smooth' });
+      var positions = getCardPositions();
+      if (!positions.length) return;
+
+      var current = track.scrollLeft;
+      var target = positions[0];
+      var tolerance = 4;
+
+      if (direction > 0) {
+        target = positions[positions.length - 1];
+        for (var i = 0; i < positions.length; i++) {
+          if (positions[i] > current + tolerance) {
+            target = positions[i];
+            break;
+          }
+        }
+      } else {
+        for (var j = positions.length - 1; j >= 0; j--) {
+          if (positions[j] < current - tolerance) {
+            target = positions[j];
+            break;
+          }
+        }
+      }
+
+      track.scrollTo({ left: target, behavior: 'smooth' });
     }
 
     if (prev) prev.addEventListener('click', function() { scrollByCard(-1); });
