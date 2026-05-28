@@ -2,6 +2,13 @@
   The contents of the product.liquid template can be found in /sections/product-template.liquid
 {% endcomment %}
 
+{{ 'custom-trustshop-reviews.css' | asset_url | stylesheet_tag }}
+<style>
+  #trustshop-review {
+    --trustshop-bronze-badge: url("{{ 'bronze.svg.svg' | asset_url }}");
+  }
+</style>
+
 {% section 'product-template' %}
 {% section 'custom-ingredient-benefits' %}
 {% section 'custom-routine-tips' %}
@@ -69,4 +76,73 @@
   ]
 }
 </script>
-<div class="trustshop trustshop-review-wrap" id="trustshop-review"></div>
+<div class="trustshop trustshop-review-wrap trustshop-widget-box" id="trustshop-review" data-product-id="{{ product.id }}" data-main-tab="summary" data-review-to-display="all"></div>
+
+<div id="SlimfairReviewAwardTemplate" hidden>
+  <div class="slimfair-review-award-column">
+    <img
+      class="slimfair-review-award-column__badge"
+      src="{{ 'bronze.svg.svg' | asset_url }}"
+      alt="Bronze Transparency 85.7"
+      loading="lazy"
+      width="112"
+      height="112">
+    <a
+      class="slimfair-review-award-column__verified"
+      href="{{ settings.review_verified_link | default: '#trustshop-review' }}"
+      aria-label="Verified reviews">
+      <span>{{ settings.review_verified_label | default: 'Verified' }}</span>
+      {% if settings.review_verified_icon != blank %}
+        <img
+          src="{{ settings.review_verified_icon | image_url: width: 64 }}"
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          width="28"
+          height="28">
+      {% else %}
+        <img
+          src="{{ 'green-check.svg' | asset_url }}"
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          width="28"
+          height="28">
+      {% endif %}
+    </a>
+  </div>
+</div>
+
+<script>
+  (function() {
+    var reviewRoot = document.getElementById('trustshop-review');
+    var template = document.getElementById('SlimfairReviewAwardTemplate');
+    if (!reviewRoot || !template) return;
+
+    function mountAwardColumn() {
+      var overview = reviewRoot.querySelector('.trustshop-overview--wrap');
+      if (!overview || overview.querySelector('.slimfair-review-award-column')) return;
+
+      var award = template.firstElementChild.cloneNode(true);
+      overview.appendChild(award);
+    }
+
+    function moveWriteReviewBelowList() {
+      var writeReview = reviewRoot.querySelector('.trustshop-write-review');
+      var reviewBody = reviewRoot.querySelector('.trustshop-review--body');
+      if (!writeReview || !reviewBody || writeReview.parentNode === reviewBody) return;
+
+      reviewBody.appendChild(writeReview);
+    }
+
+    function syncReviewLayout() {
+      mountAwardColumn();
+      moveWriteReviewBelowList();
+    }
+
+    syncReviewLayout();
+
+    var observer = new MutationObserver(syncReviewLayout);
+    observer.observe(reviewRoot, { childList: true, subtree: true });
+  })();
+</script>

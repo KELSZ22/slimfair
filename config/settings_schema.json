@@ -8,6 +8,27 @@
     "theme_support_url": "https://support.shopify.com/"
   },
   {
+    "name": "Product reviews",
+    "settings": [
+      {
+        "type": "text",
+        "id": "review_verified_label",
+        "label": "Verified link label",
+        "default": "Verified"
+      },
+      {
+        "type": "url",
+        "id": "review_verified_link",
+        "label": "Verified link"
+      },
+      {
+        "type": "image_picker",
+        "id": "review_verified_icon",
+        "label": "Verified icon"
+      }
+    ]
+  },
+  {
     "name": {
       "da": "Farver",
       "de": "Farben",

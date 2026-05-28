@@ -1,0 +1,805 @@
+.trustshop-review-wrap {
+  background: #f4f5f3;
+  border-top: 0;
+  margin: 40px auto 0;
+  max-width: 1200px;
+  padding: 32px 20px 18px;
+}
+
+#trustshop-review,
+#trustshop-review * {
+  font-family: Avenir, "Avenir Next", Arial, sans-serif;
+}
+
+#trustshop-review {
+  color: #2e6f3f;
+  margin: 0 auto;
+  max-width: 980px;
+}
+
+#trustshop-review a {
+  color: #2e6f3f;
+}
+
+#trustshop-review h1,
+#trustshop-review h2,
+#trustshop-review h3,
+#trustshop-review h4 {
+  color: #2e6f3f;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+#trustshop-review .trustshop-header--title.trustshop-title,
+#trustshop-review p.trustshop-header--title {
+  color: #49704b !important;
+  font-size: 20px !important;
+  font-style: normal !important;
+  font-weight: 500 !important;
+  line-height: 160% !important;
+  margin: 0 0 28px !important;
+  text-align: center !important;
+  width: 100% !important;
+}
+
+#trustshop-review .trustshop-review-tabs--list {
+  display: none !important;
+}
+
+#trustshop-review .verified,
+#trustshop-review [class*="verified"],
+#trustshop-review [id*="verified"] {
+  color: #2e6f3f;
+}
+
+#trustshop-review .rating,
+#trustshop-review [class*="rating"],
+#trustshop-review [id*="rating"] {
+  color: #2e6f3f;
+}
+
+#trustshop-review .star,
+#trustshop-review [class*="star"],
+#trustshop-review [class*="stars"] {
+  color: #2e6f3f;
+}
+
+#trustshop-review .trustshop-rating {
+  align-items: center !important;
+  display: inline-flex !important;
+  flex-wrap: nowrap !important;
+  font-size: 18px !important;
+  gap: 8px !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+}
+
+#trustshop-review .trustshop-rating,
+#trustshop-review .trustshop-review--rating {
+  align-items: center !important;
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+}
+
+#trustshop-review .trustshop-rating > span:first-child {
+  font-size: 18px !important;
+  font-weight: 700 !important;
+}
+
+#trustshop-review .trustshop-rating > span:first-child {
+  order: 2 !important;
+}
+
+#trustshop-review .trustshop-rating > .trustshop-rating-star--container {
+  order: 1 !important;
+}
+
+#trustshop-review .trustshop-rating-star--container {
+  align-items: center !important;
+  display: inline-flex !important;
+  flex-wrap: nowrap !important;
+  gap: 2px !important;
+  white-space: nowrap !important;
+}
+
+#trustshop-review .trustshop-rating-star--container svg {
+  height: 12px !important;
+  width: 12px !important;
+}
+
+#trustshop-review .trustshop-score-bar--item {
+  align-items: center !important;
+  display: grid !important;
+  gap: 8px !important;
+  grid-template-columns: auto 1fr 52px !important;
+}
+
+#trustshop-review .trustshop-score-bar--item > div:last-child {
+  align-items: center !important;
+  display: flex !important;
+  justify-content: center !important;
+  min-width: 52px !important;
+  text-align: center !important;
+}
+
+#trustshop-review .trustshop-score-bar--item > div:last-child span {
+  display: block !important;
+  text-align: center !important;
+  width: 100% !important;
+}
+
+#trustshop-review .review,
+#trustshop-review [class*="review-item"],
+#trustshop-review [class*="single-review"] {
+  border-bottom: 1px solid #efe8d5;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  margin-bottom: 0;
+  padding: 20px 0;
+}
+
+#trustshop-review .review p,
+#trustshop-review [class*="review-item"] p,
+#trustshop-review [class*="single-review"] p {
+  color: #3f4a40;
+  line-height: 1.55;
+  margin: 10px 0 0;
+}
+
+#trustshop-review .review time,
+#trustshop-review .date,
+#trustshop-review [class*="review-date"] {
+  color: #8c948a;
+  font-size: 12px;
+}
+
+#trustshop-review select,
+#trustshop-review button {
+  border-color: #d3d7cf;
+  color: #2e6f3f;
+}
+
+#trustshop-review .trustshop-review-filter--wrap {
+  align-items: center !important;
+  border-top: 1px solid #efe8d5 !important;
+  display: flex !important;
+  justify-content: flex-start !important;
+  margin: 18px 0 0 !important;
+  padding: 16px 0 28px !important;
+  width: 100% !important;
+}
+
+#trustshop-review .trustshop-review--filter {
+  display: none !important;
+}
+
+#trustshop-review .trustshop-review-sort--container {
+  display: block !important;
+  margin: 0 !important;
+  width: auto !important;
+}
+
+#trustshop-review .trustshop-review-sort--wrap {
+  align-items: center !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  color: #2e6f3f !important;
+  display: inline-flex !important;
+  gap: 6px !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+}
+
+#trustshop-review .trustshop-review-sort--wrap > span {
+  display: none !important;
+}
+
+#trustshop-review .trustshop-review-sort--selected {
+  align-items: center !important;
+  background: transparent !important;
+  border: 0 !important;
+  color: #2e6f3f !important;
+  display: inline-flex !important;
+  gap: 8px !important;
+  height: auto !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+}
+
+#trustshop-review .trustshop-review-sort--selected span {
+  color: #2e6f3f !important;
+  font-size: 12px !important;
+  line-height: 1 !important;
+}
+
+#trustshop-review .trustshop-review-sort--selected svg {
+  display: block !important;
+  height: 5px !important;
+  width: 9px !important;
+}
+
+#trustshop-review .trustshop-review-sort--selected svg path {
+  fill: #2e6f3f !important;
+}
+
+#trustshop-review [class*="sort"] ul,
+#trustshop-review [class*="sort"] li,
+#trustshop-review [class*="sort"] [role="listbox"],
+#trustshop-review [class*="sort"] [role="option"] {
+  color: #3d4246 !important;
+  font-size: 13px !important;
+  line-height: 1.35 !important;
+}
+
+#trustshop-review [class*="sort"] ul,
+#trustshop-review [class*="sort"] [role="listbox"] {
+  background: #fff !important;
+  border: 1px solid #d3d7cf !important;
+  border-radius: 6px !important;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08) !important;
+  min-width: 150px !important;
+  padding: 6px 0 !important;
+}
+
+#trustshop-review [class*="sort"] li,
+#trustshop-review [class*="sort"] [role="option"] {
+  background: #fff !important;
+  display: block !important;
+  padding: 8px 12px !important;
+  white-space: nowrap !important;
+}
+
+#trustshop-review .trustshop-review--list,
+#trustshop-review .trustshop-review-list--grid {
+  display: block !important;
+  grid-template-columns: none !important;
+  margin-top: 0 !important;
+  width: 100% !important;
+}
+
+#trustshop-review .trustshop-review-item-type--grid,
+#trustshop-review [id*="trustshop-review-id--"] {
+  border: 0 !important;
+  border-bottom: 1px solid #efe8d5 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  display: block !important;
+  grid-row-end: auto !important;
+  margin: 0 !important;
+  padding: 24px 0 20px !important;
+  width: 100% !important;
+}
+
+#trustshop-review .trustshop-review-item-grid--wrap,
+#trustshop-review .trustshop-review-item-grid--content {
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+}
+
+#trustshop-review .trustshop-review-item-grid--content {
+  display: flex !important;
+  flex-direction: column !important;
+  position: relative !important;
+}
+
+#trustshop-review .trustshop-review--rating {
+  align-items: center !important;
+  display: flex !important;
+  justify-content: flex-start !important;
+  margin: 0 120px 14px 0 !important;
+  order: 1 !important;
+}
+
+#trustshop-review .trustshop-stars {
+  margin: 0 !important;
+}
+
+#trustshop-review .trustshop-review--author {
+  align-items: center !important;
+  display: flex !important;
+  margin: 0 0 10px !important;
+  order: 2 !important;
+  position: relative !important;
+}
+
+#trustshop-review .trustshop-author--avt {
+  background: #f4f5f3 !important;
+  border: 1px solid #dbe3d9 !important;
+  border-radius: 0 !important;
+  height: 28px !important;
+  margin-right: 12px !important;
+  position: relative !important;
+  width: 28px !important;
+}
+
+#trustshop-review .trustshop-author-avt--text {
+  display: none !important;
+}
+
+#trustshop-review .trustshop-author--avt::before {
+  border: 1.5px solid #2e6f3f;
+  border-radius: 50%;
+  content: "";
+  display: block;
+  height: 6px;
+  left: 10px;
+  position: absolute;
+  top: 5px;
+  width: 6px;
+}
+
+#trustshop-review .trustshop-author--avt::after {
+  background: transparent;
+  border: 1px solid #fff;
+  border-left: 2px solid #2e6f3f;
+  border-bottom: 2px solid #2e6f3f;
+  border-right: 0;
+  border-top: 0;
+  bottom: 1px;
+  content: "";
+  display: block;
+  height: 5px;
+  position: absolute;
+  right: 2px;
+  transform: rotate(-45deg);
+  width: 9px;
+}
+
+#trustshop-review .trustshop-review--author .trustshop-review--author::after {
+  border: 1.5px solid #2e6f3f;
+  border-bottom: 0;
+  border-radius: 8px 8px 0 0;
+  content: "";
+  display: block;
+  height: 7px;
+  left: 7px;
+  position: absolute;
+  top: 14px;
+  width: 12px;
+}
+
+#trustshop-review .trustshop-review--author_name p {
+  color: #2e6f3f !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  line-height: 1.25 !important;
+  margin: 0 !important;
+}
+
+#trustshop-review .trustshop-review--author_name p::after {
+  background: #2e6f3f;
+  color: #fff;
+  content: "Verified";
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1;
+  margin-left: 12px;
+  padding: 3px 5px;
+  vertical-align: middle;
+}
+
+#trustshop-review .trustshop-review--title {
+  display: none !important;
+  order: 3 !important;
+}
+
+#trustshop-review .trustshop-review--content,
+#trustshop-review .trustshop-review--content span {
+  color: #4f3a2e !important;
+  font-size: 13px !important;
+  line-height: 1.55 !important;
+}
+
+#trustshop-review .trustshop-review--content {
+  margin: 0 !important;
+  max-width: none !important;
+  order: 4 !important;
+}
+
+#trustshop-review .trustshop-post-time {
+  color: #8c948a !important;
+  font-size: 11px !important;
+  line-height: 1.3 !important;
+  margin: 0 !important;
+  order: 5 !important;
+}
+
+#trustshop-review .trustshop-review-item-grid--content > .trustshop-post-time,
+#trustshop-review .trustshop-review-item-grid--content > p.trustshop-post-time {
+  position: absolute !important;
+  right: 0 !important;
+  top: 2px !important;
+}
+
+#trustshop-review .trustshop-post-time span,
+#trustshop-review .trustshop-post-time time {
+  color: inherit !important;
+  font-size: inherit !important;
+}
+
+#trustshop-review .trustshop-post-time span {
+  font-size: 0 !important;
+}
+
+#trustshop-review .trustshop-post-time time {
+  font-size: 11px !important;
+}
+
+#trustshop-review .review-item-action--field {
+  display: none !important;
+}
+
+#trustshop-review .trustshop-write-review {
+  border: 0 !important;
+  margin: 28px auto 0 !important;
+  max-width: 360px !important;
+  padding: 0 !important;
+  text-align: center !important;
+}
+
+#trustshop-review .trustshop-write-review .trustshop-title {
+  color: #3d4246 !important;
+  font-size: 15px !important;
+  font-weight: 500 !important;
+  line-height: 1.4 !important;
+  margin: 0 0 14px !important;
+  text-align: center;
+}
+
+#trustshop-review .trustshop-write-review .trustshop-subheading {
+  color: #49704b !important;
+  font-size: 15px !important;
+  line-height: 1.35 !important;
+  margin: 0 0 14px !important;
+}
+
+#trustshop-review #trustshop-write--review {
+  background: #49704b !important;
+  border: 1px solid #49704b !important;
+  border-radius: 0 !important;
+  color: #fff !important;
+  display: inline-flex !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  justify-content: center !important;
+  line-height: 1.2 !important;
+  min-height: 42px !important;
+  padding: 12px 28px !important;
+  width: 100% !important;
+}
+
+@media screen and (max-width: 749px) {
+  .trustshop-review-wrap {
+    border-top: 6px solid #efe59a;
+    margin-top: 28px;
+    padding: 28px 10px 14px;
+  }
+
+  #trustshop-review {
+    max-width: 100%;
+  }
+
+  #trustshop-review .trustshop-header--title.trustshop-title,
+  #trustshop-review p.trustshop-header--title {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+  }
+
+  #trustshop-review .trustshop-summary-box-type--left,
+  #trustshop-review .trustshop-summary-box,
+  #trustshop-review #trustshop-score--card {
+    border: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+  }
+
+  #trustshop-review .trustshop-overview--wrap {
+    align-items: center !important;
+    border: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0 !important;
+    margin: 0 auto 34px !important;
+    max-width: 260px !important;
+    padding: 0 !important;
+  }
+
+  #trustshop-review .trustshop-overview--container {
+    display: contents !important;
+  }
+
+  #trustshop-review .trustshop-score-bar--list {
+    margin: 0 auto 28px !important;
+    order: 1 !important;
+    width: 100% !important;
+  }
+
+  #trustshop-review .trustshop-score-bar--item {
+    gap: 8px !important;
+    margin-bottom: 5px !important;
+  }
+
+  #trustshop-review .trustshop-score-bar--item > span {
+    align-items: center !important;
+    color: #49704b !important;
+    display: inline-flex !important;
+    font-size: 0 !important;
+    justify-content: flex-center !important;
+  }
+
+  #trustshop-review .trustshop-score-bar--item > span svg {
+    height: 13px !important;
+    margin-left: 2px !important;
+    width: 13px !important;
+  }
+
+  #trustshop-review .trustshop-bar-container {
+    border-radius: 0 !important;
+    height: 11px !important;
+  }
+
+  #trustshop-review .trustshop-bar-container > div {
+    background: #49704b !important;
+    border-radius: 0 !important;
+  }
+
+  #trustshop-review .trustshop-score-bar--item > div:last-child {
+    min-width: 22px !important;
+  }
+
+  #trustshop-review .trustshop-score-bar--item > div:last-child span {
+    color: #6b7169 !important;
+    font-size: 10px !important;
+  }
+
+  #trustshop-review .trustshop-overview-content {
+    margin: 0 auto 28px !important;
+    order: 2 !important;
+    padding: 0 !important;
+    width: 100% !important;
+  }
+
+  #trustshop-review .trustshop-overview-rating {
+    align-items: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  #trustshop-review .trustshop-overview-rating .trustshop-rating {
+    font-size: 13px !important;
+    gap: 7px !important;
+    justify-content: center !important;
+    margin: 0 0 6px !important;
+  }
+
+  #trustshop-review
+    .trustshop-overview-rating
+    .trustshop-rating
+    > span:first-child {
+    color: #4f3a2e !important;
+    font-size: 13px !important;
+    font-weight: 400 !important;
+  }
+
+  #trustshop-review
+    .trustshop-overview-rating
+    .trustshop-rating-star--container
+    svg {
+    height: 14px !important;
+    width: 14px !important;
+  }
+
+  #trustshop-review .trustshop-total-rating {
+    color: #4f3a2e !important;
+    font-size: 12px !important;
+    line-height: 1.3 !important;
+    margin: 0 !important;
+    text-align: center !important;
+  }
+
+  #trustshop-review .slimfair-review-award-column {
+    margin: 0 auto !important;
+    order: 3 !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  #trustshop-review .slimfair-review-award-column__badge {
+    margin-bottom: 4px !important;
+    width: 70px !important;
+  }
+
+  #trustshop-review .slimfair-review-award-column__verified {
+    font-size: 11px !important;
+    gap: 4px !important;
+    text-underline-offset: 2px !important;
+  }
+
+  #trustshop-review .slimfair-review-award-column__verified img {
+    height: 13px !important;
+    width: 13px !important;
+  }
+
+  #trustshop-review .trustshop-review-filter--wrap {
+    display: none !important;
+  }
+
+  #trustshop-review .trustshop-review-tabs--list {
+    display: none !important;
+  }
+
+  #trustshop-review .trustshop-review-item-type--grid,
+  #trustshop-review [id*="trustshop-review-id--"] {
+    padding: 22px 0 20px !important;
+  }
+
+  #trustshop-review .trustshop-review--rating {
+    margin: 0 92px 12px 0 !important;
+  }
+
+  #trustshop-review
+    .trustshop-review--rating
+    .trustshop-rating-star--container
+    svg {
+    height: 14px !important;
+    width: 14px !important;
+  }
+
+  #trustshop-review .trustshop-review--author {
+    margin-bottom: 14px !important;
+  }
+
+  #trustshop-review .trustshop-author--avt {
+    height: 30px !important;
+    margin-right: 12px !important;
+    width: 30px !important;
+  }
+
+  #trustshop-review .trustshop-review--author_name p,
+  #trustshop-review .trustshop-review--content,
+  #trustshop-review .trustshop-review--content span {
+    font-size: 14px !important;
+  }
+
+  #trustshop-review .trustshop-review--title {
+    font-size: 13px !important;
+    text-align: left !important;
+  }
+
+  #trustshop-review .trustshop-post-time time {
+    font-size: 10px !important;
+  }
+
+  #trustshop-review .trustshop-write-review {
+    margin-top: 24px !important;
+    max-width: 100% !important;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  #trustshop-review .trustshop-layout-box,
+  #trustshop-review .trustshop-layout-box--left,
+  #trustshop-review [class*="layout-box"] {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0 !important;
+  }
+
+  #trustshop-review .trustshop-summary-box-type--left,
+  #trustshop-review .trustshop-summary-box,
+  #trustshop-review #trustshop-score--card {
+    border: 0 !important;
+    margin: 0 0 12px !important;
+    max-width: 100% !important;
+    padding: 0 0 14px !important;
+    width: 100% !important;
+  }
+
+  #trustshop-review .trustshop-overview--wrap {
+    align-items: center !important;
+    border: 0 !important;
+    display: grid !important;
+    gap: 0 !important;
+    grid-template-columns: 1fr 1fr 1fr !important;
+    margin: 0 auto 28px !important;
+    max-width: 860px !important;
+    padding: 0 !important;
+  }
+
+  #trustshop-review .trustshop-overview--container {
+    grid-column: 1 !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    width: 100% !important;
+  }
+
+  #trustshop-review
+    .trustshop-overview--container
+    > .trustshop-overview-content,
+  #trustshop-review .trustshop-overview-content {
+    max-width: 100% !important;
+    min-width: 0 !important;
+    width: 100% !important;
+  }
+
+  #trustshop-review .trustshop-overview--wrap > .trustshop-score-bar--list {
+    grid-column: 2 !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    width: 100% !important;
+  }
+
+  #trustshop-review .trustshop-overview-content,
+  #trustshop-review .trustshop-score-bar--list {
+    padding: 0 28px !important;
+  }
+
+  #trustshop-review .trustshop-overview-content {
+    border-right: 0 !important;
+  }
+
+  #trustshop-review .trustshop-score-bar--list {
+    border-right: 0 !important;
+  }
+
+  #trustshop-review .slimfair-review-award-column {
+    align-items: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    grid-column: 3 !important;
+    justify-self: center !important;
+    min-width: 0 !important;
+    width: 100% !important;
+  }
+
+  #trustshop-review .slimfair-review-award-column__badge {
+    display: block !important;
+    height: auto !important;
+    margin: 0 auto 8px !important;
+    width: 104px !important;
+  }
+
+  #trustshop-review .slimfair-review-award-column__verified {
+    align-items: center !important;
+    color: #2e6f3f !important;
+    display: inline-flex !important;
+    font-size: 18px !important;
+    font-weight: 400 !important;
+    gap: 8px !important;
+    line-height: 1.1 !important;
+    text-decoration: underline !important;
+    text-underline-offset: 4px !important;
+  }
+
+  #trustshop-review .slimfair-review-award-column__verified img {
+    display: block !important;
+    height: 24px !important;
+    width: 24px !important;
+  }
+
+  #trustshop-review .trustshop-review--body {
+    margin: 0 !important;
+    width: 100% !important;
+  }
+
+  #trustshop-review .trustshop-review-body--header {
+    border-top: 0 !important;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+
+  #trustshop-review .trustshop-review-container-type--grid.type--grid {
+    margin-top: 8px !important;
+  }
+}
