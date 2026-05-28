@@ -1,0 +1,1028 @@
+{% liquid
+  assign button_link = section.settings.button_link
+
+  if button_link == blank and section.settings.button_product != blank
+    assign button_link = section.settings.button_product.url
+  endif
+%}
+
+<section
+  id="SlimfairDailyCoffeeFeature-{{ section.id }}"
+  class="sf-daily-coffee sf-daily-coffee--mobile-media-{{ section.settings.mobile_media_position }}"
+  style="
+    --sf-daily-background: {{ section.settings.background_color }};
+    --sf-daily-panel-background: {{ section.settings.panel_background }};
+    --sf-daily-heading-color: {{ section.settings.heading_color }};
+    --sf-daily-text-color: {{ section.settings.text_color }};
+    --sf-daily-feature-background: {{ section.settings.feature_background }};
+    --sf-daily-feature-heading: {{ section.settings.feature_heading_color }};
+    --sf-daily-feature-text: {{ section.settings.feature_text_color }};
+    --sf-daily-icon-background: {{ section.settings.icon_background }};
+    --sf-daily-icon-color: {{ section.settings.icon_color }};
+    --sf-daily-button-background: {{ section.settings.button_background }};
+    --sf-daily-button-text: {{ section.settings.button_text }};
+    --sf-daily-panel-radius: {{ section.settings.panel_border_radius }}px;
+    --sf-daily-image-radius: {{ section.settings.image_border_radius }}px;
+    --sf-daily-padding-top: {{ section.settings.padding_top }}px;
+    --sf-daily-padding-bottom: {{ section.settings.padding_bottom }}px;
+    --sf-daily-pattern-opacity: {{ section.settings.background_image_opacity | divided_by: 100.0 }};
+    --sf-daily-background-image:
+      {% if section.settings.background_image != blank %}
+        url('{{ section.settings.background_image | image_url: width: 3000 }}')
+      {% else %}
+        none
+      {% endif %};
+    --sf-daily-mobile-background-image:
+      {% if section.settings.mobile_background_image != blank %}
+        url('{{ section.settings.mobile_background_image | image_url: width: 1200 }}')
+      {% elsif section.settings.background_image != blank %}
+        url('{{ section.settings.background_image | image_url: width: 1600 }}')
+      {% else %}
+        none
+      {% endif %};
+  "
+>
+  <div class="sf-daily-coffee__background" aria-hidden="true"></div>
+
+  <div class="sf-daily-coffee__container">
+    <div class="sf-daily-coffee__panel">
+      <div class="sf-daily-coffee__content">
+        {% if section.settings.heading != blank %}
+          <h2 class="sf-daily-coffee__heading">
+            {{ section.settings.heading | escape | newline_to_br }}
+          </h2>
+        {% endif %}
+
+        {% if section.settings.description != blank %}
+          <p class="sf-daily-coffee__description">
+            {{ section.settings.description | escape | newline_to_br }}
+          </p>
+        {% endif %}
+
+        {% if section.blocks.size > 0 %}
+          <div class="sf-daily-coffee__benefits">
+            {% for block in section.blocks %}
+              <div class="sf-daily-benefit" {{ block.shopify_attributes }}>
+                <div class="sf-daily-benefit__icon">
+                  {% if block.settings.icon != blank %}
+                    {{
+                      block.settings.icon
+                      | image_url: width: 100
+                      | image_tag:
+                        class: 'sf-daily-benefit__icon-image',
+                        widths: '40, 60, 80, 100',
+                        sizes: '30px',
+                        loading: 'lazy',
+                        alt: ''
+                    }}
+                  {% elsif block.settings.fallback_icon != blank %}
+                    <span class="sf-daily-benefit__fallback-icon" aria-hidden="true">
+                      {{ block.settings.fallback_icon | escape }}
+                    </span>
+                  {% endif %}
+                </div>
+
+                <div class="sf-daily-benefit__content">
+                  {% if block.settings.heading != blank %}
+                    <h3 class="sf-daily-benefit__heading">
+                      {{ block.settings.heading | escape }}
+                    </h3>
+                  {% endif %}
+
+                  {% if block.settings.description != blank %}
+                    <p class="sf-daily-benefit__description">
+                      {{ block.settings.description | escape }}
+                    </p>
+                  {% endif %}
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        {% if section.settings.button_label != blank %}
+          <a
+            {% if button_link != blank %}
+              href="{{ button_link }}"
+            {% else %}
+              role="link"
+              aria-disabled="true"
+            {% endif %}
+            class="sf-daily-coffee__button"
+          >
+            {{ section.settings.button_label | escape }}
+          </a>
+        {% endif %}
+      </div>
+
+      <div class="sf-daily-coffee__media">
+        {% if section.settings.feature_image != blank %}
+          {{
+            section.settings.feature_image
+            | image_url: width: 1400
+            | image_tag:
+              class: 'sf-daily-coffee__image',
+              widths: '400, 600, 800, 1000, 1200, 1400',
+              sizes: '(min-width: 990px) 42vw, 100vw',
+              loading: 'lazy',
+              alt: section.settings.feature_image.alt
+          }}
+        {% else %}
+          <div class="sf-daily-coffee__placeholder">
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'sf-daily-coffee__placeholder-svg' }}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  #SlimfairDailyCoffeeFeature-{{ section.id }} {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: var(--sf-daily-padding-top) 40px var(--sf-daily-padding-bottom);
+    background-color: var(--sf-daily-background);
+  }
+
+  #SlimfairDailyCoffeeFeature-{{ section.id }} .sf-daily-coffee__background {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-image: var(--sf-daily-background-image);
+    background-repeat: {{ section.settings.background_repeat }};
+    background-position: {{ section.settings.background_position }};
+    background-size: {{ section.settings.background_size }};
+    opacity: var(--sf-daily-pattern-opacity);
+    pointer-events: none;
+  }
+
+  #SlimfairDailyCoffeeFeature-{{ section.id }} .sf-daily-coffee__container {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: {{ section.settings.container_width }}px;
+    margin: 0 auto;
+  }
+
+  #SlimfairDailyCoffeeFeature-{{ section.id }} .sf-daily-coffee__panel {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(390px, {{ section.settings.image_width }}px);
+    gap: {{ section.settings.content_gap }}px;
+    align-items: stretch;
+    padding: {{ section.settings.panel_padding }}px;
+    border-radius: var(--sf-daily-panel-radius);
+    background-color: var(--sf-daily-panel-background);
+  }
+
+  #SlimfairDailyCoffeeFeature-{{ section.id }} .sf-daily-coffee__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 0;
+  }
+
+  #SlimfairDailyCoffeeFeature-{{ section.id }} .sf-daily-coffee__heading {
+    margin: 0;
+    max-width: 560px;
+    color: var(--sf-daily-heading-color, #49704B);
+    font-family: Lora, Georgia, serif;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  #SlimfairDailyCoffeeFeature-{{ section.id }} .sf-daily-coffee__description {
+    max-width: 545px;
+    margin: 28px 0 0;
+    color: var(--sf-daily-text-color, #5C3F2D);
+    font-family: Avenir, "Avenir Next", Arial, sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.72;
+  }
+
+  #SlimfairDailyCoffeeFeature-{{ section.id }} .sf-daily-coffee__benefits {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 500px;
+    margin-top: 28px;
+  }
+
+  #SlimfairDailyCoffeeFeature-{{ section.id }} .sf-daily-benefit {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-height: 81px;
+    padding: 12px 16px;
+    border-radius: {{ section.settings.feature_border_radius }}px;
+    background-color: var(--sf-daily-feature-background);
+  }
+
+  #SlimfairDailyCoffeeFeature-{{ section.id }} .sf-daily-benefit__icon {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: {{ section.settings.icon_circle_size }}px;
+    height: {{ section.settings.icon_circle_size }}px;
+    overflow: hidden;
+    border-radius: 50%;
+    background-color: var(--sf-daily-icon-background);
+    color: var(--sf-daily-icon-color);
+  }
+
+  #SlimfairDailyCoffeeFeature-{{ section.id }} .sf-daily-benefit__icon-image {
+    display: block;
+    width: {{ section.settings.icon_size }}px;
+    height: {{ section.settings.icon_size }}px;
+    object-fit: contain;
+  }
+
+  #SlimfairDailyCoffeeFeature-{{ section.id }} .sf-daily-benefit__fallback-icon {
+    color: var(--sf-daily-icon-color);
+    font-family: Arial, sans-serif;
+    font-size: 25px;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  #SlimfairDailyCoffeeFeature-{{ section.id }} .sf-daily-benefit__content {
+    min-width: 0;
+  }
+
+  #SlimfairDailyCoffeeFeature-{{ section.id }} .sf-daily-benefit__heading {
+    margin: 0 0 4px;
+    color: var(--sf-daily-feature-heading, #49704B);
+    font-family: Avenir, "Avenir Next", Arial, sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.35;
+  }
+
+  #SlimfairDailyCoffeeFeature-{{ section.id }} .sf-daily-benefit__description {
+    margin: 0;
+    color: var(--sf-daily-feature-text, #5C3F2D);
+    font-family: Avenir, "Avenir Next", Arial, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.45;
+  }
+
+  #SlimfairDailyCoffeeFeature-{{ section.id }} .sf-daily-coffee__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    min-width: {{ section.settings.button_width }}px;
+    min-height: 53px;
+    margin-top: 30px;
+    padding: 15px 26px;
+    border-radius: {{ section.settings.button_border_radius }}px;
+    background-color: var(--sf-daily-button-background);
+    color: var(--sf-daily-button-text);
+    font-family: Avenir, "Avenir Next", Arial, sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition:
+      opacity 0.25s ease,
+      transform 0.25s ease;
+  }
+
+  #SlimfairDailyCoffeeFeature-{{ section.id }} .sf-daily-coffee__button:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+  }
+
+  #SlimfairDailyCoffeeFeature-{{ section.id }} .sf-daily-coffee__button[aria-disabled="true"] {
+    cursor: not-allowed;
+    opacity: 0.55;
+  }
+
+  #SlimfairDailyCoffeeFeature-{{ section.id }} .sf-daily-coffee__media {
+    min-width: 0;
+    overflow: hidden;
+    border-radius: var(--sf-daily-image-radius);
+  }
+
+  #SlimfairDailyCoffeeFeature-{{ section.id }} .sf-daily-coffee__image,
+  #SlimfairDailyCoffeeFeature-{{ section.id }} .sf-daily-coffee__placeholder {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: {{ section.settings.image_height }}px;
+    aspect-ratio: {{ section.settings.image_ratio }};
+    object-fit: {{ section.settings.image_fit }};
+    object-position: {{ section.settings.image_position }};
+  }
+
+  #SlimfairDailyCoffeeFeature-{{ section.id }} .sf-daily-coffee__placeholder {
+    background-color: #f5eadb;
+  }
+
+  #SlimfairDailyCoffeeFeature-{{ section.id }} .sf-daily-coffee__placeholder-svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  @media screen and (max-width: 1199px) {
+    #SlimfairDailyCoffeeFeature-{{ section.id }} {
+      padding-right: 28px;
+      padding-left: 28px;
+    }
+
+    #SlimfairDailyCoffeeFeature-{{ section.id }} .sf-daily-coffee__panel {
+      grid-template-columns: 1fr 0.92fr;
+      gap: 30px;
+      padding: 26px;
+    }
+
+    #SlimfairDailyCoffeeFeature-{{ section.id }} .sf-daily-coffee__heading {
+      font-size: 29px;
+    }
+
+    #SlimfairDailyCoffeeFeature-{{ section.id }} .sf-daily-coffee__description {
+      margin-top: 20px;
+      font-size: 15px;
+    }
+
+    #SlimfairDailyCoffeeFeature-{{ section.id }} .sf-daily-benefit {
+      min-height: 74px;
+      padding: 11px 13px;
+    }
+
+    #SlimfairDailyCoffeeFeature-{{ section.id }} .sf-daily-coffee__image,
+    #SlimfairDailyCoffeeFeature-{{ section.id }} .sf-daily-coffee__placeholder {
+      min-height: 500px;
+    }
+  }
+
+  @media screen and (max-width: 899px) {
+    #SlimfairDailyCoffeeFeature-{{ section.id }} .sf-daily-coffee__panel {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    #SlimfairDailyCoffeeFeature-{{ section.id }}.sf-daily-coffee--mobile-media-top .sf-daily-coffee__media {
+      order: -1;
+    }
+
+    #SlimfairDailyCoffeeFeature-{{ section.id }} .sf-daily-coffee__content,
+    #SlimfairDailyCoffeeFeature-{{ section.id }} .sf-daily-coffee__description,
+    #SlimfairDailyCoffeeFeature-{{ section.id }} .sf-daily-coffee__benefits {
+      max-width: none;
+    }
+
+    #SlimfairDailyCoffeeFeature-{{ section.id }} .sf-daily-coffee__image,
+    #SlimfairDailyCoffeeFeature-{{ section.id }} .sf-daily-coffee__placeholder {
+      min-height: 0;
+      aspect-ratio: 4 / 4.5;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    #SlimfairDailyCoffeeFeature-{{ section.id }} {
+      padding: {{ section.settings.mobile_padding_top }}px 15px {{ section.settings.mobile_padding_bottom }}px;
+    }
+
+    #SlimfairDailyCoffeeFeature-{{ section.id }} .sf-daily-coffee__background {
+      background-image: var(--sf-daily-mobile-background-image);
+    }
+
+    #SlimfairDailyCoffeeFeature-{{ section.id }} .sf-daily-coffee__panel {
+      gap: 25px;
+      padding: {{ section.settings.mobile_panel_padding }}px;
+      border-radius: {{ section.settings.mobile_panel_radius }}px;
+    }
+
+    #SlimfairDailyCoffeeFeature-{{ section.id }} .sf-daily-coffee__heading {
+      font-size: 27px;
+      line-height: 1.32;
+    }
+
+    #SlimfairDailyCoffeeFeature-{{ section.id }} .sf-daily-coffee__description {
+      margin-top: 17px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    #SlimfairDailyCoffeeFeature-{{ section.id }} .sf-daily-coffee__benefits {
+      gap: 9px;
+      margin-top: 22px;
+    }
+
+    #SlimfairDailyCoffeeFeature-{{ section.id }} .sf-daily-benefit {
+      gap: 12px;
+      min-height: 72px;
+      padding: 11px 12px;
+    }
+
+    #SlimfairDailyCoffeeFeature-{{ section.id }} .sf-daily-benefit__icon {
+      width: 43px;
+      height: 43px;
+    }
+
+    #SlimfairDailyCoffeeFeature-{{ section.id }} .sf-daily-benefit__icon-image {
+      width: 25px;
+      height: 25px;
+    }
+
+    #SlimfairDailyCoffeeFeature-{{ section.id }} .sf-daily-benefit__heading {
+      font-size: 15px;
+    }
+
+    #SlimfairDailyCoffeeFeature-{{ section.id }} .sf-daily-benefit__description {
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    #SlimfairDailyCoffeeFeature-{{ section.id }} .sf-daily-coffee__button {
+      width: 100%;
+      min-height: 50px;
+      margin-top: 24px;
+      font-size: 15px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #SlimfairDailyCoffeeFeature-{{ section.id }} .sf-daily-coffee__button {
+      transition: none;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Slimfair daily coffee",
+  "tag": "section",
+  "class": "section-slimfair-daily-coffee",
+  "max_blocks": 5,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Section background color",
+      "default": "#355A3E"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Desktop pattern background image"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_background_image",
+      "label": "Mobile pattern background image"
+    },
+    {
+      "type": "range",
+      "id": "background_image_opacity",
+      "label": "Pattern image opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 45
+    },
+    {
+      "type": "select",
+      "id": "background_size",
+      "label": "Pattern image size",
+      "default": "cover",
+      "options": [
+        {
+          "value": "cover",
+          "label": "Cover"
+        },
+        {
+          "value": "contain",
+          "label": "Contain"
+        },
+        {
+          "value": "auto",
+          "label": "Original size"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "background_repeat",
+      "label": "Pattern repeat",
+      "default": "no-repeat",
+      "options": [
+        {
+          "value": "no-repeat",
+          "label": "Do not repeat"
+        },
+        {
+          "value": "repeat",
+          "label": "Repeat"
+        },
+        {
+          "value": "repeat-x",
+          "label": "Repeat horizontally"
+        },
+        {
+          "value": "repeat-y",
+          "label": "Repeat vertically"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "background_position",
+      "label": "Pattern position",
+      "default": "center center",
+      "options": [
+        {
+          "value": "center center",
+          "label": "Center"
+        },
+        {
+          "value": "center top",
+          "label": "Center top"
+        },
+        {
+          "value": "center bottom",
+          "label": "Center bottom"
+        },
+        {
+          "value": "left center",
+          "label": "Left center"
+        },
+        {
+          "value": "right center",
+          "label": "Right center"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Main card"
+    },
+    {
+      "type": "color",
+      "id": "panel_background",
+      "label": "Card background color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "container_width",
+      "label": "Card maximum width",
+      "min": 900,
+      "max": 1400,
+      "step": 10,
+      "unit": "px",
+      "default": 1150
+    },
+    {
+      "type": "range",
+      "id": "panel_border_radius",
+      "label": "Card border radius",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "panel_padding",
+      "label": "Desktop card inner padding",
+      "min": 10,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "content_gap",
+      "label": "Desktop gap between content and image",
+      "min": 10,
+      "max": 80,
+      "step": 1,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "header",
+      "content": "Text content"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Feel Lighter. More Energized.\nStarting With Your Daily Coffee."
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Slimfair Coffee is a smooth, creamy latte blend crafted with collagen and glutathione to support your body from the inside out so you can feel your best, every day."
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#49704B"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Description color",
+      "default": "#5C3F2D"
+    },
+    {
+      "type": "header",
+      "content": "Benefit rows"
+    },
+    {
+      "type": "color",
+      "id": "feature_background",
+      "label": "Benefit row background",
+      "default": "#E5EEE8"
+    },
+    {
+      "type": "color",
+      "id": "feature_heading_color",
+      "label": "Benefit title color",
+      "default": "#49704B"
+    },
+    {
+      "type": "color",
+      "id": "feature_text_color",
+      "label": "Benefit description color",
+      "default": "#5C3F2D"
+    },
+    {
+      "type": "color",
+      "id": "icon_background",
+      "label": "Icon circle background",
+      "default": "#49704B"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Fallback icon color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "icon_circle_size",
+      "label": "Icon circle size",
+      "min": 34,
+      "max": 70,
+      "step": 1,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Uploaded icon size",
+      "min": 18,
+      "max": 44,
+      "step": 1,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "feature_border_radius",
+      "label": "Benefit row border radius",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 11
+    },
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "feature_image",
+      "label": "Feature image"
+    },
+    {
+      "type": "range",
+      "id": "image_width",
+      "label": "Desktop image width",
+      "min": 360,
+      "max": 600,
+      "step": 5,
+      "unit": "px",
+      "default": 485
+    },
+    {
+      "type": "range",
+      "id": "image_height",
+      "label": "Desktop minimum image height",
+      "min": 350,
+      "max": 700,
+      "step": 5,
+      "unit": "px",
+      "default": 570
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image ratio",
+      "default": "0.85 / 1",
+      "options": [
+        {
+          "value": "0.85 / 1",
+          "label": "Tall - reference layout"
+        },
+        {
+          "value": "1 / 1",
+          "label": "Square"
+        },
+        {
+          "value": "4 / 5",
+          "label": "Portrait"
+        },
+        {
+          "value": "5 / 4",
+          "label": "Landscape"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "image_fit",
+      "label": "Image fit",
+      "default": "cover",
+      "options": [
+        {
+          "value": "cover",
+          "label": "Cover"
+        },
+        {
+          "value": "contain",
+          "label": "Contain"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image focal position",
+      "default": "center center",
+      "options": [
+        {
+          "value": "center center",
+          "label": "Center"
+        },
+        {
+          "value": "center top",
+          "label": "Top"
+        },
+        {
+          "value": "center bottom",
+          "label": "Bottom"
+        },
+        {
+          "value": "left center",
+          "label": "Left"
+        },
+        {
+          "value": "right center",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "label": "Image border radius",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 13
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "SHOP SLIM FAIR"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Custom button link",
+      "info": "This overrides the selected product link below."
+    },
+    {
+      "type": "product",
+      "id": "button_product",
+      "label": "Button product link",
+      "info": "Select a product to automatically use its URL when no custom button link is entered."
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button background",
+      "default": "#49704B"
+    },
+    {
+      "type": "color",
+      "id": "button_text",
+      "label": "Button text color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "button_width",
+      "label": "Button minimum width",
+      "min": 140,
+      "max": 340,
+      "step": 5,
+      "unit": "px",
+      "default": 235
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "label": "Button border radius",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 7
+    },
+    {
+      "type": "header",
+      "content": "Section spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Desktop padding top",
+      "min": 20,
+      "max": 140,
+      "step": 2,
+      "unit": "px",
+      "default": 58
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Desktop padding bottom",
+      "min": 20,
+      "max": 140,
+      "step": 2,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Mobile layout"
+    },
+    {
+      "type": "select",
+      "id": "mobile_media_position",
+      "label": "Mobile image position",
+      "default": "bottom",
+      "options": [
+        {
+          "value": "bottom",
+          "label": "Below text"
+        },
+        {
+          "value": "top",
+          "label": "Above text"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "mobile_panel_padding",
+      "label": "Mobile card inner padding",
+      "min": 12,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "mobile_panel_radius",
+      "label": "Mobile card border radius",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_top",
+      "label": "Mobile section padding top",
+      "min": 10,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_bottom",
+      "label": "Mobile section padding bottom",
+      "min": 10,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit row",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "White icon image",
+          "info": "Upload a transparent white icon. The green circle is already included."
+        },
+        {
+          "type": "text",
+          "id": "fallback_icon",
+          "label": "Fallback icon",
+          "default": "✓",
+          "info": "Used when no icon image is uploaded."
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Benefit title",
+          "default": "Feel Less Bloated"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Benefit description",
+          "default": "Supports healthy digestion so you feel lighter after meals."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Slimfair daily coffee",
+      "blocks": [
+        {
+          "type": "benefit",
+          "settings": {
+            "fallback_icon": "✓",
+            "heading": "Feel Less Bloated",
+            "description": "Supports healthy digestion so you feel lighter after meals."
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "fallback_icon": "✓",
+            "heading": "Stay Full, Crave Less",
+            "description": "Helps manage appetite naturally throughout the day."
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "fallback_icon": "⚡",
+            "heading": "Clean, Steady Energy",
+            "description": "No crashes-just consistent energy and focus."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

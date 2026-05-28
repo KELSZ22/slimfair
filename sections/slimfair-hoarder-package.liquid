@@ -1,0 +1,1313 @@
+{% liquid
+  assign featured_product = section.settings.product
+  assign selected_variant = featured_product.selected_or_first_available_variant
+  assign gallery_blocks = section.blocks | where: 'type', 'gallery_image'
+  assign benefit_blocks = section.blocks | where: 'type', 'benefit'
+  assign trust_blocks = section.blocks | where: 'type', 'trust_item'
+  assign product_form_id = 'SlimfairBundleProductForm-' | append: section.id
+
+  assign button_link = section.settings.payment_link
+
+  if featured_product != blank
+    assign product_url = featured_product.url
+  endif
+%}
+
+<section
+  id="SlimfairHoarderPackage-{{ section.id }}"
+  class="sf-hoarder-package"
+  style="
+    --sf-bundle-background: {{ section.settings.background_color }};
+    --sf-bundle-glow: {{ section.settings.glow_color }};
+    --sf-bundle-heading: {{ section.settings.heading_color }};
+    --sf-bundle-text: {{ section.settings.text_color }};
+    --sf-bundle-accent: {{ section.settings.accent_color }};
+    --sf-bundle-button-background: {{ section.settings.button_background }};
+    --sf-bundle-button-text: {{ section.settings.button_text }};
+    --sf-bundle-old-price: {{ section.settings.compare_price_color }};
+    --sf-bundle-badge-background: {{ section.settings.badge_background }};
+    --sf-bundle-badge-text: {{ section.settings.badge_text_color }};
+    --sf-bundle-trust-border: {{ section.settings.trust_border_color }};
+    --sf-bundle-padding-top: {{ section.settings.padding_top }}px;
+    --sf-bundle-padding-bottom: {{ section.settings.padding_bottom }}px;
+    --sf-bundle-content-gap: {{ section.settings.content_gap }}px;
+    --sf-bundle-image-radius: {{ section.settings.image_border_radius }}px;
+  "
+>
+  <div class="sf-hoarder-package__container">
+    <div class="sf-hoarder-package__grid">
+      <div class="sf-hoarder-package__gallery" data-sf-bundle-gallery>
+        <div class="sf-hoarder-package__main-media">
+          {% if gallery_blocks.size > 0 %}
+            {% for block in gallery_blocks %}
+              <div
+                class="sf-hoarder-package__slide{% if forloop.first %} is-active{% endif %}"
+                data-sf-bundle-slide="{{ forloop.index0 }}"
+                {% unless forloop.first %}
+                  hidden
+                {% endunless %}
+              >
+                {% if block.settings.image != blank %}
+                  {{
+                    block.settings.image
+                    | image_url: width: 1300
+                    | image_tag:
+                      class: 'sf-hoarder-package__main-image',
+                      widths: '450, 600, 750, 900, 1100, 1300',
+                      sizes: '(min-width: 990px) 44vw, 100vw',
+                      loading: 'lazy',
+                      alt: block.settings.image.alt
+                  }}
+                {% else %}
+                  <div class="sf-hoarder-package__placeholder">
+                    {{ 'product-1' | placeholder_svg_tag: 'sf-hoarder-package__placeholder-svg' }}
+                  </div>
+                {% endif %}
+              </div>
+            {% endfor %}
+
+          {% elsif featured_product != blank and featured_product.images.size > 0 %}
+            {% for image in featured_product.images limit: 5 %}
+              <div
+                class="sf-hoarder-package__slide{% if forloop.first %} is-active{% endif %}"
+                data-sf-bundle-slide="{{ forloop.index0 }}"
+                {% unless forloop.first %}
+                  hidden
+                {% endunless %}
+              >
+                {{
+                  image
+                  | image_url: width: 1300
+                  | image_tag:
+                    class: 'sf-hoarder-package__main-image',
+                    widths: '450, 600, 750, 900, 1100, 1300',
+                    sizes: '(min-width: 990px) 44vw, 100vw',
+                    loading: 'lazy',
+                    alt: featured_product.title
+                }}
+              </div>
+            {% endfor %}
+
+          {% else %}
+            <div class="sf-hoarder-package__slide is-active">
+              <div class="sf-hoarder-package__placeholder">
+                {{ 'product-1' | placeholder_svg_tag: 'sf-hoarder-package__placeholder-svg' }}
+              </div>
+            </div>
+          {% endif %}
+
+          {% if section.settings.show_badge and section.settings.badge_text != blank %}
+            <div class="sf-hoarder-package__badge">
+              {% if section.settings.show_badge_star %}
+                <span class="sf-hoarder-package__badge-star" aria-hidden="true">★</span>
+              {% endif %}
+
+              <span>{{ section.settings.badge_text | escape }}</span>
+            </div>
+          {% endif %}
+        </div>
+
+        {% if gallery_blocks.size > 1 %}
+          <div class="sf-hoarder-package__thumbnails" aria-label="Product image gallery">
+            {% for block in gallery_blocks %}
+              <button
+                type="button"
+                class="sf-hoarder-package__thumbnail{% if forloop.first %} is-active{% endif %}"
+                data-sf-bundle-thumb="{{ forloop.index0 }}"
+                aria-label="View image {{ forloop.index }}"
+                aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}"
+              >
+                {% if block.settings.image != blank %}
+                  {{
+                    block.settings.image
+                    | image_url: width: 220
+                    | image_tag:
+                      class: 'sf-hoarder-package__thumbnail-image',
+                      widths: '100, 140, 180, 220',
+                      sizes: '96px',
+                      loading: 'lazy',
+                      alt: ''
+                  }}
+                {% else %}
+                  {{ 'product-1' | placeholder_svg_tag: 'sf-hoarder-package__thumbnail-placeholder' }}
+                {% endif %}
+              </button>
+            {% endfor %}
+          </div>
+
+        {% elsif featured_product != blank and featured_product.images.size > 1 %}
+          <div class="sf-hoarder-package__thumbnails" aria-label="Product image gallery">
+            {% for image in featured_product.images limit: 5 %}
+              <button
+                type="button"
+                class="sf-hoarder-package__thumbnail{% if forloop.first %} is-active{% endif %}"
+                data-sf-bundle-thumb="{{ forloop.index0 }}"
+                aria-label="View image {{ forloop.index }}"
+                aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}"
+              >
+                {{
+                  image
+                  | image_url: width: 220
+                  | image_tag:
+                    class: 'sf-hoarder-package__thumbnail-image',
+                    widths: '100, 140, 180, 220',
+                    sizes: '96px',
+                    loading: 'lazy',
+                    alt: ''
+                }}
+              </button>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="sf-hoarder-package__content">
+        {% if section.settings.heading != blank %}
+          <h2 class="sf-hoarder-package__heading">
+            {{ section.settings.heading | escape | newline_to_br }}
+          </h2>
+        {% endif %}
+
+        {% if section.settings.description != blank %}
+          <div class="sf-hoarder-package__description rte">
+            {{ section.settings.description }}
+          </div>
+        {% endif %}
+
+        {% if benefit_blocks.size > 0 %}
+          <ul class="sf-hoarder-package__benefits" role="list">
+            {% for block in benefit_blocks %}
+              {% if block.settings.text != blank %}
+                <li class="sf-hoarder-package__benefit" {{ block.shopify_attributes }}>
+                  <span class="sf-hoarder-package__benefit-icon" aria-hidden="true">
+                    {% if block.settings.icon != blank %}
+                      {{
+                        block.settings.icon
+                        | image_url: width: 50
+                        | image_tag:
+                          class: 'sf-hoarder-package__benefit-image',
+                          widths: '20, 30, 40, 50',
+                          sizes: '18px',
+                          loading: 'lazy',
+                          alt: ''
+                      }}
+                    {% else %}
+                      {{ block.settings.fallback_icon | escape }}
+                    {% endif %}
+                  </span>
+
+                  <span>{{ block.settings.text | escape }}</span>
+                </li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        {% endif %}
+
+        <div class="sf-hoarder-package__purchase">
+          {% if featured_product != blank and selected_variant != blank %}
+            {% form 'product', featured_product, id: product_form_id, class: 'sf-hoarder-package__form' %}
+              <input
+                type="hidden"
+                name="id"
+                value="{{ selected_variant.id }}"
+              >
+              <input
+                type="hidden"
+                name="quantity"
+                value="1"
+              >
+
+              <button
+                type="submit"
+                name="add"
+                class="sf-hoarder-package__add-button"
+                {% unless selected_variant.available %}
+                  disabled
+                {% endunless %}
+              >
+                <span class="sf-hoarder-package__button-label">
+                  {% if selected_variant.available %}
+                    {{ section.settings.button_label | escape }}
+                  {% else %}
+                    {{ section.settings.sold_out_label | escape }}
+                  {% endif %}
+                </span>
+
+                {% if section.settings.show_price_in_button %}
+                  <span class="sf-hoarder-package__button-divider" aria-hidden="true">—</span>
+
+                  {% if selected_variant.compare_at_price > selected_variant.price %}
+                    <s class="sf-hoarder-package__compare-price">
+                      {{ selected_variant.compare_at_price | money }}
+                    </s>
+                  {% endif %}
+
+                  <span class="sf-hoarder-package__price">
+                    {{ selected_variant.price | money }}
+                  </span>
+                {% endif %}
+              </button>
+            {% endform %}
+          {% else %}
+            <button
+              type="button"
+              class="sf-hoarder-package__add-button"
+              disabled
+            >
+              <span class="sf-hoarder-package__button-label">
+                Select a product
+              </span>
+            </button>
+          {% endif %}
+
+          {% if section.settings.payment_label != blank %}
+            <a
+              {% if button_link != blank %}
+                href="{{ button_link }}"
+              {% else %}
+                role="link"
+                aria-disabled="true"
+              {% endif %}
+              class="sf-hoarder-package__payment-link"
+            >
+              {{ section.settings.payment_label | escape }}
+            </a>
+          {% endif %}
+        </div>
+
+        {% if trust_blocks.size > 0 %}
+          <div class="sf-hoarder-package__trust">
+            {% for block in trust_blocks %}
+              {% if block.settings.text != blank %}
+                <div class="sf-hoarder-package__trust-item" {{ block.shopify_attributes }}>
+                  <span class="sf-hoarder-package__trust-icon">
+                    {% if block.settings.icon != blank %}
+                      {{
+                        block.settings.icon
+                        | image_url: width: 60
+                        | image_tag:
+                          class: 'sf-hoarder-package__trust-image',
+                          widths: '24, 36, 48, 60',
+                          sizes: '22px',
+                          loading: 'lazy',
+                          alt: ''
+                      }}
+                    {% else %}
+                      <span aria-hidden="true">{{ block.settings.fallback_icon | escape }}</span>
+                    {% endif %}
+                  </span>
+
+                  <span class="sf-hoarder-package__trust-text">
+                    {{ block.settings.text | escape }}
+                  </span>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  #SlimfairHoarderPackage-{{ section.id }} {
+    width: 100%;
+    overflow: hidden;
+    padding: var(--sf-bundle-padding-top) 40px var(--sf-bundle-padding-bottom);
+    background-color: var(--sf-bundle-background);
+    {% if section.settings.enable_background_glow %}
+      background-image: radial-gradient(
+        circle at 58% 50%,
+        var(--sf-bundle-glow) 0%,
+        var(--sf-bundle-background) 68%
+      );
+    {% endif %}
+  }
+
+  #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__container {
+    width: 100%;
+    max-width: {{ section.settings.container_width }}px;
+    margin: 0 auto;
+  }
+
+  #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__grid {
+    display: grid;
+    grid-template-columns: minmax(400px, {{ section.settings.gallery_width }}px) minmax(0, 1fr);
+    align-items: center;
+    gap: var(--sf-bundle-content-gap);
+  }
+
+  #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__gallery {
+    min-width: 0;
+  }
+
+  #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__main-media {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: var(--sf-bundle-image-radius);
+  }
+
+  #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__slide {
+    display: block;
+    width: 100%;
+  }
+
+  #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__slide[hidden] {
+    display: none;
+  }
+
+  #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__main-image,
+  #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__placeholder {
+    display: block;
+    width: 100%;
+    aspect-ratio: {{ section.settings.main_image_ratio }};
+    height: auto;
+    border-radius: var(--sf-bundle-image-radius);
+    object-fit: {{ section.settings.main_image_fit }};
+    object-position: {{ section.settings.main_image_position }};
+  }
+
+  #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__placeholder {
+    background-color: rgba(92, 63, 45, 0.06);
+  }
+
+  #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__placeholder-svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__badge {
+    position: absolute;
+    top: 20px;
+    right: 15px;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    max-width: calc(100% - 30px);
+    padding: 14px 20px;
+    border-radius: 50px;
+    background-color: var(--sf-bundle-badge-background);
+    color: var(--sf-bundle-badge-text);
+    font-family: Avenir, "Avenir Next", Arial, sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__badge-star {
+    font-size: 24px;
+    line-height: 1;
+  }
+
+  #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__thumbnails {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    width: 100%;
+    margin-top: 29px;
+    overflow-x: auto;
+    padding-bottom: 2px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__thumbnails::-webkit-scrollbar {
+    display: none;
+  }
+
+  #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__thumbnail {
+    display: block;
+    flex: 0 0 auto;
+    width: {{ section.settings.thumbnail_width }}px;
+    height: {{ section.settings.thumbnail_height }}px;
+    overflow: hidden;
+    padding: 0;
+    border: 1px solid transparent;
+    border-radius: {{ section.settings.thumbnail_radius }}px;
+    background-color: transparent;
+    cursor: pointer;
+    transition: border-color 0.2s ease, opacity 0.2s ease;
+  }
+
+  #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__thumbnail:hover,
+  #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__thumbnail.is-active {
+    border-color: var(--sf-bundle-accent);
+  }
+
+  #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__thumbnail:not(.is-active) {
+    opacity: 0.82;
+  }
+
+  #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__thumbnail-image,
+  #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__thumbnail-placeholder {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__content {
+    min-width: 0;
+    width: 100%;
+  }
+
+  #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__heading {
+    margin: 0;
+    color: var(--sf-bundle-heading, #5C3F2D);
+    font-family: Lora, Georgia, serif;
+    font-size: {{ section.settings.heading_size }}px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.2;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+  }
+
+  #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__description {
+    max-width: 630px;
+    margin-top: 21px;
+    color: var(--sf-bundle-text, #5C3F2D);
+    font-family: Avenir, "Avenir Next", Arial, sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.58;
+  }
+
+  #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__description p {
+    margin: 0;
+    color: inherit;
+    font: inherit;
+    line-height: inherit;
+  }
+
+  #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__description p + p {
+    margin-top: 12px;
+  }
+
+  #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__benefits {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    margin: 23px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__benefit {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--sf-bundle-accent, #49704B);
+    font-family: Avenir, "Avenir Next", Arial, sans-serif;
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.38;
+  }
+
+  #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__benefit-icon {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 13px;
+    color: var(--sf-bundle-accent);
+    font-size: 15px;
+    line-height: 1;
+  }
+
+  #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__benefit-image {
+    display: block;
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+  }
+
+  #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__purchase {
+    width: 100%;
+    margin-top: 22px;
+  }
+
+  #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__form {
+    width: 100%;
+  }
+
+  #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__add-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    width: 100%;
+    min-height: 49px;
+    padding: 13px 18px;
+    border: 0;
+    border-radius: {{ section.settings.button_border_radius }}px;
+    background-color: var(--sf-bundle-button-background);
+    color: var(--sf-bundle-button-text);
+    font-family: Avenir, "Avenir Next", Arial, sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1;
+    cursor: pointer;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+
+  #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__add-button:hover:not(:disabled) {
+    opacity: 0.92;
+    transform: translateY(-1px);
+  }
+
+  #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__add-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.62;
+  }
+
+  #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__compare-price {
+    color: var(--sf-bundle-old-price);
+    font-weight: 400;
+    opacity: 0.72;
+  }
+
+  #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__price {
+    font-weight: 700;
+  }
+
+  #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__payment-link {
+    display: block;
+    width: fit-content;
+    margin: 14px auto 0;
+    color: var(--sf-bundle-text);
+    font-family: Avenir, "Avenir Next", Arial, sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.3;
+    text-decoration: underline;
+  }
+
+  #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__payment-link[aria-disabled="true"] {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__trust {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px 18px;
+    margin-top: 17px;
+  }
+
+  #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__trust-item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--sf-bundle-text);
+    font-family: Avenir, "Avenir Next", Arial, sans-serif;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.35;
+    white-space: nowrap;
+  }
+
+  #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__trust-icon {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 27px;
+    height: 27px;
+    border: 1px solid var(--sf-bundle-trust-border);
+    border-radius: 50%;
+    color: var(--sf-bundle-accent);
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__trust-image {
+    display: block;
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+  }
+
+  @media screen and (max-width: 1199px) {
+    #SlimfairHoarderPackage-{{ section.id }} {
+      padding-right: 28px;
+      padding-left: 28px;
+    }
+
+    #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__grid {
+      grid-template-columns: minmax(360px, 46%) minmax(0, 1fr);
+      gap: 40px;
+    }
+
+    #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__heading {
+      font-size: clamp(30px, 3vw, {{ section.settings.heading_size }}px);
+    }
+
+    #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__description {
+      font-size: 16px;
+    }
+
+    #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__benefit {
+      font-size: 15px;
+    }
+
+    #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__badge {
+      padding: 11px 15px;
+      font-size: 15px;
+    }
+  }
+
+  @media screen and (max-width: 899px) {
+    #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__grid {
+      display: flex;
+      flex-direction: column;
+      gap: 34px;
+    }
+
+    #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__gallery,
+    #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__content {
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    #SlimfairHoarderPackage-{{ section.id }} {
+      padding: {{ section.settings.mobile_padding_top }}px 15px {{ section.settings.mobile_padding_bottom }}px;
+    }
+
+    #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__grid {
+      gap: 28px;
+    }
+
+    #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__badge {
+      top: 12px;
+      right: 10px;
+      gap: 6px;
+      padding: 10px 12px;
+      font-size: 12px;
+    }
+
+    #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__badge-star {
+      font-size: 16px;
+    }
+
+    #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__thumbnails {
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__thumbnail {
+      width: 68px;
+      height: 68px;
+    }
+
+    #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__heading {
+      font-size: {{ section.settings.mobile_heading_size }}px;
+      line-height: 1.24;
+    }
+
+    #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__description {
+      margin-top: 15px;
+      font-size: 14px;
+      line-height: 1.56;
+    }
+
+    #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__benefits {
+      gap: 7px;
+      margin-top: 19px;
+    }
+
+    #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__benefit {
+      font-size: 14px;
+    }
+
+    #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__purchase {
+      margin-top: 20px;
+    }
+
+    #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__add-button {
+      min-height: 51px;
+      flex-wrap: wrap;
+      font-size: 14px;
+    }
+
+    #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__trust {
+      gap: 11px 14px;
+    }
+
+    #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__trust-item {
+      font-size: 12px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__thumbnail,
+    #SlimfairHoarderPackage-{{ section.id }} .sf-hoarder-package__add-button {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  (() => {
+    const section = document.getElementById('SlimfairHoarderPackage-{{ section.id }}');
+
+    if (!section || section.dataset.galleryInitialized === 'true') {
+      return;
+    }
+
+    const thumbnails = section.querySelectorAll('[data-sf-bundle-thumb]');
+    const slides = section.querySelectorAll('[data-sf-bundle-slide]');
+
+    if (!thumbnails.length || !slides.length) {
+      return;
+    }
+
+    section.dataset.galleryInitialized = 'true';
+
+    thumbnails.forEach((thumbnail) => {
+      thumbnail.addEventListener('click', () => {
+        const selectedIndex = thumbnail.dataset.sfBundleThumb;
+
+        thumbnails.forEach((item) => {
+          const isSelected = item === thumbnail;
+
+          item.classList.toggle('is-active', isSelected);
+          item.setAttribute('aria-pressed', isSelected ? 'true' : 'false');
+        });
+
+        slides.forEach((slide) => {
+          const isSelected = slide.dataset.sfBundleSlide === selectedIndex;
+
+          slide.classList.toggle('is-active', isSelected);
+          slide.hidden = !isSelected;
+        });
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Slimfair bundle feature",
+  "tag": "section",
+  "class": "section-slimfair-hoarder-package",
+  "max_blocks": 20,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Product"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Choose product",
+      "info": "This product controls the price and Add to Cart button."
+    },
+    {
+      "type": "header",
+      "content": "Text content"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "HOARD MORE. SAVE MORE."
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Stock up on your daily wellness coffee with our value-packed SlimFair Hoarder Package — perfect for consistent results, long-term use, and bigger savings.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Section colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#F7FBEA"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_background_glow",
+      "label": "Show subtle background glow",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "glow_color",
+      "label": "Background glow color",
+      "default": "#FFF4BE"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#5C3F2D"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#5C3F2D"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent text color",
+      "default": "#49704B"
+    },
+    {
+      "type": "header",
+      "content": "Image gallery"
+    },
+    {
+      "type": "range",
+      "id": "gallery_width",
+      "label": "Desktop gallery width",
+      "min": 380,
+      "max": 620,
+      "step": 5,
+      "unit": "px",
+      "default": 505
+    },
+    {
+      "type": "select",
+      "id": "main_image_ratio",
+      "label": "Main image ratio",
+      "default": "1 / 1",
+      "options": [
+        {
+          "value": "1 / 1",
+          "label": "Square"
+        },
+        {
+          "value": "4 / 5",
+          "label": "Portrait"
+        },
+        {
+          "value": "5 / 4",
+          "label": "Landscape"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "main_image_fit",
+      "label": "Main image fit",
+      "default": "cover",
+      "options": [
+        {
+          "value": "cover",
+          "label": "Cover"
+        },
+        {
+          "value": "contain",
+          "label": "Contain"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "main_image_position",
+      "label": "Main image position",
+      "default": "center center",
+      "options": [
+        {
+          "value": "center center",
+          "label": "Center"
+        },
+        {
+          "value": "center top",
+          "label": "Top"
+        },
+        {
+          "value": "center bottom",
+          "label": "Bottom"
+        },
+        {
+          "value": "left center",
+          "label": "Left"
+        },
+        {
+          "value": "right center",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "label": "Main image border radius",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 19
+    },
+    {
+      "type": "range",
+      "id": "thumbnail_width",
+      "label": "Desktop thumbnail width",
+      "min": 50,
+      "max": 130,
+      "step": 1,
+      "unit": "px",
+      "default": 93
+    },
+    {
+      "type": "range",
+      "id": "thumbnail_height",
+      "label": "Desktop thumbnail height",
+      "min": 50,
+      "max": 130,
+      "step": 1,
+      "unit": "px",
+      "default": 90
+    },
+    {
+      "type": "range",
+      "id": "thumbnail_radius",
+      "label": "Thumbnail border radius",
+      "min": 0,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 3
+    },
+    {
+      "type": "header",
+      "content": "Image badge"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_badge",
+      "label": "Show badge over image",
+      "default": false,
+      "info": "Turn this on only if the badge is not already included inside your uploaded artwork."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_badge_star",
+      "label": "Show star in badge",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge text",
+      "default": "Energy & Appetite Control"
+    },
+    {
+      "type": "color",
+      "id": "badge_background",
+      "label": "Badge background",
+      "default": "#C28B52"
+    },
+    {
+      "type": "color",
+      "id": "badge_text_color",
+      "label": "Badge text color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Add to cart button"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "ADD TO CART"
+    },
+    {
+      "type": "text",
+      "id": "sold_out_label",
+      "label": "Sold out button label",
+      "default": "SOLD OUT"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_price_in_button",
+      "label": "Show selected product price in button",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button background",
+      "default": "#49704B"
+    },
+    {
+      "type": "color",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "compare_price_color",
+      "label": "Compare-at price color",
+      "default": "#D4D3B9"
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "label": "Button border radius",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 7
+    },
+    {
+      "type": "text",
+      "id": "payment_label",
+      "label": "Payment options link label",
+      "default": "View Payment Options"
+    },
+    {
+      "type": "url",
+      "id": "payment_link",
+      "label": "Payment options link"
+    },
+    {
+      "type": "header",
+      "content": "Trust row"
+    },
+    {
+      "type": "color",
+      "id": "trust_border_color",
+      "label": "Trust icon border color",
+      "default": "#9BB681"
+    },
+    {
+      "type": "header",
+      "content": "Desktop layout"
+    },
+    {
+      "type": "range",
+      "id": "container_width",
+      "label": "Maximum content width",
+      "min": 900,
+      "max": 1500,
+      "step": 10,
+      "unit": "px",
+      "default": 1240
+    },
+    {
+      "type": "range",
+      "id": "content_gap",
+      "label": "Gap between gallery and text",
+      "min": 20,
+      "max": 140,
+      "step": 2,
+      "unit": "px",
+      "default": 110
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading font size",
+      "min": 26,
+      "max": 54,
+      "step": 1,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 20,
+      "max": 140,
+      "step": 2,
+      "unit": "px",
+      "default": 78
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 20,
+      "max": 140,
+      "step": 2,
+      "unit": "px",
+      "default": 78
+    },
+    {
+      "type": "header",
+      "content": "Mobile layout"
+    },
+    {
+      "type": "range",
+      "id": "mobile_heading_size",
+      "label": "Mobile heading size",
+      "min": 22,
+      "max": 38,
+      "step": 1,
+      "unit": "px",
+      "default": 29
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_top",
+      "label": "Mobile padding top",
+      "min": 16,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_bottom",
+      "label": "Mobile padding bottom",
+      "min": 16,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "gallery_image",
+      "name": "Gallery image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Product artwork image"
+        }
+      ]
+    },
+    {
+      "type": "benefit",
+      "name": "Benefit point",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Optional icon image"
+        },
+        {
+          "type": "text",
+          "id": "fallback_icon",
+          "label": "Fallback icon",
+          "default": "✦"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Benefit text",
+          "default": "6 Packs / 60 Sachets Included"
+        }
+      ]
+    },
+    {
+      "type": "trust_item",
+      "name": "Trust item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Optional icon image"
+        },
+        {
+          "type": "text",
+          "id": "fallback_icon",
+          "label": "Fallback icon",
+          "default": "✓"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Trust text",
+          "default": "FDA NO. 3000002733024"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Slimfair bundle feature",
+      "blocks": [
+        {
+          "type": "benefit",
+          "settings": {
+            "text": "6 Packs / 60 Sachets Included"
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "text": "Supports Energy & Appetite Control"
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "text": "Convenient Daily Wellness Routine"
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "text": "FDA Approved Product"
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "text": "Perfect for Long-Term Use"
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "text": "Bigger Bundle = Better Value"
+          }
+        },
+        {
+          "type": "trust_item",
+          "settings": {
+            "fallback_icon": "✓",
+            "text": "FDA NO. 3000002733024"
+          }
+        },
+        {
+          "type": "trust_item",
+          "settings": {
+            "fallback_icon": "✓",
+            "text": "FREE SHIPPING"
+          }
+        },
+        {
+          "type": "trust_item",
+          "settings": {
+            "fallback_icon": "✓",
+            "text": "Luzon 1–3days VisMin 4–7d"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

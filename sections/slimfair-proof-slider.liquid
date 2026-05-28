@@ -1,0 +1,1150 @@
+{% liquid
+  assign has_blocks = false
+
+  if section.blocks.size > 0
+    assign has_blocks = true
+  endif
+%}
+
+<section
+  id="SlimfairProofSlider-{{ section.id }}"
+  class="sf-proof-slider"
+  style="
+    --sf-proof-background: {{ section.settings.background_color }};
+    --sf-proof-heading-color: {{ section.settings.heading_color }};
+    --sf-proof-accent-color: {{ section.settings.accent_color }};
+    --sf-proof-text-color: {{ section.settings.text_color }};
+    --sf-proof-vs-background: {{ section.settings.vs_background }};
+    --sf-proof-vs-text: {{ section.settings.vs_text_color }};
+    --sf-proof-label-background: {{ section.settings.image_label_background }};
+    --sf-proof-label-text: {{ section.settings.image_label_text }};
+    --sf-proof-product-background: {{ section.settings.product_card_background }};
+    --sf-proof-product-border: {{ section.settings.product_card_border }};
+    --sf-proof-star-color: {{ section.settings.star_color }};
+    --sf-proof-progress-background: {{ section.settings.progress_background }};
+    --sf-proof-progress-active: {{ section.settings.progress_active }};
+    --sf-proof-arrow-background: {{ section.settings.arrow_background }};
+    --sf-proof-arrow-border: {{ section.settings.arrow_border }};
+    --sf-proof-arrow-color: {{ section.settings.arrow_color }};
+    --sf-proof-card-width: {{ section.settings.card_width }}px;
+    --sf-proof-image-radius: {{ section.settings.image_border_radius }}px;
+    --sf-proof-card-gap: {{ section.settings.card_gap }}px;
+    --sf-proof-padding-top: {{ section.settings.padding_top }}px;
+    --sf-proof-padding-bottom: {{ section.settings.padding_bottom }}px;
+  "
+>
+  <div class="sf-proof-slider__header">
+    {% if section.settings.heading_top != blank or section.settings.heading_bottom != blank %}
+      <h2 class="sf-proof-slider__heading">
+        {% if section.settings.heading_top != blank %}
+          <span class="sf-proof-slider__heading-top">
+            {{ section.settings.heading_top | escape }}
+          </span>
+        {% endif %}
+
+        {% if section.settings.heading_bottom != blank %}
+          <span class="sf-proof-slider__heading-bottom">
+            {{ section.settings.heading_bottom | escape }}
+          </span>
+        {% endif %}
+      </h2>
+    {% endif %}
+
+    {% if section.settings.description != blank %}
+      <p class="sf-proof-slider__description">
+        {{ section.settings.description | escape }}
+      </p>
+    {% endif %}
+  </div>
+
+  {% if has_blocks %}
+    <div class="sf-proof-slider__slider">
+      <div
+        class="sf-proof-slider__track"
+        data-sf-proof-track
+        aria-label="Customer transformations"
+      >
+        {% for block in section.blocks %}
+          {% liquid
+            assign selected_product = block.settings.product
+
+            assign product_image = block.settings.product_image
+            if product_image == blank and selected_product != blank
+              assign product_image = selected_product.featured_image
+            endif
+
+            assign product_title = block.settings.product_title
+            if product_title == blank and selected_product != blank
+              assign product_title = selected_product.title
+            endif
+
+            assign product_link = block.settings.product_link
+            if product_link == blank and selected_product != blank
+              assign product_link = selected_product.url
+            endif
+          %}
+
+          <article class="sf-proof-card" {{ block.shopify_attributes }}>
+            <div class="sf-proof-card__comparison">
+              <div class="sf-proof-card__photo">
+                {% if block.settings.before_image != blank %}
+                  {{
+                    block.settings.before_image
+                    | image_url: width: 600
+                    | image_tag:
+                      class: 'sf-proof-card__image',
+                      widths: '240, 320, 400, 500, 600',
+                      sizes: '(min-width: 750px) 200px, 44vw',
+                      loading: 'lazy',
+                      alt: block.settings.before_label
+                  }}
+                {% else %}
+                  <div class="sf-proof-card__placeholder">
+                    {{ 'image' | placeholder_svg_tag: 'sf-proof-card__placeholder-svg' }}
+                  </div>
+                {% endif %}
+
+                {% if block.settings.before_label != blank %}
+                  <span class="sf-proof-card__photo-label">
+                    {{ block.settings.before_label | escape }}
+                  </span>
+                {% endif %}
+              </div>
+
+              {% if block.settings.show_vs_badge %}
+                <span class="sf-proof-card__vs">
+                  {{ block.settings.vs_label | escape }}
+                </span>
+              {% endif %}
+
+              <div class="sf-proof-card__photo">
+                {% if block.settings.after_image != blank %}
+                  {{
+                    block.settings.after_image
+                    | image_url: width: 600
+                    | image_tag:
+                      class: 'sf-proof-card__image',
+                      widths: '240, 320, 400, 500, 600',
+                      sizes: '(min-width: 750px) 200px, 44vw',
+                      loading: 'lazy',
+                      alt: block.settings.after_label
+                  }}
+                {% else %}
+                  <div class="sf-proof-card__placeholder">
+                    {{ 'image' | placeholder_svg_tag: 'sf-proof-card__placeholder-svg' }}
+                  </div>
+                {% endif %}
+
+                {% if block.settings.after_label != blank %}
+                  <span class="sf-proof-card__photo-label">
+                    {{ block.settings.after_label | escape }}
+                  </span>
+                {% endif %}
+              </div>
+            </div>
+
+            {% if block.settings.testimonial_heading != blank or block.settings.testimonial_text != blank %}
+              <div class="sf-proof-card__testimonial">
+                {% if block.settings.testimonial_heading != blank %}
+                  <p class="sf-proof-card__testimonial-heading">
+                    {{ block.settings.testimonial_heading | escape }}
+                  </p>
+                {% endif %}
+
+                {% if block.settings.testimonial_text != blank %}
+                  <p class="sf-proof-card__testimonial-text">
+                    {{ block.settings.testimonial_text | escape }}
+                  </p>
+                {% endif %}
+              </div>
+            {% endif %}
+
+            {% if product_image != blank or product_title != blank %}
+              {% if product_link != blank %}
+                <a href="{{ product_link }}" class="sf-proof-product">
+              {% else %}
+                <div class="sf-proof-product">
+              {% endif %}
+
+                <div class="sf-proof-product__media">
+                  {% if product_image != blank %}
+                    {{
+                      product_image
+                      | image_url: width: 180
+                      | image_tag:
+                        class: 'sf-proof-product__image',
+                        widths: '80, 120, 160, 180',
+                        sizes: '64px',
+                        loading: 'lazy',
+                        alt: product_title
+                    }}
+                  {% else %}
+                    {{ 'product-1' | placeholder_svg_tag: 'sf-proof-product__placeholder' }}
+                  {% endif %}
+                </div>
+
+                <div class="sf-proof-product__content">
+                  {% if block.settings.show_product_stars and block.settings.product_stars != blank %}
+                    <span
+                      class="sf-proof-product__stars"
+                      aria-label="{{ block.settings.product_rating_text | escape }}"
+                    >
+                      {{ block.settings.product_stars | escape }}
+                    </span>
+                  {% endif %}
+
+                  {% if product_title != blank %}
+                    <h3 class="sf-proof-product__title">
+                      {{ product_title | escape }}
+                    </h3>
+                  {% endif %}
+                </div>
+
+              {% if product_link != blank %}
+                </a>
+              {% else %}
+                </div>
+              {% endif %}
+            {% endif %}
+          </article>
+        {% endfor %}
+      </div>
+
+      {% if section.settings.show_slider_controls %}
+        <div class="sf-proof-slider__controls" data-sf-proof-controls>
+          <div class="sf-proof-slider__progress" aria-hidden="true">
+            <span class="sf-proof-slider__progress-thumb" data-sf-proof-progress></span>
+          </div>
+
+          <div class="sf-proof-slider__arrows">
+            <button
+              type="button"
+              class="sf-proof-slider__arrow"
+              data-sf-proof-prev
+              aria-label="Previous testimonials"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M14.5 5.5L8 12l6.5 6.5M8.5 12H20"></path>
+              </svg>
+            </button>
+
+            <button
+              type="button"
+              class="sf-proof-slider__arrow"
+              data-sf-proof-next
+              aria-label="Next testimonials"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M9.5 5.5L16 12l-6.5 6.5M15.5 12H4"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  {% endif %}
+</section>
+
+<style>
+  #SlimfairProofSlider-{{ section.id }} {
+    width: 100%;
+    overflow: hidden;
+    padding: var(--sf-proof-padding-top) 0 var(--sf-proof-padding-bottom);
+    background-color: var(--sf-proof-background);
+  }
+
+  #SlimfairProofSlider-{{ section.id }} .sf-proof-slider__header {
+    width: min(100% - 30px, 900px);
+    margin: 0 auto 34px;
+    text-align: center;
+  }
+
+  #SlimfairProofSlider-{{ section.id }} .sf-proof-slider__heading {
+    margin: 0;
+    color: var(--sf-proof-heading-color, #5C3F2D);
+    text-align: center;
+    font-family: Lora, Georgia, serif;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.28;
+  }
+
+  #SlimfairProofSlider-{{ section.id }} .sf-proof-slider__heading-top {
+    display: block;
+    color: var(--sf-proof-heading-color, #5C3F2D);
+  }
+
+  #SlimfairProofSlider-{{ section.id }} .sf-proof-slider__heading-bottom {
+    display: block;
+    color: var(--sf-proof-accent-color, #49704B);
+    font-style: italic;
+  }
+
+  #SlimfairProofSlider-{{ section.id }} .sf-proof-slider__description {
+    margin: 14px 0 0;
+    color: var(--sf-proof-text-color, #5C3F2D);
+    text-align: center;
+    font-family: Avenir, "Avenir Next", Arial, sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.6;
+  }
+
+  #SlimfairProofSlider-{{ section.id }} .sf-proof-slider__slider {
+    width: 100%;
+  }
+
+  #SlimfairProofSlider-{{ section.id }} .sf-proof-slider__track {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: var(--sf-proof-card-width);
+    gap: var(--sf-proof-card-gap);
+    width: 100%;
+    overflow-x: auto;
+    padding: 0 clamp(30px, 3.55vw, 51px) 4px;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  #SlimfairProofSlider-{{ section.id }} .sf-proof-slider__track::-webkit-scrollbar {
+    display: none;
+  }
+
+  #SlimfairProofSlider-{{ section.id }} .sf-proof-card {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    scroll-snap-align: start;
+  }
+
+  #SlimfairProofSlider-{{ section.id }} .sf-proof-card__comparison {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  #SlimfairProofSlider-{{ section.id }} .sf-proof-card__photo {
+    position: relative;
+    min-width: 0;
+    overflow: visible;
+    padding-bottom: 29px;
+  }
+
+  #SlimfairProofSlider-{{ section.id }} .sf-proof-card__image,
+  #SlimfairProofSlider-{{ section.id }} .sf-proof-card__placeholder {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 0.69 / 1;
+    border-radius: var(--sf-proof-image-radius);
+    object-fit: cover;
+    object-position: center;
+    overflow: hidden;
+  }
+
+  #SlimfairProofSlider-{{ section.id }} .sf-proof-card__placeholder {
+    background-color: rgba(255, 255, 255, 0.35);
+  }
+
+  #SlimfairProofSlider-{{ section.id }} .sf-proof-card__placeholder-svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  #SlimfairProofSlider-{{ section.id }} .sf-proof-card__photo-label {
+    position: absolute;
+    right: 20%;
+    bottom: 0;
+    left: 20%;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 38px;
+    padding: 8px 12px;
+    border-radius: 5px;
+    background-color: var(--sf-proof-label-background);
+    color: var(--sf-proof-label-text);
+    text-align: center;
+    font-family: Avenir, "Avenir Next", Arial, sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+  }
+
+  #SlimfairProofSlider-{{ section.id }} .sf-proof-card__vs {
+    position: absolute;
+    top: 44%;
+    left: 50%;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 58px;
+    border-radius: 9px;
+    background-color: var(--sf-proof-vs-background);
+    color: var(--sf-proof-vs-text);
+    text-align: center;
+    font-family: Avenir, "Avenir Next", Arial, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1;
+    transform: translate(-50%, -50%);
+  }
+
+  #SlimfairProofSlider-{{ section.id }} .sf-proof-card__testimonial {
+    margin: 26px 0 14px;
+    text-align: center;
+  }
+
+  #SlimfairProofSlider-{{ section.id }} .sf-proof-card__testimonial-heading {
+    margin: 0 0 7px;
+    overflow: hidden;
+    color: var(--sf-proof-text-color, #5C3F2D);
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-family: Avenir, "Avenir Next", Arial, sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.4;
+  }
+
+  #SlimfairProofSlider-{{ section.id }} .sf-proof-card__testimonial-text {
+    margin: 0;
+    overflow: hidden;
+    color: var(--sf-proof-text-color, #5C3F2D);
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-family: Avenir, "Avenir Next", Arial, sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+
+  #SlimfairProofSlider-{{ section.id }} .sf-proof-product {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    width: 100%;
+    min-height: 85px;
+    margin-top: auto;
+    padding: 8px;
+    border: 1px solid var(--sf-proof-product-border);
+    border-radius: 8px;
+    background-color: var(--sf-proof-product-background);
+    color: var(--sf-proof-text-color);
+    text-decoration: none;
+    transition: border-color 0.25s ease, transform 0.25s ease;
+  }
+
+  #SlimfairProofSlider-{{ section.id }} a.sf-proof-product:hover {
+    transform: translateY(-1px);
+    border-color: var(--sf-proof-accent-color);
+  }
+
+  #SlimfairProofSlider-{{ section.id }} .sf-proof-product__media {
+    flex-shrink: 0;
+    width: 64px;
+    height: 68px;
+    overflow: hidden;
+    background-color: #f5ead7;
+  }
+
+  #SlimfairProofSlider-{{ section.id }} .sf-proof-product__image,
+  #SlimfairProofSlider-{{ section.id }} .sf-proof-product__placeholder {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  #SlimfairProofSlider-{{ section.id }} .sf-proof-product__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 0;
+  }
+
+  #SlimfairProofSlider-{{ section.id }} .sf-proof-product__stars {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--sf-proof-star-color);
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    letter-spacing: 1px;
+    line-height: 1;
+  }
+
+  #SlimfairProofSlider-{{ section.id }} .sf-proof-product__title {
+    display: block;
+    width: 100%;
+    margin: 0;
+    overflow: hidden;
+    color: var(--sf-proof-text-color, #5C3F2D);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-family: Avenir, "Avenir Next", Arial, sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.35;
+  }
+
+  #SlimfairProofSlider-{{ section.id }} .sf-proof-slider__controls {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    width: min(calc(100% - 30px), {{ section.settings.controls_width }}px);
+    margin: 38px auto 0;
+  }
+
+  #SlimfairProofSlider-{{ section.id }} .sf-proof-slider__progress {
+    position: relative;
+    flex-grow: 1;
+    height: 5px;
+    overflow: hidden;
+    border-radius: 20px;
+    background-color: var(--sf-proof-progress-background);
+  }
+
+  #SlimfairProofSlider-{{ section.id }} .sf-proof-slider__progress-thumb {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 35%;
+    height: 100%;
+    border-radius: inherit;
+    background-color: var(--sf-proof-progress-active);
+    transition: left 0.15s ease;
+  }
+
+  #SlimfairProofSlider-{{ section.id }} .sf-proof-slider__arrows {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 14px;
+  }
+
+  #SlimfairProofSlider-{{ section.id }} .sf-proof-slider__arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 39px;
+    height: 27px;
+    padding: 0;
+    border: 1px solid var(--sf-proof-arrow-border);
+    border-radius: 30px;
+    background-color: var(--sf-proof-arrow-background);
+    color: var(--sf-proof-arrow-color);
+    cursor: pointer;
+    transition: opacity 0.2s ease, background-color 0.2s ease;
+  }
+
+  #SlimfairProofSlider-{{ section.id }} .sf-proof-slider__arrow:hover {
+    opacity: 0.75;
+  }
+
+  #SlimfairProofSlider-{{ section.id }} .sf-proof-slider__arrow:disabled {
+    cursor: not-allowed;
+    opacity: 0.38;
+  }
+
+  #SlimfairProofSlider-{{ section.id }} .sf-proof-slider__arrow svg {
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  @media screen and (max-width: 1199px) {
+    #SlimfairProofSlider-{{ section.id }} .sf-proof-slider__track {
+      grid-auto-columns: min(var(--sf-proof-card-width), calc((100vw - 70px) / 2));
+      padding-right: 28px;
+      padding-left: 28px;
+    }
+
+    #SlimfairProofSlider-{{ section.id }} .sf-proof-card__photo-label {
+      right: 14%;
+      left: 14%;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    #SlimfairProofSlider-{{ section.id }} {
+      padding-top: {{ section.settings.mobile_padding_top }}px;
+      padding-bottom: {{ section.settings.mobile_padding_bottom }}px;
+    }
+
+    #SlimfairProofSlider-{{ section.id }} .sf-proof-slider__header {
+      margin-bottom: 28px;
+    }
+
+    #SlimfairProofSlider-{{ section.id }} .sf-proof-slider__heading {
+      font-size: 27px;
+      line-height: 1.3;
+    }
+
+    #SlimfairProofSlider-{{ section.id }} .sf-proof-slider__description {
+      margin-top: 10px;
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    #SlimfairProofSlider-{{ section.id }} .sf-proof-slider__track {
+      grid-auto-columns: calc(100vw - 30px);
+      gap: 15px;
+      padding: 0 15px 4px;
+    }
+
+    #SlimfairProofSlider-{{ section.id }} .sf-proof-card__comparison {
+      gap: 8px;
+    }
+
+    #SlimfairProofSlider-{{ section.id }} .sf-proof-card__photo-label {
+      right: 17%;
+      left: 17%;
+      min-height: 35px;
+      font-size: 14px;
+    }
+
+    #SlimfairProofSlider-{{ section.id }} .sf-proof-card__vs {
+      width: 52px;
+      height: 48px;
+      font-size: 12px;
+    }
+
+    #SlimfairProofSlider-{{ section.id }} .sf-proof-card__testimonial {
+      margin-top: 22px;
+    }
+
+    #SlimfairProofSlider-{{ section.id }} .sf-proof-card__testimonial-heading {
+      font-size: 16px;
+    }
+
+    #SlimfairProofSlider-{{ section.id }} .sf-proof-card__testimonial-text {
+      font-size: 14px;
+    }
+
+    #SlimfairProofSlider-{{ section.id }} .sf-proof-product {
+      min-height: 76px;
+    }
+
+    #SlimfairProofSlider-{{ section.id }} .sf-proof-product__media {
+      width: 58px;
+      height: 60px;
+    }
+
+    #SlimfairProofSlider-{{ section.id }} .sf-proof-product__stars {
+      font-size: 16px;
+    }
+
+    #SlimfairProofSlider-{{ section.id }} .sf-proof-product__title {
+      font-size: 14px;
+    }
+
+    #SlimfairProofSlider-{{ section.id }} .sf-proof-slider__controls {
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    #SlimfairProofSlider-{{ section.id }} .sf-proof-slider__arrows {
+      gap: 8px;
+    }
+
+    #SlimfairProofSlider-{{ section.id }} .sf-proof-slider__arrow {
+      width: 37px;
+      height: 28px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #SlimfairProofSlider-{{ section.id }} .sf-proof-slider__track {
+      scroll-behavior: auto;
+    }
+
+    #SlimfairProofSlider-{{ section.id }} .sf-proof-product,
+    #SlimfairProofSlider-{{ section.id }} .sf-proof-slider__progress-thumb {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  (() => {
+    const sectionId = 'SlimfairProofSlider-{{ section.id }}';
+
+    function initializeSlimfairProofSlider() {
+      const section = document.getElementById(sectionId);
+
+      if (!section || section.dataset.sliderInitialized === 'true') {
+        return;
+      }
+
+      const track = section.querySelector('[data-sf-proof-track]');
+      const progress = section.querySelector('[data-sf-proof-progress]');
+      const controls = section.querySelector('[data-sf-proof-controls]');
+      const previousButton = section.querySelector('[data-sf-proof-prev]');
+      const nextButton = section.querySelector('[data-sf-proof-next]');
+      const firstCard = section.querySelector('.sf-proof-card');
+
+      if (!track || !firstCard) {
+        return;
+      }
+
+      section.dataset.sliderInitialized = 'true';
+
+      function getScrollAmount() {
+        const computedStyle = window.getComputedStyle(track);
+        const gap = parseFloat(computedStyle.columnGap || computedStyle.gap || 0);
+        return firstCard.getBoundingClientRect().width + gap;
+      }
+
+      function updateSliderControls() {
+        const maximumScroll = track.scrollWidth - track.clientWidth;
+        const currentScroll = track.scrollLeft;
+        const scrollRatio = maximumScroll > 0 ? currentScroll / maximumScroll : 0;
+        const visibleRatio = track.scrollWidth > 0 ? track.clientWidth / track.scrollWidth : 1;
+        const progressWidth = Math.min(100, Math.max(18, visibleRatio * 100));
+        const progressPosition = scrollRatio * (100 - progressWidth);
+
+        if (progress) {
+          progress.style.width = `${progressWidth}%`;
+          progress.style.left = `${progressPosition}%`;
+        }
+
+        if (previousButton) {
+          previousButton.disabled = currentScroll <= 2;
+        }
+
+        if (nextButton) {
+          nextButton.disabled = currentScroll >= maximumScroll - 2;
+        }
+
+        if (controls) {
+          controls.style.display = maximumScroll > 2 ? 'flex' : 'none';
+        }
+      }
+
+      if (previousButton) {
+        previousButton.addEventListener('click', () => {
+          track.scrollBy({
+            left: -getScrollAmount(),
+            behavior: 'smooth'
+          });
+        });
+      }
+
+      if (nextButton) {
+        nextButton.addEventListener('click', () => {
+          track.scrollBy({
+            left: getScrollAmount(),
+            behavior: 'smooth'
+          });
+        });
+      }
+
+      track.addEventListener('scroll', updateSliderControls, { passive: true });
+      window.addEventListener('resize', updateSliderControls);
+
+      updateSliderControls();
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initializeSlimfairProofSlider);
+    } else {
+      initializeSlimfairProofSlider();
+    }
+
+    document.addEventListener('shopify:section:load', function(event) {
+      if (
+        event.target &&
+        (
+          event.target.id === sectionId ||
+          event.target.querySelector(`#${sectionId}`)
+        )
+      ) {
+        initializeSlimfairProofSlider();
+      }
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Slimfair proof slider",
+  "tag": "section",
+  "class": "section-slimfair-proof-slider",
+  "max_blocks": 12,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Heading content"
+    },
+    {
+      "type": "text",
+      "id": "heading_top",
+      "label": "Heading top",
+      "default": "Trusted by Hundreds of"
+    },
+    {
+      "type": "text",
+      "id": "heading_bottom",
+      "label": "Heading bottom",
+      "default": "Thousands of Filipinos"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut"
+    },
+    {
+      "type": "header",
+      "content": "Section colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#E5F1B6"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading top color",
+      "default": "#5C3F2D"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Heading bottom color",
+      "default": "#49704B"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#5C3F2D"
+    },
+    {
+      "type": "header",
+      "content": "Before and after cards"
+    },
+    {
+      "type": "range",
+      "id": "card_width",
+      "label": "Desktop card width",
+      "min": 320,
+      "max": 520,
+      "step": 4,
+      "unit": "px",
+      "default": 408
+    },
+    {
+      "type": "range",
+      "id": "card_gap",
+      "label": "Gap between cards",
+      "min": 10,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "label": "Image border radius",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "color",
+      "id": "vs_background",
+      "label": "VS badge background",
+      "default": "#BD8951"
+    },
+    {
+      "type": "color",
+      "id": "vs_text_color",
+      "label": "VS badge text",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "image_label_background",
+      "label": "Before and after label background",
+      "default": "#49704B"
+    },
+    {
+      "type": "color",
+      "id": "image_label_text",
+      "label": "Before and after label text",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Product card"
+    },
+    {
+      "type": "color",
+      "id": "product_card_background",
+      "label": "Product card background",
+      "default": "#FFF8E8"
+    },
+    {
+      "type": "color",
+      "id": "product_card_border",
+      "label": "Product card border",
+      "default": "#DDA45D"
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Product star color",
+      "default": "#B97C43"
+    },
+    {
+      "type": "header",
+      "content": "Slider controls"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_slider_controls",
+      "label": "Show slider controls",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "controls_width",
+      "label": "Controls maximum width",
+      "min": 700,
+      "max": 1300,
+      "step": 20,
+      "unit": "px",
+      "default": 1120
+    },
+    {
+      "type": "color",
+      "id": "progress_background",
+      "label": "Progress bar background",
+      "default": "#F5DFA3"
+    },
+    {
+      "type": "color",
+      "id": "progress_active",
+      "label": "Progress bar active color",
+      "default": "#5C3F2D"
+    },
+    {
+      "type": "color",
+      "id": "arrow_background",
+      "label": "Arrow background",
+      "default": "#F5DFA3"
+    },
+    {
+      "type": "color",
+      "id": "arrow_border",
+      "label": "Arrow border",
+      "default": "#5C3F2D"
+    },
+    {
+      "type": "color",
+      "id": "arrow_color",
+      "label": "Arrow icon color",
+      "default": "#5C3F2D"
+    },
+    {
+      "type": "header",
+      "content": "Section spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Desktop padding top",
+      "min": 20,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "default": 46
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Desktop padding bottom",
+      "min": 20,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "default": 42
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_top",
+      "label": "Mobile padding top",
+      "min": 20,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 34
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_bottom",
+      "label": "Mobile padding bottom",
+      "min": 20,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 34
+    }
+  ],
+  "blocks": [
+    {
+      "type": "transformation",
+      "name": "Transformation card",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Before and after images"
+        },
+        {
+          "type": "image_picker",
+          "id": "before_image",
+          "label": "Before image"
+        },
+        {
+          "type": "text",
+          "id": "before_label",
+          "label": "Before label",
+          "default": "Before"
+        },
+        {
+          "type": "image_picker",
+          "id": "after_image",
+          "label": "After image"
+        },
+        {
+          "type": "text",
+          "id": "after_label",
+          "label": "After label",
+          "default": "After"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_vs_badge",
+          "label": "Show VS badge",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "vs_label",
+          "label": "VS badge text",
+          "default": "VS"
+        },
+        {
+          "type": "header",
+          "content": "Testimonial text"
+        },
+        {
+          "type": "text",
+          "id": "testimonial_heading",
+          "label": "Testimonial heading",
+          "default": "Lorem ipsum dolor sit amet,"
+        },
+        {
+          "type": "text",
+          "id": "testimonial_text",
+          "label": "Testimonial text",
+          "default": "Lorem ipsum dolor sit amet"
+        },
+        {
+          "type": "header",
+          "content": "Product shown below review"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Choose product"
+        },
+        {
+          "type": "image_picker",
+          "id": "product_image",
+          "label": "Custom product image",
+          "info": "Leave blank to use the selected product featured image."
+        },
+        {
+          "type": "text",
+          "id": "product_title",
+          "label": "Custom product title",
+          "info": "Leave blank to use the selected product title."
+        },
+        {
+          "type": "url",
+          "id": "product_link",
+          "label": "Custom product link",
+          "info": "Leave blank to use the selected product link."
+        },
+        {
+          "type": "checkbox",
+          "id": "show_product_stars",
+          "label": "Show product stars",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "product_stars",
+          "label": "Product stars",
+          "default": "★★★★★"
+        },
+        {
+          "type": "text",
+          "id": "product_rating_text",
+          "label": "Accessible rating text",
+          "default": "5 out of 5 stars"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Slimfair proof slider",
+      "blocks": [
+        {
+          "type": "transformation"
+        },
+        {
+          "type": "transformation"
+        },
+        {
+          "type": "transformation"
+        },
+        {
+          "type": "transformation"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

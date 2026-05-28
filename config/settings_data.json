@@ -494,60 +494,6 @@
           "button_link": "shopify://products/slimfair-coffee"
         }
       },
-      "209c1a2a-e24a-4883-bf3a-93c426687e50": {
-        "type": "image-bar",
-        "blocks": {
-          "209c1a2a-e24a-4883-bf3a-93c426687e50-1688988111ac7d32d4-0": {
-            "type": "image",
-            "disabled": true,
-            "settings": {
-              "image": "shopify://shop_images/EF7C9CFF-5E56-43F7-856A-7472F34AF0A8.png",
-              "alignment": "center",
-              "link": "",
-              "cta_label": ""
-            }
-          },
-          "image_E84fp6": {
-            "type": "image",
-            "disabled": true,
-            "settings": {
-              "image": "shopify://shop_images/Copy_of_Consistency_24_x_36_in.png",
-              "alignment": "center",
-              "link": "",
-              "cta_label": ""
-            }
-          }
-        },
-        "block_order": [
-          "209c1a2a-e24a-4883-bf3a-93c426687e50-1688988111ac7d32d4-0",
-          "image_E84fp6"
-        ],
-        "disabled": true,
-        "settings": {
-          "section_height": "small"
-        }
-      },
-      "94cb5824-701d-4646-8386-e6165f9f2756": {
-        "type": "rich-text",
-        "disabled": true,
-        "settings": {
-          "full_width": true,
-          "section_title": "﻿ASIA'S BEST HEALTH AND BEAUTY PRODUCTS PROVIDER",
-          "text": "<h2>﻿2022 Asia's Golden Icons Award</h2>",
-          "text_size": "large"
-        }
-      },
-      "19494a9c-8ffb-4150-9dac-f35a70654d9d": {
-        "type": "collection",
-        "settings": {
-          "title": "slimming beauty mix",
-          "collection": "slimfair-coffee",
-          "grid": 3,
-          "rows": 2,
-          "show_vendor": false,
-          "show_view_all": false
-        }
-      },
       "734fe57f-0903-4d8f-8a58-8445b60a39b7": {
         "type": "collection",
         "settings": {
@@ -737,35 +683,6 @@
           "autorotate_speed": 5
         }
       },
-      "slideshow_CEQYa9": {
-        "type": "slideshow",
-        "blocks": {
-          "image_bLJVxB": {
-            "type": "image",
-            "disabled": true,
-            "settings": {
-              "image": "shopify://shop_images/PREORDER_PROMO_2.png",
-              "alignment": "center center",
-              "slide_title": "",
-              "subheading": "",
-              "button_label": "",
-              "button_link": "shopify://products/skin-quench-matcha-latte-beauty-drink-w-gluta-blend-collagen-oral-sunbloc-l-carnitine-fiber"
-            }
-          }
-        },
-        "block_order": [
-          "image_bLJVxB"
-        ],
-        "disabled": true,
-        "settings": {
-          "slideshow_height": "adapt",
-          "text_size": "large",
-          "text_alignment": "center center",
-          "show_overlay": true,
-          "autorotate": false,
-          "autorotate_speed": 5
-        }
-      },
       "slideshow_in7UQe": {
         "type": "slideshow",
         "blocks": {
@@ -792,47 +709,6 @@
           "show_overlay": false,
           "autorotate": false,
           "autorotate_speed": 5
-        }
-      },
-      "image_bar_mXk7QD": {
-        "type": "image-bar",
-        "blocks": {
-          "image_aCcRqP": {
-            "type": "image",
-            "settings": {
-              "image": "shopify://shop_images/SLIMFAIR_CAFE_LATTE_9_x_12_in.jpg",
-              "alignment": "center",
-              "link": "",
-              "cta_label": ""
-            }
-          },
-          "image_jWfk7U": {
-            "type": "image",
-            "settings": {
-              "image": "shopify://shop_images/Glow_up_Instagram_Post_1.png",
-              "alignment": "center",
-              "link": "",
-              "cta_label": ""
-            }
-          },
-          "image_XFWkPD": {
-            "type": "image",
-            "settings": {
-              "image": "shopify://shop_images/Glow_up_Instagram_Post_6.png",
-              "alignment": "center",
-              "link": "",
-              "cta_label": ""
-            }
-          }
-        },
-        "block_order": [
-          "image_aCcRqP",
-          "image_jWfk7U",
-          "image_XFWkPD"
-        ],
-        "disabled": true,
-        "settings": {
-          "section_height": "medium"
         }
       },
       "featured-collections": {
@@ -875,29 +751,6 @@
         ],
         "settings": {
           "title": "We're the first and the best!"
-        }
-      },
-      "feature_row_NEzGVn": {
-        "type": "feature-row",
-        "disabled": true,
-        "settings": {
-          "image": "shopify://shop_images/Glow_up_Your_Story_3.png",
-          "layout": "left",
-          "title": "The Best Made Even Better!",
-          "text": "<p>Fuel your day, elevate your mind. Unlock Better Taste and Results with Our New improved SLIMFAIR CAFE LATTE. </p>",
-          "button_label": "Learn More",
-          "button_link": "shopify://products/slimfair-coffee-🏆"
-        }
-      },
-      "feature_row_rnhT6F": {
-        "type": "feature-row",
-        "settings": {
-          "image": "shopify://shop_images/New_Obsession_Coming_soon_Instagram_Post_45_Instagram_Post_3.png",
-          "layout": "right",
-          "title": "Indulge and burn with Slimfair",
-          "text": "<p><br/>At Slimfair, we believe beauty starts from within. Each drink is crafted to support your metabolism, boost focus, and promote a healthy glow — whether you’re working, hustling, or taking that self-care moment.<br/><br/></p>",
-          "button_label": "Learn More",
-          "button_link": "shopify://collections/slimfair-coffee"
         }
       },
       "image_bar_a7rqqA": {
@@ -946,47 +799,6 @@
         "settings": {
           "cart_ajax_enable": true,
           "cart_notes_enable": false
-        }
-      },
-      "image_bar_BRnM7Q": {
-        "type": "image-bar",
-        "blocks": {
-          "image_Y3iARj": {
-            "type": "image",
-            "settings": {
-              "image": "shopify://shop_images/Best_for_you.jpg",
-              "alignment": "center",
-              "link": "",
-              "cta_label": ""
-            }
-          },
-          "image_Q9xL9n": {
-            "type": "image",
-            "disabled": true,
-            "settings": {
-              "alignment": "center",
-              "link": "",
-              "cta_label": ""
-            }
-          },
-          "image_ijfGnm": {
-            "type": "image",
-            "disabled": true,
-            "settings": {
-              "alignment": "center",
-              "link": "",
-              "cta_label": ""
-            }
-          }
-        },
-        "block_order": [
-          "image_Y3iARj",
-          "image_Q9xL9n",
-          "image_ijfGnm"
-        ],
-        "name": "Gallery",
-        "settings": {
-          "section_height": "large"
         }
       },
       "custom-routine-tips": {
@@ -1097,10 +909,11 @@
         "settings": {
           "heading": "See Why SlimFair Stands Above the Rest",
           "text": "<p>While others rely on hype and hidden formulas, SlimFair focuses on transparency, balance, and real results over time.</p>",
-          "slimfair_image": "shopify://shop_images/SLIMFAIR_CAFE_LATTE_9_x_12_in.jpg",
+          "slimfair_image": "shopify://shop_images/Group_136.png",
           "slimfair_label": "SlimFair Products",
+          "competitor_image": "shopify://shop_images/ziplock-packaging-bag-mockup_1.png",
           "competitor_label": "Brand X",
-          "background_color": "#65402c",
+          "background_color": "#5c3f2d",
           "heading_color": "#fbf7d4",
           "text_color": "#fbf7d4",
           "accent_color": "#a8dd62",
@@ -1108,6 +921,7 @@
           "pill_background_color": "#fff9d2",
           "pill_text_color": "#5c3f2d",
           "divider_color": "#e8d8b9",
+          "content_width": 1120,
           "padding_top": 36,
           "padding_bottom": 44
         }
@@ -1298,18 +1112,699 @@
           "padding_top": 64,
           "padding_bottom": 64
         }
+      },
+      "slimfair_homepage_hero_jFwhig": {
+        "type": "slimfair-homepage-hero",
+        "blocks": {
+          "benefit_wPztgz": {
+            "type": "benefit",
+            "settings": {
+              "fallback_icon": "✓",
+              "label": "Sugar-Free"
+            }
+          },
+          "benefit_atPt6X": {
+            "type": "benefit",
+            "settings": {
+              "fallback_icon": "GMP",
+              "label": "GMP Certified"
+            }
+          },
+          "benefit_9pA9tE": {
+            "type": "benefit",
+            "settings": {
+              "fallback_icon": "✓",
+              "label": "Laxative-Free"
+            }
+          },
+          "benefit_nbeHA9": {
+            "type": "benefit",
+            "settings": {
+              "fallback_icon": "✓",
+              "label": "Science-backed Formula"
+            }
+          },
+          "benefit_TkRDHa": {
+            "type": "benefit",
+            "settings": {
+              "fallback_icon": "✓",
+              "label": "Natural Ingredients"
+            }
+          }
+        },
+        "block_order": [
+          "benefit_wPztgz",
+          "benefit_atPt6X",
+          "benefit_9pA9tE",
+          "benefit_nbeHA9",
+          "benefit_TkRDHa"
+        ],
+        "name": "Slimfair homepage hero",
+        "settings": {
+          "desktop_background_position": "center center",
+          "mobile_background_position": "center top",
+          "background_color": "#F4E6D2",
+          "overlay_color": "#FFFFFF",
+          "overlay_opacity": 0,
+          "show_review_row": true,
+          "rating_stars": "★★★★★",
+          "rating_score": "5.0",
+          "sold_text": "200k+ Sold",
+          "review_color": "#5C3F2D",
+          "heading_top": "The Coffee that",
+          "heading_bottom": "Slims, Glows, & Energizes",
+          "description": "4 functional coffee & latte blends crafted with premium ingredients to support your weight, energy, digestion, and natural glow.",
+          "heading_top_color": "#5C3F2D",
+          "heading_bottom_color": "#49704B",
+          "body_color": "#5C3F2D",
+          "primary_button_label": "Shop Bundle",
+          "primary_button_link": "",
+          "primary_button_background": "#49704B",
+          "primary_button_text": "#FFFFFF",
+          "secondary_button_label": "Shop Now",
+          "secondary_button_link": "",
+          "secondary_button_background": "#FFF6DF",
+          "secondary_button_text": "#5C3F2D",
+          "secondary_button_border": "#5C3F2D",
+          "content_position": "right",
+          "desktop_height": 680,
+          "mobile_height": 860,
+          "content_width": 600,
+          "content_vertical_offset": 0,
+          "enable_mobile_panel": true,
+          "mobile_panel_color": "#F8EDDC",
+          "mobile_panel_opacity": 90,
+          "marquee_height": 84,
+          "marquee_speed": 24,
+          "pause_marquee_on_hover": true,
+          "marquee_background": "#F5E8D5",
+          "marquee_background_opacity": 70,
+          "marquee_text_color": "#5C3F2D"
+        }
+      },
+      "slimfair_featured_products_erJLC9": {
+        "type": "slimfair-featured-products",
+        "blocks": {
+          "product_card_nhcfzV": {
+            "type": "product_card",
+            "settings": {
+              "product": "",
+              "custom_title": "",
+              "custom_category": "",
+              "custom_description": "",
+              "custom_link": "",
+              "show_badge_star": true,
+              "badge_text": "Slimming & Detox",
+              "show_reviews": true,
+              "stars": "★★★★★",
+              "rating_text": "5 out of 5 stars",
+              "sold_text": "2,000 Sold",
+              "button_label": "Shop Now"
+            }
+          },
+          "product_card_6DUbCX": {
+            "type": "product_card",
+            "settings": {
+              "product": "",
+              "custom_title": "",
+              "custom_category": "",
+              "custom_description": "",
+              "custom_link": "",
+              "show_badge_star": true,
+              "badge_text": "Slimming & Detox",
+              "show_reviews": true,
+              "stars": "★★★★★",
+              "rating_text": "5 out of 5 stars",
+              "sold_text": "2,000 Sold",
+              "button_label": "Shop Now"
+            }
+          },
+          "product_card_63XADT": {
+            "type": "product_card",
+            "settings": {
+              "product": "",
+              "custom_title": "",
+              "custom_category": "",
+              "custom_description": "",
+              "custom_link": "",
+              "show_badge_star": true,
+              "badge_text": "Slimming & Detox",
+              "show_reviews": true,
+              "stars": "★★★★★",
+              "rating_text": "5 out of 5 stars",
+              "sold_text": "2,000 Sold",
+              "button_label": "Shop Now"
+            }
+          },
+          "product_card_JxnEwd": {
+            "type": "product_card",
+            "settings": {
+              "product": "",
+              "custom_title": "",
+              "custom_category": "",
+              "custom_description": "",
+              "custom_link": "",
+              "show_badge_star": true,
+              "badge_text": "Energy & Appetite Control",
+              "show_reviews": true,
+              "stars": "★★★★★",
+              "rating_text": "5 out of 5 stars",
+              "sold_text": "2,000 Sold",
+              "button_label": "Shop Now"
+            }
+          }
+        },
+        "block_order": [
+          "product_card_nhcfzV",
+          "product_card_6DUbCX",
+          "product_card_63XADT",
+          "product_card_JxnEwd"
+        ],
+        "name": "Slimfair products",
+        "settings": {
+          "heading": "Choose Your Perfect Blend",
+          "description": "Our most-loved, award-winning formulas designed to elevate your daily wellness and beauty ritual.",
+          "background_color": "#F7FBEA",
+          "heading_color": "#5C3F2D",
+          "text_color": "#5C3F2D",
+          "accent_color": "#49704B",
+          "badge_background": "#C18A4F",
+          "badge_text": "#FFFFFF",
+          "button_background": "#49704B",
+          "button_text": "#FFFFFF",
+          "button_border_radius": 8,
+          "image_ratio": "1 / 1",
+          "image_fit": "cover",
+          "image_border_radius": 11,
+          "container_width": 1260,
+          "columns_desktop": "4",
+          "card_gap": 20,
+          "header_spacing": 38,
+          "padding_top": 38,
+          "padding_bottom": 38,
+          "columns_mobile": "1",
+          "mobile_padding_top": 36,
+          "mobile_padding_bottom": 36
+        }
+      },
+      "slimfair_proof_slider_rAbY7W": {
+        "type": "slimfair-proof-slider",
+        "blocks": {
+          "transformation_XhmnqT": {
+            "type": "transformation",
+            "settings": {
+              "before_label": "Before",
+              "after_label": "After",
+              "show_vs_badge": true,
+              "vs_label": "VS",
+              "testimonial_heading": "Lorem ipsum dolor sit amet,",
+              "testimonial_text": "Lorem ipsum dolor sit amet",
+              "product": "",
+              "product_title": "",
+              "product_link": "",
+              "show_product_stars": true,
+              "product_stars": "★★★★★",
+              "product_rating_text": "5 out of 5 stars"
+            }
+          },
+          "transformation_RfRLkk": {
+            "type": "transformation",
+            "settings": {
+              "before_label": "Before",
+              "after_label": "After",
+              "show_vs_badge": true,
+              "vs_label": "VS",
+              "testimonial_heading": "Lorem ipsum dolor sit amet,",
+              "testimonial_text": "Lorem ipsum dolor sit amet",
+              "product": "",
+              "product_title": "",
+              "product_link": "",
+              "show_product_stars": true,
+              "product_stars": "★★★★★",
+              "product_rating_text": "5 out of 5 stars"
+            }
+          },
+          "transformation_LpTxYq": {
+            "type": "transformation",
+            "settings": {
+              "before_label": "Before",
+              "after_label": "After",
+              "show_vs_badge": true,
+              "vs_label": "VS",
+              "testimonial_heading": "Lorem ipsum dolor sit amet,",
+              "testimonial_text": "Lorem ipsum dolor sit amet",
+              "product": "",
+              "product_title": "",
+              "product_link": "",
+              "show_product_stars": true,
+              "product_stars": "★★★★★",
+              "product_rating_text": "5 out of 5 stars"
+            }
+          },
+          "transformation_PhA3e3": {
+            "type": "transformation",
+            "settings": {
+              "before_label": "Before",
+              "after_label": "After",
+              "show_vs_badge": true,
+              "vs_label": "VS",
+              "testimonial_heading": "Lorem ipsum dolor sit amet,",
+              "testimonial_text": "Lorem ipsum dolor sit amet",
+              "product": "",
+              "product_title": "",
+              "product_link": "",
+              "show_product_stars": true,
+              "product_stars": "★★★★★",
+              "product_rating_text": "5 out of 5 stars"
+            }
+          }
+        },
+        "block_order": [
+          "transformation_XhmnqT",
+          "transformation_RfRLkk",
+          "transformation_LpTxYq",
+          "transformation_PhA3e3"
+        ],
+        "name": "Slimfair proof slider",
+        "settings": {
+          "heading_top": "Trusted by Hundreds of",
+          "heading_bottom": "Thousands of Filipinos",
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut",
+          "background_color": "#E5F1B6",
+          "heading_color": "#5C3F2D",
+          "accent_color": "#49704B",
+          "text_color": "#5C3F2D",
+          "card_width": 408,
+          "card_gap": 16,
+          "image_border_radius": 12,
+          "vs_background": "#BD8951",
+          "vs_text_color": "#FFFFFF",
+          "image_label_background": "#49704B",
+          "image_label_text": "#FFFFFF",
+          "product_card_background": "#FFF8E8",
+          "product_card_border": "#DDA45D",
+          "star_color": "#B97C43",
+          "show_slider_controls": true,
+          "controls_width": 1120,
+          "progress_background": "#F5DFA3",
+          "progress_active": "#5C3F2D",
+          "arrow_background": "#F5DFA3",
+          "arrow_border": "#5C3F2D",
+          "arrow_color": "#5C3F2D",
+          "padding_top": 46,
+          "padding_bottom": 42,
+          "mobile_padding_top": 34,
+          "mobile_padding_bottom": 34
+        }
+      },
+      "slimfair_benefits_grid_7CXKGP": {
+        "type": "slimfair-benefits-grid",
+        "blocks": {
+          "benefit_jijGqt": {
+            "type": "benefit",
+            "settings": {
+              "fallback_icon": "♨",
+              "heading": "Faster Metabolism",
+              "description": "Formulated with L-Carnitine and Green Coffee to kickstart your body's natural ability to manage weight."
+            }
+          },
+          "benefit_nUg8Xf": {
+            "type": "benefit",
+            "settings": {
+              "fallback_icon": "✦",
+              "heading": "Reduced Bloating",
+              "description": "Our Prebiotic Fiber supports a flatter stomach and smoother digestion without the harsh laxative effects."
+            }
+          },
+          "benefit_eJnT4t": {
+            "type": "benefit",
+            "settings": {
+              "fallback_icon": "♨",
+              "heading": "Less Cravings",
+              "description": "MCT Oil provides fuel for your brain and body, helping you stay energized through a busy schedule without those cravings."
+            }
+          },
+          "benefit_bxRNXk": {
+            "type": "benefit",
+            "settings": {
+              "fallback_icon": "✧",
+              "heading": "Glowing Radiant Skin",
+              "description": "Premium Collagen and Glutathione work from within to support glowing skin, healthier hair, and a youthful appearance."
+            }
+          }
+        },
+        "block_order": [
+          "benefit_jijGqt",
+          "benefit_nUg8Xf",
+          "benefit_eJnT4t",
+          "benefit_bxRNXk"
+        ],
+        "name": "Slimfair benefits grid",
+        "settings": {
+          "heading": "",
+          "description": "",
+          "header_spacing": 32,
+          "background_color": "#F7FBEA",
+          "card_background": "#F7FBEA",
+          "card_border": "#E4C876",
+          "heading_color": "#5C3F2D",
+          "text_color": "#5C3F2D",
+          "icon_color": "#5C3F2D",
+          "container_width": 1290,
+          "columns_desktop": "4",
+          "card_gap": 30,
+          "card_min_height": 178,
+          "card_border_radius": 8,
+          "card_padding_top": 15,
+          "card_padding_bottom": 14,
+          "icon_size": 48,
+          "padding_top": 44,
+          "padding_bottom": 42,
+          "columns_mobile": "1",
+          "mobile_padding_top": 28,
+          "mobile_padding_bottom": 28
+        }
+      },
+      "slimfair_daily_coffee_feature_G8GVMm": {
+        "type": "slimfair-daily-coffee-feature",
+        "blocks": {
+          "benefit_FfJHxj": {
+            "type": "benefit",
+            "settings": {
+              "fallback_icon": "✓",
+              "heading": "Feel Less Bloated",
+              "description": "Supports healthy digestion so you feel lighter after meals."
+            }
+          },
+          "benefit_9Jzw8r": {
+            "type": "benefit",
+            "settings": {
+              "fallback_icon": "✓",
+              "heading": "Stay Full, Crave Less",
+              "description": "Helps manage appetite naturally throughout the day."
+            }
+          },
+          "benefit_x9FpC8": {
+            "type": "benefit",
+            "settings": {
+              "fallback_icon": "⚡",
+              "heading": "Clean, Steady Energy",
+              "description": "No crashes-just consistent energy and focus."
+            }
+          }
+        },
+        "block_order": [
+          "benefit_FfJHxj",
+          "benefit_9Jzw8r",
+          "benefit_x9FpC8"
+        ],
+        "name": "Slimfair daily coffee",
+        "settings": {
+          "background_color": "#355A3E",
+          "background_image_opacity": 45,
+          "background_size": "cover",
+          "background_repeat": "no-repeat",
+          "background_position": "center center",
+          "panel_background": "#FFFFFF",
+          "container_width": 1150,
+          "panel_border_radius": 16,
+          "panel_padding": 30,
+          "content_gap": 48,
+          "heading": "Feel Lighter. More Energized.\nStarting With Your Daily Coffee.",
+          "description": "Slimfair Coffee is a smooth, creamy latte blend crafted with collagen and glutathione to support your body from the inside out so you can feel your best, every day.",
+          "heading_color": "#49704B",
+          "text_color": "#5C3F2D",
+          "feature_background": "#E5EEE8",
+          "feature_heading_color": "#49704B",
+          "feature_text_color": "#5C3F2D",
+          "icon_background": "#49704B",
+          "icon_color": "#FFFFFF",
+          "icon_circle_size": 48,
+          "icon_size": 30,
+          "feature_border_radius": 11,
+          "image_width": 485,
+          "image_height": 570,
+          "image_ratio": "0.85 / 1",
+          "image_fit": "cover",
+          "image_position": "center center",
+          "image_border_radius": 13,
+          "button_label": "SHOP SLIM FAIR",
+          "button_link": "",
+          "button_product": "",
+          "button_background": "#49704B",
+          "button_text": "#FFFFFF",
+          "button_width": 235,
+          "button_border_radius": 7,
+          "padding_top": 58,
+          "padding_bottom": 60,
+          "mobile_media_position": "bottom",
+          "mobile_panel_padding": 18,
+          "mobile_panel_radius": 14,
+          "mobile_padding_top": 32,
+          "mobile_padding_bottom": 32
+        }
+      },
+      "slimfair_image_text_feature_AMecwC": {
+        "type": "slimfair-image-text-feature",
+        "name": "Slimfair image text",
+        "settings": {
+          "background_color": "#F7FBEA",
+          "section_border_color": "#5C3F2D",
+          "section_border_width": 1,
+          "panel_background": "#FFF8E8",
+          "panel_border_color": "#5C3F2D",
+          "panel_border_width": 2,
+          "panel_border_radius": 18,
+          "container_width": 1250,
+          "panel_padding": 34,
+          "panel_gap": 48,
+          "desktop_image_position": "left",
+          "image_width": 500,
+          "image_height": 500,
+          "image_fit": "cover",
+          "image_position": "center center",
+          "image_border_radius": 16,
+          "heading": "Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit,",
+          "description": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut</p>",
+          "heading_color": "#5C3F2D",
+          "text_color": "#5C3F2D",
+          "content_width": 520,
+          "button_label": "START YOUR JOURNEY",
+          "button_link": "",
+          "show_button_arrow": true,
+          "button_background": "#49704B",
+          "button_text_color": "#FFFFFF",
+          "button_border_radius": 6,
+          "padding_top": 28,
+          "padding_bottom": 28,
+          "mobile_image_position": "top",
+          "mobile_image_ratio": "1 / 1",
+          "mobile_panel_padding": 16,
+          "mobile_panel_border_radius": 14,
+          "mobile_image_border_radius": 12,
+          "mobile_padding_top": 22,
+          "mobile_padding_bottom": 22
+        }
+      },
+      "slimfair_awards_logo_bar_nCaAVN": {
+        "type": "slimfair-awards-logo-bar",
+        "blocks": {
+          "award_logo_9AaBRB": {
+            "type": "award_logo",
+            "settings": {
+              "label": "Asia's Golden Icons Awards",
+              "link": "",
+              "open_in_new_tab": false,
+              "desktop_logo_width": 120,
+              "mobile_logo_width": 108
+            }
+          },
+          "award_logo_Mb6APt": {
+            "type": "award_logo",
+            "settings": {
+              "label": "Philippine Social Media Awards",
+              "link": "",
+              "open_in_new_tab": false,
+              "desktop_logo_width": 112,
+              "mobile_logo_width": 98
+            }
+          },
+          "award_logo_DxDceW": {
+            "type": "award_logo",
+            "settings": {
+              "label": "Asia Pacific Excellence Citation",
+              "link": "",
+              "open_in_new_tab": false,
+              "desktop_logo_width": 144,
+              "mobile_logo_width": 124
+            }
+          },
+          "award_logo_zNcHfM": {
+            "type": "award_logo",
+            "settings": {
+              "label": "Hall of Excellence Star Brand",
+              "link": "",
+              "open_in_new_tab": false,
+              "desktop_logo_width": 116,
+              "mobile_logo_width": 100
+            }
+          },
+          "award_logo_TNLT4D": {
+            "type": "award_logo",
+            "settings": {
+              "label": "Pinnacle Awards",
+              "link": "",
+              "open_in_new_tab": false,
+              "desktop_logo_width": 142,
+              "mobile_logo_width": 124
+            }
+          },
+          "award_logo_ceygN7": {
+            "type": "award_logo",
+            "settings": {
+              "label": "People's Choice Philippines Award",
+              "link": "",
+              "open_in_new_tab": false,
+              "desktop_logo_width": 112,
+              "mobile_logo_width": 100
+            }
+          },
+          "award_logo_AKdCdq": {
+            "type": "award_logo",
+            "settings": {
+              "label": "Top Choice Consumers Award",
+              "link": "",
+              "open_in_new_tab": false,
+              "desktop_logo_width": 102,
+              "mobile_logo_width": 94
+            }
+          }
+        },
+        "block_order": [
+          "award_logo_9AaBRB",
+          "award_logo_Mb6APt",
+          "award_logo_DxDceW",
+          "award_logo_zNcHfM",
+          "award_logo_TNLT4D",
+          "award_logo_ceygN7",
+          "award_logo_AKdCdq"
+        ],
+        "name": "Slimfair awards logo bar",
+        "settings": {
+          "heading": "",
+          "heading_color": "#FFF8E8",
+          "background_color": "#634532",
+          "container_width": 1240,
+          "accessibility_label": "Awards and recognitions",
+          "logo_height": 94,
+          "tablet_logo_height": 78,
+          "logo_gap": 54,
+          "enable_mobile_scroll": true,
+          "mobile_logo_height": 70,
+          "mobile_logo_gap": 28,
+          "padding_top": 38,
+          "padding_bottom": 38,
+          "mobile_padding_top": 28,
+          "mobile_padding_bottom": 28
+        }
+      },
+      "slimfair_video_testimonials_KwxEcT": {
+        "type": "slimfair-video-testimonials",
+        "blocks": {
+          "video_testimonial_nDtp4g": {
+            "type": "video_testimonial",
+            "settings": {
+              "testimonial_heading": "Lorem ipsum dolor sit amet!",
+              "testimonial_text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+              "customer_name": "Jane Doe"
+            }
+          },
+          "video_testimonial_wyjBDU": {
+            "type": "video_testimonial",
+            "settings": {
+              "testimonial_heading": "Lorem ipsum dolor sit amet!",
+              "testimonial_text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+              "customer_name": "Jane Doe"
+            }
+          },
+          "video_testimonial_GjitjR": {
+            "type": "video_testimonial",
+            "settings": {
+              "testimonial_heading": "Lorem ipsum dolor sit amet!",
+              "testimonial_text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+              "customer_name": "Jane Doe"
+            }
+          },
+          "video_testimonial_DXpf3L": {
+            "type": "video_testimonial",
+            "settings": {
+              "testimonial_heading": "Lorem ipsum dolor sit amet!",
+              "testimonial_text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+              "customer_name": "Jane Doe"
+            }
+          },
+          "video_testimonial_gLQhmt": {
+            "type": "video_testimonial",
+            "settings": {
+              "testimonial_heading": "Lorem ipsum dolor sit amet!",
+              "testimonial_text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+              "customer_name": "Jane Doe"
+            }
+          }
+        },
+        "block_order": [
+          "video_testimonial_nDtp4g",
+          "video_testimonial_wyjBDU",
+          "video_testimonial_GjitjR",
+          "video_testimonial_DXpf3L",
+          "video_testimonial_gLQhmt"
+        ],
+        "name": "Slimfair video reviews",
+        "settings": {
+          "show_rating": true,
+          "stars": "★★★★★",
+          "rating_text": "5.0/5.0",
+          "rating_accessibility_text": "Rated 5 out of 5 stars",
+          "heading": "Real Routines. Real Results.",
+          "description": "See how Slimfair Coffee fits into busy mornings, self-care moments and healthy lifestyles supporting weight, digestion, energy and glow.",
+          "header_spacing": 50,
+          "background_color": "#F7FBEA",
+          "heading_color": "#5C3F2D",
+          "text_color": "#5C3F2D",
+          "star_color": "#B7814D",
+          "card_width": 290,
+          "card_gap": 29,
+          "media_height": 485,
+          "image_border_radius": 11,
+          "play_button_size": 62,
+          "play_button_color": "#FFF8E8",
+          "play_icon_color": "#FFF8E8",
+          "show_slider_controls": true,
+          "controls_width": 1110,
+          "controls_spacing": 58,
+          "progress_height": 5,
+          "progress_background": "#F2DDA6",
+          "progress_active": "#5C3F2D",
+          "arrow_background": "#F5DFA8",
+          "arrow_border": "#5C3F2D",
+          "arrow_color": "#5C3F2D",
+          "padding_top": 30,
+          "padding_bottom": 34,
+          "mobile_card_width": 78,
+          "mobile_padding_top": 28,
+          "mobile_padding_bottom": 28
+        }
       }
     },
     "content_for_index": [
-      "feature_row_rnhT6F",
-      "image_bar_BRnM7Q",
-      "feature_row_NEzGVn",
-      "image_bar_mXk7QD",
-      "209c1a2a-e24a-4883-bf3a-93c426687e50",
-      "94cb5824-701d-4646-8386-e6165f9f2756",
-      "slideshow_CEQYa9",
-      "19494a9c-8ffb-4150-9dac-f35a70654d9d",
-      "hero",
+      "slimfair_homepage_hero_jFwhig",
+      "slimfair_featured_products_erJLC9",
+      "slimfair_proof_slider_rAbY7W",
+      "slimfair_benefits_grid_7CXKGP",
+      "slimfair_daily_coffee_feature_G8GVMm",
+      "slimfair_image_text_feature_AMecwC",
+      "slimfair_awards_logo_bar_nCaAVN",
+      "slimfair_video_testimonials_KwxEcT",
       "image_bar_a7rqqA",
       "734fe57f-0903-4d8f-8a58-8445b60a39b7",
       "featured-collections",

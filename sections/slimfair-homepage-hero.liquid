@@ -1,0 +1,1125 @@
+{% liquid
+  assign hero_image = section.settings.background_image | default: section.settings.mobile_background_image
+  assign overlay_alpha = section.settings.overlay_opacity | divided_by: 100.0
+  assign marquee_alpha = section.settings.marquee_background_opacity | divided_by: 100.0
+  assign mobile_panel_alpha = section.settings.mobile_panel_opacity | divided_by: 100.0
+%}
+
+<section
+  id="SlimfairHero-{{ section.id }}"
+  class="sf-hero sf-hero--content-{{ section.settings.content_position }}"
+  style="
+    --sf-hero-background: {{ section.settings.background_color }};
+    --sf-overlay-color: {{ section.settings.overlay_color | color_modify: 'alpha', overlay_alpha }};
+    --sf-heading-top-color: {{ section.settings.heading_top_color }};
+    --sf-heading-bottom-color: {{ section.settings.heading_bottom_color }};
+    --sf-body-color: {{ section.settings.body_color }};
+    --sf-review-color: {{ section.settings.review_color }};
+    --sf-primary-button-background: {{ section.settings.primary_button_background }};
+    --sf-primary-button-text: {{ section.settings.primary_button_text }};
+    --sf-secondary-button-background: {{ section.settings.secondary_button_background }};
+    --sf-secondary-button-text: {{ section.settings.secondary_button_text }};
+    --sf-secondary-button-border: {{ section.settings.secondary_button_border }};
+    --sf-marquee-background: {{ section.settings.marquee_background | color_modify: 'alpha', marquee_alpha }};
+    --sf-marquee-text: {{ section.settings.marquee_text_color }};
+    --sf-mobile-panel-background: {{ section.settings.mobile_panel_color | color_modify: 'alpha', mobile_panel_alpha }};
+    --sf-desktop-height: {{ section.settings.desktop_height }}px;
+    --sf-mobile-height: {{ section.settings.mobile_height }}px;
+    --sf-content-width: {{ section.settings.content_width }}px;
+    --sf-content-offset: {{ section.settings.content_vertical_offset }}px;
+    --sf-marquee-height: {{ section.settings.marquee_height }}px;
+    --sf-marquee-speed: {{ section.settings.marquee_speed }}s;
+    --sf-desktop-bg-position: {{ section.settings.desktop_background_position }};
+    --sf-mobile-bg-position: {{ section.settings.mobile_background_position }};
+  "
+>
+  <div class="sf-hero__media" aria-hidden="true">
+    {% if hero_image != blank %}
+      <picture>
+        {% if section.settings.mobile_background_image != blank %}
+          <source
+            media="(max-width: 749px)"
+            srcset="
+              {{ section.settings.mobile_background_image | image_url: width: 750 }} 750w,
+              {{ section.settings.mobile_background_image | image_url: width: 1100 }} 1100w,
+              {{ section.settings.mobile_background_image | image_url: width: 1500 }} 1500w
+            "
+            sizes="100vw"
+          >
+        {% endif %}
+
+        {{
+          hero_image
+          | image_url: width: 3200
+          | image_tag:
+            class: 'sf-hero__background-image',
+            widths: '750, 1100, 1500, 2000, 2500, 3200',
+            sizes: '100vw',
+            loading: 'eager',
+            fetchpriority: 'high',
+            alt: ''
+        }}
+      </picture>
+    {% endif %}
+
+    <div class="sf-hero__overlay"></div>
+  </div>
+
+  <div class="sf-hero__main">
+    <div class="sf-hero__content{% if section.settings.enable_mobile_panel %} sf-hero__content--mobile-panel{% endif %}">
+      {% if section.settings.show_review_row %}
+        <div class="sf-hero__review">
+          {% if section.settings.rating_stars != blank %}
+            <span class="sf-hero__stars" aria-label="{{ section.settings.rating_score | escape }}">
+              {{ section.settings.rating_stars }}
+            </span>
+          {% endif %}
+
+          {% if section.settings.rating_score != blank %}
+            <span class="sf-hero__rating-score">
+              {{ section.settings.rating_score }}
+            </span>
+          {% endif %}
+
+          {% if section.settings.avatar_1 != blank or section.settings.avatar_2 != blank or section.settings.avatar_3 != blank %}
+            <span class="sf-hero__avatars">
+              {% if section.settings.avatar_1 != blank %}
+                {{
+                  section.settings.avatar_1
+                  | image_url: width: 60
+                  | image_tag: class: 'sf-hero__avatar', loading: 'lazy', alt: ''
+                }}
+              {% endif %}
+
+              {% if section.settings.avatar_2 != blank %}
+                {{
+                  section.settings.avatar_2
+                  | image_url: width: 60
+                  | image_tag: class: 'sf-hero__avatar', loading: 'lazy', alt: ''
+                }}
+              {% endif %}
+
+              {% if section.settings.avatar_3 != blank %}
+                {{
+                  section.settings.avatar_3
+                  | image_url: width: 60
+                  | image_tag: class: 'sf-hero__avatar', loading: 'lazy', alt: ''
+                }}
+              {% endif %}
+            </span>
+          {% endif %}
+
+          {% if section.settings.sold_text != blank %}
+            <span class="sf-hero__review-divider" aria-hidden="true"></span>
+            <span class="sf-hero__sold-text">
+              {{ section.settings.sold_text }}
+            </span>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      {% if section.settings.heading_top != blank or section.settings.heading_bottom != blank %}
+        <h1 class="sf-hero__heading">
+          {% if section.settings.heading_top != blank %}
+            <span class="sf-hero__heading-top">
+              {{ section.settings.heading_top | escape }}
+            </span>
+          {% endif %}
+
+          {% if section.settings.heading_bottom != blank %}
+            <span class="sf-hero__heading-bottom">
+              {{ section.settings.heading_bottom | escape }}
+            </span>
+          {% endif %}
+        </h1>
+      {% endif %}
+
+      {% if section.settings.description != blank %}
+        <p class="sf-hero__description">
+          {{ section.settings.description | escape | newline_to_br }}
+        </p>
+      {% endif %}
+
+      {% if section.settings.primary_button_label != blank or section.settings.secondary_button_label != blank %}
+        <div class="sf-hero__buttons">
+          {% if section.settings.primary_button_label != blank %}
+            <a
+              {% if section.settings.primary_button_link != blank %}
+                href="{{ section.settings.primary_button_link }}"
+              {% else %}
+                role="link"
+                aria-disabled="true"
+              {% endif %}
+              class="sf-hero__button sf-hero__button--primary"
+            >
+              {{ section.settings.primary_button_label | escape }}
+            </a>
+          {% endif %}
+
+          {% if section.settings.secondary_button_label != blank %}
+            <a
+              {% if section.settings.secondary_button_link != blank %}
+                href="{{ section.settings.secondary_button_link }}"
+              {% else %}
+                role="link"
+                aria-disabled="true"
+              {% endif %}
+              class="sf-hero__button sf-hero__button--secondary"
+            >
+              {{ section.settings.secondary_button_label | escape }}
+            </a>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  {% if section.blocks.size > 0 %}
+    <div
+      class="sf-hero__marquee{% if section.settings.pause_marquee_on_hover %} sf-hero__marquee--pause{% endif %}"
+      aria-label="Product benefits"
+    >
+      <div class="sf-hero__marquee-track">
+        {% for repeat in (1..2) %}
+          <div
+            class="sf-hero__marquee-group"
+            {% if repeat == 2 %}
+              aria-hidden="true"
+            {% endif %}
+          >
+            {% for block in section.blocks %}
+              {% if block.type == 'benefit' %}
+                <div
+                  class="sf-hero__marquee-item"
+                  {% if repeat == 1 %}
+                    {{ block.shopify_attributes }}
+                  {% endif %}
+                >
+                  <span class="sf-hero__marquee-icon">
+                    {% if block.settings.icon != blank %}
+                      {{
+                        block.settings.icon
+                        | image_url: width: 80
+                        | image_tag:
+                          class: 'sf-hero__marquee-icon-image',
+                          loading: 'lazy',
+                          alt: ''
+                      }}
+                    {% else %}
+                      <span class="sf-hero__marquee-fallback-icon">
+                        {{ block.settings.fallback_icon | escape }}
+                      </span>
+                    {% endif %}
+                  </span>
+
+                  {% if block.settings.label != blank %}
+                    <span class="sf-hero__marquee-label">
+                      {{ block.settings.label | escape }}
+                    </span>
+                  {% endif %}
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+</section>
+
+<style>
+  #SlimfairHero-{{ section.id }} {
+    position: relative;
+    min-height: var(--sf-desktop-height);
+    background-color: var(--sf-hero-background);
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  #SlimfairHero-{{ section.id }} .sf-hero__media {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+  }
+
+  #SlimfairHero-{{ section.id }} .sf-hero__media picture {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  #SlimfairHero-{{ section.id }} .sf-hero__background-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: var(--sf-desktop-bg-position);
+  }
+
+  #SlimfairHero-{{ section.id }} .sf-hero__overlay {
+    position: absolute;
+    inset: 0;
+    background-color: var(--sf-overlay-color);
+    pointer-events: none;
+  }
+
+  #SlimfairHero-{{ section.id }} .sf-hero__main {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: calc(var(--sf-desktop-height) - var(--sf-marquee-height));
+    padding: 48px clamp(24px, 5vw, 86px) 36px;
+  }
+
+  #SlimfairHero-{{ section.id }}.sf-hero--content-right .sf-hero__main {
+    justify-content: flex-end;
+  }
+
+  #SlimfairHero-{{ section.id }}.sf-hero--content-left .sf-hero__main {
+    justify-content: flex-start;
+  }
+
+  #SlimfairHero-{{ section.id }}.sf-hero--content-center .sf-hero__main {
+    justify-content: center;
+  }
+
+  #SlimfairHero-{{ section.id }} .sf-hero__content {
+    width: min(100%, var(--sf-content-width));
+    text-align: center;
+    transform: translateY(var(--sf-content-offset));
+  }
+
+  #SlimfairHero-{{ section.id }}.sf-hero--content-right .sf-hero__content {
+    margin-right: clamp(0px, 2.8vw, 46px);
+  }
+
+  #SlimfairHero-{{ section.id }}.sf-hero--content-left .sf-hero__content {
+    margin-left: clamp(0px, 2.8vw, 46px);
+  }
+
+  #SlimfairHero-{{ section.id }} .sf-hero__review {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0 0 18px;
+    color: var(--sf-review-color);
+    font-family: Avenir, "Avenir Next", Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.2;
+  }
+
+  #SlimfairHero-{{ section.id }} .sf-hero__stars {
+    color: #bd8752;
+    font-size: 17px;
+    letter-spacing: 2px;
+    line-height: 1;
+  }
+
+  #SlimfairHero-{{ section.id }} .sf-hero__rating-score {
+    font-weight: 500;
+  }
+
+  #SlimfairHero-{{ section.id }} .sf-hero__avatars {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 2px;
+  }
+
+  #SlimfairHero-{{ section.id }} .sf-hero__avatar {
+    display: block;
+    width: 24px;
+    height: 24px;
+    margin-left: -7px;
+    border: 1.5px solid #f4e6d2;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  #SlimfairHero-{{ section.id }} .sf-hero__avatar:first-child {
+    margin-left: 0;
+  }
+
+  #SlimfairHero-{{ section.id }} .sf-hero__review-divider {
+    width: 1px;
+    height: 17px;
+    margin: 0 1px;
+    background-color: rgba(92, 63, 45, 0.45);
+  }
+
+  #SlimfairHero-{{ section.id }} .sf-hero__sold-text {
+    font-weight: 400;
+  }
+
+  #SlimfairHero-{{ section.id }} .sf-hero__heading {
+    margin: 0;
+    text-align: center;
+  }
+
+  #SlimfairHero-{{ section.id }} .sf-hero__heading-top {
+    display: block;
+    color: var(--sf-heading-top-color);
+    text-align: center;
+    font-family: Lora, Georgia, serif;
+    font-size: clamp(38px, 3.35vw, 48px);
+    font-weight: 600;
+    font-style: normal;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+  }
+
+  #SlimfairHero-{{ section.id }} .sf-hero__heading-bottom {
+    display: block;
+    margin-top: 4px;
+    color: var(--sf-heading-bottom-color);
+    text-align: center;
+    font-family: Lora, Georgia, serif;
+    font-size: clamp(38px, 3.35vw, 48px);
+    font-weight: 600;
+    font-style: italic;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+  }
+
+  #SlimfairHero-{{ section.id }} .sf-hero__description {
+    max-width: 620px;
+    margin: 18px auto 0;
+    color: var(--sf-body-color);
+    text-align: center;
+    font-family: Avenir, "Avenir Next", Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.65;
+  }
+
+  #SlimfairHero-{{ section.id }} .sf-hero__buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  #SlimfairHero-{{ section.id }} .sf-hero__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 170px;
+    min-height: 60px;
+    padding: 16px 30px;
+    border-radius: 9px;
+    color: var(--sf-body-color);
+    font-family: Avenir, "Avenir Next", Arial, sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1;
+    text-decoration: none;
+    transition:
+      transform 0.25s ease,
+      opacity 0.25s ease,
+      background-color 0.25s ease;
+  }
+
+  #SlimfairHero-{{ section.id }} .sf-hero__button:hover {
+    transform: translateY(-2px);
+    opacity: 0.92;
+  }
+
+  #SlimfairHero-{{ section.id }} .sf-hero__button[aria-disabled="true"] {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  #SlimfairHero-{{ section.id }} .sf-hero__button--primary {
+    color: var(--sf-primary-button-text);
+    background-color: var(--sf-primary-button-background);
+    border: 1px solid var(--sf-primary-button-background);
+  }
+
+  #SlimfairHero-{{ section.id }} .sf-hero__button--secondary {
+    color: var(--sf-secondary-button-text);
+    background-color: var(--sf-secondary-button-background);
+    border: 1px solid var(--sf-secondary-button-border);
+  }
+
+  #SlimfairHero-{{ section.id }} .sf-hero__marquee {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: var(--sf-marquee-height);
+    overflow: hidden;
+    background-color: var(--sf-marquee-background);
+  }
+
+  #SlimfairHero-{{ section.id }} .sf-hero__marquee-track {
+    display: flex;
+    align-items: center;
+    width: max-content;
+    min-width: max-content;
+    animation: sfHeroMarquee-{{ section.id }} var(--sf-marquee-speed) linear infinite;
+    will-change: transform;
+  }
+
+  #SlimfairHero-{{ section.id }} .sf-hero__marquee--pause:hover .sf-hero__marquee-track {
+    animation-play-state: paused;
+  }
+
+  #SlimfairHero-{{ section.id }} .sf-hero__marquee-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-shrink: 0;
+    min-width: 100vw;
+  }
+
+  #SlimfairHero-{{ section.id }} .sf-hero__marquee-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-shrink: 0;
+    padding: 0 clamp(24px, 3vw, 50px);
+    color: var(--sf-marquee-text);
+    white-space: nowrap;
+  }
+
+  #SlimfairHero-{{ section.id }} .sf-hero__marquee-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    border: 2px solid var(--sf-marquee-text);
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  #SlimfairHero-{{ section.id }} .sf-hero__marquee-icon-image {
+    display: block;
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+  }
+
+  #SlimfairHero-{{ section.id }} .sf-hero__marquee-fallback-icon {
+    font-family: Avenir, "Avenir Next", Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  #SlimfairHero-{{ section.id }} .sf-hero__marquee-label {
+    color: var(--sf-marquee-text);
+    font-family: Avenir, "Avenir Next", Arial, sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  @keyframes sfHeroMarquee-{{ section.id }} {
+    from {
+      transform: translateX(0);
+    }
+
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @media screen and (max-width: 1199px) {
+    #SlimfairHero-{{ section.id }} .sf-hero__main {
+      padding-right: 28px;
+      padding-left: 28px;
+    }
+
+    #SlimfairHero-{{ section.id }} .sf-hero__content {
+      max-width: 52%;
+    }
+
+    #SlimfairHero-{{ section.id }} .sf-hero__heading-top,
+    #SlimfairHero-{{ section.id }} .sf-hero__heading-bottom {
+      font-size: clamp(30px, 3.8vw, 40px);
+    }
+
+    #SlimfairHero-{{ section.id }} .sf-hero__description {
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    #SlimfairHero-{{ section.id }} .sf-hero__button {
+      min-width: 145px;
+      min-height: 54px;
+      padding: 14px 22px;
+      font-size: 16px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    #SlimfairHero-{{ section.id }} {
+      min-height: var(--sf-mobile-height);
+    }
+
+    #SlimfairHero-{{ section.id }} .sf-hero__background-image {
+      object-position: var(--sf-mobile-bg-position);
+    }
+
+    #SlimfairHero-{{ section.id }} .sf-hero__main {
+      align-items: flex-end;
+      justify-content: center;
+      min-height: calc(var(--sf-mobile-height) - var(--sf-marquee-height));
+      padding: 42px 15px 28px;
+    }
+
+    #SlimfairHero-{{ section.id }}.sf-hero--content-right .sf-hero__content,
+    #SlimfairHero-{{ section.id }}.sf-hero--content-left .sf-hero__content,
+    #SlimfairHero-{{ section.id }}.sf-hero--content-center .sf-hero__content {
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
+      transform: none;
+    }
+
+    #SlimfairHero-{{ section.id }} .sf-hero__content--mobile-panel {
+      padding: 24px 16px;
+      border-radius: 14px;
+      background-color: var(--sf-mobile-panel-background);
+      backdrop-filter: blur(3px);
+    }
+
+    #SlimfairHero-{{ section.id }} .sf-hero__review {
+      gap: 6px;
+      margin-bottom: 14px;
+      font-size: 12px;
+    }
+
+    #SlimfairHero-{{ section.id }} .sf-hero__stars {
+      font-size: 14px;
+    }
+
+    #SlimfairHero-{{ section.id }} .sf-hero__avatar {
+      width: 21px;
+      height: 21px;
+    }
+
+    #SlimfairHero-{{ section.id }} .sf-hero__heading-top,
+    #SlimfairHero-{{ section.id }} .sf-hero__heading-bottom {
+      font-size: clamp(30px, 9.4vw, 38px);
+      line-height: 1.12;
+    }
+
+    #SlimfairHero-{{ section.id }} .sf-hero__description {
+      margin-top: 14px;
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    #SlimfairHero-{{ section.id }} .sf-hero__buttons {
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    #SlimfairHero-{{ section.id }} .sf-hero__button {
+      width: 100%;
+      min-width: 0;
+      min-height: 52px;
+      font-size: 16px;
+    }
+
+    #SlimfairHero-{{ section.id }} .sf-hero__marquee {
+      height: var(--sf-marquee-height);
+    }
+
+    #SlimfairHero-{{ section.id }} .sf-hero__marquee-group {
+      justify-content: flex-start;
+      min-width: auto;
+    }
+
+    #SlimfairHero-{{ section.id }} .sf-hero__marquee-item {
+      gap: 10px;
+      padding: 0 24px;
+    }
+
+    #SlimfairHero-{{ section.id }} .sf-hero__marquee-icon {
+      width: 31px;
+      height: 31px;
+    }
+
+    #SlimfairHero-{{ section.id }} .sf-hero__marquee-icon-image {
+      width: 21px;
+      height: 21px;
+    }
+
+    #SlimfairHero-{{ section.id }} .sf-hero__marquee-label {
+      font-size: 15px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #SlimfairHero-{{ section.id }} .sf-hero__marquee-track {
+      animation: none;
+      overflow-x: auto;
+    }
+
+    #SlimfairHero-{{ section.id }} .sf-hero__marquee-group[aria-hidden="true"] {
+      display: none;
+    }
+
+    #SlimfairHero-{{ section.id }} .sf-hero__button {
+      transition: none;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Slimfair homepage hero",
+  "tag": "section",
+  "class": "section-slimfair-homepage-hero",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Background image"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Desktop background image"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_background_image",
+      "label": "Mobile background image"
+    },
+    {
+      "type": "select",
+      "id": "desktop_background_position",
+      "label": "Desktop image position",
+      "default": "center center",
+      "options": [
+        {
+          "value": "left center",
+          "label": "Left center"
+        },
+        {
+          "value": "center center",
+          "label": "Center center"
+        },
+        {
+          "value": "right center",
+          "label": "Right center"
+        },
+        {
+          "value": "center top",
+          "label": "Center top"
+        },
+        {
+          "value": "center bottom",
+          "label": "Center bottom"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "mobile_background_position",
+      "label": "Mobile image position",
+      "default": "center top",
+      "options": [
+        {
+          "value": "left top",
+          "label": "Left top"
+        },
+        {
+          "value": "center top",
+          "label": "Center top"
+        },
+        {
+          "value": "right top",
+          "label": "Right top"
+        },
+        {
+          "value": "center center",
+          "label": "Center center"
+        },
+        {
+          "value": "center bottom",
+          "label": "Center bottom"
+        }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#F4E6D2"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Image overlay color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Image overlay opacity",
+      "min": 0,
+      "max": 70,
+      "step": 5,
+      "unit": "%",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Review row"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_review_row",
+      "label": "Show review row",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "rating_stars",
+      "label": "Stars",
+      "default": "★★★★★"
+    },
+    {
+      "type": "text",
+      "id": "rating_score",
+      "label": "Rating text",
+      "default": "5.0"
+    },
+    {
+      "type": "image_picker",
+      "id": "avatar_1",
+      "label": "Customer avatar 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "avatar_2",
+      "label": "Customer avatar 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "avatar_3",
+      "label": "Customer avatar 3"
+    },
+    {
+      "type": "text",
+      "id": "sold_text",
+      "label": "Sold text",
+      "default": "200k+ Sold"
+    },
+    {
+      "type": "color",
+      "id": "review_color",
+      "label": "Review text color",
+      "default": "#5C3F2D"
+    },
+    {
+      "type": "header",
+      "content": "Hero content"
+    },
+    {
+      "type": "text",
+      "id": "heading_top",
+      "label": "Heading top",
+      "default": "The Coffee that"
+    },
+    {
+      "type": "text",
+      "id": "heading_bottom",
+      "label": "Heading bottom",
+      "default": "Slims, Glows, & Energizes"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "4 functional coffee & latte blends crafted with premium ingredients to support your weight, energy, digestion, and natural glow."
+    },
+    {
+      "type": "color",
+      "id": "heading_top_color",
+      "label": "Top heading color",
+      "default": "#5C3F2D"
+    },
+    {
+      "type": "color",
+      "id": "heading_bottom_color",
+      "label": "Bottom heading color",
+      "default": "#49704B"
+    },
+    {
+      "type": "color",
+      "id": "body_color",
+      "label": "Description color",
+      "default": "#5C3F2D"
+    },
+    {
+      "type": "header",
+      "content": "Buttons"
+    },
+    {
+      "type": "text",
+      "id": "primary_button_label",
+      "label": "Primary button label",
+      "default": "Shop Bundle"
+    },
+    {
+      "type": "url",
+      "id": "primary_button_link",
+      "label": "Primary button link"
+    },
+    {
+      "type": "color",
+      "id": "primary_button_background",
+      "label": "Primary button background",
+      "default": "#49704B"
+    },
+    {
+      "type": "color",
+      "id": "primary_button_text",
+      "label": "Primary button text",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "text",
+      "id": "secondary_button_label",
+      "label": "Secondary button label",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "secondary_button_link",
+      "label": "Secondary button link"
+    },
+    {
+      "type": "color",
+      "id": "secondary_button_background",
+      "label": "Secondary button background",
+      "default": "#FFF6DF"
+    },
+    {
+      "type": "color",
+      "id": "secondary_button_text",
+      "label": "Secondary button text",
+      "default": "#5C3F2D"
+    },
+    {
+      "type": "color",
+      "id": "secondary_button_border",
+      "label": "Secondary button border",
+      "default": "#5C3F2D"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "content_position",
+      "label": "Desktop content position",
+      "default": "right",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "desktop_height",
+      "label": "Desktop section height",
+      "min": 500,
+      "max": 900,
+      "step": 10,
+      "unit": "px",
+      "default": 680
+    },
+    {
+      "type": "range",
+      "id": "mobile_height",
+      "label": "Mobile section height",
+      "min": 600,
+      "max": 1100,
+      "step": 10,
+      "unit": "px",
+      "default": 860
+    },
+    {
+      "type": "range",
+      "id": "content_width",
+      "label": "Content maximum width",
+      "min": 380,
+      "max": 700,
+      "step": 10,
+      "unit": "px",
+      "default": 600
+    },
+    {
+      "type": "range",
+      "id": "content_vertical_offset",
+      "label": "Desktop content vertical offset",
+      "min": -100,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_mobile_panel",
+      "label": "Show background panel behind mobile text",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "mobile_panel_color",
+      "label": "Mobile text panel color",
+      "default": "#F8EDDC"
+    },
+    {
+      "type": "range",
+      "id": "mobile_panel_opacity",
+      "label": "Mobile text panel opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 90
+    },
+    {
+      "type": "header",
+      "content": "Benefits marquee"
+    },
+    {
+      "type": "range",
+      "id": "marquee_height",
+      "label": "Marquee height",
+      "min": 60,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "default": 84
+    },
+    {
+      "type": "range",
+      "id": "marquee_speed",
+      "label": "Marquee speed",
+      "min": 8,
+      "max": 80,
+      "step": 1,
+      "unit": "s",
+      "default": 24
+    },
+    {
+      "type": "checkbox",
+      "id": "pause_marquee_on_hover",
+      "label": "Pause marquee on hover",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "marquee_background",
+      "label": "Marquee background color",
+      "default": "#F5E8D5"
+    },
+    {
+      "type": "range",
+      "id": "marquee_background_opacity",
+      "label": "Marquee background opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 70
+    },
+    {
+      "type": "color",
+      "id": "marquee_text_color",
+      "label": "Marquee text and icon color",
+      "default": "#5C3F2D"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon image"
+        },
+        {
+          "type": "text",
+          "id": "fallback_icon",
+          "label": "Fallback icon text",
+          "default": "✓"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Benefit text",
+          "default": "Sugar-Free"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Slimfair homepage hero",
+      "blocks": [
+        {
+          "type": "benefit",
+          "settings": {
+            "fallback_icon": "✓",
+            "label": "Sugar-Free"
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "fallback_icon": "GMP",
+            "label": "GMP Certified"
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "fallback_icon": "✓",
+            "label": "Laxative-Free"
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "fallback_icon": "✓",
+            "label": "Science-backed Formula"
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "fallback_icon": "✓",
+            "label": "Natural Ingredients"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
