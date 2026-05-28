@@ -1,17 +1,45 @@
 {% assign section_image = section.settings.image %}
 
 <section class="custom-simple-steps" style="
-    --simple-steps-bg: {{ section.settings.background_color }};
-    --simple-steps-heading: {{ section.settings.heading_color }};
-    --simple-steps-text: {{ section.settings.text_color }};
-    --simple-steps-accent: {{ section.settings.accent_color }};
-    --simple-steps-number-bg: {{ section.settings.number_background_color }};
-    --simple-steps-number-text: {{ section.settings.number_text_color }};
-    --simple-steps-padding-top: {{ section.settings.padding_top }}px;
-    --simple-steps-padding-bottom: {{ section.settings.padding_bottom }}px;
-    --simple-steps-image-radius: {{ section.settings.image_radius }}px;
+    --simple-steps-bg: {{ section.settings.background_color | default: '#FFFBD8' }};
+    --simple-steps-heading: {{ section.settings.heading_color | default: '#5C3F2D' }};
+    --simple-steps-text: {{ section.settings.text_color | default: '#6D563D' }};
+    --simple-steps-accent: {{ section.settings.accent_color | default: '#68422E' }};
+    --simple-steps-icon-color: {{ section.settings.icon_color | default: '#FFFFFF' }};
+    --simple-steps-number-bg: {{ section.settings.number_background_color | default: '#F3E59B' }};
+    --simple-steps-number-text: {{ section.settings.number_text_color | default: '#6D563D' }};
+    --simple-steps-padding-top: {{ section.settings.padding_top | default: 52 }}px;
+    --simple-steps-padding-bottom: {{ section.settings.padding_bottom | default: 52 }}px;
+    --simple-steps-max-width: {{ section.settings.max_width | default: 1160 }}px;
+    --simple-steps-layout-gap: {{ section.settings.layout_gap | default: 72 }}px;
+    --simple-steps-content-width: {{ section.settings.content_width | default: 560 }}px;
+    --simple-steps-image-radius: {{ section.settings.image_radius | default: 34 }}px;
+    --simple-steps-image-size: {{ section.settings.image_size | default: 559 }}px;
+    --simple-steps-image-aspect: {{ section.settings.image_aspect_width | default: 559 }} / {{ section.settings.image_aspect_height | default: 559 }};
+    --simple-steps-heading-size: {{ section.settings.heading_size | default: 31 }}px;
+    --simple-steps-text-size: {{ section.settings.text_size | default: 15 }}px;
+    --simple-steps-step-title-size: {{ section.settings.step_title_size | default: 14 }}px;
+    --simple-steps-step-text-size: {{ section.settings.step_text_size | default: 12 }}px;
+    --simple-steps-list-gap: {{ section.settings.list_gap | default: 26 }}px;
+    --simple-steps-step-gap: {{ section.settings.step_gap | default: 20 }}px;
+    --simple-steps-icon-size: {{ section.settings.icon_size | default: 64 }}px;
+    --simple-steps-number-size: {{ section.settings.number_size | default: 23 }}px;
+    --simple-steps-mobile-padding-top: {{ section.settings.mobile_padding_top | default: 10 }}px;
+    --simple-steps-mobile-padding-bottom: {{ section.settings.mobile_padding_bottom | default: 18 }}px;
+    --simple-steps-mobile-page-padding: {{ section.settings.mobile_page_padding | default: 10 }}px;
+    --simple-steps-mobile-layout-gap: {{ section.settings.mobile_layout_gap | default: 12 }}px;
+    --simple-steps-mobile-image-radius: {{ section.settings.mobile_image_radius | default: 8 }}px;
+    --simple-steps-mobile-image-aspect: {{ section.settings.mobile_image_aspect_width | default: 272 }} / {{ section.settings.mobile_image_aspect_height | default: 245 }};
+    --simple-steps-mobile-heading-size: {{ section.settings.mobile_heading_size | default: 17 }}px;
+    --simple-steps-mobile-text-size: {{ section.settings.mobile_text_size | default: 11 }}px;
+    --simple-steps-mobile-step-title-size: {{ section.settings.mobile_step_title_size | default: 11 }}px;
+    --simple-steps-mobile-step-text-size: {{ section.settings.mobile_step_text_size | default: 10 }}px;
+    --simple-steps-mobile-list-gap: {{ section.settings.mobile_list_gap | default: 9 }}px;
+    --simple-steps-mobile-step-gap: {{ section.settings.mobile_step_gap | default: 8 }}px;
+    --simple-steps-mobile-icon-size: {{ section.settings.mobile_icon_size | default: 48 }}px;
+    --simple-steps-mobile-number-size: {{ section.settings.mobile_number_size | default: 22 }}px;
   ">
-  <div class="custom-simple-steps__inner page-width custom-simple-steps__inner--{{ section.settings.image_position }}">
+  <div class="custom-simple-steps__inner page-width custom-simple-steps__inner--{{ section.settings.image_position | default: 'right' }}">
     <div class="custom-simple-steps__content">
       {% if section.settings.heading != blank %}
         <h2 class="custom-simple-steps__heading">{{ section.settings.heading | escape }}</h2>
@@ -24,22 +52,66 @@
       {% if section.blocks.size > 0 %}
         <div class="custom-simple-steps__list">
           {% for block in section.blocks %}
+            {% assign step_icon = block.settings.icon | default: 'water' %}
+            {% assign mobile_step_icon = block.settings.mobile_icon | default: 'inherit' %}
+            {% if mobile_step_icon == 'inherit' %}
+              {% assign mobile_step_icon = step_icon %}
+            {% endif %}
+
             <article class="custom-simple-steps__step" {{ block.shopify_attributes }}>
-              <div class="custom-simple-steps__icon custom-simple-steps__icon--{{ block.settings.icon }}" aria-hidden="true">
-                {% if block.settings.icon == 'water' %}
-                  <span class="custom-simple-steps__icon-shape custom-simple-steps__icon-shape--drop"></span>
-                  <span class="custom-simple-steps__icon-shape custom-simple-steps__icon-shape--cup"></span>
-                {% elsif block.settings.icon == 'sachet' %}
-                  <span class="custom-simple-steps__icon-shape custom-simple-steps__icon-shape--pack"></span>
-                {% else %}
-                  <span class="custom-simple-steps__icon-shape custom-simple-steps__icon-shape--person"></span>
-                  <span class="custom-simple-steps__icon-shape custom-simple-steps__icon-shape--cup-small"></span>
-                {% endif %}
+              <div class="custom-simple-steps__icon custom-simple-steps__icon--{{ step_icon }}" aria-hidden="true">
+                <span class="custom-simple-steps__icon-art custom-simple-steps__icon-art--desktop">
+                  {% if block.settings.icon_image != blank %}
+                    <img
+                      class="custom-simple-steps__icon-image"
+                      src="{{ block.settings.icon_image | img_url: '96x' }}"
+                      alt=""
+                      loading="lazy">
+                  {% elsif step_icon == 'water' %}
+                    <span class="custom-simple-steps__icon-shape custom-simple-steps__icon-shape--drop"></span>
+                    <span class="custom-simple-steps__icon-shape custom-simple-steps__icon-shape--cup"></span>
+                  {% elsif step_icon == 'sachet' %}
+                    <span class="custom-simple-steps__icon-shape custom-simple-steps__icon-shape--pack"></span>
+                  {% elsif step_icon == 'check' %}
+                    <span class="custom-simple-steps__icon-shape custom-simple-steps__icon-shape--check"></span>
+                  {% else %}
+                    <span class="custom-simple-steps__icon-shape custom-simple-steps__icon-shape--person"></span>
+                    <span class="custom-simple-steps__icon-shape custom-simple-steps__icon-shape--cup-small"></span>
+                  {% endif %}
+                </span>
+
+                <span class="custom-simple-steps__icon-art custom-simple-steps__icon-art--mobile custom-simple-steps__icon-art--{{ mobile_step_icon }}">
+                  {% if block.settings.mobile_icon_image != blank %}
+                    <img
+                      class="custom-simple-steps__icon-image"
+                      src="{{ block.settings.mobile_icon_image | img_url: '96x' }}"
+                      alt=""
+                      loading="lazy">
+                  {% elsif mobile_step_icon == 'water' %}
+                    <span class="custom-simple-steps__icon-shape custom-simple-steps__icon-shape--drop"></span>
+                    <span class="custom-simple-steps__icon-shape custom-simple-steps__icon-shape--cup"></span>
+                  {% elsif mobile_step_icon == 'sachet' %}
+                    <span class="custom-simple-steps__icon-shape custom-simple-steps__icon-shape--pack"></span>
+                  {% elsif mobile_step_icon == 'check' %}
+                    <span class="custom-simple-steps__icon-shape custom-simple-steps__icon-shape--check"></span>
+                  {% else %}
+                    <span class="custom-simple-steps__icon-shape custom-simple-steps__icon-shape--person"></span>
+                    <span class="custom-simple-steps__icon-shape custom-simple-steps__icon-shape--cup-small"></span>
+                  {% endif %}
+                </span>
               </div>
 
               <div class="custom-simple-steps__copy">
                 <div class="custom-simple-steps__title-row">
-                  <span class="custom-simple-steps__number">{{ forloop.index }}</span>
+                  {% unless section.settings.show_numbers == false %}
+                    <span class="custom-simple-steps__number">
+                      {% if block.settings.number_label != blank %}
+                        {{ block.settings.number_label | escape }}
+                      {% else %}
+                        {{ forloop.index }}
+                      {% endif %}
+                    </span>
+                  {% endunless %}
 
                   {% if block.settings.title != blank %}
                     <h3 class="custom-simple-steps__step-title">{{ block.settings.title | escape }}</h3>
@@ -67,7 +139,7 @@
             {{ section_image | img_url: '960x' }} 960w
           "
           sizes="(min-width: 990px) 48vw, 92vw"
-          alt="{{ section_image.alt | escape }}"
+          alt="{% if section.settings.image_alt != blank %}{{ section.settings.image_alt | escape }}{% else %}{{ section_image.alt | escape }}{% endif %}"
           loading="lazy">
       {% else %}
         {{ 'image' | placeholder_svg_tag: 'placeholder-svg custom-simple-steps__placeholder' }}
@@ -84,14 +156,16 @@
   }
 
   .custom-simple-steps__inner.page-width {
-    max-width: 1160px;
+    max-width: var(--simple-steps-max-width);
+    padding-left: 0;
+    padding-right: 0;
   }
 
   .custom-simple-steps__inner {
     align-items: center;
     display: grid;
-    gap: 72px;
-    grid-template-columns: minmax(320px, .95fr) minmax(320px, 1.05fr);
+    gap: var(--simple-steps-layout-gap);
+    grid-template-columns: minmax(280px, 0.95fr) minmax(280px, 1.05fr);
   }
 
   .custom-simple-steps__inner--left .custom-simple-steps__media {
@@ -100,8 +174,9 @@
 
   .custom-simple-steps__heading {
     color: var(--simple-steps-heading);
-    font-family: Lora, serif;
-    font-size: 31px;
+    font-family: Lora
+    , serif;
+    font-size: var(--simple-steps-heading-size);
     font-weight: 700;
     letter-spacing: 0;
     line-height: 1.2;
@@ -111,10 +186,10 @@
   .custom-simple-steps__text,
   .custom-simple-steps__text.rte-setting {
     color: var(--simple-steps-text);
-    font-size: 15px;
+    font-size: var(--simple-steps-text-size);
     line-height: 1.55;
     margin: 0 0 38px;
-    max-width: 560px;
+    max-width: var(--simple-steps-content-width);
   }
 
   .custom-simple-steps__text p,
@@ -125,25 +200,47 @@
 
   .custom-simple-steps__list {
     display: grid;
-    gap: 26px;
+    gap: var(--simple-steps-list-gap);
   }
 
   .custom-simple-steps__step {
     align-items: center;
     display: grid;
-    gap: 20px;
-    grid-template-columns: 68px minmax(0, 1fr);
+    gap: var(--simple-steps-step-gap);
+    grid-template-columns: var(--simple-steps-icon-size) minmax(0, 1fr);
   }
 
   .custom-simple-steps__icon {
     align-items: center;
     background: var(--simple-steps-accent);
     border-radius: 50%;
+    color: var(--simple-steps-icon-color);
     display: flex;
-    height: 64px;
+    height: var(--simple-steps-icon-size);
     justify-content: center;
     position: relative;
-    width: 64px;
+    width: var(--simple-steps-icon-size);
+  }
+
+  .custom-simple-steps__icon-image {
+    display: block;
+    height: 58%;
+    max-height: 44px;
+    max-width: 44px;
+    object-fit: contain;
+    width: 58%;
+  }
+
+  .custom-simple-steps__icon-art {
+    align-items: center;
+    display: flex;
+    inset: 0;
+    justify-content: center;
+    position: absolute;
+  }
+
+  .custom-simple-steps__icon-art--mobile {
+    display: none;
   }
 
   .custom-simple-steps__icon-shape {
@@ -152,84 +249,92 @@
   }
 
   .custom-simple-steps__icon-shape--drop {
+    border: 3px solid currentColor;
     border-radius: 50% 50% 50% 0;
-    border: 3px solid #fff;
-    height: 18px;
-    left: 21px;
-    top: 18px;
+    height: 28%;
+    left: 33%;
+    top: 28%;
     transform: rotate(-45deg);
-    width: 18px;
+    width: 28%;
   }
 
   .custom-simple-steps__icon-shape--cup {
-    border: 3px solid #fff;
+    border: 3px solid currentColor;
     border-radius: 0 0 8px 8px;
     border-top: 0;
-    bottom: 17px;
-    height: 16px;
-    right: 18px;
-    width: 16px;
+    bottom: 27%;
+    height: 25%;
+    right: 28%;
+    width: 25%;
   }
 
   .custom-simple-steps__icon-shape--pack {
-    border: 3px solid #fff;
+    border: 3px solid currentColor;
     border-radius: 3px;
-    height: 26px;
-    width: 28px;
+    height: 41%;
+    width: 44%;
   }
 
   .custom-simple-steps__icon-shape--pack:before {
-    border-bottom: 2px solid #fff;
-    border-left: 2px solid #fff;
+    border-bottom: 2px solid currentColor;
+    border-left: 2px solid currentColor;
     content: "";
-    height: 6px;
-    left: 7px;
+    height: 23%;
+    left: 25%;
     position: absolute;
-    top: 7px;
+    top: 27%;
     transform: rotate(-45deg);
-    width: 10px;
+    width: 36%;
   }
 
   .custom-simple-steps__icon-shape--pack:after {
-    border: 2px solid #fff;
+    border: 2px solid currentColor;
     border-radius: 50%;
     content: "";
-    height: 5px;
+    height: 19%;
     position: absolute;
-    right: 5px;
-    top: 8px;
-    width: 5px;
+    right: 18%;
+    top: 31%;
+    width: 19%;
   }
 
   .custom-simple-steps__icon-shape--person {
-    background: #fff;
+    background: currentColor;
     border-radius: 50% 50% 44% 44%;
-    height: 18px;
-    left: 17px;
-    top: 29px;
-    width: 18px;
+    height: 28%;
+    left: 27%;
+    top: 45%;
+    width: 28%;
   }
 
   .custom-simple-steps__icon-shape--person:before {
-    background: #fff;
+    background: currentColor;
     border-radius: 50%;
     content: "";
-    height: 12px;
-    left: 3px;
+    height: 67%;
+    left: 17%;
     position: absolute;
-    top: -13px;
-    width: 12px;
+    top: -72%;
+    width: 67%;
   }
 
   .custom-simple-steps__icon-shape--cup-small {
-    border: 3px solid #fff;
+    border: 3px solid currentColor;
     border-radius: 0 0 8px 8px;
     border-top: 0;
-    height: 17px;
-    right: 18px;
-    top: 27px;
+    height: 27%;
+    right: 28%;
+    top: 42%;
     transform: rotate(-30deg);
-    width: 13px;
+    width: 20%;
+  }
+
+  .custom-simple-steps__icon-shape--check {
+    border-bottom: 4px solid currentColor;
+    border-left: 4px solid currentColor;
+    height: 22%;
+    transform: rotate(-45deg);
+    width: 42%;
   }
 
   .custom-simple-steps__title-row {
@@ -237,6 +342,7 @@
     display: flex;
     gap: 12px;
     margin-bottom: 8px;
+    min-width: 0;
   }
 
   .custom-simple-steps__number {
@@ -245,39 +351,43 @@
     border-radius: 50%;
     color: var(--simple-steps-number-text);
     display: inline-flex;
-    flex: 0 0 23px;
+    flex: 0 0 var(--simple-steps-number-size);
     font-size: 12px;
     font-weight: 700;
-    height: 23px;
+    height: var(--simple-steps-number-size);
     justify-content: center;
     line-height: 1;
-    width: 23px;
+    width: var(--simple-steps-number-size);
   }
 
   .custom-simple-steps__step-title {
     color: var(--simple-steps-heading);
-    font-size: 14px;
+    font-size: var(--simple-steps-step-title-size);
     font-weight: 700;
     letter-spacing: 0;
     line-height: 1.3;
     margin: 0;
+    min-width: 0;
   }
 
   .custom-simple-steps__description,
   .custom-simple-steps__description.rte-setting {
     color: var(--simple-steps-text);
-    font-size: 12px;
+    font-size: var(--simple-steps-step-text-size);
     line-height: 1.45;
   }
 
   .custom-simple-steps__media {
     border-radius: var(--simple-steps-image-radius);
+    justify-self: center;
+    max-width: var(--simple-steps-image-size);
     overflow: hidden;
+    width: 100%;
   }
 
   .custom-simple-steps__media img,
   .custom-simple-steps__placeholder {
-    aspect-ratio: 540 / 408;
+    aspect-ratio: var(--simple-steps-image-aspect);
     display: block;
     height: auto;
     object-fit: cover;
@@ -286,6 +396,10 @@
 
   .custom-simple-steps__placeholder {
     background: #eadfc6;
+  }
+
+  .custom-simple-steps__content {
+    width: 550px;
   }
 
   @media screen and (max-width: 899px) {
@@ -301,125 +415,94 @@
 
   @media screen and (max-width: 549px) {
     .custom-simple-steps {
-      padding: 10px 0 18px;
+      padding: var(--simple-steps-mobile-padding-top) 0 var(--simple-steps-mobile-padding-bottom);
     }
 
     .custom-simple-steps__inner.page-width {
-      padding-left: 10px;
-      padding-right: 10px;
+      padding-left: var(--simple-steps-mobile-page-padding);
+      padding-right: var(--simple-steps-mobile-page-padding);
     }
 
     .custom-simple-steps__inner {
-      gap: 12px;
+      gap: var(--simple-steps-mobile-layout-gap);
     }
 
     .custom-simple-steps__media {
-      border-radius: 8px;
+      border-radius: var(--simple-steps-mobile-image-radius);
     }
 
     .custom-simple-steps__media img,
     .custom-simple-steps__placeholder {
-      aspect-ratio: 272 / 245;
+      aspect-ratio: var(--simple-steps-mobile-image-aspect);
     }
 
     .custom-simple-steps__heading {
-      font-size: 17px;
+      font-size: var(--simple-steps-mobile-heading-size);
       line-height: 1.2;
       margin-bottom: 8px;
     }
 
     .custom-simple-steps__text,
     .custom-simple-steps__text.rte-setting {
-      font-size: 11px;
+      font-size: var(--simple-steps-mobile-text-size);
       line-height: 1.45;
       margin-bottom: 14px;
       max-width: none;
     }
 
     .custom-simple-steps__list {
-      gap: 9px;
+      gap: var(--simple-steps-mobile-list-gap);
     }
 
     .custom-simple-steps__step {
       align-items: start;
-      gap: 8px;
-      grid-template-columns: 28px minmax(0, 1fr);
+      gap: var(--simple-steps-mobile-step-gap);
+      grid-template-columns: var(--simple-steps-mobile-icon-size) minmax(0, 1fr);
     }
 
     .custom-simple-steps__icon {
       background: transparent;
       border-radius: 0;
-      height: 28px;
+      color: var(--simple-steps-accent);
+      height: var(--simple-steps-mobile-icon-size);
       margin-top: 2px;
-      width: 28px;
+      width: var(--simple-steps-mobile-icon-size);
     }
 
-    .custom-simple-steps__icon-shape--drop {
-      border-color: var(--simple-steps-accent);
-      border-width: 2px;
-      height: 10px;
-      left: 5px;
-      top: 3px;
-      width: 10px;
+    .custom-simple-steps__icon-art--desktop {
+      display: none;
     }
 
-    .custom-simple-steps__icon-shape--cup {
-      border-color: var(--simple-steps-accent);
-      border-width: 2px;
-      bottom: 4px;
-      height: 12px;
-      right: 3px;
-      width: 12px;
+    .custom-simple-steps__icon-art--mobile {
+      display: flex;
     }
 
-    .custom-simple-steps__icon-shape--pack {
-      border-color: var(--simple-steps-accent);
-      border-radius: 2px;
+    .custom-simple-steps__icon-art--mobile .custom-simple-steps__icon-image {
+      height: 100%;
+      max-height: none;
+      max-width: none;
+      width: 100%;
+    }
+
+    .custom-simple-steps__icon-shape--drop,
+    .custom-simple-steps__icon-shape--cup,
+    .custom-simple-steps__icon-shape--pack,
+    .custom-simple-steps__icon-shape--cup-small {
       border-width: 2px;
-      height: 22px;
-      width: 20px;
     }
 
     .custom-simple-steps__icon-shape--pack:before {
-      border-bottom-color: var(--simple-steps-accent);
-      border-left-color: var(--simple-steps-accent);
-      height: 5px;
-      left: 4px;
-      top: 5px;
-      width: 8px;
+      border-bottom-width: 2px;
+      border-left-width: 2px;
     }
 
     .custom-simple-steps__icon-shape--pack:after {
-      border-color: var(--simple-steps-accent);
-      height: 4px;
-      right: 3px;
-      top: 6px;
-      width: 4px;
-    }
-
-    .custom-simple-steps__icon-shape--person {
-      background: var(--simple-steps-accent);
-      height: 12px;
-      left: 3px;
-      top: 13px;
-      width: 12px;
-    }
-
-    .custom-simple-steps__icon-shape--person:before {
-      background: var(--simple-steps-accent);
-      height: 8px;
-      left: 2px;
-      top: -9px;
-      width: 8px;
-    }
-
-    .custom-simple-steps__icon-shape--cup-small {
-      border-color: var(--simple-steps-accent);
       border-width: 2px;
-      height: 13px;
-      right: 3px;
-      top: 11px;
-      width: 10px;
+    }
+
+    .custom-simple-steps__icon-shape--check {
+      border-bottom-width: 3px;
+      border-left-width: 3px;
     }
 
     .custom-simple-steps__title-row {
@@ -428,20 +511,20 @@
     }
 
     .custom-simple-steps__number {
-      flex-basis: 22px;
+      flex-basis: var(--simple-steps-mobile-number-size);
       font-size: 11px;
-      height: 22px;
-      width: 22px;
+      height: var(--simple-steps-mobile-number-size);
+      width: var(--simple-steps-mobile-number-size);
     }
 
     .custom-simple-steps__step-title {
-      font-size: 11px;
+      font-size: var(--simple-steps-mobile-step-title-size);
       line-height: 1.25;
     }
 
     .custom-simple-steps__description,
     .custom-simple-steps__description.rte-setting {
-      font-size: 10px;
+      font-size: var(--simple-steps-mobile-step-text-size);
       line-height: 1.35;
     }
   }
@@ -470,6 +553,10 @@
         "label": "Image"
       },
       {
+        "type": "text",
+        "id": "image_alt",
+        "label": "Image alt text override"
+      }, {
         "type": "select",
         "id": "image_position",
         "label": "Image position",
@@ -478,14 +565,85 @@
           {
             "value": "left",
             "label": "Left"
-          },
-          {
+          }, {
             "value": "right",
             "label": "Right"
           }
         ]
-      },
-      {
+      }, {
+        "type": "checkbox",
+        "id": "show_numbers",
+        "label": "Show step numbers",
+        "default": true
+      }, {
+        "type": "header",
+        "content": "Colors"
+      }, {
+        "type": "color",
+        "id": "background_color",
+        "label": "Background color",
+        "default": "#FFFBD8"
+      }, {
+        "type": "color",
+        "id": "heading_color",
+        "label": "Heading color",
+        "default": "#5C3F2D"
+      }, {
+        "type": "color",
+        "id": "text_color",
+        "label": "Text color",
+        "default": "#6D563D"
+      }, {
+        "type": "color",
+        "id": "accent_color",
+        "label": "Icon background",
+        "default": "#68422E"
+      }, {
+        "type": "color",
+        "id": "icon_color",
+        "label": "Icon color",
+        "default": "#FFFFFF"
+      }, {
+        "type": "color",
+        "id": "number_background_color",
+        "label": "Step number background",
+        "default": "#F3E59B"
+      }, {
+        "type": "color",
+        "id": "number_text_color",
+        "label": "Step number text",
+        "default": "#6D563D"
+      }, {
+        "type": "header",
+        "content": "Desktop layout"
+      }, {
+        "type": "range",
+        "id": "max_width",
+        "label": "Content max width",
+        "min": 960,
+        "max": 1440,
+        "step": 20,
+        "unit": "px",
+        "default": 1160
+      }, {
+        "type": "range",
+        "id": "layout_gap",
+        "label": "Image and text gap",
+        "min": 16,
+        "max": 120,
+        "step": 4,
+        "unit": "px",
+        "default": 72
+      }, {
+        "type": "range",
+        "id": "content_width",
+        "label": "Text max width",
+        "min": 320,
+        "max": 760,
+        "step": 20,
+        "unit": "px",
+        "default": 560
+      }, {
         "type": "range",
         "id": "image_radius",
         "label": "Image corner radius",
@@ -494,70 +652,266 @@
         "step": 2,
         "unit": "px",
         "default": 34
-      },
-      {
+      }, {
+        "type": "range",
+        "id": "image_size",
+        "label": "Image size",
+        "min": 520,
+        "max": 620,
+        "step": 1,
+        "unit": "px",
+        "default": 559
+      }, {
+        "type": "range",
+        "id": "image_aspect_width",
+        "label": "Image aspect width",
+        "min": 500,
+        "max": 600,
+        "step": 1,
+        "default": 559
+      }, {
+        "type": "range",
+        "id": "image_aspect_height",
+        "label": "Image aspect height",
+        "min": 500,
+        "max": 600,
+        "step": 1,
+        "default": 559
+      }, {
         "type": "header",
-        "content": "Colors"
-      },
-      {
-        "type": "color",
-        "id": "background_color",
-        "label": "Background color",
-        "default": "#FFFBD8"
-      },
-      {
-        "type": "color",
-        "id": "heading_color",
-        "label": "Heading color",
-        "default": "#5C3F2D"
-      },
-      {
-        "type": "color",
-        "id": "text_color",
-        "label": "Text color",
-        "default": "#6D563D"
-      },
-      {
-        "type": "color",
-        "id": "accent_color",
-        "label": "Icon background",
-        "default": "#68422E"
-      },
-      {
-        "type": "color",
-        "id": "number_background_color",
-        "label": "Step number background",
-        "default": "#F3E59B"
-      },
-      {
-        "type": "color",
-        "id": "number_text_color",
-        "label": "Step number text",
-        "default": "#6D563D"
-      },
-      {
+        "content": "Desktop type and items"
+      }, {
+        "type": "range",
+        "id": "heading_size",
+        "label": "Heading size",
+        "min": 18,
+        "max": 56,
+        "step": 1,
+        "unit": "px",
+        "default": 31
+      }, {
+        "type": "range",
+        "id": "text_size",
+        "label": "Text size",
+        "min": 10,
+        "max": 24,
+        "step": 1,
+        "unit": "px",
+        "default": 15
+      }, {
+        "type": "range",
+        "id": "step_title_size",
+        "label": "Step title size",
+        "min": 10,
+        "max": 24,
+        "step": 1,
+        "unit": "px",
+        "default": 14
+      }, {
+        "type": "range",
+        "id": "step_text_size",
+        "label": "Step text size",
+        "min": 10,
+        "max": 20,
+        "step": 1,
+        "unit": "px",
+        "default": 12
+      }, {
+        "type": "range",
+        "id": "list_gap",
+        "label": "Space between steps",
+        "min": 4,
+        "max": 56,
+        "step": 1,
+        "unit": "px",
+        "default": 26
+      }, {
+        "type": "range",
+        "id": "step_gap",
+        "label": "Icon and text gap",
+        "min": 4,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "default": 20
+      }, {
+        "type": "range",
+        "id": "icon_size",
+        "label": "Icon size",
+        "min": 28,
+        "max": 96,
+        "step": 1,
+        "unit": "px",
+        "default": 64
+      }, {
+        "type": "range",
+        "id": "number_size",
+        "label": "Number size",
+        "min": 16,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "default": 23
+      }, {
         "type": "header",
-        "content": "Spacing"
-      },
-      {
+        "content": "Desktop spacing"
+      }, {
         "type": "range",
         "id": "padding_top",
         "label": "Top padding",
-        "min": 24,
+        "min": 0,
         "max": 120,
         "step": 4,
         "unit": "px",
         "default": 52
-      },
-      {
+      }, {
         "type": "range",
         "id": "padding_bottom",
         "label": "Bottom padding",
-        "min": 24,
+        "min": 0,
         "max": 120,
         "step": 4,
         "unit": "px",
         "default": 52
+      }, {
+        "type": "header",
+        "content": "Mobile layout"
+      }, {
+        "type": "range",
+        "id": "mobile_padding_top",
+        "label": "Mobile top padding",
+        "min": 0,
+        "max": 80,
+        "step": 1,
+        "unit": "px",
+        "default": 10
+      }, {
+        "type": "range",
+        "id": "mobile_padding_bottom",
+        "label": "Mobile bottom padding",
+        "min": 0,
+        "max": 80,
+        "step": 1,
+        "unit": "px",
+        "default": 18
+      }, {
+        "type": "range",
+        "id": "mobile_page_padding",
+        "label": "Mobile side padding",
+        "min": 0,
+        "max": 32,
+        "step": 1,
+        "unit": "px",
+        "default": 10
+      }, {
+        "type": "range",
+        "id": "mobile_layout_gap",
+        "label": "Mobile image and text gap",
+        "min": 0,
+        "max": 48,
+        "step": 1,
+        "unit": "px",
+        "default": 12
+      }, {
+        "type": "range",
+        "id": "mobile_image_radius",
+        "label": "Mobile image radius",
+        "min": 0,
+        "max": 32,
+        "step": 1,
+        "unit": "px",
+        "default": 8
+      }, {
+        "type": "range",
+        "id": "mobile_image_aspect_width",
+        "label": "Mobile image aspect width",
+        "min": 220,
+        "max": 320,
+        "step": 1,
+        "default": 272
+      }, {
+        "type": "range",
+        "id": "mobile_image_aspect_height",
+        "label": "Mobile image aspect height",
+        "min": 200,
+        "max": 300,
+        "step": 1,
+        "default": 245
+      }, {
+        "type": "header",
+        "content": "Mobile type and items"
+      }, {
+        "type": "range",
+        "id": "mobile_heading_size",
+        "label": "Mobile heading size",
+        "min": 12,
+        "max": 36,
+        "step": 1,
+        "unit": "px",
+        "default": 17
+      }, {
+        "type": "range",
+        "id": "mobile_text_size",
+        "label": "Mobile text size",
+        "min": 8,
+        "max": 18,
+        "step": 1,
+        "unit": "px",
+        "default": 11
+      }, {
+        "type": "range",
+        "id": "mobile_step_title_size",
+        "label": "Mobile step title size",
+        "min": 8,
+        "max": 18,
+        "step": 1,
+        "unit": "px",
+        "default": 11
+      }, {
+        "type": "range",
+        "id": "mobile_step_text_size",
+        "label": "Mobile step text size",
+        "min": 8,
+        "max": 16,
+        "step": 1,
+        "unit": "px",
+        "default": 10
+      }, {
+        "type": "range",
+        "id": "mobile_list_gap",
+        "label": "Mobile space between steps",
+        "min": 0,
+        "max": 32,
+        "step": 1,
+        "unit": "px",
+        "default": 9
+      }, {
+        "type": "range",
+        "id": "mobile_step_gap",
+        "label": "Mobile icon and text gap",
+        "min": 0,
+        "max": 24,
+        "step": 1,
+        "unit": "px",
+        "default": 8
+      }, {
+        "type": "range",
+        "id": "mobile_icon_size",
+        "label": "Mobile icon size",
+        "min": 16,
+        "max": 48,
+        "step": 1,
+        "unit": "px",
+        "default": 48
+      }, {
+        "type": "range",
+        "id": "mobile_number_size",
+        "label": "Mobile number size",
+        "min": 14,
+        "max": 36,
+        "step": 1,
+        "unit": "px",
+        "default": 22
       }
     ],
     "blocks": [
@@ -574,6 +928,36 @@
               {
                 "value": "water",
                 "label": "Water"
+              }, {
+                "value": "sachet",
+                "label": "Sachet"
+              }, {
+                "value": "sip",
+                "label": "Sip"
+              }, {
+                "value": "check",
+                "label": "Check"
+              }
+            ]
+          },
+          {
+            "type": "image_picker",
+            "id": "icon_image",
+            "label": "Custom icon image"
+          },
+          {
+            "type": "select",
+            "id": "mobile_icon",
+            "label": "Mobile icon",
+            "default": "inherit",
+            "options": [
+              {
+                "value": "inherit",
+                "label": "Same as desktop"
+              },
+              {
+                "value": "water",
+                "label": "Water"
               },
               {
                 "value": "sachet",
@@ -582,16 +966,26 @@
               {
                 "value": "sip",
                 "label": "Sip"
+              }, {
+                "value": "check",
+                "label": "Check"
               }
             ]
           },
           {
+            "type": "image_picker",
+            "id": "mobile_icon_image",
+            "label": "Custom mobile icon image"
+          }, {
+            "type": "text",
+            "id": "number_label",
+            "label": "Number label"
+          }, {
             "type": "text",
             "id": "title",
             "label": "Title",
             "default": "Add Hot or Cold Water"
-          },
-          {
+          }, {
             "type": "richtext",
             "id": "description",
             "label": "Description",
@@ -612,16 +1006,14 @@
               "title": "Add Hot or Cold Water",
               "description": "<p>Pour 150-200ml of hot or cold water into your cup.</p>"
             }
-          },
-          {
+          }, {
             "type": "simple_step",
             "settings": {
               "icon": "sachet",
               "title": "Mix 1 Sachet of SlimFair",
               "description": "<p>Stir well until fully dissolved for a smooth, creamy blend.</p>"
             }
-          },
-          {
+          }, {
             "type": "simple_step",
             "settings": {
               "icon": "sip",
