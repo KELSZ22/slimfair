@@ -1,0 +1,188 @@
+{% comment %}
+  Nutrition info modal — image panels.
+  Uses theme editor images, or theme assets:
+  - custom-nutrition-left-panel.png
+  - custom-nutrition-right-panel.png
+{% endcomment %}
+
+{% unless section.settings.show_nutrition_info_modal == false %}
+  {% assign nutrition_modal_id = 'nutrition-info-modal-' | append: section.id %}
+
+  {% assign left_image = section.settings.nutrition_facts_panel_image %}
+  {% assign right_image = section.settings.nutrition_product_panel_image %}
+  {% assign left_asset = section.settings.nutrition_left_asset | default: 'custom-nutrition-left-panel.png' %}
+  {% assign right_asset = section.settings.nutrition_right_asset | default: 'custom-nutrition-right-panel.png' %}
+  {% assign has_left = false %}
+  {% assign has_right = false %}
+  {% if left_image != blank %}
+    {% assign has_left = true %}
+  {% endif %}
+  {% if right_image != blank %}
+    {% assign has_right = true %}
+  {% elsif section.settings.nutrition_product_image != blank or section.settings.nutrition_certificate_image != blank %}
+    {% assign has_right = true %}
+  {% endif %}
+
+  <div
+    id="{{ nutrition_modal_id }}"
+    class="custom-nutrition-modal"
+    data-nutrition-info-modal
+    hidden
+    aria-hidden="true">
+    <button
+      type="button"
+      class="custom-nutrition-modal__backdrop"
+      data-nutrition-info-close
+      aria-label="Close nutrition information"></button>
+
+    <div
+      class="custom-nutrition-modal__dialog"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="{{ nutrition_modal_id }}-title">
+      <button
+        type="button"
+        class="custom-nutrition-modal__close"
+        data-nutrition-info-close
+        aria-label="Close nutrition information">
+        {% include 'icon-close' %}
+      </button>
+
+      <h2 id="{{ nutrition_modal_id }}-title" class="visually-hidden">
+        {{ section.settings.nutrition_modal_title | default: 'Nutrition information' | escape }}
+      </h2>
+
+      <div class="custom-nutrition-modal__panels">
+        <div class="custom-nutrition-modal__panel custom-nutrition-modal__panel--facts">
+          {% if has_left %}
+            {{
+              left_image
+              | image_url: width: 1000
+              | image_tag:
+                class: 'custom-nutrition-modal__panel-image',
+                alt: section.settings.nutrition_facts_panel_alt | default: 'Nutrition facts',
+                loading: 'lazy',
+                widths: '500, 750, 1000',
+                sizes: '(max-width: 749px) 88vw, 420px'
+            }}
+          {% else %}
+            <img
+              class="custom-nutrition-modal__panel-image"
+              src="{{ left_asset | asset_url }}"
+              alt="{{ section.settings.nutrition_facts_panel_alt | default: 'Nutrition facts' | escape }}"
+              loading="lazy"
+              width="520"
+              height="640">
+          {% endif %}
+        </div>
+
+        <div class="custom-nutrition-modal__panel custom-nutrition-modal__panel--product">
+          {% if has_right and right_image != blank %}
+            {{
+              right_image
+              | image_url: width: 1000
+              | image_tag:
+                class: 'custom-nutrition-modal__panel-image',
+                alt: section.settings.nutrition_product_panel_alt | default: 'Product and certification',
+                loading: 'lazy',
+                widths: '500, 750, 1000',
+                sizes: '(max-width: 749px) 88vw, 420px'
+            }}
+          {% elsif has_right %}
+            <div class="custom-nutrition-modal__product-content">
+              {% if section.settings.nutrition_product_image != blank %}
+                {{
+                  section.settings.nutrition_product_image
+                  | image_url: width: 600
+                  | image_tag:
+                    class: 'custom-nutrition-modal__product-image',
+                    alt: section.settings.nutrition_product_image_alt | default: 'Product packaging',
+                    loading: 'lazy',
+                    widths: '300, 450, 600',
+                    sizes: '(max-width: 749px) 40vw, 200px'
+                }}
+              {% endif %}
+
+              {% if section.settings.nutrition_certificate_image != blank %}
+                {{
+                  section.settings.nutrition_certificate_image
+                  | image_url: width: 800
+                  | image_tag:
+                    class: 'custom-nutrition-modal__certificate-image',
+                    alt: section.settings.nutrition_certificate_image_alt | default: 'FDA certificate of product registration',
+                    loading: 'lazy',
+                    widths: '400, 600, 800',
+                    sizes: '(max-width: 749px) 46vw, 260px'
+                }}
+              {% endif %}
+            </div>
+          {% else %}
+            <img
+              class="custom-nutrition-modal__panel-image"
+              src="{{ right_asset | asset_url }}"
+              alt="{{ section.settings.nutrition_product_panel_alt | default: 'Product and certification' | escape }}"
+              loading="lazy"
+              width="520"
+              height="640">
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      var modalId = {{ nutrition_modal_id | json }};
+      var modal = document.getElementById(modalId);
+      if (!modal || modal.dataset.nutritionInfoInit === 'true') return;
+      modal.dataset.nutritionInfoInit = 'true';
+
+      var activeTrigger = null;
+
+      function ensureModalInBody() {
+        if (modal.parentElement !== document.body) {
+          document.body.appendChild(modal);
+        }
+      }
+
+      function openModal(trigger) {
+        ensureModalInBody();
+        activeTrigger = trigger || null;
+        modal.hidden = false;
+        modal.setAttribute('aria-hidden', 'false');
+        document.documentElement.classList.add('custom-nutrition-modal-open');
+
+        var closeButton = modal.querySelector('.custom-nutrition-modal__close');
+        if (closeButton) closeButton.focus();
+      }
+
+      function closeModal() {
+        modal.hidden = true;
+        modal.setAttribute('aria-hidden', 'true');
+        document.documentElement.classList.remove('custom-nutrition-modal-open');
+        if (activeTrigger) activeTrigger.focus();
+        activeTrigger = null;
+      }
+
+      ensureModalInBody();
+
+      document.addEventListener('click', function(event) {
+        var trigger = event.target.closest('[data-nutrition-info-open]');
+        if (trigger) {
+          event.preventDefault();
+          openModal(trigger);
+          return;
+        }
+
+        if (!modal.hidden && event.target.closest('[data-nutrition-info-close]')) {
+          event.preventDefault();
+          closeModal();
+        }
+      });
+
+      document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape' && !modal.hidden) closeModal();
+      });
+    })();
+  </script>
+{% endunless %}

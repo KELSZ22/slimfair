@@ -552,6 +552,16 @@
     white-space: nowrap;
   }
 
+  button.custom-health-benefits__link {
+    appearance: none;
+    background: none;
+    border: 0;
+    cursor: pointer;
+    font: inherit;
+    padding: 0;
+    text-align: inherit;
+  }
+
   .custom-health-benefits__panel {
     border-radius: 14px;
     background: #f3f1f0;
@@ -1752,6 +1762,16 @@
     white-space: nowrap;
   }
 
+  button.custom-health-benefits__link {
+    appearance: none;
+    background: none;
+    border: 0;
+    cursor: pointer;
+    font: inherit;
+    padding: 0;
+    text-align: inherit;
+  }
+
   .custom-health-benefits__panel {
     border-radius: 14px;
     background: #f3f1f0;
@@ -1893,5 +1913,142 @@
 
   .custom-product-trust-badges__title {
     font-weight: 400;
+  }
+}
+
+button.custom-health-benefits__link {
+  appearance: none;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  font: inherit;
+  padding: 0;
+  text-align: inherit;
+}
+
+.custom-nutrition-modal[hidden] {
+  display: none !important;
+  pointer-events: none;
+}
+
+.custom-nutrition-modal:not([hidden]) {
+  align-items: center;
+  box-sizing: border-box;
+  display: flex;
+  inset: 0;
+  justify-content: center;
+  padding: 24px 16px;
+  position: fixed;
+  z-index: 10000;
+}
+
+.custom-nutrition-modal__backdrop {
+  background: rgba(0, 0, 0, 0.45);
+  border: 0;
+  cursor: pointer;
+  inset: 0;
+  position: absolute;
+}
+
+.custom-nutrition-modal__dialog {
+  background: #fff9e5;
+  border-radius: 8px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.22);
+  box-sizing: border-box;
+  margin: 0;
+  max-height: min(85vh, 720px);
+  max-width: min(920px, 94vw);
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: 20px 18px 18px;
+  position: relative;
+  width: 100%;
+  z-index: 1;
+}
+
+.custom-nutrition-modal__close {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  color: #111;
+  cursor: pointer;
+  display: flex;
+  height: 32px;
+  justify-content: center;
+  padding: 0;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: 32px;
+  z-index: 2;
+}
+
+.custom-nutrition-modal__close svg {
+  display: block;
+  height: 16px;
+  width: 16px;
+}
+
+.custom-nutrition-modal__panels {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: 1fr;
+}
+
+@media only screen and (min-width: 750px) {
+  .custom-nutrition-modal__panels {
+    gap: 16px;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+}
+
+.custom-nutrition-modal__panel {
+  line-height: 0;
+  overflow: hidden;
+}
+
+.custom-nutrition-modal__panel-image {
+  display: block;
+  height: auto;
+  margin: 0 auto;
+  max-height: min(70vh, 520px);
+  max-width: 100%;
+  object-fit: contain;
+  width: 100%;
+}
+
+.custom-nutrition-modal__product-content {
+  align-items: center;
+  box-sizing: border-box;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  min-height: 200px;
+  padding: 8px 4px;
+}
+
+.custom-nutrition-modal__product-image,
+.custom-nutrition-modal__certificate-image {
+  display: block;
+  height: auto;
+  max-height: min(60vh, 480px);
+  max-width: 48%;
+  object-fit: contain;
+  width: auto;
+}
+
+.custom-nutrition-modal-open {
+  overflow: hidden;
+}
+
+@media only screen and (max-width: 899px) {
+  .custom-nutrition-modal__product-content {
+    flex-direction: column;
+  }
+
+  .custom-nutrition-modal__product-image,
+  .custom-nutrition-modal__certificate-image {
+    max-height: 220px;
+    max-width: 88%;
   }
 }

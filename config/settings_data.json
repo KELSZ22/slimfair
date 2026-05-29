@@ -1156,107 +1156,6 @@
           "padding_bottom": 64
         }
       },
-      "slimfair-awards-logo-bar": {
-        "type": "slimfair-awards-logo-bar",
-        "blocks": {
-          "product_award_logo_1": {
-            "type": "award_logo",
-            "settings": {
-              "label": "Asia's Golden Icons Awards",
-              "link": "",
-              "open_in_new_tab": false,
-              "desktop_logo_width": 120,
-              "mobile_logo_width": 108
-            }
-          },
-          "product_award_logo_2": {
-            "type": "award_logo",
-            "settings": {
-              "label": "Philippine Social Media Awards",
-              "link": "",
-              "open_in_new_tab": false,
-              "desktop_logo_width": 112,
-              "mobile_logo_width": 98
-            }
-          },
-          "product_award_logo_3": {
-            "type": "award_logo",
-            "settings": {
-              "label": "Asia Pacific Excellence Citation",
-              "link": "",
-              "open_in_new_tab": false,
-              "desktop_logo_width": 144,
-              "mobile_logo_width": 124
-            }
-          },
-          "product_award_logo_4": {
-            "type": "award_logo",
-            "settings": {
-              "label": "Seal of Excellence Star Award",
-              "link": "",
-              "open_in_new_tab": false,
-              "desktop_logo_width": 116,
-              "mobile_logo_width": 100
-            }
-          },
-          "product_award_logo_5": {
-            "type": "award_logo",
-            "settings": {
-              "label": "Pinnacle Awards",
-              "link": "",
-              "open_in_new_tab": false,
-              "desktop_logo_width": 142,
-              "mobile_logo_width": 124
-            }
-          },
-          "product_award_logo_6": {
-            "type": "award_logo",
-            "settings": {
-              "label": "People's Choice Philippines Awardee",
-              "link": "",
-              "open_in_new_tab": false,
-              "desktop_logo_width": 112,
-              "mobile_logo_width": 100
-            }
-          },
-          "product_award_logo_7": {
-            "type": "award_logo",
-            "settings": {
-              "label": "Top Choice Consumers Award",
-              "link": "",
-              "open_in_new_tab": false,
-              "desktop_logo_width": 102,
-              "mobile_logo_width": 94
-            }
-          }
-        },
-        "block_order": [
-          "product_award_logo_1",
-          "product_award_logo_2",
-          "product_award_logo_3",
-          "product_award_logo_4",
-          "product_award_logo_5",
-          "product_award_logo_6",
-          "product_award_logo_7"
-        ],
-        "settings": {
-          "heading": "",
-          "heading_color": "#fff8e8",
-          "background_color": "#634532",
-          "container_width": 1240,
-          "accessibility_label": "Awards and recognitions",
-          "logo_height": 94,
-          "tablet_logo_height": 78,
-          "logo_gap": 54,
-          "enable_mobile_scroll": true,
-          "mobile_logo_height": 70,
-          "mobile_logo_gap": 28,
-          "padding_top": 38,
-          "padding_bottom": 38,
-          "mobile_padding_top": 28,
-          "mobile_padding_bottom": 28
-        }
-      },
       "slimfair_homepage_hero_jFwhig": {
         "type": "slimfair-homepage-hero",
         "blocks": {
@@ -1935,6 +1834,114 @@
           "padding_top": 30,
           "padding_bottom": 34,
           "mobile_card_width": 78,
+          "mobile_padding_top": 28,
+          "mobile_padding_bottom": 28
+        }
+      },
+      "slimfair-awards-logo-bar": {
+        "type": "slimfair-awards-logo-bar",
+        "blocks": {
+          "award_logo_PkMHaQ": {
+            "type": "award_logo",
+            "settings": {
+              "logo": "shopify://shop_images/Theslimfairshop_20260415_001028_0000_1.png",
+              "label": "Award logo",
+              "link": "",
+              "open_in_new_tab": false,
+              "desktop_logo_width": 130,
+              "mobile_logo_width": 112
+            }
+          },
+          "award_logo_gkzz67": {
+            "type": "award_logo",
+            "settings": {
+              "logo": "shopify://shop_images/Theslimfairshop_20260415_001037_0000_1_Vectorized.svg",
+              "label": "Award logo",
+              "link": "",
+              "open_in_new_tab": false,
+              "desktop_logo_width": 130,
+              "mobile_logo_width": 112
+            }
+          },
+          "award_logo_t6iFcw": {
+            "type": "award_logo",
+            "settings": {
+              "logo": "shopify://shop_images/FB_IMG_1776182955909_1.png",
+              "label": "Award logo",
+              "link": "",
+              "open_in_new_tab": false,
+              "desktop_logo_width": 130,
+              "mobile_logo_width": 112
+            }
+          },
+          "award_logo_nGTkpG": {
+            "type": "award_logo",
+            "settings": {
+              "logo": "shopify://shop_images/Theslimfairshop_20260415_001017_0000_1.png",
+              "label": "Award logo",
+              "link": "",
+              "open_in_new_tab": false,
+              "desktop_logo_width": 130,
+              "mobile_logo_width": 112
+            }
+          },
+          "award_logo_fg4cz8": {
+            "type": "award_logo",
+            "settings": {
+              "logo": "shopify://shop_images/images_1.png",
+              "label": "Award logo",
+              "link": "",
+              "open_in_new_tab": false,
+              "desktop_logo_width": 130,
+              "mobile_logo_width": 112
+            }
+          },
+          "award_logo_FT9eWX": {
+            "type": "award_logo",
+            "settings": {
+              "logo": "shopify://shop_images/Theslimfairshop_20260415_000952_0000_1.png",
+              "label": "Award logo",
+              "link": "",
+              "open_in_new_tab": false,
+              "desktop_logo_width": 130,
+              "mobile_logo_width": 112
+            }
+          },
+          "award_logo_zxHQRQ": {
+            "type": "award_logo",
+            "settings": {
+              "logo": "shopify://shop_images/Theslimfairshop_20260415_001006_0000_1.png",
+              "label": "Award logo",
+              "link": "",
+              "open_in_new_tab": false,
+              "desktop_logo_width": 130,
+              "mobile_logo_width": 112
+            }
+          }
+        },
+        "block_order": [
+          "award_logo_PkMHaQ",
+          "award_logo_gkzz67",
+          "award_logo_t6iFcw",
+          "award_logo_nGTkpG",
+          "award_logo_fg4cz8",
+          "award_logo_FT9eWX",
+          "award_logo_zxHQRQ"
+        ],
+        "settings": {
+          "heading": "",
+          "heading_color": "#fff8e8",
+          "background_color": "#5c3f2d",
+          "container_width": 1240,
+          "accessibility_label": "Awards and recognitions",
+          "logo_height": 114,
+          "tablet_logo_height": 78,
+          "logo_gap": 54,
+          "enable_mobile_scroll": true,
+          "mobile_logo_height": 70,
+          "mobile_logo_gap": 28,
+          "padding_top": 38,
+          "padding_bottom": 38,
           "mobile_padding_top": 28,
           "mobile_padding_bottom": 28
         }

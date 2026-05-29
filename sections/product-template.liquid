@@ -175,6 +175,9 @@
           </div>
 
           {% include 'custom-health-benefits' %}
+          {% if section.settings.show_nutrition_info_modal != false %}
+            {% include 'custom-nutrition-info-modal' %}
+          {% endif %}
 
           {% capture "form_classes" -%}
             product-form product-form-{{ section.id }}
@@ -844,7 +847,86 @@
     {
       "type": "url",
       "id": "health_benefits_link_url",
-      "label": "Link URL"
+      "label": "Link URL",
+      "info": "Leave blank to open the nutrition info popup."
+    },
+    {
+      "type": "header",
+      "content": "Nutrition info popup"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_nutrition_info_modal",
+      "label": "Enable nutrition info popup",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "nutrition_modal_title",
+      "label": "Modal title (screen readers)",
+      "default": "Nutrition information"
+    },
+    {
+      "type": "text",
+      "id": "nutrition_left_asset",
+      "label": "Left panel asset filename",
+      "info": "Used when left panel image is empty. Upload to theme Assets.",
+      "default": "custom-nutrition-left-panel.png"
+    },
+    {
+      "type": "text",
+      "id": "nutrition_right_asset",
+      "label": "Right panel asset filename",
+      "info": "Used when right panel image is empty. Upload to theme Assets.",
+      "default": "custom-nutrition-right-panel.png"
+    },
+    {
+      "type": "image_picker",
+      "id": "nutrition_facts_panel_image",
+      "label": "Left panel image",
+      "info": "Nutrition facts panel (full image). Overrides asset filename."
+    },
+    {
+      "type": "text",
+      "id": "nutrition_facts_panel_alt",
+      "label": "Left panel alt text",
+      "default": "Nutrition facts"
+    },
+    {
+      "type": "image_picker",
+      "id": "nutrition_product_panel_image",
+      "label": "Right panel image",
+      "info": "Product and FDA certificate panel (full image). Use this OR the two images below."
+    },
+    {
+      "type": "text",
+      "id": "nutrition_product_panel_alt",
+      "label": "Right panel alt text",
+      "default": "Product and FDA certification"
+    },
+    {
+      "type": "image_picker",
+      "id": "nutrition_product_image",
+      "label": "Product sachet image (optional)",
+      "info": "Only used if right panel image is empty."
+    },
+    {
+      "type": "text",
+      "id": "nutrition_product_image_alt",
+      "label": "Product sachet alt text",
+      "default": "Slimfair coffee mix sachet"
+    },
+    {
+      "type": "image_picker",
+      "id": "nutrition_certificate_image",
+      "label": "FDA certificate image (optional)",
+      "info": "Only used if right panel image is empty."
+    },
+    {
+      "type": "text",
+      "id": "nutrition_certificate_image_alt",
+      "label": "Certificate alt text",
+      "default": "FDA certificate of product registration"
     },
     {
       "type": "textarea",
@@ -1002,19 +1084,19 @@
       "type": "color",
       "id": "faq_active_background_color",
       "label": "FAQ open item background",
-      "default": "#5C3F2D"
+      "default": "#68422e"
     },
     {
       "type": "color",
       "id": "faq_text_color",
       "label": "FAQ text color",
-      "default": "#5C3F2D"
+      "default": "#68422e"
     },
     {
       "type": "color",
       "id": "faq_accent_color",
       "label": "FAQ accent color",
-      "default": "#5C3F2D"
+      "default": "#68422e"
     },
     {
       "type": "color",

@@ -8,9 +8,19 @@
       {% endif %}
 
       {% if section.settings.health_benefits_link_text != blank %}
-        <a class="custom-health-benefits__link" href="{{ section.settings.health_benefits_link_url | default: '#nutrition-info' }}">
-          {{ section.settings.health_benefits_link_text }}
-        </a>
+        {% if section.settings.health_benefits_link_url != blank %}
+          <a class="custom-health-benefits__link" href="{{ section.settings.health_benefits_link_url }}">
+            {{ section.settings.health_benefits_link_text }}
+          </a>
+        {% elsif section.settings.show_nutrition_info_modal != false %}
+          <button type="button" class="custom-health-benefits__link" data-nutrition-info-open>
+            {{ section.settings.health_benefits_link_text }}
+          </button>
+        {% else %}
+          <a class="custom-health-benefits__link" href="#nutrition-info">
+            {{ section.settings.health_benefits_link_text }}
+          </a>
+        {% endif %}
       {% endif %}
     </div>
 
