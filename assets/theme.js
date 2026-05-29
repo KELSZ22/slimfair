@@ -4216,6 +4216,7 @@ theme.Product = (function() {
       });
     },
 
+
     _initThumbnailRailScroll: function() {
       var self = this;
 
