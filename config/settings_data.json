@@ -360,7 +360,6 @@
           "ingredient_green_coffee": {
             "type": "ingredient",
             "settings": {
-              "featured_card": true,
               "eyebrow": "Enhanced Fat Burning",
               "title": "GREEN COFFEE BEANS",
               "description": "<p>Higher chlorogenic acid content to improved metabolism vs roasted coffee.</p>",
@@ -371,7 +370,6 @@
           "ingredient_l_carnitine": {
             "type": "ingredient",
             "settings": {
-              "featured_card": false,
               "eyebrow": "Appetite Suppressant",
               "title": "L-CARNITINE",
               "description": "<p>Breaks down fat and turn fat into energy.</p>",
@@ -382,7 +380,6 @@
           "ingredient_stevia": {
             "type": "ingredient",
             "settings": {
-              "featured_card": false,
               "eyebrow": "Natural Sweetener",
               "title": "STEVIA",
               "description": "<p>Against oxidative damage; whitening effect on skin.</p>",
@@ -393,7 +390,6 @@
           "ingredient_rosehip": {
             "type": "ingredient",
             "settings": {
-              "featured_card": false,
               "eyebrow": "Lower Cholesterol",
               "title": "ROSEHIP EXTRACT",
               "description": "<p>Blood fat levels, brighten skin, prevent blackheads, and reduce inflammation.</p>",
@@ -404,7 +400,6 @@
           "ingredient_moringa": {
             "type": "ingredient",
             "settings": {
-              "featured_card": false,
               "eyebrow": "Normalize Blood Sugar",
               "title": "MORINGA OLEIFERA",
               "description": "<p>Rich in vitamins, minerals, and nutrients; helps normalize blood sugar.</p>",
@@ -415,7 +410,6 @@
           "ingredient_ginkgo": {
             "type": "ingredient",
             "settings": {
-              "featured_card": false,
               "eyebrow": "Boost Metabolism",
               "title": "GINKGO BILOBA",
               "description": "<p>Increases blood flow and improves memory.</p>",
@@ -426,7 +420,6 @@
           "ingredient_collagen": {
             "type": "ingredient",
             "settings": {
-              "featured_card": false,
               "eyebrow": "Reduce wrinkles",
               "title": "MARINE COLLAGEN",
               "description": "<p>Improve skin elasticity, and enhance the overall structure and appearance of skin.</p>",
@@ -437,7 +430,6 @@
           "ingredient_mangosteen": {
             "type": "ingredient",
             "settings": {
-              "featured_card": false,
               "eyebrow": "Burning Fat",
               "title": "MANGOSTEEN",
               "description": "<p>Helps in the prevention of weight gain, by burning down fat.</p>",
@@ -918,7 +910,7 @@
           "background_color": "#5c3f2d",
           "heading_color": "#fbf7d4",
           "text_color": "#fbf7d4",
-          "accent_color": "#a8dd62",
+          "accent_color": "#49704b",
           "negative_color": "#ff3131",
           "pill_background_color": "#fff9d2",
           "pill_text_color": "#5c3f2d",
