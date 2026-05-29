@@ -194,6 +194,7 @@
     flex: 0 0 236px;
     grid-template-rows: auto auto minmax(0, 1fr) auto auto;
     height: 209px;
+    overflow: hidden;
     padding: 22px 24px 20px;
     scroll-snap-align: start;
     text-align: center;
@@ -217,32 +218,66 @@
 
   .custom-switch-reviews__quote,
   .custom-switch-reviews__quote.rte-setting {
+    align-self: stretch;
     color: #111;
     font-size: 13px;
+    height: 100%;
     line-height: 1.45;
     margin: 0;
+    max-height: 100%;
     min-height: 0;
     overflow-y: auto;
-    padding-right: 4px;
-    scrollbar-color: rgba(52, 125, 69, 0.45) rgba(52, 125, 69, 0.12);
+    padding-right: 6px;
+    scrollbar-color: var(--switch-reviews-heading) rgba(52, 125, 69, 0.14);
+    scrollbar-gutter: stable;
     scrollbar-width: thin;
   }
 
   .custom-switch-reviews__quote::-webkit-scrollbar,
   .custom-switch-reviews__quote.rte-setting::-webkit-scrollbar {
+    -webkit-appearance: none;
+    appearance: none;
     width: 4px;
   }
 
   .custom-switch-reviews__quote::-webkit-scrollbar-track,
   .custom-switch-reviews__quote.rte-setting::-webkit-scrollbar-track {
-    background: rgba(52, 125, 69, 0.12);
+    background: rgba(52, 125, 69, 0.14);
     border-radius: 999px;
   }
 
   .custom-switch-reviews__quote::-webkit-scrollbar-thumb,
   .custom-switch-reviews__quote.rte-setting::-webkit-scrollbar-thumb {
-    background: rgba(52, 125, 69, 0.45);
+    background: var(--switch-reviews-heading);
+    border: 0;
     border-radius: 999px;
+    min-height: 32px;
+  }
+
+  .custom-switch-reviews__quote::-webkit-scrollbar-button,
+  .custom-switch-reviews__quote.rte-setting::-webkit-scrollbar-button,
+  .custom-switch-reviews__quote::-webkit-scrollbar-button:single-button,
+  .custom-switch-reviews__quote.rte-setting::-webkit-scrollbar-button:single-button,
+  .custom-switch-reviews__quote::-webkit-scrollbar-button:vertical:start:decrement,
+  .custom-switch-reviews__quote::-webkit-scrollbar-button:vertical:end:increment,
+  .custom-switch-reviews__quote::-webkit-scrollbar-button:horizontal:start:decrement,
+  .custom-switch-reviews__quote::-webkit-scrollbar-button:horizontal:end:increment,
+  .custom-switch-reviews__quote.rte-setting::-webkit-scrollbar-button:vertical:start:decrement,
+  .custom-switch-reviews__quote.rte-setting::-webkit-scrollbar-button:vertical:end:increment,
+  .custom-switch-reviews__quote.rte-setting::-webkit-scrollbar-button:horizontal:start:decrement,
+  .custom-switch-reviews__quote.rte-setting::-webkit-scrollbar-button:horizontal:end:increment {
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    display: none;
+    height: 0;
+    width: 0;
+  }
+
+  .custom-switch-reviews__quote::-webkit-scrollbar-corner,
+  .custom-switch-reviews__quote.rte-setting::-webkit-scrollbar-corner {
+    background: transparent;
+    display: none;
   }
 
   .custom-switch-reviews__quote p {
