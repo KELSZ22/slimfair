@@ -1,0 +1,15 @@
+{%- liquid
+  assign star_size = size | default: 17
+-%}
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="{{ star_size }}"
+  height="{{ star_size }}"
+  viewBox="0 0 17 17"
+  fill="none"
+  class="custom-rating-star{% if class != blank %} {{ class }}{% endif %}"
+  aria-hidden="true"
+  focusable="false"
+  role="presentation">
+  <path d="M8.31604 12.5366L11.7595 14.6149C12.3028 14.9427 12.973 14.4555 12.8288 13.838L11.9148 9.92054L14.9577 7.28439C15.4372 6.86929 15.1808 6.08136 14.5488 6.028L10.5433 5.68843L8.97646 1.99131C8.72906 1.4085 7.90301 1.4085 7.65562 1.99131L6.08876 5.68843L2.08325 6.028C1.45124 6.08136 1.19483 6.86929 1.67439 7.28439L4.71732 9.92054L3.80326 13.838C3.65912 14.4555 4.32924 14.9427 4.87255 14.6149L8.31604 12.5366Z" fill="currentColor"/>
+</svg>

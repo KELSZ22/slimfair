@@ -4216,6 +4216,32 @@ theme.Product = (function() {
       });
     },
 
+    _initThumbnailRailScroll: function() {
+      var self = this;
+
+      $(this.selectors.productThumbRailScroll, this.$container).on(
+        'click',
+        function() {
+          var $thumbnails = $(self.selectors.productThumbs, self.$container);
+
+          if (!$thumbnails.length || $thumbnails.hasClass('slick-initialized')) {
+            return;
+          }
+
+          var itemHeight =
+            $thumbnails.find(self.selectors.productThumbListItem).outerHeight(true) ||
+            66;
+
+          $thumbnails.animate(
+            {
+              scrollTop: $thumbnails.scrollTop() + itemHeight * 3
+            },
+            200
+          );
+        }
+      );
+    },
+
     _initBundleOptions: function() {
       var self = this;
       var $bundleInputs = $(this.selectors.bundleOptionInput, this.$container);

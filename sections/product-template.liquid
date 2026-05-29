@@ -130,7 +130,11 @@
             <div class="product-info-header__social-proof">
               <span class="product-info-header__badge">Best Seller</span>
               <span class="product-info-header__rating" aria-label="Rated 5 out of 5">
-                <span class="product-info-header__stars" aria-hidden="true">★★★★★</span>
+                <span class="product-info-header__stars" aria-hidden="true">
+                  {% for i in (1..5) %}
+                    {% render 'custom-rating-star' %}
+                  {% endfor %}
+                </span>
                 <span>5.0/5.0</span>
               </span>
               <span class="product-info-header__divider" aria-hidden="true">|</span>

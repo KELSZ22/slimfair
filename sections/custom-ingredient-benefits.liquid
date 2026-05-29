@@ -61,7 +61,7 @@
     {% if section.blocks.size > 0 %}
       <div class="custom-ingredient-benefits__grid">
         {% for block in section.blocks %}
-          <article class="custom-ingredient-benefits__card{% if block.settings.featured_card %} custom-ingredient-benefits__card--featured{% endif %}{% if block.settings.image == blank %} custom-ingredient-benefits__card--no-image{% endif %}" {{ block.shopify_attributes }}>
+          <article class="custom-ingredient-benefits__card{% if block.settings.image == blank %} custom-ingredient-benefits__card--no-image{% endif %}" {{ block.shopify_attributes }}>
             <div class="custom-ingredient-benefits__card-copy">
               {% if block.settings.eyebrow != blank %}
                 <p class="custom-ingredient-benefits__eyebrow">{{ block.settings.eyebrow | escape }}</p>
@@ -209,18 +209,22 @@
     border: 1px solid var(--ingredient-benefits-card-border);
     border-radius: 8px;
     box-sizing: border-box;
+    color: var(--ingredient-benefits-text);
     display: flex;
     min-height: 148px;
     overflow: hidden;
     padding: 25px;
     position: relative;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
     width: 328px;
     max-width: 100%;
   }
 
-  .custom-ingredient-benefits__card--featured {
-    background: var(--ingredient-benefits-featured-bg);
-    color: var(--ingredient-benefits-featured-text);
+  @media (hover: hover) {
+    .custom-ingredient-benefits__card:hover {
+      background: var(--ingredient-benefits-featured-bg);
+      color: var(--ingredient-benefits-featured-text);
+    }
   }
 
   .custom-ingredient-benefits__card-copy {
@@ -503,7 +507,7 @@
         "type": "color",
         "id": "card_background_color",
         "label": "Card background color",
-        "default": "#FEFCE8"
+        "default": "#F9FFE9"
       }, {
         "type": "color",
         "id": "card_border_color",
@@ -512,12 +516,12 @@
       }, {
         "type": "color",
         "id": "featured_card_background_color",
-        "label": "Featured card background color",
+        "label": "Card hover background color",
         "default": "#6B422E"
       }, {
         "type": "color",
         "id": "featured_card_text_color",
-        "label": "Featured card text color",
+        "label": "Card hover text color",
         "default": "#FFFFFF"
       }
     ],
@@ -526,12 +530,6 @@
         "type": "ingredient",
         "name": "Ingredient card",
         "settings": [
-          {
-            "type": "checkbox",
-            "id": "featured_card",
-            "label": "Use featured card colors",
-            "default": false
-          },
           {
             "type": "text",
             "id": "eyebrow",
@@ -579,7 +577,6 @@
           {
             "type": "ingredient",
             "settings": {
-              "featured_card": true,
               "eyebrow": "Enhanced Fat Burning",
               "title": "GREEN COFFEE BEANS",
               "description": "<p>Higher chlorogenic acid content to improved metabolism vs roasted coffee.</p>"

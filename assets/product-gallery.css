@@ -103,10 +103,16 @@
   }
 
   .product-info-header__stars {
-    color: #c57d42;
-    letter-spacing: 2px;
-    font-size: 21px;
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    color: #b68353;
     line-height: 1;
+  }
+
+  .product-info-header__stars .custom-rating-star {
+    display: block;
+    flex-shrink: 0;
   }
 
   .product-info-header .product-single__title {
@@ -1328,9 +1334,16 @@
   }
 
   .product-info-header__stars {
-    color: #c57d42;
-    letter-spacing: 1px;
-    font-weight: 800;
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    color: #b68353;
+    line-height: 1;
+  }
+
+  .product-info-header__stars .custom-rating-star {
+    display: block;
+    flex-shrink: 0;
   }
 
   .product-info-header .product-single__title {
