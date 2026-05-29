@@ -9,6 +9,7 @@
     --real-results-line: {{ section.settings.line_color }};
     --real-results-padding-top: {{ section.settings.padding_top }}px;
     --real-results-padding-bottom: {{ section.settings.padding_bottom }}px;
+    --real-results-content-width: {{ section.settings.content_width | default: 1440 }}px;
   ">
   <div class="custom-real-results__inner page-width">
     <div class="custom-real-results__header">
@@ -191,7 +192,10 @@
   }
 
   .custom-real-results__inner.page-width {
-    max-width: 1160px;
+    max-width: var(--real-results-content-width);
+    padding-left: 0;
+    padding-right: 0;
+    width: 100%;
   }
 
   .custom-real-results__header {
@@ -330,7 +334,7 @@
   .custom-real-results__play img {
     display: block;
     height: auto;
-    width: 45px;
+    width: 70px;
   }
 
   .custom-real-results__card-title {
@@ -355,8 +359,10 @@
 
   .custom-real-results__name {
     color: var(--real-results-heading);
+    font-family: Lora, serif;
     font-size: 14px;
-    font-weight: 700;
+    font-style: normal;
+    font-weight: 800 !important;
     line-height: 1.25;
     margin: 4px 0 0;
   }
@@ -366,7 +372,7 @@
     display: flex;
     gap: 16px;
     margin: 24px auto 0;
-    max-width: 100%;
+    max-width: min(100%, 920px);
     width: 100%;
   }
 
@@ -376,7 +382,7 @@
     border-radius: 999px;
     cursor: pointer;
     flex: 1 1 auto;
-    height: 4px;
+    height: 3px;
     min-width: 0;
     padding: 0;
     position: relative;
@@ -529,8 +535,10 @@
     }
 
     .custom-real-results__header {
-      margin: 0 11px 16px 0;
+      margin: 0 0 16px;
       max-width: none;
+      padding-left: 0;
+      padding-right: 0;
     }
 
     .custom-real-results__rating {
@@ -567,11 +575,11 @@
       gap: 12px;
       justify-content: flex-start;
       padding: 0 0 12px;
-      scroll-padding-left: 0;
+      scroll-padding-left: 16px;
     }
 
     .custom-real-results__card {
-      flex: 0 0 min(230px, calc(100vw - 79px));
+      flex: 0 0 min(230px, calc(100vw - 48px));
     }
 
     .custom-real-results__media {
@@ -610,18 +618,22 @@
 
     .custom-real-results__name {
       font-size: 14px;
+      font-weight: 800 !important;
       margin-top: 4px;
     }
 
     .custom-real-results__controls {
       gap: 12px;
-      margin: 10px auto 0;
-      padding-right: 16px;
+      margin: 10px 0 0;
+      max-width: min(100%, 380px);
+      padding-left: 0;
+      padding-right: 0;
       width: 100%;
     }
 
     .custom-real-results__controls-line {
-      height: 3px;
+      height: 2px;
+      max-width: 260px;
     }
 
     .custom-real-results__controls-thumb {
@@ -883,6 +895,20 @@
         "id": "text",
         "label": "Text",
         "default": "<p>See how Slimfair Coffee fits into busy mornings, self-care moments and healthy lifestyles supporting weight, digestion, energy and glow.</p>"
+      },
+      {
+        "type": "header",
+        "content": "Layout"
+      },
+      {
+        "type": "range",
+        "id": "content_width",
+        "label": "Content width",
+        "min": 900,
+        "max": 1600,
+        "step": 20,
+        "unit": "px",
+        "default": 1440
       },
       {
         "type": "header",

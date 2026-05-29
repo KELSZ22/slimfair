@@ -1960,7 +1960,7 @@ button.custom-health-benefits__link {
   max-width: min(920px, 94vw);
   overflow: auto;
   overscroll-behavior: contain;
-  padding: 20px 18px 18px;
+  padding: 50px 18px 18px;
   position: relative;
   width: 100%;
   z-index: 1;
