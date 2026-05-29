@@ -441,67 +441,29 @@ $color-slideshow-dots: #fff;
 
 
 @font-face {
-  font-family: "Work Sans";
-  font-weight: 600;
-  font-style: normal;
-  src: url("//theslimfairshop.com/cdn/fonts/work_sans/worksans_n6.75811c3bd5161ea6e3ceb2d48ca889388f9bd5fe.woff2") format("woff2"),
-       url("//theslimfairshop.com/cdn/fonts/work_sans/worksans_n6.defcf26f28f3fa3df4555714d3f2e0f1217d7772.woff") format("woff");
-}
-
-@font-face {
-  font-family: "Work Sans";
+  font-family: 'Avenir-Regular';
+  src: url('https://cdn.shopify.com/s/files/1/0266/8858/5772/files/Avenir_Regular.ttf?v=1780046600') format('truetype');
   font-weight: 400;
   font-style: normal;
-  src: url("//theslimfairshop.com/cdn/fonts/work_sans/worksans_n4.b7973b3d07d0ace13de1b1bea9c45759cdbe12cf.woff2") format("woff2"),
-       url("//theslimfairshop.com/cdn/fonts/work_sans/worksans_n4.cf5ceb1e6d373a9505e637c1aff0a71d0959556d.woff") format("woff");
+  font-display: swap;
 }
 
-
-
-
 @font-face {
-  font-family: "Work Sans";
-  font-weight: 700;
+  font-family: 'Avenir-Black';
+  src: url('https://cdn.shopify.com/s/files/1/0266/8858/5772/files/Avenir_Black.ttf?v=1780046600') format('truetype');
+  font-weight: 900;
   font-style: normal;
-  src: url("//theslimfairshop.com/cdn/fonts/work_sans/worksans_n7.e2cf5bd8f2c7e9d30c030f9ea8eafc69f5a92f7b.woff2") format("woff2"),
-       url("//theslimfairshop.com/cdn/fonts/work_sans/worksans_n7.20f1c80359e7f7b4327b81543e1acb5c32cd03cd.woff") format("woff");
+  font-display: swap;
 }
 
-@font-face {
-  font-family: "Work Sans";
-  font-weight: 700;
-  font-style: normal;
-  src: url("//theslimfairshop.com/cdn/fonts/work_sans/worksans_n7.e2cf5bd8f2c7e9d30c030f9ea8eafc69f5a92f7b.woff2") format("woff2"),
-       url("//theslimfairshop.com/cdn/fonts/work_sans/worksans_n7.20f1c80359e7f7b4327b81543e1acb5c32cd03cd.woff") format("woff");
-}
+$font-weight-body--bold: 900;
+$font-weight-body--bolder: 900;
+$font-weight-header--bold: 900;
 
-@font-face {
-  font-family: "Work Sans";
-  font-weight: 400;
-  font-style: italic;
-  src: url("//theslimfairshop.com/cdn/fonts/work_sans/worksans_i4.16ff51e3e71fc1d09ff97b9ff9ccacbeeb384ec4.woff2") format("woff2"),
-       url("//theslimfairshop.com/cdn/fonts/work_sans/worksans_i4.ed4a1418cba5b7f04f79e4d5c8a5f1a6bd34f23b.woff") format("woff");
-}
-
-@font-face {
-  font-family: "Work Sans";
-  font-weight: 700;
-  font-style: italic;
-  src: url("//theslimfairshop.com/cdn/fonts/work_sans/worksans_i7.7cdba6320b03c03dcaa365743a4e0e729fe97e54.woff2") format("woff2"),
-       url("//theslimfairshop.com/cdn/fonts/work_sans/worksans_i7.42a9f4016982495f4c0b0fb3dc64cf8f2d0c3eaa.woff") format("woff");
-}
-
-
-$font-weight-body--bold: 700;
-$font-weight-body--bolder: 700;
-$font-weight-header--bold: 700;
-$font-stack-body: Avenir, "Avenir Next", "Work Sans", sans-serif;
-
-$font-stack-header: "Work Sans", sans-serif;
+$font-stack-body: 'Avenir-Regular', Avenir, "Avenir Next", sans-serif;
+$font-stack-header: 'Avenir-Black', Avenir, "Avenir Next", sans-serif;
 $font-style-header: normal;
-$font-weight-header: 600;
-
-$font-stack-body: "Work Sans", sans-serif;
+$font-weight-header: 900;
 $font-style-body: normal;
 $font-weight-body: 400;
 

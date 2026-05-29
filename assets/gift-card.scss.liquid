@@ -141,38 +141,32 @@ $color-slideshow-dots: #fff;
 
 /*================ Typography ================*/
 
-{% assign header_font = settings.type_header_font %}
-{% assign base_font = settings.type_base_font %}
+@font-face {
+  font-family: 'Avenir-Regular';
+  src: url('https://cdn.shopify.com/s/files/1/0266/8858/5772/files/Avenir_Regular.ttf?v=1780046600') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 
-{{ header_font | font_face }}
-{{ base_font | font_face }}
+@font-face {
+  font-family: 'Avenir-Black';
+  src: url('https://cdn.shopify.com/s/files/1/0266/8858/5772/files/Avenir_Black.ttf?v=1780046600') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
 
-{% if settings.type_bold_product_titles %}
-  {%- assign header_font_bold = header_font | font_modify: 'weight', 'bolder' -%}
-{% endif %}
+$font-weight-body--bold: 900;
+$font-weight-body--bolder: 900;
+$font-weight-header--bold: 900;
 
-{%- assign base_font_bolder = base_font | font_modify: 'weight', 'bolder' -%}
-{%- assign base_font_bold = base_font | font_modify: 'weight', 'bold' -%}
-{%- assign base_font_italic = base_font | font_modify: 'style', 'italic' -%}
-{%- assign base_font_bold_italic = base_font_bold | font_modify: 'style', 'italic' -%}
-
-{{ header_font_bold | font_face }}
-{{ base_font_bold | font_face }}
-{{ base_font_bolder | font_face }}
-{{ base_font_italic | font_face }}
-{{ base_font_bold_italic | font_face }}
-
-$font-weight-body--bold: {{ base_font_bold.weight | default: 700 }};
-$font-weight-body--bolder: {{ base_font_bolder.weight | default: 700 }};
-$font-weight-header--bold: {{ header_font_bold.weight | default: 700 }};
-
-$font-stack-header: {{ header_font.family }}, {{ header_font.fallback_families }};
-$font-style-header: {{ header_font.style }};
-$font-weight-header: {{ header_font.weight }};
-
-$font-stack-body: {{ base_font.family }}, {{ base_font.fallback_families }};
-$font-style-body: {{ base_font.style }};
-$font-weight-body: {{ base_font.weight }};
+$font-stack-body: 'Avenir-Regular', Avenir, "Avenir Next", sans-serif;
+$font-stack-header: 'Avenir-Black', Avenir, "Avenir Next", sans-serif;
+$font-style-header: normal;
+$font-weight-header: 900;
+$font-style-body: normal;
+$font-weight-body: 400;
 
 $font-size-header: {{ settings.type_header_base_size }} * 1px;
 $font-bold-titles: {{ settings.type_bold_product_titles }};
