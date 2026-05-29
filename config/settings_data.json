@@ -168,6 +168,7 @@
           "1576063353576",
           "1576063377661"
         ],
+        "disabled": true,
         "settings": {
           "slideshow_height": "adapt",
           "text_size": "medium",
@@ -501,6 +502,7 @@
       },
       "734fe57f-0903-4d8f-8a58-8445b60a39b7": {
         "type": "collection",
+        "disabled": true,
         "settings": {
           "title": "Beauty Soaps",
           "collection": "beauty",
@@ -600,6 +602,7 @@
           "38ec88fd-5611-489c-ac8f-dc4a0a9470e8",
           "a2119665-3219-4463-9d49-015a2469ce7f"
         ],
+        "disabled": true,
         "settings": {
           "slideshow_height": "adapt",
           "text_size": "medium",
@@ -679,6 +682,7 @@
           "0266c5db-02f0-4398-8984-acd4690fe9fc",
           "image_JYBp39"
         ],
+        "disabled": true,
         "settings": {
           "slideshow_height": "adapt",
           "text_size": "large",
@@ -754,6 +758,7 @@
           "text_mi8jM7",
           "image_hKpMHP"
         ],
+        "disabled": true,
         "settings": {
           "title": "We're the first and the best!"
         }
@@ -794,6 +799,7 @@
           "image_MfeDVb",
           "image_3hxB67"
         ],
+        "disabled": true,
         "name": "Gallery",
         "settings": {
           "section_height": "large"

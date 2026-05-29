@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
 .trustshop-review-wrap {
   background: #f4f5f3;
   border-top: 0;
@@ -6,9 +8,9 @@
   padding: 32px 20px 18px;
 }
 
-.trustshop-review-wrap,
-#trustshop-review {
-  font-family: 'Avenir-Regular', Avenir, "Avenir Next", sans-serif;
+#trustshop-review,
+#trustshop-review * {
+  font-family: Avenir, "Avenir Next", Arial, sans-serif;
 }
 
 #trustshop-review {
@@ -26,8 +28,7 @@
 #trustshop-review h3,
 #trustshop-review h4 {
   color: #49704b;
-  font-family: 'Lora-Bold', serif;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0;
 }
 
@@ -689,6 +690,12 @@
 }
 
 @media screen and (min-width: 750px) {
+  .trustshop-review-wrap,
+  #trustshop-review,
+  #trustshop-review * {
+    font-family: Inter, sans-serif;
+  }
+
   #trustshop-review {
     font-size: 15.875px;
   }
