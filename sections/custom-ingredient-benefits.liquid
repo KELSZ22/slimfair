@@ -15,6 +15,8 @@
     --ingredient-benefits-featured-bg: {{ section.settings.featured_card_background_color }};
     --ingredient-benefits-featured-text: {{ section.settings.featured_card_text_color }};
     --ingredient-benefits-overlay-opacity: {{ section.settings.background_overlay_opacity | divided_by: 100.0 }};
+    --ingredient-benefits-margin-top: {{ section.settings.margin_top }}px;
+    --ingredient-benefits-margin-bottom: {{ section.settings.margin_bottom }}px;
   ">
   {% if has_background_image %}
     <div
@@ -104,6 +106,8 @@
   .custom-ingredient-benefits {
     background-color: var(--ingredient-benefits-bg);
     color: var(--ingredient-benefits-text);
+    margin-bottom: var(--ingredient-benefits-margin-bottom);
+    margin-top: var(--ingredient-benefits-margin-top);
     overflow: hidden;
     padding: 56px 0 0;
     position: relative;
@@ -372,6 +376,30 @@
         "id": "subheading",
         "label": "Subheading",
         "default": "<p>Every ingredient is carefully selected to support fat loss, boost metabolism, and keep you feeling in control, nothing unnecessary, nothing hidden.</p>"
+      },
+      {
+        "type": "header",
+        "content": "Spacing"
+      },
+      {
+        "type": "range",
+        "id": "margin_top",
+        "label": "Top margin",
+        "min": 0,
+        "max": 120,
+        "step": 4,
+        "unit": "px",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "margin_bottom",
+        "label": "Bottom margin",
+        "min": 0,
+        "max": 120,
+        "step": 4,
+        "unit": "px",
+        "default": 0
       },
       {
         "type": "header",

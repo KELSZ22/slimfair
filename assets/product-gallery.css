@@ -248,6 +248,10 @@
     border-color: #347b4f;
   }
 
+  .bundle-option-card input:checked + .bundle-option-card__image-wrap {
+    border-color: #347b4f;
+  }
+
   .bundle-option-card__image {
     display: block;
     width: 100%;
@@ -271,6 +275,7 @@
     line-height: 1;
     text-align: center;
     text-transform: uppercase;
+    pointer-events: none;
   }
 
   .bundle-option-card__badge--red {
@@ -293,6 +298,10 @@
   }
 
   .bundle-option-card.is-selected .bundle-option-card__radio {
+    border: 4px solid #347b4f;
+  }
+
+  .bundle-option-card input:checked ~ .bundle-option-card__content .bundle-option-card__radio {
     border: 4px solid #347b4f;
   }
 
@@ -970,6 +979,9 @@
 .custom-results-videos__modal:not([hidden]) {
   position: fixed;
   inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
   z-index: 9999;
   display: grid;
   place-items: center;
@@ -995,9 +1007,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: min(92vw, 860px);
-  max-height: calc(100dvh - 32px);
+  width: min(96vw, 1180px);
   max-height: calc(100vh - 32px);
+  max-height: calc(100dvh - 32px);
   margin: 0;
   background: #111;
   border-radius: 8px;
@@ -1031,12 +1043,12 @@
   position: relative;
   width: min(
     100%,
-    860px,
+    1180px,
     calc((100dvh - 32px) * 16 / 9),
     calc((100vh - 32px) * 16 / 9)
   );
-  max-height: calc(100dvh - 32px);
   max-height: calc(100vh - 32px);
+  max-height: calc(100dvh - 32px);
   aspect-ratio: 16 / 9;
   overflow: hidden;
   border-radius: 8px;
@@ -1115,18 +1127,18 @@
   }
 
   .custom-results-videos__dialog {
-    width: min(92vw, 360px);
+    width: min(96vw, 430px);
   }
 
   .custom-results-videos__player {
     width: min(
-      92vw,
-      360px,
+      96vw,
+      430px,
       calc((100dvh - 32px) * 9 / 16),
       calc((100vh - 32px) * 9 / 16)
     );
-    max-height: calc(100dvh - 32px);
     max-height: calc(100vh - 32px);
+    max-height: calc(100dvh - 32px);
     aspect-ratio: 9 / 16;
   }
 }
@@ -1424,6 +1436,10 @@
     border-color: #347b4f;
   }
 
+  .bundle-option-card input:checked + .bundle-option-card__image-wrap {
+    border-color: #347b4f;
+  }
+
   .bundle-option-card__image {
     display: block;
     width: 100%;
@@ -1448,6 +1464,7 @@
     line-height: 1.1;
     text-align: center;
     text-transform: uppercase;
+    pointer-events: none;
   }
 
   .bundle-option-card__badge--red {
@@ -1471,6 +1488,10 @@
   }
 
   .bundle-option-card.is-selected .bundle-option-card__radio {
+    border: 4px solid #347b4f;
+  }
+
+  .bundle-option-card input:checked ~ .bundle-option-card__content .bundle-option-card__radio {
     border: 4px solid #347b4f;
   }
 

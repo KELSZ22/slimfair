@@ -178,7 +178,7 @@
             {%- if current_variant.available == false %} product-form--variant-sold-out {%- endif -%}
           {%- endcapture %}
 
-          {% form 'product', product, class:form_classes, novalidate: 'novalidate', data-product-form: '' %}
+          {% form 'product', product, class:form_classes, novalidate: 'novalidate', autocomplete: 'off', data-product-form: '' %}
             <div class="bundle-options">
               <h2 class="bundle-options__title">Bundle &amp; Save More!</h2>
 
@@ -188,8 +188,8 @@
                 {% assign six_image = product.images[2] | default: double_image %}
                 {% assign compare_price = current_variant.compare_at_price | default: current_variant.price %}
 
-                <label class="bundle-option-card is-selected" data-bundle-option-card>
-                  <input type="radio" name="bundle_option" value="{{ current_variant.id }}" data-bundle-option-input data-bundle-quantity="1" data-bundle-price="{{ current_variant.price }}" data-bundle-compare-price="{{ compare_price }}" checked {% unless current_variant.available %}disabled{% endunless %}>
+                <label class="bundle-option-card" data-bundle-option-card for="BundleOption-{{ section.id }}-1">
+                  <input id="BundleOption-{{ section.id }}-1" type="radio" name="bundle_option" value="bundle-1" data-bundle-option-input data-bundle-quantity="1" data-bundle-price="{{ current_variant.price }}" data-bundle-compare-price="{{ compare_price }}" checked>
                   <div class="bundle-option-card__image-wrap">
                     {% if single_image != blank %}
                       <img class="bundle-option-card__image" src="{{ single_image | img_url: '420x420', crop: 'center' }}" alt="Buy single pack" loading="lazy">
@@ -212,8 +212,8 @@
 
                 {% assign double_price = current_variant.price | times: 2 %}
                 {% assign double_compare_price = compare_price | times: 2 %}
-                <label class="bundle-option-card" data-bundle-option-card>
-                  <input type="radio" name="bundle_option" value="{{ current_variant.id }}" data-bundle-option-input data-bundle-quantity="2" data-bundle-price="{{ double_price }}" data-bundle-compare-price="{{ double_compare_price }}" {% unless current_variant.available %}disabled{% endunless %}>
+                <label class="bundle-option-card" data-bundle-option-card for="BundleOption-{{ section.id }}-2">
+                  <input id="BundleOption-{{ section.id }}-2" type="radio" name="bundle_option" value="bundle-2" data-bundle-option-input data-bundle-quantity="2" data-bundle-price="{{ double_price }}" data-bundle-compare-price="{{ double_compare_price }}">
                   <span class="bundle-option-card__badge">Most Popular</span>
                   <div class="bundle-option-card__image-wrap">
                     {% if double_image != blank %}
@@ -237,8 +237,8 @@
 
                 {% assign six_price = current_variant.price | times: 6 %}
                 {% assign six_compare_price = compare_price | times: 6 %}
-                <label class="bundle-option-card" data-bundle-option-card>
-                  <input type="radio" name="bundle_option" value="{{ current_variant.id }}" data-bundle-option-input data-bundle-quantity="6" data-bundle-price="{{ six_price }}" data-bundle-compare-price="{{ six_compare_price }}" {% unless current_variant.available %}disabled{% endunless %}>
+                <label class="bundle-option-card" data-bundle-option-card for="BundleOption-{{ section.id }}-6">
+                  <input id="BundleOption-{{ section.id }}-6" type="radio" name="bundle_option" value="bundle-6" data-bundle-option-input data-bundle-quantity="6" data-bundle-price="{{ six_price }}" data-bundle-compare-price="{{ six_compare_price }}">
                   <span class="bundle-option-card__badge bundle-option-card__badge--red">Best Value</span>
                   <div class="bundle-option-card__image-wrap">
                     {% if six_image != blank %}

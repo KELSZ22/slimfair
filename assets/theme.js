@@ -4216,10 +4216,108 @@ theme.Product = (function() {
       });
     },
 
+    _initBundleOptions: function() {
+      var self = this;
+      var $bundleInputs = $(this.selectors.bundleOptionInput, this.$container);
+
+      if (!$bundleInputs.length) {
+        return;
+      }
+
+      var $bundleCards = $(this.selectors.bundleOptionCard, this.$container);
+
+      function applySelectedBundle($input) {
+        if (!$input || !$input.length || $input.is(':disabled')) {
+          return;
+        }
+
+        var quantity = parseInt($input.data('bundle-quantity'), 10) || 1;
+        var bundlePrice = parseInt($input.data('bundle-price'), 10);
+        var bundleComparePrice = parseInt($input.data('bundle-compare-price'), 10);
+
+        self.$quantityInput.val(quantity);
+
+        $bundleCards.removeClass('is-selected');
+        $input.closest(self.selectors.bundleOptionCard).addClass('is-selected');
+
+        if (!self.$addToCartText.length || !Number.isFinite(bundlePrice)) {
+          return;
+        }
+
+        var addToCartText = theme.strings.addToCart + ' \u2014 ';
+        if (Number.isFinite(bundleComparePrice) && bundleComparePrice > bundlePrice) {
+          addToCartText +=
+            '<s>' +
+            theme.Currency.formatMoney(bundleComparePrice, theme.moneyFormat) +
+            '</s> ';
+        }
+        addToCartText +=
+          '<strong>' +
+          theme.Currency.formatMoney(bundlePrice, theme.moneyFormat) +
+          '</strong>';
+
+        self.$addToCartText.html(addToCartText);
+      }
+
+      $bundleInputs.on(
+        'change' + this.settings.namespace,
+        function(event) {
+          applySelectedBundle($(event.currentTarget));
+        }
+      );
+
+      $bundleInputs.on(
+        'click' + this.settings.namespace,
+        function(event) {
+          applySelectedBundle($(event.currentTarget));
+        }
+      );
+
+      $bundleCards.on(
+        'click' + this.settings.namespace,
+        function(event) {
+          var $cardInput = $(self.selectors.bundleOptionInput, event.currentTarget).first();
+          if (!$cardInput.length || $cardInput.is(':disabled')) {
+            return;
+          }
+
+          if (!$cardInput.prop('checked')) {
+            $cardInput.prop('checked', true).trigger('change');
+            return;
+          }
+
+          applySelectedBundle($cardInput);
+        }
+      );
+
+      var $singleBundle = $bundleInputs
+        .filter('[data-bundle-quantity="1"]')
+        .not(':disabled')
+        .first();
+      var $checkedBundle = $bundleInputs.filter(':checked').not(':disabled').first();
+      var $initialBundle = $singleBundle.length
+        ? $singleBundle
+        : $checkedBundle.length
+          ? $checkedBundle
+          : $bundleInputs.not(':disabled').first();
+
+      if ($initialBundle.length && !$initialBundle.prop('checked')) {
+        $initialBundle.prop('checked', true);
+      }
+      applySelectedBundle($initialBundle);
+    },
+
     _initAddToCart: function() {
       $(this.selectors.productForm, this.$container).on(
         'submit',
         function(evt) {
+          var $selectedBundle = $(this.selectors.bundleOptionInput + ':checked', this.$container).first();
+          if ($selectedBundle.length) {
+            var selectedQuantity =
+              parseInt($selectedBundle.data('bundle-quantity'), 10) || 1;
+            this.$quantityInput.val(selectedQuantity);
+          }
+
           if (this.$addToCart.is('[aria-disabled]')) {
             evt.preventDefault();
             return;

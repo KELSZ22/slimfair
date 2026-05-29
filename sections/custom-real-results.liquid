@@ -428,11 +428,19 @@
   }
 
   .custom-real-results__modal[hidden] {
-    display: none;
+    display: none !important;
+    pointer-events: none;
   }
 
-  .custom-real-results__modal {
+  .custom-real-results__modal:not([hidden]) {
+    box-sizing: border-box;
+    display: grid;
     inset: 0;
+    padding: max(16px, env(safe-area-inset-top, 0px))
+      max(16px, env(safe-area-inset-right, 0px))
+      max(16px, env(safe-area-inset-bottom, 0px))
+      max(16px, env(safe-area-inset-left, 0px));
+    place-items: center;
     position: fixed;
     z-index: 9999;
   }
@@ -445,37 +453,52 @@
   }
 
   .custom-real-results__dialog {
-    background: #000;
+    align-items: center;
+    background: #111;
     border-radius: 8px;
-    left: 50%;
-    max-width: min(90vw, 420px);
-    overflow: hidden;
-    position: absolute;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.38);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0;
+    max-height: calc(100dvh - 32px);
+    max-height: calc(100vh - 32px);
+    position: relative;
+    width: min(96vw, 1180px);
+    z-index: 1;
   }
 
   .custom-real-results__close {
     align-items: center;
-    background: #fff;
-    border: 0;
+    background: rgba(0, 0, 0, 0.48);
+    border: 1px solid rgba(255, 255, 255, 0.55);
     border-radius: 50%;
-    color: #111;
+    color: #fff;
     display: flex;
     height: 34px;
     justify-content: center;
-    padding: 9px;
+    padding: 0;
     position: absolute;
-    right: 10px;
-    top: 10px;
+    right: 8px;
+    top: 8px;
     width: 34px;
     z-index: 2;
   }
 
+  .custom-real-results__close svg {
+    display: block;
+    height: 14px;
+    width: 14px;
+  }
+
   .custom-real-results__player {
-    aspect-ratio: 9 / 16;
-    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #111;
+    border-radius: 8px;
+    max-height: calc(100dvh - 32px);
+    max-height: calc(100vh - 32px);
+    overflow: hidden;
+    width: min(100%, 1180px, calc((100dvh - 32px) * 16 / 9), calc((100vh - 32px) * 16 / 9));
   }
 
   .custom-real-results__player iframe,
@@ -484,6 +507,10 @@
     display: block;
     height: 100%;
     width: 100%;
+  }
+
+  .custom-real-results-open {
+    overflow: hidden;
   }
 
   @media screen and (max-width: 749px) {
@@ -614,6 +641,17 @@
       margin-top: 0;
       width: 31px;
     }
+
+    .custom-real-results__dialog {
+      width: min(96vw, 430px);
+    }
+
+    .custom-real-results__player {
+      aspect-ratio: 9 / 16;
+      max-height: calc(100dvh - 32px);
+      max-height: calc(100vh - 32px);
+      width: min(96vw, 430px, calc((100dvh - 32px) * 9 / 16), calc((100vh - 32px) * 9 / 16));
+    }
   }
 </style>
 
@@ -731,8 +769,15 @@
       return /\.(mp4|webm|ogg|mov)(\?.*)?$/i.test(url);
     }
 
+    function ensureModalInBody() {
+      if (modal && modal.parentElement !== document.body) {
+        document.body.appendChild(modal);
+      }
+    }
+
     function openVideo(url, trigger) {
       if (!modal || !player) return;
+      ensureModalInBody();
       activeTrigger = trigger;
       player.innerHTML = '';
 
@@ -754,6 +799,10 @@
 
       modal.hidden = false;
       modal.setAttribute('aria-hidden', 'false');
+      document.documentElement.classList.add('custom-real-results-open');
+
+      var closeButton = modal.querySelector('.custom-real-results__close');
+      if (closeButton) closeButton.focus();
     }
 
     function closeVideo() {
@@ -761,6 +810,7 @@
       modal.hidden = true;
       modal.setAttribute('aria-hidden', 'true');
       player.innerHTML = '';
+      document.documentElement.classList.remove('custom-real-results-open');
       if (activeTrigger) activeTrigger.focus();
       activeTrigger = null;
     }
@@ -779,12 +829,20 @@
     if (track) track.addEventListener('scroll', updateScrollbar);
     window.addEventListener('resize', updateScrollbar);
     updateScrollbar();
+    ensureModalInBody();
 
     section.addEventListener('click', function(event) {
       var trigger = event.target.closest('[data-real-results-video-trigger]');
       if (trigger) openVideo(trigger.getAttribute('data-video-url'), trigger);
 
       if (event.target.closest('[data-real-results-close]')) closeVideo();
+    });
+
+    document.addEventListener('click', function(event) {
+      if (modal && modal.contains(event.target) && event.target.closest('[data-real-results-close]')) {
+        event.preventDefault();
+        closeVideo();
+      }
     });
 
     document.addEventListener('keydown', function(event) {
