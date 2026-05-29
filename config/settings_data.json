@@ -1109,7 +1109,8 @@
               "title": "Amazing results!",
               "text": "<p>After 2 weeks I noticed less bloating and more energy. Will definitely repurchase!</p>",
               "name": "Mike dela Cruz",
-              "badge": "Verified Buyer"
+              "badge": "Verified Buyer",
+              "badge_icon": "shopify://shop_images/Frame.svg"
             }
           },
           "switch_review_2": {
@@ -1118,7 +1119,8 @@
               "title": "Taste like cafe latte",
               "text": "<p>Didn't expect a health mix to taste like my favorite cafe drink. Super creamy!</p>",
               "name": "Sophia Abad",
-              "badge": "Verified Buyer"
+              "badge": "Verified Buyer",
+              "badge_icon": "shopify://shop_images/Frame.svg"
             }
           },
           "switch_review_3": {
@@ -1127,7 +1129,8 @@
               "title": "My daily ritual",
               "text": "<p>I start my mornings with this and I've lost 2kg in a month without changing much else.</p>",
               "name": "Noel Sanchez",
-              "badge": "Verified Buyer"
+              "badge": "Verified Buyer",
+              "badge_icon": "shopify://shop_images/Frame.svg"
             }
           },
           "switch_review_4": {
@@ -1136,7 +1139,8 @@
               "title": "My daily ritual",
               "text": "<p>I start my mornings with this and I've lost 2kg in a month without changing much else.</p>",
               "name": "Noel Sanchez",
-              "badge": "Verified Buyer"
+              "badge": "Verified Buyer",
+              "badge_icon": "shopify://shop_images/Frame.svg"
             }
           }
         },
