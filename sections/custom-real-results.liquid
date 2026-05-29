@@ -73,7 +73,14 @@
                 {% endif %}
 
                 {% if video_url != blank %}
-                  <span class="custom-real-results__play" aria-hidden="true"></span>
+                  <span class="custom-real-results__play" aria-hidden="true">
+                    <img
+                      src="{{ 'Circled Play Button.svg' | asset_url }}"
+                      alt=""
+                      width="69"
+                      height="69"
+                      loading="lazy">
+                  </span>
                 {% endif %}
               {% endcapture %}
               {% if video_url != blank %}
@@ -238,18 +245,24 @@
   }
 
   .custom-real-results__viewport {
+    margin: 0 auto;
     overflow: visible;
-    width: calc(100% + max(0px, (100vw - min(100vw, 1160px)) / 2));
+    width: 100%;
   }
 
   .custom-real-results__track {
     display: flex;
     gap: 24px;
+    justify-content: flex-start;
     overflow-x: auto;
     padding: 0 0 18px;
     scroll-behavior: smooth;
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
+  }
+
+  .custom-real-results__track--centered {
+    justify-content: center;
   }
 
   .custom-real-results__track::-webkit-scrollbar {
@@ -306,24 +319,18 @@
   }
 
   .custom-real-results__play {
-    border: 3px solid #fff;
-    border-radius: 50%;
-    height: 45px;
+    display: inline-flex;
     left: 50%;
+    line-height: 0;
     position: absolute;
     top: 50%;
     transform: translate(-50%, -50%);
-    width: 45px;
   }
 
-  .custom-real-results__play:after {
-    border-bottom: 10px solid transparent;
-    border-left: 15px solid #fff;
-    border-top: 10px solid transparent;
-    content: "";
-    left: 17px;
-    position: absolute;
-    top: 10px;
+  .custom-real-results__play img {
+    display: block;
+    height: auto;
+    width: 45px;
   }
 
   .custom-real-results__card-title {
@@ -343,6 +350,7 @@
     color: var(--real-results-text);
     font-size: 14px;
     line-height: 1.45;
+    margin: 0;
   }
 
   .custom-real-results__name {
@@ -350,7 +358,7 @@
     font-size: 14px;
     font-weight: 700;
     line-height: 1.25;
-    margin: 8px 0 0;
+    margin: 4px 0 0;
   }
 
   .custom-real-results__controls {
@@ -436,10 +444,7 @@
     box-sizing: border-box;
     display: grid;
     inset: 0;
-    padding: max(16px, env(safe-area-inset-top, 0px))
-      max(16px, env(safe-area-inset-right, 0px))
-      max(16px, env(safe-area-inset-bottom, 0px))
-      max(16px, env(safe-area-inset-left, 0px));
+    padding: max(16px, env(safe-area-inset-top, 0 max(16px,;
     place-items: center;
     position: fixed;
     z-index: 9999;
@@ -560,6 +565,7 @@
 
     .custom-real-results__track {
       gap: 12px;
+      justify-content: flex-start;
       padding: 0 0 12px;
       scroll-padding-left: 0;
     }
@@ -584,17 +590,8 @@
       top: 12px;
     }
 
-    .custom-real-results__play {
-      height: 56px;
+    .custom-real-results__play img {
       width: 56px;
-    }
-
-    .custom-real-results__play:after {
-      border-bottom-width: 12px;
-      border-left-width: 18px;
-      border-top-width: 12px;
-      left: 21px;
-      top: 13px;
     }
 
     .custom-real-results__card-title {
@@ -613,7 +610,7 @@
 
     .custom-real-results__name {
       font-size: 14px;
-      margin-top: 8px;
+      margin-top: 4px;
     }
 
     .custom-real-results__controls {
@@ -706,6 +703,19 @@
       }
 
       track.scrollTo({ left: target, behavior: 'smooth' });
+    }
+
+    function syncTrackLayout() {
+      if (!track) return;
+
+      var hasOverflow = track.scrollWidth > track.clientWidth + 2;
+      track.classList.toggle('custom-real-results__track--centered', !hasOverflow);
+
+      if (hasOverflow && track.scrollLeft < 1) {
+        track.scrollLeft = 0;
+      }
+
+      updateScrollbar();
     }
 
     function updateScrollbar() {
@@ -827,8 +837,8 @@
       });
     }
     if (track) track.addEventListener('scroll', updateScrollbar);
-    window.addEventListener('resize', updateScrollbar);
-    updateScrollbar();
+    window.addEventListener('resize', syncTrackLayout);
+    syncTrackLayout();
     ensureModalInBody();
 
     section.addEventListener('click', function(event) {

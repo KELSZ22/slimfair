@@ -2,9 +2,10 @@
 
 {% assign cpf_heading = faq_section.settings.faq_heading | default: faq_section.settings.heading %}
 {% assign cpf_bg = faq_section.settings.faq_background_color | default: faq_section.settings.background_color | default: '#fffbd8' %}
-{% assign cpf_text = faq_section.settings.faq_text_color | default: faq_section.settings.text_color | default: '#68422e' %}
-{% assign cpf_accent = faq_section.settings.faq_accent_color | default: faq_section.settings.accent_color | default: '#68422e' %}
-{% assign cpf_active_bg = faq_section.settings.faq_active_background_color | default: faq_section.settings.active_background_color | default: '#68422e' %}
+{% assign cpf_brand_brown = '#5C3F2D' %}
+{% assign cpf_text = faq_section.settings.faq_text_color | default: faq_section.settings.text_color | default: cpf_brand_brown %}
+{% assign cpf_accent = faq_section.settings.faq_accent_color | default: faq_section.settings.accent_color | default: cpf_brand_brown %}
+{% assign cpf_active_bg = faq_section.settings.faq_active_background_color | default: faq_section.settings.active_background_color | default: cpf_brand_brown %}
 {% assign cpf_divider = faq_section.settings.faq_divider_color | default: faq_section.settings.divider_color | default: '#e8ddb2' %}
 {% assign cpf_radius = faq_section.settings.faq_border_radius | default: faq_section.settings.border_radius | default: 24 %}
 {% assign cpf_padding_top = faq_section.settings.faq_padding_top | default: faq_section.settings.padding_top | default: 32 %}

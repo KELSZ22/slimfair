@@ -251,11 +251,11 @@
   }
 
   .bundle-option-card.is-selected .bundle-option-card__image-wrap {
-    border-color: #347b4f;
+    border-color: #49704b;
   }
 
   .bundle-option-card input:checked + .bundle-option-card__image-wrap {
-    border-color: #347b4f;
+    border-color: #49704b;
   }
 
   .bundle-option-card__image {
@@ -296,19 +296,43 @@
   }
 
   .bundle-option-card__radio {
+    position: relative;
+    flex-shrink: 0;
     width: 18px;
     height: 18px;
     margin-top: 1px;
-    border: 1px solid #9f9f9f;
+    border: 2px solid #9f9f9f;
     border-radius: 50%;
+    background: #fff;
+    box-sizing: border-box;
   }
 
-  .bundle-option-card.is-selected .bundle-option-card__radio {
-    border: 4px solid #347b4f;
+  .bundle-option-card__radio::after {
+    content: none;
   }
 
-  .bundle-option-card input:checked ~ .bundle-option-card__content .bundle-option-card__radio {
-    border: 4px solid #347b4f;
+  .bundle-option-card.is-selected .bundle-option-card__radio,
+  .bundle-option-card
+    input:checked
+    ~ .bundle-option-card__content
+    .bundle-option-card__radio {
+    border-color: #49704b;
+  }
+
+  .bundle-option-card.is-selected .bundle-option-card__radio::after,
+  .bundle-option-card
+    input:checked
+    ~ .bundle-option-card__content
+    .bundle-option-card__radio::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #49704b;
+    transform: translate(-50%, -50%);
   }
 
   .bundle-option-card__title {
@@ -466,7 +490,7 @@
     width: 100%;
     min-height: 52px;
     border-radius: 6px;
-    background: #347b4f;
+    background: #49704b;
     color: #fff;
     font-size: 18px;
     font-weight: 800;
@@ -622,7 +646,7 @@
     height: 40px;
     border: 1px solid #9e8d41;
     border-radius: 50%;
-    color: #347b4f;
+    color: #49704b;
     background: #fffbe8;
   }
 
@@ -1318,7 +1342,7 @@
     align-items: center;
     justify-content: center;
     border-radius: 7px;
-    background: #347b4f;
+    background: #49704b;
     color: #fff;
     min-height: 30px;
     padding: 0 14px;
@@ -1446,11 +1470,11 @@
   }
 
   .bundle-option-card.is-selected .bundle-option-card__image-wrap {
-    border-color: #347b4f;
+    border-color: #49704b;
   }
 
   .bundle-option-card input:checked + .bundle-option-card__image-wrap {
-    border-color: #347b4f;
+    border-color: #49704b;
   }
 
   .bundle-option-card__image {
@@ -1493,19 +1517,43 @@
   }
 
   .bundle-option-card__radio {
+    position: relative;
+    flex-shrink: 0;
     width: 15px;
     height: 15px;
     margin-top: 2px;
-    border: 1px solid #9f9f9f;
+    border: 2px solid #9f9f9f;
     border-radius: 50%;
+    background: #fff;
+    box-sizing: border-box;
   }
 
-  .bundle-option-card.is-selected .bundle-option-card__radio {
-    border: 4px solid #347b4f;
+  .bundle-option-card__radio::after {
+    content: none;
   }
 
-  .bundle-option-card input:checked ~ .bundle-option-card__content .bundle-option-card__radio {
-    border: 4px solid #347b4f;
+  .bundle-option-card.is-selected .bundle-option-card__radio,
+  .bundle-option-card
+    input:checked
+    ~ .bundle-option-card__content
+    .bundle-option-card__radio {
+    border-color: #49704b;
+  }
+
+  .bundle-option-card.is-selected .bundle-option-card__radio::after,
+  .bundle-option-card
+    input:checked
+    ~ .bundle-option-card__content
+    .bundle-option-card__radio::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #49704b;
+    transform: translate(-50%, -50%);
   }
 
   .bundle-option-card__title {
@@ -1654,7 +1702,7 @@
     width: 100%;
     min-height: 50px;
     border-radius: 6px;
-    background: #347b4f;
+    background: #49704b;
     color: #fff;
     font-size: 16px;
     font-weight: 800;
@@ -1805,7 +1853,7 @@
     height: 38px;
     border: 1px solid #9e8d41;
     border-radius: 50%;
-    color: #347b4f;
+    color: #49704b;
     background: #fffbe8;
   }
 

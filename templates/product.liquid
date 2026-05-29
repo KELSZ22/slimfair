@@ -92,23 +92,13 @@
       href="{{ settings.review_verified_link | default: '#trustshop-review' }}"
       aria-label="Verified reviews">
       <span>{{ settings.review_verified_label | default: 'Verified' }}</span>
-      {% if settings.review_verified_icon != blank %}
-        <img
-          src="{{ settings.review_verified_icon | image_url: width: 64 }}"
-          alt=""
-          aria-hidden="true"
-          loading="lazy"
-          width="28"
-          height="28">
-      {% else %}
-        <img
-          src="{{ 'green-check.svg' | asset_url }}"
-          alt=""
-          aria-hidden="true"
-          loading="lazy"
-          width="28"
-          height="28">
-      {% endif %}
+      <img
+        src="{{ 'verified-icon.svg' | asset_url }}"
+        alt=""
+        aria-hidden="true"
+        loading="lazy"
+        width="16"
+        height="16">
     </a>
   </div>
 </div>
