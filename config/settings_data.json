@@ -460,6 +460,8 @@
           "rating_text": "Rated by 20,000+ Coffee Lovers",
           "heading": "See Exactly What You're Putting In Your Body",
           "subheading": "<p>Every ingredient is carefully selected to support fat loss, boost metabolism, and keep you feeling in control, nothing unnecessary, nothing hidden.</p>",
+          "margin_top": 44,
+          "margin_bottom": 0,
           "background_image_position": "center center",
           "background_image_size": "cover",
           "background_color": "#fff8dc",
@@ -1153,6 +1155,7 @@
           "accent_color": "#5c3f2d",
           "card_background_color": "#fbfee8",
           "line_color": "#347d45",
+          "max_width": 1160,
           "padding_top": 64,
           "padding_bottom": 64
         }
