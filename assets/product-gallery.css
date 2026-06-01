@@ -216,10 +216,12 @@
   .bundle-options__title {
     margin: 0 0 14px;
     color: #5c3f2d;
-    font-size: 17px;
+    font-size: 18px;
     font-weight: 800;
     line-height: 1.2;
-    text-transform:none;
+    text-transform: none;
+    font-family: "Avenir-Black", Avenir, "Avenir Next", sans-serif !important;
+    letter-spacing: 0;
   }
 
   .bundle-options__grid {
@@ -252,11 +254,11 @@
   }
 
   .bundle-option-card.is-selected .bundle-option-card__image-wrap {
-    border-color: #49704b;
+    border-color: #5c3f2d;
   }
 
   .bundle-option-card input:checked + .bundle-option-card__image-wrap {
-    border-color: #49704b;
+    border-color: #5c3f2d;
   }
 
   .bundle-option-card__image {
@@ -540,9 +542,11 @@
   .custom-health-benefits__title {
     margin: 0;
     color: #5c3f2d;
-    font-size: 21px;
+    font-size: 18px;
     font-weight: 700;
     line-height: 1.2;
+    font-family: "Avenir-Black", Avenir, "Avenir Next", sans-serif !important;
+    letter-spacing: 0;
   }
 
   .custom-health-benefits__link {
@@ -807,12 +811,15 @@
 }
 
 .custom-results-videos__title {
-  font-size: 16px;
+  font-size: 18px;
   font-style: normal;
   font-weight: 800;
   line-height: normal;
   color: #5c3f2d;
   margin: 0;
+  font-family: "Avenir-Black", Avenir, "Avenir Next", sans-serif !important;
+  letter-spacing: 0;
+  text-transform: none;
 }
 
 .custom-results-videos__next {
@@ -1481,11 +1488,11 @@
   }
 
   .bundle-option-card.is-selected .bundle-option-card__image-wrap {
-    border-color: #49704b;
+    border-color: #5c3f2d;
   }
 
   .bundle-option-card input:checked + .bundle-option-card__image-wrap {
-    border-color: #49704b;
+    border-color: #5c3f2d;
   }
 
   .bundle-option-card__image {

@@ -174,8 +174,8 @@
     line-height: normal;
     color: #5C3F2D;
     margin: 0;
-    text-transform:none;
-    letter-spacing:0;
+    text-transform: none;
+    letter-spacing: 0;
   }
 
   .custom-ingredient-benefits__subheading,
@@ -217,7 +217,9 @@
     overflow: hidden;
     padding: 25px;
     position: relative;
-    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    transition: background-color 0.2s ease
+    , border-color 0.2s ease
+    , color 0.2s ease;
     width: 328px;
     max-width: 100%;
   }
@@ -259,6 +261,12 @@
     line-height: 1.18;
     margin: 0 0 10px;
     text-transform: uppercase;
+    font-family: "Avenir-Black"
+    , Avenir
+    , "Avenir Next"
+    , sans-serif !important;
+    letter-spacing: 0;
+    text-transform: none;
   }
 
   .custom-ingredient-benefits__description,
@@ -387,8 +395,7 @@
       {
         "type": "header",
         "content": "Spacing"
-      },
-      {
+      }, {
         "type": "range",
         "id": "margin_top",
         "label": "Top margin",
@@ -397,8 +404,7 @@
         "step": 4,
         "unit": "px",
         "default": 0
-      },
-      {
+      }, {
         "type": "range",
         "id": "margin_bottom",
         "label": "Bottom margin",
@@ -407,8 +413,7 @@
         "step": 4,
         "unit": "px",
         "default": 0
-      },
-      {
+      }, {
         "type": "header",
         "content": "Background"
       }, {
@@ -550,7 +555,8 @@
             "id": "description",
             "label": "Description",
             "default": "<p>Higher chlorogenic acid content to improved metabolism vs roasted coffee.</p>"
-          }, {
+          },
+          {
             "type": "image_picker",
             "id": "image",
             "label": "Image"
